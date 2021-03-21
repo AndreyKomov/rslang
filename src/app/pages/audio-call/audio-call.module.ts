@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { AudioCallComponent } from './components/audio-call.component';
+import AudioCallComponent from './audio-call.component';
 
 @NgModule({
   declarations: [AudioCallComponent],
   imports: [],
   exports: [AudioCallComponent],
 })
-export class AudioCallModule {}
+export default class AudioCallModule {}
