@@ -1,0 +1,33 @@
+body { 
+  margin: 0; 
+
+  font-family: $font-main;
+}
+
+hr {
+  margin: 0;
+
+  border-width: 2px;
+  border-color: $color-main;
+  border-style: solid;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hovered {
+  background-color: $color-hover;
+}
+
+.card.shadowed {
+  box-shadow: $card-hovered-shadow;
+}
