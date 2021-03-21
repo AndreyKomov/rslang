@@ -127,7 +127,7 @@ module.exports = {
         '@typescript-eslint/restrict-plus-operands': 'error',
         '@typescript-eslint/no-floating-promises': 'off',
         '@typescript-eslint/ban-types': 'error',
-        '@typescript-eslint/no-duplicate-imports': 'error',
+        'no-duplicate-imports': 'error',
         '@typescript-eslint/no-useless-constructor': 'error',
         '@typescript-eslint/semi': 'error',
         '@typescript-eslint/default-param-last': 'error',
