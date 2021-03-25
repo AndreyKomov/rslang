@@ -1,0 +1,49 @@
+<ng-container *ngIf="show">
+  <div class="overlay"></div>
+  <div class="modal-content">
+    <h1 *ngIf="!login; else loginHeading">Registration</h1>
+    <button (click)="closeReg()" class="close"></button>
+    <p>Password</p>
+    <input
+      type="text"
+      placeholder="Enter Password"
+      required
+      [(ngModel)]="password"
+      #idPas="ngModel"
+    />
+    <div *ngIf="idPas.errors?.required" class="alert">Type a password</div>
+    <p>Email</p>
+    <input
+      type="text"
+      placeholder="Enter Email"
+      required
+      [(ngModel)]="email"
+      #idEmail="ngModel"
+      pattern="^\S+@\S+.com"
+    />
+    <div *ngIf="idEmail.errors?.required || idEmail.errors?.pattern" class="alert">
+      Type an email
+    </div>
+    <p>By creating an account you agree to our <a href="">Terms & Privacy</a>.</p>
+    <button
+      type="submit"
+      class="registerbtn"
+      (click)="!login ? addData() : loginData()"
+      [disabled]="idEmail.errors?.required || idPas.errors?.required || idEmail.errors?.pattern"
+    >
+      {{ !login ? 'Register' : 'Login' }}
+    </button>
+    <div class="container signin">
+      <p>
+        Already have an account?
+        <button (click)="goToSignIn()" *ngIf="!login; else loginButton">Sign in</button>.
+      </p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loginButton><button (click)="goToSignIn()">Sign up</button></ng-template>
+
+<ng-template #loginHeading>
+  <h1>Login</h1>
+</ng-template>

@@ -1,0 +1,120 @@
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 30%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.close {
+  position: absolute;
+  right: 32px;
+  top: 5px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  outline: 0;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before,
+.close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
+input[type='text'],
+input[type='password'] {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type='text']:focus,
+input[type='password']:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.signin button {
+  color: dodgerblue;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  outline: 0;
+  font-size: 17px;
+}
+
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+}
+
+.registerbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+.overlay {
+  position: fixed;
+  background-color: black;
+  opacity: 0.5;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+}
+
+.alert {
+  color: red;
+}
