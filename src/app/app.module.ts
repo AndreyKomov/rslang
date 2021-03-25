@@ -5,12 +5,13 @@ import AppComponent from '@app/app.component';
 
 import AudioCallService from './pages/audio-call/audio-call.service';
 
+import SharedModule from './shared/shared.module';
 import MaterialModule from './pages/material/material.module';
 import AudioCallModule from './pages/audio-call/audio-call.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, MaterialModule, AudioCallModule],
+  imports: [BrowserModule, BrowserAnimationsModule, MaterialModule, SharedModule, AudioCallModule],
   providers: [AudioCallService],
   bootstrap: [AppComponent],
 })

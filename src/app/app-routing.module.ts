@@ -1,1 +1,1 @@
-export default class AppRoutingModule {}
+export default class AppRoutingModule { }
