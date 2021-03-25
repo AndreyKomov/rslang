@@ -7,8 +7,20 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { MainComponent } from './layout/main/main.component';
 
 @NgModule({
-    declarations: [HeaderComponent, HeaderMenuComponent, HeaderLogoComponent, FooterComponent, MainComponent],
-    exports: [HeaderComponent, HeaderMenuComponent, HeaderLogoComponent, FooterComponent, MainComponent],
-    providers: []
+  declarations: [
+    HeaderComponent,
+    HeaderMenuComponent,
+    HeaderLogoComponent,
+    FooterComponent,
+    MainComponent,
+  ],
+  exports: [
+    HeaderComponent,
+    HeaderMenuComponent,
+    HeaderLogoComponent,
+    FooterComponent,
+    MainComponent,
+  ],
+  providers: [],
 })
-export default class SharedModule { }
+export default class SharedModule {}

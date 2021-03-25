@@ -8,9 +8,8 @@ describe('HeaderLogoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderLogoComponent ]
-    })
-    .compileComponents();
+      declarations: [HeaderLogoComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
