@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './shared/layout/main/main.component';
+import { ParamKeys } from './app-routing.enum';
 
-const appRoutes: Routes = [
-  { path: '', component: MainComponent, pathMatch: 'full' },
+const routes: Routes = [
+  { path: ParamKeys.main, component: MainComponent, pathMatch: 'full' },
   {
-    path: 'promo',
+    path: ParamKeys.promo,
     loadChildren: () => import('./pages/promo/promo.module').then((module) => module.PromoModule),
   },
-  { path: '**', redirectTo: '' },
+  { path: ParamKeys.redirect, redirectTo: '' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export default class AppRoutingModule {}
