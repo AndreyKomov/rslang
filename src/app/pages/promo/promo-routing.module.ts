@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PromoComponent } from './promo.component';
 
 const routes: Routes = [
   {
-    path: 'promo',
-    loadChildren: () => import('./promo.module').then((module) => module.PromoModule),
+    path: '',
+    component: PromoComponent,
   },
 ];
 
