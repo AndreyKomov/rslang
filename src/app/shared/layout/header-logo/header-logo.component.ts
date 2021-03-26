@@ -7,7 +7,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderLogoComponent implements OnInit {
-  constructor() {}
+  imagePath: string;
+
+  constructor() {
+    this.imagePath = '../../../assets/img/logo_light.png';
+  }
 
   ngOnInit(): void {}
 }

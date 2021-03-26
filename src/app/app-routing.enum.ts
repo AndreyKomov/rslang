@@ -1,5 +1,9 @@
-export enum ParamKeys {
+export enum ParamKey {
   main = '',
   promo = 'promo',
-  redirect = '**',
+  notFound = '**',
+}
+
+export enum QueryParamKey {
+  redirectTo = '',
 }

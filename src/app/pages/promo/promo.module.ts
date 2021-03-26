@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PromoComponent } from './promo.component';
-
 import { PromoRoutingModule } from './promo-routing.module';
 
 @NgModule({
