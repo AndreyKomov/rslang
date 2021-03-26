@@ -10,8 +10,12 @@
       required
       [(ngModel)]="password"
       #idPas="ngModel"
+      minlength="8"
+      maxlength="25"
     />
-    <div *ngIf="idPas.errors?.required" class="alert">Type a password</div>
+    <div *ngIf="idPas.errors?.required || idPas.errors?.minlength" class="alert">
+      Type a password(more than 8 and below 25 charts)
+    </div>
     <p>Email</p>
     <input
       type="text"
@@ -29,7 +33,12 @@
       type="submit"
       class="registerbtn"
       (click)="!login ? addData() : loginData()"
-      [disabled]="idEmail.errors?.required || idPas.errors?.required || idEmail.errors?.pattern"
+      [disabled]="
+        idEmail.errors?.required ||
+        idPas.errors?.required ||
+        idEmail.errors?.pattern ||
+        idPas.errors?.minlength
+      "
     >
       {{ !login ? 'Register' : 'Login' }}
     </button>

@@ -19,10 +19,6 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  showReg(): void {
-    this.show = true;
-  }
-
   closeReg(): void {
     this.show = false;
   }
