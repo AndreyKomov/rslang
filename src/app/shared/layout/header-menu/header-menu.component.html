@@ -1,1 +1,5 @@
-<p>header-menu works!</p>
+<ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+  <li *ngFor="let item of navMenu" class="nav-item">
+    <a routerLink="{{ menuRoutes[item[0]] }}" routerLinkActive="active">{{ item[1] }}</a>
+  </li>
+</ul>

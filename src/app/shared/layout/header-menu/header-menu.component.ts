@@ -1,4 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { MainNav } from './header-menu.enum';
+import { ParamKey } from '@app/app-routing.enum';
 
 @Component({
   selector: 'app-header-menu',
@@ -7,7 +9,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderMenuComponent implements OnInit {
-  constructor() {}
+  navMenu: Array<Array<string>>;
+  menuRoutes: object;
+
+  constructor() {
+    this.navMenu = Object.entries(MainNav);
+    this.menuRoutes = ParamKey;
+  }
 
   ngOnInit(): void {}
 }

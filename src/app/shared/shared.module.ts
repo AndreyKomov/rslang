@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './layout/header/header.component';
@@ -15,7 +16,7 @@ import { MainComponent } from './layout/main/main.component';
     FooterComponent,
     MainComponent,
   ],
-  imports: [RouterModule],
+  imports: [RouterModule, BrowserModule],
   exports: [
     HeaderComponent,
     HeaderMenuComponent,
