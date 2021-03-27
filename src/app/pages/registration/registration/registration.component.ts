@@ -7,9 +7,9 @@ import RegistrationService from '@app/pages/registration/registration/registrati
   styleUrls: ['./registration.component.scss'],
 })
 export default class RegistrationComponent {
-  show = false;
+  isShow = false;
 
-  login = false;
+  isReg = true;
 
   password: string;
 
@@ -18,19 +18,19 @@ export default class RegistrationComponent {
   constructor(private registrationService: RegistrationService) {}
 
   showReg(): void {
-    this.show = true;
+    this.isShow = true;
   }
 
   closeReg(): void {
-    this.show = false;
+    this.isShow = false;
   }
 
   goToSignIn(): void {
-    this.login = !this.login;
+    this.isReg = !this.isReg;
   }
 
-  addData(): void {
-    this.registrationService.addData(this.password, this.email);
+  addRegData(): void {
+    this.registrationService.addRegData(this.password, this.email);
   }
 
   loginData(): void {

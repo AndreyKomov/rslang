@@ -1,8 +1,8 @@
-<ng-container *ngIf="!show">
+<ng-container *ngIf="isShow">
   <div class="overlay"></div>
   <div class="modal-content">
-    <h1 *ngIf="!login; else loginHeading">Registration</h1>
-    <button (click)="closeReg()" class="close"></button>
+    <h1 *ngIf="isReg; else loginHeading">Registration</h1>
+    <button (click)="closeReg()" class="modal-content__close"></button>
     <p>Email</p>
     <input
       type="text"
@@ -12,7 +12,7 @@
       #idEmail="ngModel"
       pattern="^\S+@\S+.com"
     />
-    <div *ngIf="idEmail.errors?.required || idEmail.errors?.pattern" class="alert">
+    <div *ngIf="idEmail.errors?.required || idEmail.errors?.pattern" class="modal-content__alert">
       Type an email
     </div>
     <p>Password</p>
@@ -25,27 +25,28 @@
       minlength="8"
       maxlength="25"
     />
-    <div *ngIf="idPas.errors?.required || idPas.errors?.minlength" class="alert">
+    <div *ngIf="idPas.errors?.required || idPas.errors?.minlength" class="modal-content__alert">
       Type a password(more than 8 and below 25 charts)
     </div>
     <p>By creating an account you agree to our <a href="">Terms & Privacy</a>.</p>
     <button
       type="submit"
-      class="registerbtn"
-      (click)="!login ? addData() : loginData()"
+      class="modal-content__registerbtn"
+      (click)="addRegData()"
       [disabled]="
         idEmail.errors?.required ||
         idPas.errors?.required ||
         idEmail.errors?.pattern ||
         idPas.errors?.minlength
       "
+      *ngIf="isReg; else loginSubmit"
     >
-      {{ !login ? 'Register' : 'Login' }}
+      Register
     </button>
-    <div class="container signin">
+    <div class="modal-content__container modal-content__signin">
       <p>
         Already have an account?
-        <button (click)="goToSignIn()" *ngIf="!login; else loginButton">Sign in</button>.
+        <button (click)="goToSignIn()" *ngIf="isReg; else loginButton">Sign in</button>.
       </p>
     </div>
   </div>
@@ -55,4 +56,20 @@
 
 <ng-template #loginHeading>
   <h1>Login</h1>
+</ng-template>
+
+<ng-template #loginSubmit>
+  <button
+    type="submit"
+    class="registerbtn"
+    (click)="login()"
+    [disabled]="
+      idEmail.errors?.required ||
+      idPas.errors?.required ||
+      idEmail.errors?.pattern ||
+      idPas.errors?.minlength
+    "
+  >
+    Login
+  </button>
 </ng-template>
