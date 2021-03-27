@@ -5,12 +5,10 @@ module.exports = {
       files: ['*.ts'],
       parserOptions: {
         project: ['tsconfig.*?.json', 'e2e/tsconfig.json'],
+        tsconfigRootDir: __dirname,
         createDefaultProgram: true,
       },
-      plugins: [
-        "@typescript-eslint",
-        "@typescript-eslint/tslint"
-      ],
+      plugins: ['@typescript-eslint', '@typescript-eslint/tslint'],
       extends: [
         'plugin:@angular-eslint/recommended',
         'airbnb-typescript/base',

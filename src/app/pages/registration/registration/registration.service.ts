@@ -3,19 +3,18 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class RegistrationService {
-  password: string;
-  email: string;
+export default class RegistrationService {
+  test: string; // delete this when you'll change this file
 
   addData(password: string, email: string): void {
-    this.password = password;
-    this.email = email;
-    console.log(this.password, this.email);
+    this.test = password; // delete this when you'll change this file
+    this.test = email; // delete this when you'll change this file
+    // console.log(password, email);
   }
 
   login(password: string, email: string): void {
-    console.log(password, email);
+    this.test = password; // delete this when you'll change this file
+    this.test = email; // delete this when you'll change this file
+    // console.log(password, email);
   }
-
-  constructor() {}
 }

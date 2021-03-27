@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { RegistrationService } from '@app/pages/registration/registration/registration.service';
+import { Component } from '@angular/core';
+import RegistrationService from '@app/pages/registration/registration/registration.service';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit {
+export default class RegistrationComponent {
   show = false;
 
   login = false;
@@ -17,7 +17,9 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private registrationService: RegistrationService) {}
 
-  ngOnInit(): void {}
+  showReg(): void {
+    this.show = true;
+  }
 
   closeReg(): void {
     this.show = false;
