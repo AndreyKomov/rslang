@@ -83,6 +83,7 @@ module.exports = {
          * ESLint Plugin TypeScript rules extending @typescript-eslint/recommended
          * ========================================================================
          */
+        '@typescript-eslint/lines-between-class-members': ['off'],
         // disallow usage of the any type
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/prefer-regexp-exec': 'off',
@@ -115,7 +116,7 @@ module.exports = {
         ],
         '@typescript-eslint/interface-name-prefix': 'off',
 
-        //TODO: resolve later
+        //TODO: resolve later*
         '@typescript-eslint/no-unsafe-assignment': 'error',
         '@typescript-eslint/explicit-module-boundary-types': 'error',
         '@typescript-eslint/no-unsafe-return': 'error',

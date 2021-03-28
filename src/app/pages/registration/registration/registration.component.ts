@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import RegistrationService from '@app/pages/registration/services/registration.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { RegFormModel } from '../models/RegFormsModel';
+import { IRegForm } from '../models/RegFormsModel';
 
 @Component({
   selector: 'app-registration',
@@ -10,14 +10,9 @@ import { RegFormModel } from '../models/RegFormsModel';
 })
 export default class RegistrationComponent implements OnInit {
   modalName = 'Registration';
-
-  isLoginTemp = false;
-
+  isLoginTemplate = false;
   isShow = false;
-
-  reactiveForm: RegFormModel;
-
-  submitName = 'Registration';
+  reactiveForm: IRegForm;
 
   constructor(private registrationService: RegistrationService, private fb: FormBuilder) {}
 
@@ -42,16 +37,13 @@ export default class RegistrationComponent implements OnInit {
 
   changeModal(): void {
     this.modalName = this.modalName === 'Registration' ? 'Login' : 'Registration';
-    this.submitName = this.submitName === 'Registration' ? 'Login' : 'Registration';
-    this.isLoginTemp = !this.isLoginTemp;
+    this.isLoginTemplate = !this.isLoginTemplate;
   }
 
   isControlInvalid(controlName: string): boolean {
     const control = this.reactiveForm.controls[controlName];
 
-    const result = control.invalid && control.touched;
-
-    return result;
+    return control.invalid && control.touched;
   }
 
   addUserData(): void {
@@ -63,13 +55,13 @@ export default class RegistrationComponent implements OnInit {
       return;
     }
 
-    if (this.isLoginTemp) {
-      this.registrationService.addRegData(
+    if (this.isLoginTemplate) {
+      this.registrationService.signIn(
         this.reactiveForm.value.password,
         this.reactiveForm.value.email
       );
     } else {
-      this.registrationService.addLoginData(
+      this.registrationService.logIn(
         this.reactiveForm.value.password,
         this.reactiveForm.value.email
       );

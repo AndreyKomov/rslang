@@ -5,6 +5,6 @@ interface ValueObj {
   password: string;
 }
 
-export interface RegFormModel extends FormGroup {
+export interface IRegForm extends FormGroup {
   value: ValueObj;
 }
