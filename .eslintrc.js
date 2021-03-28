@@ -143,7 +143,14 @@ module.exports = {
         'object-curly-spacing': ['error', 'always'],
         '@typescript-eslint/brace-style': ['error', '1tbs', { allowSingleLine: true }],
         '@typescript-eslint/type-annotation-spacing': ['error', { before: false, after: true }],
-        '@typescript-eslint/space-before-function-paren': ['error', 'never'],
+        'space-before-function-paren': [
+          'error',
+          {
+            anonymous: 'never',
+            named: 'never',
+            asyncArrow: 'always',
+          },
+        ],
         'no-console': 'error',
       },
     },

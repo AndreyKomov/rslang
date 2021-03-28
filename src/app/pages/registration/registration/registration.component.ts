@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Component, OnInit } from '@angular/core';
-import RegistrationService from '@app/pages/registration/registration/registration.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import RegistrationService from '@app/pages/registration/services/registration.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { RegFormModel } from '../models/RegFormsModel';
 
 @Component({
   selector: 'app-registration',
@@ -16,7 +15,7 @@ export default class RegistrationComponent implements OnInit {
 
   isShow = false;
 
-  reactiveForm: FormGroup;
+  reactiveForm: RegFormModel;
 
   submitName = 'Registration';
 
@@ -64,20 +63,15 @@ export default class RegistrationComponent implements OnInit {
       return;
     }
 
-    // eslint-disable-next-line no-console
-    console.log(this.reactiveForm.value);
-
     if (this.isLoginTemp) {
       this.registrationService.addRegData(
         this.reactiveForm.value.password,
-        // eslint-disable-next-line @typescript-eslint/comma-dangle
-        this.reactiveForm.value.email,
+        this.reactiveForm.value.email
       );
     } else {
       this.registrationService.addLoginData(
         this.reactiveForm.value.password,
-        // eslint-disable-next-line @typescript-eslint/comma-dangle
-        this.reactiveForm.value.email,
+        this.reactiveForm.value.email
       );
     }
   }
