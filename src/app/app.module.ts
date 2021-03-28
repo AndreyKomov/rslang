@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import AppComponent from '@app/app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import AudioCallService from './pages/audio-call/audio-call.service';
 
@@ -11,7 +11,14 @@ import RegistrationComponent from './pages/registration/registration/registratio
 
 @NgModule({
   declarations: [AppComponent, RegistrationComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, MaterialModule, AudioCallModule, FormsModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    AudioCallModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [AudioCallService],
   bootstrap: [AppComponent],
 })

@@ -1,75 +1,35 @@
-<ng-container *ngIf="isShow">
+<ng-container *ngIf="!isShow">
   <div class="overlay"></div>
-  <div class="modal-content">
-    <h1 *ngIf="isReg; else loginHeading">Registration</h1>
-    <button (click)="closeReg()" class="modal-content__close"></button>
+  <form class="modal-content" [formGroup]="reactiveForm" (submit)="addUserData()">
+    <h1>{{ modalName }}</h1>
+    <button (click)="closeModal()" class="modal-content__close"></button>
     <p>Email</p>
-    <input
-      type="text"
-      placeholder="Enter Email"
-      required
-      [(ngModel)]="email"
-      #idEmail="ngModel"
-      pattern="^\S+@\S+.com"
-    />
-    <div *ngIf="idEmail.errors?.required || idEmail.errors?.pattern" class="modal-content__alert">
-      Type an email
-    </div>
+    <input type="text" placeholder="Enter Email" formControlName="email" id="email" />
+    <div class="modal-content__alert" *ngIf="isControlInvalid('email')">Type an email</div>
     <p>Password</p>
-    <input
-      type="text"
-      placeholder="Enter Password"
-      required
-      [(ngModel)]="password"
-      #idPas="ngModel"
-      minlength="8"
-      maxlength="25"
-    />
-    <div *ngIf="idPas.errors?.required || idPas.errors?.minlength" class="modal-content__alert">
-      Type a password(more than 8 and below 25 charts)
+    <input type="text" placeholder="Enter Password" formControlName="password" id="password" />
+    <div class="modal-content__alert" *ngIf="isControlInvalid('password')">
+      Type a password(more than 8 and below than 25 charts)
     </div>
     <p>By creating an account you agree to our <a href="">Terms & Privacy</a>.</p>
-    <button
-      type="submit"
-      class="modal-content__registerbtn"
-      (click)="addRegData()"
-      [disabled]="
-        idEmail.errors?.required ||
-        idPas.errors?.required ||
-        idEmail.errors?.pattern ||
-        idPas.errors?.minlength
-      "
-      *ngIf="isReg; else loginSubmit"
+    <button type="submit" class="modal-content__registerbtn">{{ submitName }}</button>
+    <div
+      class="modal-content__container modal-content__signin"
+      *ngIf="!isLoginTemp; else signInBtn"
     >
-      Register
-    </button>
-    <div class="modal-content__container modal-content__signin">
       <p>
         Already have an account?
-        <button (click)="goToSignIn()" *ngIf="isReg; else loginButton">Sign in</button>.
+        <button (click)="changeModal()">Sign in</button>.
       </p>
     </div>
-  </div>
+  </form>
 </ng-container>
 
-<ng-template #loginButton><button (click)="goToSignIn()">Sign up</button></ng-template>
-
-<ng-template #loginHeading>
-  <h1>Login</h1>
-</ng-template>
-
-<ng-template #loginSubmit>
-  <button
-    type="submit"
-    class="registerbtn"
-    (click)="login()"
-    [disabled]="
-      idEmail.errors?.required ||
-      idPas.errors?.required ||
-      idEmail.errors?.pattern ||
-      idPas.errors?.minlength
-    "
-  >
-    Login
-  </button>
+<ng-template #signInBtn>
+  <div class="modal-content__container modal-content__signin">
+    <p>
+      Have not an account?
+      <button (click)="changeModal()">Sign up</button>.
+    </p>
+  </div>
 </ng-template>

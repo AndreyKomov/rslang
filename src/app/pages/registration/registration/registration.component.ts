@@ -1,39 +1,84 @@
-import { Component } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { Component, OnInit } from '@angular/core';
 import RegistrationService from '@app/pages/registration/registration/registration.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export default class RegistrationComponent {
+export default class RegistrationComponent implements OnInit {
+  modalName = 'Registration';
+
+  isLoginTemp = false;
+
   isShow = false;
 
-  isReg = true;
+  reactiveForm: FormGroup;
 
-  password: string;
+  submitName = 'Registration';
 
-  email: string;
+  constructor(private registrationService: RegistrationService, private fb: FormBuilder) {}
 
-  constructor(private registrationService: RegistrationService) {}
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.reactiveForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(25)]],
+    });
+  }
 
   showReg(): void {
     this.isShow = true;
   }
 
-  closeReg(): void {
+  closeModal(): void {
     this.isShow = false;
   }
 
-  goToSignIn(): void {
-    this.isReg = !this.isReg;
+  changeModal(): void {
+    this.modalName = this.modalName === 'Registration' ? 'Login' : 'Registration';
+    this.submitName = this.submitName === 'Registration' ? 'Login' : 'Registration';
+    this.isLoginTemp = !this.isLoginTemp;
   }
 
-  addRegData(): void {
-    this.registrationService.addRegData(this.password, this.email);
+  isControlInvalid(controlName: string): boolean {
+    const control = this.reactiveForm.controls[controlName];
+
+    const result = control.invalid && control.touched;
+
+    return result;
   }
 
-  loginData(): void {
-    this.registrationService.login(this.password, this.email);
+  addUserData(): void {
+    const { controls } = this.reactiveForm;
+
+    if (this.reactiveForm.invalid) {
+      Object.keys(controls).forEach((controlName) => controls[controlName].markAsTouched());
+
+      return;
+    }
+
+    // eslint-disable-next-line no-console
+    console.log(this.reactiveForm.value);
+
+    if (this.isLoginTemp) {
+      this.registrationService.addRegData(
+        this.reactiveForm.value.password,
+        // eslint-disable-next-line @typescript-eslint/comma-dangle
+        this.reactiveForm.value.email,
+      );
+    } else {
+      this.registrationService.addLoginData(
+        this.reactiveForm.value.password,
+        // eslint-disable-next-line @typescript-eslint/comma-dangle
+        this.reactiveForm.value.email,
+      );
+    }
   }
 }
