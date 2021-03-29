@@ -27,3 +27,4 @@ export default class WordsApiService implements OnInit {
       });
   }
 }
+
