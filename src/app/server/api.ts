@@ -13,13 +13,18 @@ export default class WordsApiServiceComponent implements OnInit {
 
   group: number | null;
 
-  name:string|null;
+  userName: string | null;
+
+  email: string | null;
+
+  password: string | null;
 
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
     this.getWordById(this.id);
     this.getWordsByPageAndGroup(this.page, this.group);
+    this.createUser(this.userName, this.email, this.password);
   }
 
   private getWordById(id: number | null): void {
@@ -39,6 +44,33 @@ export default class WordsApiServiceComponent implements OnInit {
     this.group = group;
     const promise = this.httpClient
       .get(`${this.apiUrl}words?page=${page}&group=${group}`)
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
+
+  private createUser(userName: string | null, email: string | null, password: string | null): void {
+    this.userName = userName;
+    this.email = email;
+    this.password = password;
+    const promise = this.httpClient
+      .post(`${this.apiUrl}users`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userName,
+          email,
+          password,
+        }),
+      })
       .toPromise();
     promise
       .then((data) => {
