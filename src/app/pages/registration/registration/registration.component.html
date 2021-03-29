@@ -3,12 +3,12 @@
   <form class="modal-content" [formGroup]="registrationForm" (submit)="addUserData()">
     <h4>{{ modalName }}</h4>
     <button (click)="closeModal()" class="modal-content__close"></button>
-    <input type="text" placeholder="Enter Email" formControlName="email" id="email" />
     <div class="modal-content__alert" *ngIf="isControlInvalid('email')">Type an email</div>
-    <input type="text" placeholder="Enter Password" formControlName="password" id="password" />
+    <input type="text" placeholder="Enter Email" formControlName="email" id="email" />
     <div class="modal-content__alert" *ngIf="isControlInvalid('password')">
       Type a password(more than 8 and below than 25 charts)
     </div>
+    <input type="text" placeholder="Enter Password" formControlName="password" id="password" />
     <p>By creating an account you agree to our <span>Terms & Privacy</span>.</p>
     <button type="submit" class="modal-content__registerbtn">{{ modalName }}</button>
     <div
