@@ -7,20 +7,17 @@ module.exports = {
         project: ['tsconfig.*?.json', 'e2e/tsconfig.json'],
         createDefaultProgram: true,
       },
-      plugins: ['@typescript-eslint', '@typescript-eslint/tslint'],
+      plugins: [
+        "@typescript-eslint",
+        "@typescript-eslint/tslint"
+      ],
       extends: [
         'plugin:@angular-eslint/recommended',
         'airbnb-typescript/base',
         'prettier/@typescript-eslint',
-        'plugin:prettier/recommended',
+        'plugin:prettier/g',
       ],
       rules: {
-        'prettier/prettier': [
-          'error',
-          {
-            endOfLine: 'auto',
-          },
-        ],
         /**
          * ========================================================================
          * Modified Airbnb JS Style Guide rules extending eslint:recommended
