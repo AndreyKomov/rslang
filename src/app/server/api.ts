@@ -13,6 +13,8 @@ export default class WordsApiServiceComponent implements OnInit {
 
   group: number | null;
 
+  name:string|null;
+
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
