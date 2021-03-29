@@ -9,6 +9,10 @@ const routes: Routes = [
     path: ParamKey.promo,
     loadChildren: () => import('./pages/promo/promo.module').then((module) => module.PromoModule),
   },
+  {
+    path: ParamKey.audiocallPromo,
+    loadChildren: () => import('./pages/games/audiocall-game/audiocall.module').then((module) => module.AudiocallModule),
+  },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];
 

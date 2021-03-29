@@ -1,0 +1,13 @@
+.audiocall-game {
+  position: relative;
+  width: 1000px;
+  margin: 0 auto;
+
+    .words-list {
+      display: grid;
+      width: 750px;
+      margin: 0 auto;
+      grid-template-columns: 200px 200px 200px;
+      text-align: center;
+    }
+}

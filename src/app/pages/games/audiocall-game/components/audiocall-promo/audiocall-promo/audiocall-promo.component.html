@@ -1,0 +1,41 @@
+<div class="container-audiocall-promo">
+  <div class="game-description">
+    <h4>Игра на тренировку навыков аудирования.</h4>
+    <h6>
+      <p>В процессе игры необходимо угадать слово, произнесенное на английском языке.
+        При выборе правилього/неправильного ответа звучит соответствующий сигнал.
+        В конце выходит статистика по количеству угаданных/неугаданных слов и аудио-дорожки всех слов,
+        участвовавших в игре.
+      </p>
+
+      <p>Выбирайте слово кликом мыши или нажатием соответствующей клавиши с номером слова.</p>
+    </h6>
+  </div>
+
+      <a routerLink="/audiocall/audiocallgame" class="start-link">
+        <button class="start-game">Начать</button>
+      </a>
+
+  <div class="game-types">
+    <div class="studied-words">
+      <h6>Играть с уже изученными словами</h6>
+      <a routerLink="/audiocall/audiocallgame" class="start-link">
+        <button class="start-game">Начать</button>
+      </a>
+    </div>
+
+    <div class="random-words">
+      <h6>Играть со случайными словами</h6>
+      <div class="difficult-slider">
+        <label class="difficult-label">Сложность</label>
+        <input type="range" class="difficult">
+      </div>
+      <div class="round-slider">
+        <label class="round-label">Раунд</label>
+        <input type="range" class="round">
+      </div>
+
+
+    </div>
+  </div>
+</div>
