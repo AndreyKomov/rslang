@@ -1,7 +1,10 @@
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-export default class WordsApiService implements OnInit {
+@Component({
+  template: '',
+})
+export default class WordsApiServiceComponent implements OnInit {
   name = 'WordsApiService';
 
   apiUrl = 'https://arcane-chamber-21175.herokuapp.com/';
@@ -10,21 +13,19 @@ export default class WordsApiService implements OnInit {
 
   constructor(private httpClient: HttpClient) {}
 
-  ngOnInit() {
-   this.getWordById(this.id);
+  ngOnInit(): void {
+    this.getWordById(this.id);
   }
 
-  private getWordById(id) {
+  private getWordById(id: number | null): void {
     this.id = id;
     const promise = this.httpClient.get(`${this.apiUrl}words/${this.id}`).toPromise();
-    console.log(promise);
     promise
       .then((data) => {
-        return console.log(`Promise resolved with: ${JSON.stringify(data)}`);
+        return JSON.stringify(data);
       })
       .catch((error) => {
-        return console.log(`Promise rejected with ${JSON.stringify(error)}`);
+        return JSON.stringify(error);
       });
   }
 }
-
