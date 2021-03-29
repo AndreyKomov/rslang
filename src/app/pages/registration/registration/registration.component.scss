@@ -12,6 +12,19 @@
   flex-direction: column;
   align-items: center;
 
+  & h4 {
+    font-size: 30px;
+  }
+
+  & span {
+    color: dodgerblue;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    outline: 0;
+  }
+
   & input {
     width: 90%;
     padding: 15px;

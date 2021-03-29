@@ -12,7 +12,7 @@ export default class RegistrationComponent implements OnInit {
   modalName = 'Registration';
   isLoginTemplate = false;
   isShow = false;
-  reactiveForm: IRegForm;
+  registrationForm: IRegForm;
 
   constructor(private registrationService: RegistrationService, private fb: FormBuilder) {}
 
@@ -21,7 +21,7 @@ export default class RegistrationComponent implements OnInit {
   }
 
   initForm(): void {
-    this.reactiveForm = this.fb.group({
+    this.registrationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(25)]],
     });
@@ -41,15 +41,15 @@ export default class RegistrationComponent implements OnInit {
   }
 
   isControlInvalid(controlName: string): boolean {
-    const control = this.reactiveForm.controls[controlName];
+    const control = this.registrationForm.controls[controlName];
 
     return control.invalid && control.touched;
   }
 
   addUserData(): void {
-    const { controls } = this.reactiveForm;
+    const { controls } = this.registrationForm;
 
-    if (this.reactiveForm.invalid) {
+    if (this.registrationForm.invalid) {
       Object.keys(controls).forEach((controlName) => controls[controlName].markAsTouched());
 
       return;
@@ -57,13 +57,13 @@ export default class RegistrationComponent implements OnInit {
 
     if (this.isLoginTemplate) {
       this.registrationService.signIn(
-        this.reactiveForm.value.password,
-        this.reactiveForm.value.email
+        this.registrationForm.value.password,
+        this.registrationForm.value.email
       );
     } else {
       this.registrationService.logIn(
-        this.reactiveForm.value.password,
-        this.reactiveForm.value.email
+        this.registrationForm.value.password,
+        this.registrationForm.value.email
       );
     }
   }
