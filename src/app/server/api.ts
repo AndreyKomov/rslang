@@ -8,8 +8,10 @@ export default class WordsApiServiceComponent implements OnInit {
   apiUrl = 'https://arcane-chamber-21175.herokuapp.com/';
 
   id: number | null;
-  page:number|null;
-  group:number|null;
+
+  page: number | null;
+
+  group: number | null;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -29,10 +31,13 @@ export default class WordsApiServiceComponent implements OnInit {
         return JSON.stringify(error);
       });
   }
-   private getWordsByPageAndGroup(page: number | null, group :number|null): void {
+
+  private getWordsByPageAndGroup(page: number | null, group: number | null): void {
     this.page = page;
     this.group = group;
-    const promise = this.httpClient.get(`${this.apiUrl}words?page=${page}&group=${group}`).toPromise();
+    const promise = this.httpClient
+      .get(`${this.apiUrl}words?page=${page}&group=${group}`)
+      .toPromise();
     promise
       .then((data) => {
         return JSON.stringify(data);
@@ -41,5 +46,4 @@ export default class WordsApiServiceComponent implements OnInit {
         return JSON.stringify(error);
       });
   }
- 
 }
