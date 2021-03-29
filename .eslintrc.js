@@ -15,9 +15,15 @@ module.exports = {
         'plugin:@angular-eslint/recommended',
         'airbnb-typescript/base',
         'prettier/@typescript-eslint',
-        'plugin:prettier/g',
+        'plugin:prettier/recommended',
       ],
       rules: {
+        'prettier/prettier': [
+          'error',
+          {
+            endOfLine: 'auto',
+          },
+        ],
         /**
          * ========================================================================
          * Modified Airbnb JS Style Guide rules extending eslint:recommended
