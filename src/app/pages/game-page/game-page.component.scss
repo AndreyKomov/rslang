@@ -1,0 +1,35 @@
+$background_link: #55C1FF;
+$border_color: #5887FF;
+
+.game-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__content {
+    width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  &__link {
+    width: 250px;
+    height: 90px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $background_link;
+    border-radius: 8.5rem;
+    border: 0.3rem solid $border_color;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: sans-serif;
+  }
+}
