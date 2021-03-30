@@ -454,9 +454,26 @@ export default class WordsApiServiceComponent implements OnInit {
       .toPromise();
     promise
       .then((data) => {
+        localStorage.setItem('token', this.token);
+        localStorage.setItem('refreshToken', refreshToken);
         return JSON.stringify(data);
       })
       .catch((error) => {
+        localStorage.setItem('userId', null);
+        localStorage.setItem('token', null);
+        localStorage.setItem('userName', null);
+        localStorage.setItem('email', null);
+        localStorage.setItem('authorized', 'false');
+        localStorage.setItem('wordsPerDay', null);
+        localStorage.setItem('userCardsCount', null);
+        localStorage.setItem('userLevel', null);
+        localStorage.setItem('userSetExample', null);
+        localStorage.setItem('userSetExplanation', null);
+        localStorage.setItem('userSetImage', null);
+        localStorage.setItem('userSetTranscription', null);
+        localStorage.setItem('userSetTranslate', null);
+        localStorage.setItem('refreshToken', null);
+        localStorage.setItem('mainDailyStatistic', null);
         return JSON.stringify(error);
       });
   }
