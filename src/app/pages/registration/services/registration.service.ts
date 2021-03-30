@@ -5,13 +5,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export default class RegistrationService {
-  signIn(password: string, email: string): void {
+  signIn(name: string, password: string, email: string, imgPath: string | ArrayBuffer): void {
     // eslint-disable-next-line no-console
-    console.log(password, email);
+    console.log(name, password, email, imgPath);
   }
 
-  logIn(password: string, email: string): void {
+  logIn(name: string, password: string, email: string, imgPath: string | ArrayBuffer): void {
     // eslint-disable-next-line no-console
-    console.log(password, email);
+    console.log(name, password, email, imgPath);
   }
 }

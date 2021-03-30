@@ -3,12 +3,24 @@
   <form class="modal-content" [formGroup]="registrationForm" (submit)="addUserData()">
     <h4>{{ modalName }}</h4>
     <button (click)="closeModal()" class="modal-content__close"></button>
+    <div class="modal-content__alert" *ngIf="isControlInvalid('name')">
+      Type a name(more than 8 and below than 30 charts)
+    </div>
+    <input type="text" placeholder="Enter Name" formControlName="name" id="name" maxlength="30" />
     <div class="modal-content__alert" *ngIf="isControlInvalid('email')">Type an email</div>
     <input type="text" placeholder="Enter Email" formControlName="email" id="email" />
     <div class="modal-content__alert" *ngIf="isControlInvalid('password')">
       Type a password(more than 8 and below than 25 charts)
     </div>
-    <input type="text" placeholder="Enter Password" formControlName="password" id="password" />
+    <input
+      type="text"
+      placeholder="Enter Password"
+      formControlName="password"
+      id="password"
+      maxlength="25"
+    />
+    <img [src]="imgURL" alt="choose-image" class="modal-content__avatar" />
+    <input #file type="file" accept="image/*" (change)="preview(file.files)" id="avatar-choose" />
     <p>By creating an account you agree to our <span>Terms & Privacy</span>.</p>
     <button type="submit" class="modal-content__registerbtn">{{ modalName }}</button>
     <div
