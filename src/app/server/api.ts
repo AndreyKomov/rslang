@@ -29,6 +29,7 @@ export default class WordsApiServiceComponent implements OnInit {
     this.createUser(this.userName, this.email, this.password);
     this.getUser(this.id, this.token);
     this.updateUser(this.id, this.token, this.userName, this.email, this.password);
+    this.deleteUser(this.id, this.token);
   }
 
   private getWordById(id: number | null): void {
@@ -123,6 +124,26 @@ export default class WordsApiServiceComponent implements OnInit {
           email: `${email}`,
           password: `${password}`,
         }),
+      })
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
+
+  private deleteUser(id: number | null, token: string | null): void {
+    this.id = id;
+    this.token = token;
+    const promise = this.httpClient
+      .delete(`${this.apiUrl}users/${id}`, {
+        headers: {
+          Accept: '*/*',
+          Authorization: `Bearer ${token}`,
+        },
       })
       .toPromise();
     promise
