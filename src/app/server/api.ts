@@ -35,7 +35,8 @@ export default class WordsApiServiceComponent implements OnInit {
   wordsPerDay: number | null;
 
   learnedWords: number | null;
-  
+
+  refreshToken: string | null;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -55,7 +56,8 @@ export default class WordsApiServiceComponent implements OnInit {
     this.setUserSettings(this.id, this.token, this.wordsPerDay, this.optionalObject);
     this.getUserStatistic(this.id, this.token);
     this.setUserStatistic(this.id, this.token, this.learnedWords, this.optionalObject);
-    this.signIn(this.email, this.password) ;
+    this.signIn(this.email, this.password);
+    this.refreshTokenUser(this.id, this.refreshToken);
   }
 
   private getWordById(id: number | null): void {
@@ -414,28 +416,48 @@ export default class WordsApiServiceComponent implements OnInit {
         return JSON.stringify(error);
       });
   }
- private signIn(email: string | null, password: string | null): void {
-  this.email = email;
-  this.password = password;
-  const promise = this.httpClient
-    .post(`${this.apiUrl}signin`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: `${email}`,
-        password: `${password}`,
-      }),
-    })
-    .toPromise();
-  promise
-    .then((data) => {
-      return JSON.stringify(data);
-    })
-    .catch((error) => {
-      return JSON.stringify(error);
-    });
-}
 
+  private signIn(email: string | null, password: string | null): void {
+    this.email = email;
+    this.password = password;
+    const promise = this.httpClient
+      .post(`${this.apiUrl}signin`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: `${email}`,
+          password: `${password}`,
+        }),
+      })
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
+
+  private refreshTokenUser(id: number | null, refreshToken: string | null): void {
+    this.id = id;
+    this.refreshToken = refreshToken;
+    const promise = this.httpClient
+      .get(`${this.apiUrl}users/${id}/tokens`, {
+        headers: {
+          Authorization: `Bearer ${refreshToken}`,
+          Accept: 'application/json',
+        },
+      })
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
 }
