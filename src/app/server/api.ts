@@ -43,6 +43,7 @@ export default class WordsApiServiceComponent implements OnInit {
     this.getAllUsersWords(this.id, this.token);
     this.getUserWordById(this.id, this.wordId, this.token);
     this.updateUserWord(this.id, this.wordId, this.token, this.wordDifficulty, this.optionalObject);
+    this.createUserWord(this.id, this.wordId, this.token, this.wordDifficulty, this.optionalObject);
   }
 
   private getWordById(id: number | null): void {
@@ -230,7 +231,41 @@ export default class WordsApiServiceComponent implements OnInit {
         },
         body: JSON.stringify({
           difficulty: `${wordDifficulty}`,
-          optional: optionalObject,
+          optionalObject,
+        }),
+      })
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
+
+  private createUserWord(
+    id: number | null,
+    wordId: number | null,
+    token: string | null,
+    wordDifficulty: string | null,
+    optionalObject: optionalObject[] | null
+  ): void {
+    this.id = id;
+    this.wordId = wordId;
+    this.token = token;
+    this.wordDifficulty = wordDifficulty;
+    this.optionalObject = optionalObject;
+    const promise = this.httpClient
+      .put(`${this.apiUrl}users/${id}/words/${wordId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          difficulty: `${wordDifficulty}`,
+          optionalObject,
         }),
       })
       .toPromise();
