@@ -44,6 +44,7 @@ export default class WordsApiServiceComponent implements OnInit {
     this.getUserWordById(this.id, this.wordId, this.token);
     this.updateUserWord(this.id, this.wordId, this.token, this.wordDifficulty, this.optionalObject);
     this.createUserWord(this.id, this.wordId, this.token, this.wordDifficulty, this.optionalObject);
+    this.deleteUserWord(this.id, this.wordId, this.token);
   }
 
   private getWordById(id: number | null): void {
@@ -267,6 +268,27 @@ export default class WordsApiServiceComponent implements OnInit {
           difficulty: `${wordDifficulty}`,
           optionalObject,
         }),
+      })
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
+
+  private deleteUserWord(id: number | null, wordId: number | null, token: string | null): void {
+    this.id = id;
+    this.wordId = wordId;
+    this.token = token;
+    const promise = this.httpClient
+      .delete(`${this.apiUrl}users/${id}/words/${wordId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: '*/*',
+        },
       })
       .toPromise();
     promise
