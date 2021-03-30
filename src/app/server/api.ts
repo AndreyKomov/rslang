@@ -21,6 +21,8 @@ export default class WordsApiServiceComponent implements OnInit {
 
   token: string | null;
 
+  wordId: number | null;
+
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export default class WordsApiServiceComponent implements OnInit {
     this.updateUser(this.id, this.token, this.userName, this.email, this.password);
     this.deleteUser(this.id, this.token);
     this.getAllUsersWords(this.id, this.token);
+    this.getUserWordById(this.id, this.wordId, this.token);
   }
 
   private getWordById(id: number | null): void {
@@ -161,6 +164,27 @@ export default class WordsApiServiceComponent implements OnInit {
     this.token = token;
     const promise = this.httpClient
       .get(`${this.apiUrl}users/${id}/words`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+      })
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
+
+  private getUserWordById(id: number | null, wordId: number | null, token: string | null): void {
+    this.id = id;
+    this.wordId = wordId;
+    this.token = token;
+    const promise = this.httpClient
+      .get(`${this.apiUrl}users/${id}/words/${wordId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: 'application/json',
