@@ -83,7 +83,11 @@ module.exports = {
          * ESLint Plugin TypeScript rules extending @typescript-eslint/recommended
          * ========================================================================
          */
-        '@typescript-eslint/lines-between-class-members': ['off'],
+        '@typescript-eslint/lines-between-class-members': [
+          'error',
+          'always',
+          { exceptAfterSingleLine: true },
+        ],
         // disallow usage of the any type
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/prefer-regexp-exec': 'off',
