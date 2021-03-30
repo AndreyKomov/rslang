@@ -49,6 +49,7 @@ export default class WordsApiServiceComponent implements OnInit {
     this.deleteUserWord(this.id, this.wordId, this.token);
     this.getUserSettings(this.id, this.token);
     this.setUserSettings(this.id, this.token, this.wordsPerDay, this.optionalObject);
+    this.getUserStatistic(this.id, this.token);
   }
 
   private getWordById(id: number | null): void {
@@ -345,6 +346,26 @@ export default class WordsApiServiceComponent implements OnInit {
           wordsPerDay,
           optionalObject,
         }),
+      })
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
+
+  private getUserStatistic(id: number | null, token: string | null): void {
+    this.id = id;
+    this.token = token;
+    const promise = this.httpClient
+      .get(`${this.apiUrl}users/${id}/statistics`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
       })
       .toPromise();
     promise
