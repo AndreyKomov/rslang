@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/member-ordering */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Component, OnInit } from '@angular/core';
 import RegistrationService from '@app/pages/registration/services/registration.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IRegForm } from '../models/RegFormsModel';
+import { IFileModel } from '../models/FileModel';
 
 @Component({
   selector: 'app-registration',
@@ -18,8 +14,10 @@ export default class RegistrationComponent implements OnInit {
   isLoginTemplate = false;
   isShow = false;
   registrationForm: IRegForm;
+  imgURL: ArrayBuffer | string = '../../../assets/no-avatar.png';
+  imagePath: string | any[];
 
-  constructor(private registrationService: RegistrationService, private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -41,11 +39,7 @@ export default class RegistrationComponent implements OnInit {
     });
   }
 
-  imgURL: ArrayBuffer | string = '../../../assets/no-avatar.png';
-
-  public imagePath;
-
-  preview(files: string | any[]): void {
+  preview(files: IFileModel[]): void {
     if (files.length === 0) return;
 
     const mimeType = files[0].type;
@@ -56,7 +50,7 @@ export default class RegistrationComponent implements OnInit {
     const reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
-    reader.onload = (_event) => {
+    reader.onload = () => {
       this.imgURL = reader.result;
     };
   }
@@ -90,14 +84,14 @@ export default class RegistrationComponent implements OnInit {
     }
 
     if (this.isLoginTemplate) {
-      this.registrationService.signIn(
+      RegistrationService.signIn(
         this.registrationForm.value.name,
         this.registrationForm.value.password,
         this.registrationForm.value.email,
         this.imgURL
       );
     } else {
-      this.registrationService.logIn(
+      RegistrationService.logIn(
         this.registrationForm.value.name,
         this.registrationForm.value.password,
         this.registrationForm.value.email,
