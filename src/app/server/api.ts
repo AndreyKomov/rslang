@@ -5,6 +5,7 @@ interface optionalObject {
   option1: string | null;
   option2: number | null;
 }
+
 @Component({
   template: '',
 })
@@ -33,6 +34,8 @@ export default class WordsApiServiceComponent implements OnInit {
 
   wordsPerDay: number | null;
 
+  learnedWords: number | null;
+
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
@@ -50,6 +53,7 @@ export default class WordsApiServiceComponent implements OnInit {
     this.getUserSettings(this.id, this.token);
     this.setUserSettings(this.id, this.token, this.wordsPerDay, this.optionalObject);
     this.getUserStatistic(this.id, this.token);
+    this.setUserStatistic(this.id, this.token, this.learnedWords, this.optionalObject);
   }
 
   private getWordById(id: number | null): void {
@@ -366,6 +370,38 @@ export default class WordsApiServiceComponent implements OnInit {
           Authorization: `Bearer ${token}`,
           Accept: 'application/json',
         },
+      })
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
+
+  private setUserStatistic(
+    id: number | null,
+    token: string | null,
+    learnedWords: number | null,
+    optionalObject: optionalObject[] | null
+  ): void {
+    this.id = id;
+    this.token = token;
+    this.learnedWords = learnedWords;
+    this.optionalObject = optionalObject;
+    const promise = this.httpClient
+      .put(`${this.apiUrl}users/${id}/statistics`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          learnedWords,
+          optionalObject,
+        }),
       })
       .toPromise();
     promise
