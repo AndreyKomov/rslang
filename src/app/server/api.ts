@@ -31,6 +31,8 @@ export default class WordsApiServiceComponent implements OnInit {
 
   optionalObject: optionalObject[] | null;
 
+  wordsPerDay: number | null;
+
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
@@ -46,6 +48,7 @@ export default class WordsApiServiceComponent implements OnInit {
     this.createUserWord(this.id, this.wordId, this.token, this.wordDifficulty, this.optionalObject);
     this.deleteUserWord(this.id, this.wordId, this.token);
     this.getUserSettings(this.id, this.token);
+    this.setUserSettings(this.id, this.token, this.wordsPerDay, this.optionalObject);
   }
 
   private getWordById(id: number | null): void {
@@ -310,6 +313,38 @@ export default class WordsApiServiceComponent implements OnInit {
           Authorization: `Bearer ${token}`,
           Accept: 'application/json',
         },
+      })
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
+
+  private setUserSettings(
+    id: number | null,
+    token: string | null,
+    wordsPerDay: number | null,
+    optionalObject: optionalObject[] | null
+  ): void {
+    this.id = id;
+    this.token = token;
+    this.wordsPerDay = wordsPerDay;
+    this.optionalObject = optionalObject;
+    const promise = this.httpClient
+      .put(`${this.apiUrl}users/${id}/settings`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          wordsPerDay,
+          optionalObject,
+        }),
       })
       .toPromise();
     promise
