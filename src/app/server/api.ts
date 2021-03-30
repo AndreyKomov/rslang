@@ -30,6 +30,7 @@ export default class WordsApiServiceComponent implements OnInit {
     this.getUser(this.id, this.token);
     this.updateUser(this.id, this.token, this.userName, this.email, this.password);
     this.deleteUser(this.id, this.token);
+    this.getAllUsersWords(this.id, this.token);
   }
 
   private getWordById(id: number | null): void {
@@ -143,6 +144,26 @@ export default class WordsApiServiceComponent implements OnInit {
         headers: {
           Accept: '*/*',
           Authorization: `Bearer ${token}`,
+        },
+      })
+      .toPromise();
+    promise
+      .then((data) => {
+        return JSON.stringify(data);
+      })
+      .catch((error) => {
+        return JSON.stringify(error);
+      });
+  }
+
+  private getAllUsersWords(id: number | null, token: string | null): void {
+    this.id = id;
+    this.token = token;
+    const promise = this.httpClient
+      .get(`${this.apiUrl}users/${id}/words`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
         },
       })
       .toPromise();
