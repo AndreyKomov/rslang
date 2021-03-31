@@ -1,7 +1,7 @@
 import { OnInit, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-interface optionalObject {
+interface OptionalObject {
   option1: string | null;
   option2: number | null;
 }
@@ -30,7 +30,7 @@ export default class WordsApiServiceComponent implements OnInit {
 
   wordDifficulty: string | null;
 
-  optionalObject: optionalObject[] | null;
+  optionalObject: OptionalObject[] | null;
 
   wordsPerDay: number | null;
 
@@ -229,7 +229,7 @@ export default class WordsApiServiceComponent implements OnInit {
     wordId: number | null,
     token: string | null,
     wordDifficulty: string | null,
-    optionalObject: optionalObject[] | null
+    optionalObject: OptionalObject[] | null
   ): void {
     this.id = id;
     this.wordId = wordId;
@@ -263,7 +263,7 @@ export default class WordsApiServiceComponent implements OnInit {
     wordId: number | null,
     token: string | null,
     wordDifficulty: string | null,
-    optionalObject: optionalObject[] | null
+    optionalObject: OptionalObject[] | null
   ): void {
     this.id = id;
     this.wordId = wordId;
@@ -337,7 +337,7 @@ export default class WordsApiServiceComponent implements OnInit {
     id: number | null,
     token: string | null,
     wordsPerDay: number | null,
-    optionalObject: optionalObject[] | null
+    optionalObject: OptionalObject[] | null
   ): void {
     this.id = id;
     this.token = token;
@@ -389,7 +389,7 @@ export default class WordsApiServiceComponent implements OnInit {
     id: number | null,
     token: string | null,
     learnedWords: number | null,
-    optionalObject: optionalObject[] | null
+    optionalObject: OptionalObject[] | null
   ): void {
     this.id = id;
     this.token = token;
