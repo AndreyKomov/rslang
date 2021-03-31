@@ -2,17 +2,16 @@ import { OnInit, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface OptionalObject {
-  option1: string | null;
-  option2: number | null;
+  difficulty: string | null;
+  isDeleted: string | null;
 }
-
 @Component({
   template: '',
 })
 export default class WordsApiServiceComponent implements OnInit {
-  apiUrl = 'https://arcane-chamber-21175.herokuapp.com/';
+  private apiUrl = 'https://arcane-chamber-21175.herokuapp.com/';
 
-  id: number | null;
+  id: string | null;
 
   page: number | null;
 
@@ -26,7 +25,7 @@ export default class WordsApiServiceComponent implements OnInit {
 
   token: string | null;
 
-  wordId: number | null;
+  wordId: string | null;
 
   wordDifficulty: string | null;
 
@@ -41,7 +40,7 @@ export default class WordsApiServiceComponent implements OnInit {
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.getWordById(this.id);
+    this.getWordById(this.wordId);
     this.getWordsByPageAndGroup(this.page, this.group);
     this.createUser(this.userName, this.email, this.password);
     this.getUser(this.id, this.token);
@@ -60,9 +59,9 @@ export default class WordsApiServiceComponent implements OnInit {
     this.refreshTokenUser(this.id, this.refreshToken);
   }
 
-  public getWordById(id: number | null): void {
-    this.id = id;
-    const promise = this.httpClient.get(`${this.apiUrl}words/${this.id}`).toPromise();
+  public getWordById(wordId: string | null): void {
+    this.wordId = wordId;
+    const promise = this.httpClient.get(`${this.apiUrl}words/${this.wordId}`).toPromise();
     promise
       .then((data) => {
         return JSON.stringify(data);
@@ -72,7 +71,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private getWordsByPageAndGroup(page: number | null, group: number | null): void {
+  public getWordsByPageAndGroup(page: number | null, group: number | null): void {
     this.page = page;
     this.group = group;
     const promise = this.httpClient
@@ -87,7 +86,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private createUser(userName: string | null, email: string | null, password: string | null): void {
+  public createUser(userName: string | null, email: string | null, password: string | null): void {
     this.userName = userName;
     this.email = email;
     this.password = password;
@@ -113,7 +112,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private getUser(id: number | null, token: string | null): void {
+  public getUser(id: string | null, token: string | null): void {
     this.id = id;
     this.token = token;
     const promise = this.httpClient
@@ -128,8 +127,8 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private updateUser(
-    id: number | null,
+  public updateUser(
+    id: string | null,
     token: string | null,
     userName: string | null,
     email: string | null,
@@ -163,7 +162,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private deleteUser(id: number | null, token: string | null): void {
+  public deleteUser(id: string | null, token: string | null): void {
     this.id = id;
     this.token = token;
     const promise = this.httpClient
@@ -183,7 +182,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private getAllUsersWords(id: number | null, token: string | null): void {
+  public getAllUsersWords(id: string | null, token: string | null): void {
     this.id = id;
     this.token = token;
     const promise = this.httpClient
@@ -203,7 +202,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private getUserWordById(id: number | null, wordId: number | null, token: string | null): void {
+  public getUserWordById(id: string | null, wordId: string | null, token: string | null): void {
     this.id = id;
     this.wordId = wordId;
     this.token = token;
@@ -224,9 +223,9 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private updateUserWord(
-    id: number | null,
-    wordId: number | null,
+  public updateUserWord(
+    id: string | null,
+    wordId: string | null,
     token: string | null,
     wordDifficulty: string | null,
     optionalObject: OptionalObject[] | null
@@ -258,9 +257,9 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private createUserWord(
-    id: number | null,
-    wordId: number | null,
+  public createUserWord(
+    id: string | null,
+    wordId: string | null,
     token: string | null,
     wordDifficulty: string | null,
     optionalObject: OptionalObject[] | null
@@ -292,7 +291,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private deleteUserWord(id: number | null, wordId: number | null, token: string | null): void {
+  public deleteUserWord(id: string | null, wordId: string | null, token: string | null): void {
     this.id = id;
     this.wordId = wordId;
     this.token = token;
@@ -313,7 +312,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private getUserSettings(id: number | null, token: string | null): void {
+  public getUserSettings(id: string | null, token: string | null): void {
     this.id = id;
     this.token = token;
     const promise = this.httpClient
@@ -333,8 +332,8 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private setUserSettings(
-    id: number | null,
+  public setUserSettings(
+    id: string | null,
     token: string | null,
     wordsPerDay: number | null,
     optionalObject: OptionalObject[] | null
@@ -365,7 +364,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private getUserStatistic(id: number | null, token: string | null): void {
+  public getUserStatistic(id: string | null, token: string | null): void {
     this.id = id;
     this.token = token;
     const promise = this.httpClient
@@ -385,8 +384,8 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private setUserStatistic(
-    id: number | null,
+  public setUserStatistic(
+    id: string | null,
     token: string | null,
     learnedWords: number | null,
     optionalObject: OptionalObject[] | null
@@ -417,7 +416,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private signIn(email: string | null, password: string | null): void {
+  public signIn(email: string | null, password: string | null): void {
     this.email = email;
     this.password = password;
     const promise = this.httpClient
@@ -441,7 +440,7 @@ export default class WordsApiServiceComponent implements OnInit {
       });
   }
 
-  private refreshTokenUser(id: number | null, refreshToken: string | null): void {
+  public refreshTokenUser(id: string | null, refreshToken: string | null): void {
     this.id = id;
     this.refreshToken = refreshToken;
     const promise = this.httpClient
