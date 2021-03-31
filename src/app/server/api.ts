@@ -60,7 +60,7 @@ export default class WordsApiServiceComponent implements OnInit {
     this.refreshTokenUser(this.id, this.refreshToken);
   }
 
-  private getWordById(id: number | null): void {
+  public getWordById(id: number | null): void {
     this.id = id;
     const promise = this.httpClient.get(`${this.apiUrl}words/${this.id}`).toPromise();
     promise

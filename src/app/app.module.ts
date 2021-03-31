@@ -8,9 +8,10 @@ import AudioCallService from './pages/audio-call/audio-call.service';
 import MaterialModule from './pages/material/material.module';
 import AudioCallModule from './pages/audio-call/audio-call.module';
 import WordsApiService from './server/api';
+import ServerTestingComponent from './server-testing/server-testing.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ServerTestingComponent],
   imports: [BrowserModule, BrowserAnimationsModule, MaterialModule, AudioCallModule],
   providers: [AudioCallService, WordsApiService],
   bootstrap: [AppComponent],
