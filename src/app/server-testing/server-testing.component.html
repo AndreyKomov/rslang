@@ -3,7 +3,22 @@
  
 <h3> Here we received word by id:{{wordById}} </h3> 
 <h3>Words</h3>
-
+<h3>getUser</h3>
+ {{getUser}}
+<h3>createUser</h3>
+<input
+    style="display: none"
+    #fileInput
+    type="file" (change)="onFileSelected($event)" >
+    <button type="button" (click)="fileInput.click()">Pick File</button>
+    <button type="button" (click)="createUser()">createUser</button>
+<h3>updateUser</h3>
+<input
+    style="display: none"
+    #fileInput
+    type="file" (change)="onFileSelected($event)" >
+    <button type="button" (click)="fileInput.click()">Pick File</button>
+    <button type="button" (click)="updateUser()">updateUser</button>
 </div>
 
 

@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,8 @@ interface OptionalObject {
   template: '',
 })
 export default class WordsApiServiceComponent {
-  private apiUrl = 'https://arcane-chamber-21175.herokuapp.com/';
+  // private apiUrl = 'https://arcane-chamber-21175.herokuapp.com/';
+  private apiUrl = 'https://apricot-cake-88637.herokuapp.com/';
 
   id: string | null;
 
@@ -40,6 +41,8 @@ export default class WordsApiServiceComponent {
 
   refreshToken: string | null;
 
+  avatar: File;
+
   constructor(private httpClient: HttpClient) {}
 
   public getWordById(wordId: string | null): Observable<any> {
@@ -56,22 +59,20 @@ export default class WordsApiServiceComponent {
   public createUser(
     userName: string | null,
     email: string | null,
-    password: string | null
+    password: string | null,
+    avatar: File
   ): Observable<any> {
+    const myHeaders = new HttpHeaders().set('Authorization', 'my-auth-token');
     this.userName = userName;
     this.email = email;
     this.password = password;
-    return this.httpClient.post<any>(`${this.apiUrl}users`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'form/multipart',
-      },
-      body: JSON.stringify({
-        userName,
-        email,
-        password,
-      }),
-    });
+    this.avatar = avatar;
+    const data = new FormData();
+    data.append('avatar', avatar);
+    data.append('name', userName);
+    data.append('email', email);
+    data.append('password', password);
+    return this.httpClient.post<any>(`${this.apiUrl}users`, data, { headers: myHeaders });
   }
 
   public getUser(id: string | null, token: string | null): Observable<any> {
@@ -87,24 +88,23 @@ export default class WordsApiServiceComponent {
     token: string | null,
     userName: string | null,
     email: string | null,
-    password: string | null
+    password: string | null,
+    avatar: File
   ): Observable<any> {
     this.id = id;
     this.token = token;
     this.userName = userName;
     this.email = email;
     this.password = password;
-    return this.httpClient.put<any>(`${this.apiUrl}users/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userName,
-        email: `${email}`,
-        password: `${password}`,
-      }),
+    this.avatar = avatar;
+    const data = new FormData();
+    data.append('_id', id);
+    data.append('avatar', avatar);
+    data.append('name', userName);
+    data.append('email', email);
+    data.append('password', password);
+    return this.httpClient.put<any>(`${this.apiUrl}users/${id}`, data, {
+      headers: { Authorization: `Bearer ${token}` },
     });
   }
 
