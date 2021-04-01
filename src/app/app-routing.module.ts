@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './shared/layout/main/main.component';
+import { PromoComponent } from './pages/promo/promo.component';
 import { ParamKey, QueryParamKey } from './app-routing.enum';
 
 const routes: Routes = [
-  { path: ParamKey.main, component: MainComponent, pathMatch: 'full' },
+  { path: ParamKey.promo, component: PromoComponent, pathMatch: 'full' },
+  { path: ParamKey.promo, component: PromoComponent },
   {
-    path: ParamKey.promo,
-    loadChildren: () => import('./pages/promo/promo.module').then((module) => module.PromoModule),
+    path: ParamKey.games,
+    loadChildren: () => import('./pages/games/games.module').then((module) => module.GamesModule),
+  },
+  {
+    path: ParamKey.team,
+    loadChildren: () => import('./pages/team/team.module').then((module) => module.TeamModule),
   },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];

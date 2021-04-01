@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  @include media-max-width {
+    & .auth-button__button {
+      width: 100px;
+      margin-top: 18px;
+    }
+    & .button.mat-primary {
+      background-color: #1d509f !important;
+    }
+  }
+  @include media-desktop {
+  }
+  @include media-tablet-landscape {
+  }
+  @include media-tablet-portrait {
+  }
+  @include media-mobile {
+  }
+}

@@ -1,6 +1,5 @@
 export enum ParamKey {
-  main = '',
-  promo = 'promo',
+  promo = '',
   notFound = '**',
   team = 'team',
   games = 'games',
