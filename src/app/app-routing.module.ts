@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: ParamKey.main, component: MainComponent, pathMatch: 'full' },
   {
     path: ParamKey.promo,
-    loadChildren: () => import('./pages/promo/promo.module').then((module) => module.PromoModule),
+    loadChildren: (): any =>
+      import('./pages/promo/promo.module').then((module) => module.PromoModule),
   },
   {
     path: ParamKey.audiocallPromo,

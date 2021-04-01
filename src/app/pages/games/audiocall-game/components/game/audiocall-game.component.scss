@@ -3,11 +3,46 @@
   width: 1000px;
   margin: 0 auto;
 
+    .speaker {
+      width: 125px;
+      margin: 10px auto;
+
+        img {
+          width: 125px;
+        }
+    }
+
+    .speaker:hover {
+      cursor: pointer;
+      transform: scale(1.15);
+    }
+
     .words-list {
-      display: grid;
-      width: 750px;
+      position: relative;
+      width: 500px;
       margin: 0 auto;
-      grid-template-columns: 200px 200px 200px;
       text-align: center;
+      overflow: hidden;
+
+        .words {
+          position: relative;
+          margin: 10px auto;
+          width: 100px;
+          height: 25px;
+          text-align: center;
+          border-radius: 19px;
+          padding: 5px;
+          border: 2px double #681bb0;
+          color: #681bb0;
+          background-color: #9effff;
+          font-size: 19px;
+          outline: none;
+          text-align: center;
+        }
+
+        .words:hover {
+          cursor: pointer;
+          transform: scale(1.15);
+        }
     }
 }

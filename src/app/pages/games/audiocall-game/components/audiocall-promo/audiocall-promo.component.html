@@ -1,0 +1,84 @@
+<div class="container-audiocall-promo">
+  <div class="game-description">
+    <h4>Игра на тренировку навыков аудирования.</h4>
+    <h6>
+      <p>В процессе игры необходимо угадать слово, произнесенное на английском языке.
+        При выборе правилього/неправильного ответа звучит соответствующий сигнал.
+        В конце выходит статистика по количеству угаданных/неугаданных слов и аудио-дорожки всех слов,
+        участвовавших в игре.
+      </p>
+
+      <p>Выбирайте слово кликом мыши или нажатием соответствующей клавиши с номером слова.</p>
+    </h6>
+  </div>
+
+  <div class="col-xs-12 col-sm-6" *ngIf="startFromMenu">
+    <div class="card">
+      <div class="card-header">
+        <h4>Играть со случайными словами</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled pl-0">
+          <li class="birthday-item">
+            <div class="form-item">
+              <label class="form-item__label">Сложность</label>
+              <div class="form-item__control"><small><strong><span
+                      class="slider__value level">1</span><span>&nbsp;Уровень</span></strong></small></div>
+              <div class="slider">
+                <input id="level" class="slider__input" type="range" value="0" min="0" max="5" />
+                <div class="slider__positive" style="width: 0%;"></div>
+              </div>
+            </div>
+          </li>
+          <li>
+          <div class="form-item">
+            <label class="form-item__label">Раунд</label>
+            <div class="form-item__control">
+              <small>
+                <strong>
+                  <span class="slider__value round">1</span>
+                  <span>&nbsp;Раунд</span>
+                </strong>
+              </small>
+            </div>
+            <div class="slider">
+              <input id="group" class="slider__input" type="range" value="0" min="0" max="29" />
+              <div class="slider__positive" style="width: 0%;"></div>
+            </div>
+          </div>
+          </li>
+        </ul>
+      </div>
+      <div id="custom-start" class="card-button">
+        <button>Старт</button>
+      </div>
+    </div>
+  </div>
+
+  <a routerLink="/audiocall/audiocallgame" class="start-link">
+    <button class="start-game">Начать</button>
+  </a>
+
+  <!--   <div class="game-options">
+    <div class="studied-words">
+      <h6>Играть с уже изученными словами</h6>
+      <a routerLink="/audiocall/audiocallgame" class="start-link">
+        <button class="start-game">Начать</button>
+      </a>
+    </div>
+
+    <div class="random-words">
+      <h6>Играть со случайными словами</h6>
+      <div class="difficult-slider">
+        <label class="difficult-label">Сложность</label>
+        <input type="range" class="difficult">
+      </div>
+      <div class="round-slider">
+        <label class="round-label">Раунд</label>
+        <input type="range" class="round">
+      </div>
+
+
+    </div>
+  </div> -->
+</div>

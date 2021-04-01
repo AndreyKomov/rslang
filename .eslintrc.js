@@ -24,6 +24,9 @@ module.exports = {
          * ========================================================================
          */
         // require the use of === and !==
+        "prettier/prettier": ["error", {
+          "endOfLine":"auto"
+        }],
         eqeqeq: ['error', 'always', { null: 'ignore' }],
         // disallow else after a return in an if
         'no-else-return': ['error', { allowElseIf: false }],

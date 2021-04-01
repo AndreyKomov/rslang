@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AudiocallPromoComponent } from './components/audiocall-promo/audiocall-promo/audiocall-promo.component';
+import { AudiocallPromoComponent } from './components/audiocall-promo/audiocall-promo.component';
 import { AudiocallGameComponent } from './components/game/audiocall-game.component';
 
 const routes: Routes = [
