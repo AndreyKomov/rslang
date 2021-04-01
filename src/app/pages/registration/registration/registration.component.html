@@ -1,6 +1,6 @@
 <ng-container *ngIf="!isShow">
   <div class="overlay">
-    <form class="overlay__modal-content" [formGroup]="registrationForm" (submit)="addUserData()">
+    <form class="modal-content" [formGroup]="registrationForm" (submit)="addUserData()">
       <h4>{{ modalName }}</h4>
       <button (click)="closeModal()" class="modal-content__close"></button>
       <div class="modal-content__alert" *ngIf="isControlInvalid('name')">
