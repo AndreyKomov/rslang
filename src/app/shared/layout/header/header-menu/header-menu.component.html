@@ -1,0 +1,14 @@
+<nav class="menu">
+  <ul class="menu__list">
+    <li *ngFor="let item of navMenu" class="menu__item">
+      <a
+        routerLink="{{ menuRoutes[item[0]] }}"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="menu__link"
+      >
+        {{ item[1] }}
+      </a>
+    </li>
+  </ul>
+</nav>

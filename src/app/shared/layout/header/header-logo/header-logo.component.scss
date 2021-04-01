@@ -1,0 +1,27 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  @include media-max-width {
+    & .logo__link {
+      width: 132px;
+      height: 74px;
+    }
+    & .logo__image {
+      width: 162px;
+      height: 74px;
+    }
+  }
+  @include media-desktop {
+  }
+  @include media-tablet-landscape {
+  }
+  @include media-tablet-portrait {
+  }
+  @include media-mobile {
+  }
+
+  & .logo__link {
+    display: block;
+  }
+}

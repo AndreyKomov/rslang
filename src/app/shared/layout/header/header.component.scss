@@ -1,0 +1,31 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  @include media-max-width {
+    @include main-header-grid;
+    height: 20vh;
+    & div {
+      margin-top: 30px;
+    }
+  }
+  @include media-desktop {
+    @include main-template-grid;
+    height: 160px;
+    padding: 0 5%;
+    & div {
+      margin-top: 20px;
+    }
+  }
+  @include media-tablet-landscape {
+  }
+  @include media-tablet-portrait {
+  }
+  @include media-mobile {
+  }
+  display: grid;
+  background: url('../../../../assets/img/header-bg.png') no-repeat;
+  background-position: right;
+  background-size: contain;
+  padding: 0 5%;
+}
