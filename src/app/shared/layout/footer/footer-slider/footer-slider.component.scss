@@ -10,6 +10,21 @@
         margin: 68px 0 0 140px;
       }
     }
+    & .dev-team__content {
+      & .dev-team__name {
+        font-size: 46px;
+        margin: 68px 0 0 200px;
+      }
+      & .dev-team__github {
+        margin-left: 100px;
+        & a {
+          color: $footer-link-color;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
     & .dev-team__arrows {
       & span {
         font-size: 46px;
@@ -53,6 +68,20 @@
     }
     background-color: $footer-creds-bg;
     height: 100%;
+  }
+
+  & .dev-team__content {
+    & span {
+      display: block;
+    }
+    & .dev-team__github {
+      & a {
+        color: $footer-link-color;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
   & .dev-team__arrows {

@@ -3,12 +3,8 @@
 
 :host {
   @include media-max-width {
-    & .auth-button__button {
-      width: 100px;
-      margin-top: 18px;
-    }
-    & .button.mat-primary {
-      background-color: #1d509f !important;
+    & .promo__button {
+      margin-top: 20px;
     }
   }
   @include media-desktop {
