@@ -1,0 +1,16 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  @include media-max-width {
+    height: 20vh;
+  }
+  @include media-desktop {
+  }
+  @include media-tablet-landscape {
+  }
+  @include media-tablet-portrait {
+  }
+  @include media-mobile {
+  }
+}
