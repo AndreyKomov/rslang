@@ -1,24 +1,15 @@
-body { 
-  margin: 0; 
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Open+Sans&family=Roboto&family=Roboto+Condensed&family=Source+Sans+Pro&display=swap');
 
+body {
   font-family: $font-main;
+  color: $main-text-color;
+  height: 100%;
 }
 
-hr {
-  margin: 0;
-
-  border-width: 2px;
-  border-style: solid;
-}
-
-.list {
-  margin: 0;
-  padding: 0;
-
-  list-style: none;
-}
-
-.link {
-  color: inherit;
+a {
   text-decoration: none;
+}
+
+ul {
+  list-style: none;
 }

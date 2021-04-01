@@ -13,6 +13,7 @@
       "@books/*": ["src/app/books/*"],
       "@cart/*": ["src/app/cart/*"],
       "@orders/*": ["src/app/orders/*"],
+      "@assets/*": ["src/assets/*"],
     },
     "sourceMap": true,
     "declaration": false,
