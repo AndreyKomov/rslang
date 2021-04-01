@@ -12,8 +12,8 @@ export default class ServerTestingComponent implements OnInit {
   constructor(public api: WordApiServiceComponent) {}
 
   ngOnInit() {
-    this.api.getWordById('5e8aaaf87c3d1d199c0f2d6e').subscribe((data) => {
-      this.Data = data;
+    this.api.getWordById('5e9f5ee35eb9e72bc21af4a2').subscribe((data) => {
+      this.Data = data.word;
     });
   }
 }
