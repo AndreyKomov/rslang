@@ -7,12 +7,13 @@ import WordApiServiceComponent from '../server/api';
   styleUrls: ['./server-testing.component.scss'],
 })
 export default class ServerTestingComponent implements OnInit {
-  Data: string | null;
+  Data: any | null;
 
-  constructor(private api: WordApiServiceComponent) {}
+  constructor(public api: WordApiServiceComponent) {}
 
-  ngOnInit(): void {
-    this.Data = 'gljkulk';
-    // this.api.getWordById('5e8aaaf87c3d1d199c0f2d6f');
+  ngOnInit() {
+    this.api.getWordById('5e8aaaf87c3d1d199c0f2d6e').subscribe((data) => {
+      this.Data = data;
+    });
   }
 }

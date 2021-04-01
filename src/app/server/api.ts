@@ -1,10 +1,13 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+import { Observable } from 'rxjs';
 
 interface OptionalObject {
   difficulty: string | null;
   isDeleted: string | null;
 }
+@Injectable()
 @Component({
   template: '',
 })
@@ -59,16 +62,9 @@ export default class WordsApiServiceComponent implements OnInit {
     this.refreshTokenUser(this.id, this.refreshToken);
   }
 
-  public getWordById(wordId: string | null): void {
+  public getWordById(wordId: string | null): Observable<any> {
     this.wordId = wordId;
-    const promise = this.httpClient.get(`${this.apiUrl}words/${this.wordId}`).toPromise();
-    promise
-      .then((data) => {
-        return JSON.stringify(data);
-      })
-      .catch((error) => {
-        return JSON.stringify(error);
-      });
+    return this.httpClient.get<any>(`${this.apiUrl}words/${this.wordId}`);
   }
 
   public getWordsByPageAndGroup(page: number | null, group: number | null): void {
