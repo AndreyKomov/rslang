@@ -9,7 +9,13 @@ import WordApiServiceComponent from '../server/api';
 export default class ServerTestingComponent implements OnInit {
   wordById: string | null;
 
-  getWordsByPageAndGroup: any | null;
+  getUser: string | null;
+
+  createUserWord: string | null;
+
+  getUserWordById: string | null;
+
+  getWordsByPageAndGroup: string | null;
 
   constructor(public api: WordApiServiceComponent) {}
 
