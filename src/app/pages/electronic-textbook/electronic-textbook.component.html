@@ -1,0 +1,7 @@
+<nav class="section-menu">
+  <ul>
+    <li *ngFor="let category of categories; let i = index"
+      [attr.data-index]="i" (click)="onClickCategory(i)" >{{category}}</li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
