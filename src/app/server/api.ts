@@ -1,6 +1,5 @@
 import { OnInit, Component, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Observable } from 'rxjs';
 
 interface OptionalObject {
@@ -67,19 +66,10 @@ export default class WordsApiServiceComponent implements OnInit {
     return this.httpClient.get<any>(`${this.apiUrl}words/${this.wordId}`);
   }
 
-  public getWordsByPageAndGroup(page: number | null, group: number | null): void {
+  public getWordsByPageAndGroup(page: number | null, group: number | null): Observable<any> {
     this.page = page;
     this.group = group;
-    const promise = this.httpClient
-      .get(`${this.apiUrl}words?page=${page}&group=${group}`)
-      .toPromise();
-    promise
-      .then((data) => {
-        return JSON.stringify(data);
-      })
-      .catch((error) => {
-        return JSON.stringify(error);
-      });
+    return this.httpClient.get<any>(`${this.apiUrl}words?page=${page}&group=${group}`);
   }
 
   public createUser(userName: string | null, email: string | null, password: string | null): void {

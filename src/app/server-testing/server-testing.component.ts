@@ -7,13 +7,18 @@ import WordApiServiceComponent from '../server/api';
   styleUrls: ['./server-testing.component.scss'],
 })
 export default class ServerTestingComponent implements OnInit {
-  Data: any | null;
+  wordById: string | null;
+
+  getWordsByPageAndGroup: any | null;
 
   constructor(public api: WordApiServiceComponent) {}
 
   ngOnInit() {
     this.api.getWordById('5e9f5ee35eb9e72bc21af4a2').subscribe((data) => {
-      this.Data = data.word;
+      this.wordById = data.word;
+    });
+    this.api.getWordsByPageAndGroup(0, 0).subscribe((data) => {
+      this.getWordsByPageAndGroup = JSON.stringify(data);
     });
   }
 }
