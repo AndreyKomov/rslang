@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
@@ -13,7 +13,9 @@ interface OptionalObject {
 })
 export default class WordsApiServiceComponent {
   // private apiUrl = 'https://arcane-chamber-21175.herokuapp.com/';
-  private apiUrl = 'https://apricot-cake-88637.herokuapp.com/';
+  // private apiUrl = 'https://apricot-cake-88637.herokuapp.com/';
+  // private apiUrl = ' https://peaceful-stream-52178.herokuapp.com/';
+  private apiUrl = 'http://localhost:4000/';
 
   id: string | null;
 
@@ -62,8 +64,6 @@ export default class WordsApiServiceComponent {
     password: string | null,
     avatar: File
   ): Observable<any> {
-    const myHeaders = new HttpHeaders().set('Authorization', 'my-auth-token');
-    console.log(myHeaders);
     this.userName = userName;
     this.email = email;
     this.password = password;
@@ -73,7 +73,7 @@ export default class WordsApiServiceComponent {
     data.append('name', userName);
     data.append('email', email);
     data.append('password', password);
-    return this.httpClient.post<any>(`${this.apiUrl}users`, data, { headers: myHeaders });
+    return this.httpClient.post<any>(`${this.apiUrl}users`, data);
   }
 
   public getUser(id: string | null, token: string | null): Observable<any> {
@@ -284,10 +284,10 @@ export default class WordsApiServiceComponent {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      body: {
         email: `${email}`,
         password: `${password}`,
-      }),
+      },
     });
   }
 
