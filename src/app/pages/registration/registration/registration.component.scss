@@ -1,3 +1,5 @@
+$btn-color: #1c77c3;
+
 .modal-content {
   position: relative;
   background-color: #fefefe;
@@ -94,7 +96,7 @@
   }
 
   &__registerbtn {
-    background-color: #4caf50;
+    background-color: $btn-color;
     color: white;
     padding: 16px 20px;
     margin: 8px 0;

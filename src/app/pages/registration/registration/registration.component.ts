@@ -14,7 +14,7 @@ export default class RegistrationComponent implements OnInit {
   isLoginTemplate = false;
   isShow = false;
   registrationForm: IRegForm;
-  imgURL: ArrayBuffer | string = '../../../assets/no-avatar.png';
+  imgURL: ArrayBuffer | string = '../../../../assets/img/no-avatar.png';
   imagePath: string | any[];
 
   constructor(private fb: FormBuilder) {}
