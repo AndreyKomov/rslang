@@ -35,7 +35,7 @@ export default class ServerTestingComponent implements OnInit {
     this.api
       .getUser(
         '60660e296b85e609a078ee2c',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzMwMjk4NiwiZXhwIjoxNjE3MzE3Mzg2fQ.GCzIFUJ2rJV8y2Nn_jFvk_sGkDt0cLgUtRR59X3hdZU'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM0NjkxMywiZXhwIjoxNjE3MzYxMzEzfQ.4VSFdH-xmarDtUbPCudNmKyO0WlEsERZCabdoljPanM'
       )
       .subscribe((data) => {
         this.getUser = JSON.stringify(data);
@@ -54,7 +54,7 @@ export default class ServerTestingComponent implements OnInit {
     this.api
       .updateUser(
         '60660e296b85e609a078ee2c',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzMwMjk4NiwiZXhwIjoxNjE3MzE3Mzg2fQ.GCzIFUJ2rJV8y2Nn_jFvk_sGkDt0cLgUtRR59X3hdZU',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM0NjkxMywiZXhwIjoxNjE3MzYxMzEzfQ.4VSFdH-xmarDtUbPCudNmKyO0WlEsERZCabdoljPanM',
         'vitali',
         'vit1678468@mail.ru',
         'Vit1767812++',
