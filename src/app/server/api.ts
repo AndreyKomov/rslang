@@ -13,7 +13,6 @@ interface Optional {
 })
 export default class WordsApiServiceComponent {
   private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
-  // private apiUrl = 'http://localhost:4000/';
 
   id: string | null;
 
