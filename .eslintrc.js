@@ -147,6 +147,7 @@ module.exports = {
         '@typescript-eslint/type-annotation-spacing': ['error', { before: false, after: true }],
         '@typescript-eslint/space-before-function-paren': ['error', 'never'],
         'no-console': 'error',
+        'import/prefer-default-export': 'off',
       },
     },
     {

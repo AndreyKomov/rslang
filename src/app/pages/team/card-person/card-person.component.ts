@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import IPerson from '../aboutUs';
+import IPerson from '../../../models/aboutUs';
 
 @Component({
   selector: 'app-card-person',

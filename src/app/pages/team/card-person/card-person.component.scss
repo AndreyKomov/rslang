@@ -1,8 +1,8 @@
 .card-person {
   position: relative;
-  overflow: hidden;
   width: 250px;
   height: 360px;
+  overflow: hidden;
   border-radius: 5px;
   transition: 0.3s;
   &:hover {
@@ -29,8 +29,6 @@
     color: white;
     font-family: 'Open Sans', sans-serif;
     transition: all 0.3s ease-in-out;
-    &_name {
-    }
     &_description {
       width: 230px;
       height: 20px;
@@ -52,21 +50,21 @@
       transition: background-image 0.3s ease-in-out;
     }
     .git {
-      background-image: url(../../../../assets/image/icon/github.png);
+      background-image: url(../../../../assets/img/icon/github.png);
       &:hover {
-        background-image: url(../../../../assets/image/icon/github-hover.png);
+        background-image: url(../../../../assets/img/icon/github-hover.png);
       }
     }
     .telegram {
-      background-image: url(../../../../assets/image/icon/telegram.png);
+      background-image: url(../../../../assets/img/icon/telegram.png);
       &:hover {
-        background-image: url(../../../../assets/image/icon/telegram-hover.png);
+        background-image: url(../../../../assets/img/icon/telegram-hover.png);
       }
     }
     .linkedin {
-      background-image: url(../../../../assets/image/icon/linkedin.png);
+      background-image: url(../../../../assets/img/icon/linkedin.png);
       &:hover {
-        background-image: url(../../../../assets/image/icon/linkedin-hover.png);
+        background-image: url(../../../../assets/img/icon/linkedin-hover.png);
       }
     }
   }

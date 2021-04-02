@@ -46,20 +46,20 @@
   height: 20vh;
 
   & .dev-team__slider {
-      background-color: $footer-slider-bg;
-      height: 100%;
-      display: inline-block;
-      & div {
-        float: left;
-      }
-      & .dev-team__background {
-        width: 100px;
-        height: 20vh;
-        float: right;
-        background: url('../../../../../assets/img/triangle-bg.png') no-repeat;
-        background-position: right;
-        background-size: contain;
-      }
+    background-color: $footer-slider-bg;
+    height: 100%;
+    display: inline-block;
+    & div {
+      float: left;
+    }
+    & .dev-team__background {
+      width: 100px;
+      height: 20vh;
+      float: right;
+      background: url('../../../../../assets/img/triangle-bg.png') no-repeat;
+      background-position: right;
+      background-size: contain;
+    }
   }
 
   & .dev-team__heading {

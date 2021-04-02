@@ -5,5 +5,5 @@ export default interface IPerson {
   description: string;
   gitHub: string;
   telegram: string;
-  linkedin: string;
+  linkedIn: string;
 }
