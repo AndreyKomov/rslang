@@ -21,6 +21,7 @@ module.exports = {
          * Modified Airbnb JS Style Guide rules extending eslint:recommended
          * ========================================================================
          */
+        'import/prefer-default-export': 'off',
         // require the use of === and !==
         eqeqeq: ['error', 'always', { null: 'ignore' }],
         // disallow else after a return in an if
