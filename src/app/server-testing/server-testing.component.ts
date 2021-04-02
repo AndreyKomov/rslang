@@ -11,7 +11,7 @@ export default class ServerTestingComponent implements OnInit {
 
   getUser: string | null;
 
-  createUserWord: string | null;
+  createdUserWord: string | null;
 
   getUserWordById: string | null;
 
@@ -35,7 +35,7 @@ export default class ServerTestingComponent implements OnInit {
     this.api
       .getUser(
         '60660e296b85e609a078ee2c',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM3MDUwMiwiZXhwIjoxNjE3Mzg0OTAyfQ.xmW47UQ-ST266Yb57r3i7oTGkzq0gi9NdX0BItqb28M'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM4Njc1OSwiZXhwIjoxNjE3NDAxMTU5fQ.mFdIB2T8u0PWlyKP1oO1kgN8e_TWUo65qSnhjjDGmMU'
       )
       .subscribe((data) => {
         this.getUser = JSON.stringify(data);
@@ -69,5 +69,14 @@ export default class ServerTestingComponent implements OnInit {
     this.api.signIn('vit1678465@mail.ru', 'Vit1767812++').subscribe((res) => {
       console.log('signIn: ', res);
     });
+  }
+
+  createUserWord() {
+    this.api
+      .createUserWord('60660e296b85e609a078ee2c', '5e9f5ee35eb9e72bc21af4a0', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM4Njc1OSwiZXhwIjoxNjE3NDAxMTU5fQ.mFdIB2T8u0PWlyKP1oO1kgN8e_TWUo65qSnhjjDGmMU', 'weak', null)
+      .subscribe((res) => {
+        this.createdUserWord = JSON.stringify(res);
+        console.log(res);
+      });
   }
 }

@@ -12,8 +12,8 @@ interface OptionalObject {
   template: '',
 })
 export default class WordsApiServiceComponent {
-  private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
-  // private apiUrl = 'http://localhost:4000/';
+  // private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
+  private apiUrl = 'http://localhost:4000/';
 
   id: string | null;
 
@@ -60,7 +60,7 @@ export default class WordsApiServiceComponent {
     userName: string | null,
     email: string | null,
     password: string | null,
-    avatar: File
+    avatar: File,
   ): Observable<any> {
     this.userName = userName;
     this.email = email;
@@ -88,7 +88,7 @@ export default class WordsApiServiceComponent {
     userName: string | null,
     email: string | null,
     password: string | null,
-    avatar: File
+    avatar: File,
   ): Observable<any> {
     this.id = id;
     this.token = token;
@@ -123,23 +123,24 @@ export default class WordsApiServiceComponent {
     wordId: string | null,
     token: string | null,
     wordDifficulty: string | null,
-    optionalObject: OptionalObject[] | null
+    optionalObject: OptionalObject[] | null,
   ): Observable<any> {
     this.id = id;
     this.wordId = wordId;
     this.token = token;
     this.wordDifficulty = wordDifficulty;
     this.optionalObject = optionalObject;
+    console.log(id, wordId, token, wordDifficulty, optionalObject);
     return this.httpClient.put<any>(`${this.apiUrl}users/${id}/words/${wordId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      body: {
         difficulty: `${wordDifficulty}`,
-        optionalObject,
-      }),
+        optionalObject: `${optionalObject}`,
+      },
     });
   }
 
@@ -157,7 +158,7 @@ export default class WordsApiServiceComponent {
   public getUserWordById(
     id: string | null,
     wordId: string | null,
-    token: string | null
+    token: string | null,
   ): Observable<any> {
     this.id = id;
     this.wordId = wordId;
@@ -170,7 +171,7 @@ export default class WordsApiServiceComponent {
     wordId: string | null,
     token: string | null,
     wordDifficulty: string | null,
-    optionalObject: OptionalObject[] | null
+    optionalObject: OptionalObject[] | null,
   ): Observable<any> {
     this.id = id;
     this.wordId = wordId;
@@ -193,7 +194,7 @@ export default class WordsApiServiceComponent {
   public deleteUserWord(
     id: string | null,
     wordId: string | null,
-    token: string | null
+    token: string | null,
   ): Observable<any> {
     this.id = id;
     this.wordId = wordId;
@@ -221,7 +222,7 @@ export default class WordsApiServiceComponent {
     id: string | null,
     token: string | null,
     wordsPerDay: number | null,
-    optionalObject: OptionalObject[] | null
+    optionalObject: OptionalObject[] | null,
   ): Observable<any> {
     this.id = id;
     this.token = token;
@@ -255,7 +256,7 @@ export default class WordsApiServiceComponent {
     id: string | null,
     token: string | null,
     learnedWords: number | null,
-    optionalObject: OptionalObject[] | null
+    optionalObject: OptionalObject[] | null,
   ): Observable<any> {
     this.id = id;
     this.token = token;
