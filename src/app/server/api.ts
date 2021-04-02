@@ -12,10 +12,8 @@ interface OptionalObject {
   template: '',
 })
 export default class WordsApiServiceComponent {
-  // private apiUrl = 'https://arcane-chamber-21175.herokuapp.com/';
-  // private apiUrl = 'https://apricot-cake-88637.herokuapp.com/';
-  // private apiUrl = ' https://peaceful-stream-52178.herokuapp.com/';
-  private apiUrl = 'http://localhost:4000/';
+  private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
+  // private apiUrl = 'http://localhost:4000/';
 
   id: string | null;
 

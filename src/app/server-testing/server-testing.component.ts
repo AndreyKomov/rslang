@@ -35,7 +35,7 @@ export default class ServerTestingComponent implements OnInit {
     this.api
       .getUser(
         '60660e296b85e609a078ee2c',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM2MjQ0NCwiZXhwIjoxNjE3Mzc2ODQ0fQ.I6n9OqlXxj7s6La6y3_XSVfLqoVT5nTUMv6a_Hy92hM'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM3MDUwMiwiZXhwIjoxNjE3Mzg0OTAyfQ.xmW47UQ-ST266Yb57r3i7oTGkzq0gi9NdX0BItqb28M'
       )
       .subscribe((data) => {
         this.getUser = JSON.stringify(data);
@@ -44,9 +44,9 @@ export default class ServerTestingComponent implements OnInit {
 
   createUser() {
     this.api
-      .createUser('vitali', 'vit167411155@mail.ru', 'Vit1767812++', this.selectedFile)
+      .createUser('vitalik', 'vitg54@mail.ru', 'Vit1767812++', this.selectedFile)
       .subscribe((res) => {
-        console.log('User: ', res);
+        console.log(res);
       });
   }
 
@@ -54,14 +54,14 @@ export default class ServerTestingComponent implements OnInit {
     this.api
       .updateUser(
         '60660e296b85e609a078ee2c',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM0NjkxMywiZXhwIjoxNjE3MzYxMzEzfQ.4VSFdH-xmarDtUbPCudNmKyO0WlEsERZCabdoljPanM',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM3MDUwMiwiZXhwIjoxNjE3Mzg0OTAyfQ.xmW47UQ-ST266Yb57r3i7oTGkzq0gi9NdX0BItqb28M',
         'vitali',
         'vit1678465@mail.ru',
         'Vit1767812++',
         this.selectedFile
       )
       .subscribe((res) => {
-        console.log('User: ', res);
+        console.log(res);
       });
   }
 
