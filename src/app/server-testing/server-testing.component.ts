@@ -13,11 +13,30 @@ export default class ServerTestingComponent implements OnInit {
 
   createdUserWord: string | null;
 
-  getUserWordById: string | null;
+  getedAllUsersWords: string | null;
+
+  getedUserWordById: string | null;
+
+  updatedUserWord: string | null;
+
+  deletedUserWord: string | null;
+
+  setedUserSettings: string | null;
 
   getWordsByPageAndGroup: string | null;
 
+  getedUserSettings: string | null;
+
+  setedUserStatistic: string | null;
+
+  getedUserStatistic: string | null;
+
+  refreshedTokenUser: string | null;
+
   selectedFile: File = null;
+
+  token: string | null =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzQwNzA0MiwiZXhwIjoxNjE3NDIxNDQyfQ.xHNbjrb5ZhAs4VYk8Y86InZQfqXSKjtKS-u6h-e3kSo';
 
   constructor(public api: WordApiServiceComponent) {}
 
@@ -32,19 +51,14 @@ export default class ServerTestingComponent implements OnInit {
     this.api.getWordsByPageAndGroup(0, 0).subscribe((data) => {
       this.getWordsByPageAndGroup = JSON.stringify(data);
     });
-    this.api
-      .getUser(
-        '60660e296b85e609a078ee2c',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM4Njc1OSwiZXhwIjoxNjE3NDAxMTU5fQ.mFdIB2T8u0PWlyKP1oO1kgN8e_TWUo65qSnhjjDGmMU'
-      )
-      .subscribe((data) => {
-        this.getUser = JSON.stringify(data);
-      });
+    this.api.getUser('60660e296b85e609a078ee2c', this.token).subscribe((data) => {
+      this.getUser = JSON.stringify(data);
+    });
   }
 
   createUser() {
     this.api
-      .createUser('vitalik', 'vitg54@mail.ru', 'Vit1767812++', this.selectedFile)
+      .createUser('vitalik', 'vitg54uy@mail.ru', 'Vit1767812++', this.selectedFile)
       .subscribe((res) => {
         console.log(res);
       });
@@ -54,9 +68,9 @@ export default class ServerTestingComponent implements OnInit {
     this.api
       .updateUser(
         '60660e296b85e609a078ee2c',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM3MDUwMiwiZXhwIjoxNjE3Mzg0OTAyfQ.xmW47UQ-ST266Yb57r3i7oTGkzq0gi9NdX0BItqb28M',
+        this.token,
         'vitali',
-        'vit1678465@mail.ru',
+        'vit16784675@mail.ru',
         'Vit1767812++',
         this.selectedFile
       )
@@ -66,16 +80,125 @@ export default class ServerTestingComponent implements OnInit {
   }
 
   signIn() {
-    this.api.signIn('vit1678465@mail.ru', 'Vit1767812++').subscribe((res) => {
+    this.api.signIn('vit16784675@mail.ru', 'Vit1767812++').subscribe((res) => {
       console.log('signIn: ', res);
     });
   }
 
   createUserWord() {
+    const optional = {
+      optionalField: 'free',
+      isDeleted: true,
+    };
     this.api
-      .createUserWord('60660e296b85e609a078ee2c', '5e9f5ee35eb9e72bc21af4a0', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzM4Njc1OSwiZXhwIjoxNjE3NDAxMTU5fQ.mFdIB2T8u0PWlyKP1oO1kgN8e_TWUo65qSnhjjDGmMU', 'weak', null)
+      .createUserWord(
+        '60660e296b85e609a078ee2c',
+        '5e9f5ee35eb9e72bc21af4a0',
+        this.token,
+        'weak',
+        optional
+      )
       .subscribe((res) => {
         this.createdUserWord = JSON.stringify(res);
+        console.log(res);
+      });
+  }
+
+  getAllUsersWords() {
+    this.api.getAllUsersWords('60660e296b85e609a078ee2c', this.token).subscribe((res) => {
+      this.getedAllUsersWords = JSON.stringify(res);
+      console.log(res);
+    });
+  }
+
+  getUserWordById() {
+    this.api
+      .getUserWordById('60660e296b85e609a078ee2c', '5e9f5ee35eb9e72bc21af4a0', this.token)
+      .subscribe((res) => {
+        this.getedUserWordById = JSON.stringify(res);
+        console.log(res);
+      });
+  }
+
+  updateUserWord() {
+    const optional = {
+      optionalField: 'close',
+      isDeleted: true,
+    };
+    this.api
+      .updateUserWord(
+        '60660e296b85e609a078ee2c',
+        '5e9f5ee35eb9e72bc21af4a0',
+        this.token,
+        'hard',
+        optional
+      )
+      .subscribe((res) => {
+        this.updatedUserWord = JSON.stringify(res);
+        console.log(res);
+      });
+  }
+
+  deleteUserWord() {
+    this.api
+      .deleteUserWord('60660e296b85e609a078ee2c', '5e9f5ee35eb9e72bc21af4a0', this.token)
+      .subscribe((res) => {
+        this.deletedUserWord = JSON.stringify(res);
+        console.log(res);
+      });
+  }
+
+  setUserSettings() {
+    const optional = {
+      optionalField: 'close',
+      isDeleted: false,
+    };
+    this.api
+      .setUserSettings('60660e296b85e609a078ee2c', this.token, 4, optional)
+      .subscribe((res) => {
+        this.setedUserSettings = JSON.stringify(res);
+        console.log(res);
+      });
+  }
+  getUserSettings() {
+    this.api
+      .getUserSettings('60660e296b85e609a078ee2c', this.token)
+      .subscribe((res) => {
+        this.getedUserSettings = JSON.stringify(res);
+        console.log(res);
+      });
+  }
+
+  setUserStatistic() {
+    const optional = {
+      optionalField: 'close',
+      isDeleted: false,
+    };
+    this.api
+      .setUserStatistic('60660e296b85e609a078ee2c', this.token, 10, optional)
+      .subscribe((res) => {
+        this.setedUserStatistic = JSON.stringify(res);
+        console.log(res);
+      });
+  }
+  getUserStatistic() {
+    const optional = {
+      optionalField: 'close',
+      isDeleted: false,
+    };
+    this.api
+      .getUserStatistic('60660e296b85e609a078ee2c', this.token)
+      .subscribe((res) => {
+        this.getedUserStatistic = JSON.stringify(res);
+        console.log(res);
+      });
+  }
+
+  refreshTokenUser() {
+    this.api
+      .refreshTokenUser('60660e296b85e609a078ee2c', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsInRva2VuSWQiOiJkZjA0NDc4Zi02Yjk3LTRkNTItYTNlYS0zYmFhZWZiMjJmYzMiLCJpYXQiOjE2MTc0MDY5MDgsImV4cCI6MTYxNzQyMzEwOH0.pRXSPDWeStGNAb5vAgFD0dUCFQ11OLVGs5QeGozfP-0')
+      .subscribe((res) => {
+        this.refreshedTokenUser = JSON.stringify(res);
         console.log(res);
       });
   }

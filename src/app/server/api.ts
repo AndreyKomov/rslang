@@ -3,17 +3,17 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-interface OptionalObject {
-  difficulty: string | null;
-  isDeleted: string | null;
+interface Optional {
+  optionalField?: string | null;
+  isDeleted?: boolean;
 }
 @Injectable()
 @Component({
   template: '',
 })
 export default class WordsApiServiceComponent {
-  // private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
-  private apiUrl = 'http://localhost:4000/';
+  private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
+  // private apiUrl = 'http://localhost:4000/';
 
   id: string | null;
 
@@ -33,7 +33,7 @@ export default class WordsApiServiceComponent {
 
   wordDifficulty: string | null;
 
-  optionalObject: OptionalObject[] | null;
+  optional: Optional | null;
 
   wordsPerDay: number | null;
 
@@ -123,24 +123,19 @@ export default class WordsApiServiceComponent {
     wordId: string | null,
     token: string | null,
     wordDifficulty: string | null,
-    optionalObject: OptionalObject[] | null,
+    optional: Optional | null,
   ): Observable<any> {
     this.id = id;
     this.wordId = wordId;
     this.token = token;
     this.wordDifficulty = wordDifficulty;
-    this.optionalObject = optionalObject;
-    console.log(id, wordId, token, wordDifficulty, optionalObject);
-    return this.httpClient.put<any>(`${this.apiUrl}users/${id}/words/${wordId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: {
-        difficulty: `${wordDifficulty}`,
-        optionalObject: `${optionalObject}`,
-      },
+    this.optional = optional;
+    const data = {
+      difficulty: `${wordDifficulty}`,
+      optional,
+    };
+    return this.httpClient.post<any>(`${this.apiUrl}users/${id}/words/${wordId}`, data, {
+      headers: { Authorization: `Bearer ${token}` },
     });
   }
 
@@ -163,7 +158,12 @@ export default class WordsApiServiceComponent {
     this.id = id;
     this.wordId = wordId;
     this.token = token;
-    return this.httpClient.get<any>(`${this.apiUrl}users/${id}/words/${wordId}`);
+    return this.httpClient.get<any>(`${this.apiUrl}users/${id}/words/${wordId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      },
+    });
   }
 
   public updateUserWord(
@@ -171,23 +171,19 @@ export default class WordsApiServiceComponent {
     wordId: string | null,
     token: string | null,
     wordDifficulty: string | null,
-    optionalObject: OptionalObject[] | null,
+    optional: Optional | null,
   ): Observable<any> {
     this.id = id;
     this.wordId = wordId;
     this.token = token;
     this.wordDifficulty = wordDifficulty;
-    this.optionalObject = optionalObject;
-    return this.httpClient.put<any>(`${this.apiUrl}users/${id}/words/${wordId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        difficulty: `${wordDifficulty}`,
-        optionalObject,
-      }),
+    this.optional = optional;
+    const data = {
+      difficulty: `${wordDifficulty}`,
+      optional,
+    };
+    return this.httpClient.put<any>(`${this.apiUrl}users/${id}/words/${wordId}`, data, {
+      headers: { Authorization: `Bearer ${token}` },
     });
   }
 
@@ -222,22 +218,18 @@ export default class WordsApiServiceComponent {
     id: string | null,
     token: string | null,
     wordsPerDay: number | null,
-    optionalObject: OptionalObject[] | null,
+    optional: Optional | null,
   ): Observable<any> {
     this.id = id;
     this.token = token;
     this.wordsPerDay = wordsPerDay;
-    this.optionalObject = optionalObject;
-    return this.httpClient.put<any>(`${this.apiUrl}users/${id}/settings`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        wordsPerDay,
-        optionalObject,
-      }),
+    this.optional = optional;
+    const data = {
+      wordsPerDay,
+      optional,
+    };
+    return this.httpClient.put<any>(`${this.apiUrl}users/${id}/settings`, data, {
+      headers: { Authorization: `Bearer ${token}` },
     });
   }
 
@@ -256,45 +248,36 @@ export default class WordsApiServiceComponent {
     id: string | null,
     token: string | null,
     learnedWords: number | null,
-    optionalObject: OptionalObject[] | null,
+    optional: Optional | null,
   ): Observable<any> {
     this.id = id;
     this.token = token;
     this.learnedWords = learnedWords;
-    this.optionalObject = optionalObject;
-    return this.httpClient.put<any>(`${this.apiUrl}users/${id}/statistics`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        learnedWords,
-        optionalObject,
-      }),
+    this.optional = optional;
+    const data = {
+      learnedWords,
+      optional,
+    };
+    return this.httpClient.put<any>(`${this.apiUrl}users/${id}/statistics`, data, {
+      headers: { Authorization: `Bearer ${token}` },
     });
   }
 
   public signIn(email: string | null, password: string | null): Observable<any> {
     this.email = email;
     this.password = password;
-    return this.httpClient.post<any>(`${this.apiUrl}signin`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: {
-        email: `${email}`,
-        password: `${password}`,
-      },
+    const data = {
+      email,
+      password,
+    };
+    return this.httpClient.post<any>(`${this.apiUrl}signin`, data, {
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
     });
   }
 
   public refreshTokenUser(id: string | null, refreshToken: string | null): Observable<any> {
     this.id = id;
     this.refreshToken = refreshToken;
-    localStorage.setItem('token', this.token);
-    localStorage.setItem('refreshToken', refreshToken);
     return this.httpClient.get<any>(`${this.apiUrl}users/${id}/tokens`, {
       headers: {
         Authorization: `Bearer ${refreshToken}`,
