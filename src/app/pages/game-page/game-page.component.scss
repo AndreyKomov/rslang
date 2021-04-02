@@ -1,3 +1,4 @@
+@use  '../../../scss/variables.scss';
 $background_link: #55C1FF;
 $border_color: #5887FF;
 
@@ -21,15 +22,15 @@ $border_color: #5887FF;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $background_link;
+    background-color: variables.$footer-creds-bg;
     border-radius: 8.5rem;
-    border: 0.3rem solid $border_color;
+    border: 0.3rem solid variables.$footer-slider-bg;
     cursor: pointer;
-    color: white;
+    color: variables.$main-text-color;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
-    font-family: sans-serif;
+    font-family: variables.$font-main;
   }
 }
