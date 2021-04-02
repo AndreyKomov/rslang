@@ -44,7 +44,7 @@ export default class ServerTestingComponent implements OnInit {
 
   createUser() {
     this.api
-      .createUser('vitali', 'vit1678461@mail.ru', 'Vit1767812++', this.selectedFile)
+      .createUser('vitali', 'vit1678464@mail.ru', 'Vit1767812++', this.selectedFile)
       .subscribe((res) => {
         console.log('User: ', res);
       });

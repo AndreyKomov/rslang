@@ -63,6 +63,7 @@ export default class WordsApiServiceComponent {
     avatar: File
   ): Observable<any> {
     const myHeaders = new HttpHeaders().set('Authorization', 'my-auth-token');
+    console.log(myHeaders);
     this.userName = userName;
     this.email = email;
     this.password = password;
@@ -301,5 +302,56 @@ export default class WordsApiServiceComponent {
         Accept: 'application/json',
       },
     });
+  }
+
+  public setUserId(id: string | null): void {
+    this.id = id;
+    localStorage.setItem('userId', id);
+  }
+
+  public getUserId(): void {
+    localStorage.getItem('userId');
+  }
+
+  public setUserToken(token: string | null): void {
+    this.token = token;
+    localStorage.setItem('token', token);
+  }
+
+  public getUserToken(): void {
+    localStorage.getItem('token');
+  }
+
+  public setUserRefreshToken(refreshToken: string | null): void {
+    this.refreshToken = refreshToken;
+    localStorage.setItem('refreshToken', refreshToken);
+  }
+
+  public getUserRefreshToken(): void {
+    localStorage.getItem('refreshToken');
+  }
+
+  public setUserName(userName: string | null): void {
+    localStorage.setItem('userName', userName);
+  }
+
+  public getUserName(): void {
+    localStorage.getItem('userName');
+  }
+
+  public setUserEmail(userEmail: string | null): void {
+    localStorage.setItem('userEmail', userEmail);
+  }
+
+  public getUserEmail(): void {
+    localStorage.getItem('userEmail');
+  }
+
+  public setUserAuthorized(authorized: string | null): void {
+    localStorage.setItem('authorized', authorized);
+  }
+
+  public getUserAuthorized(): void {
+    localStorage.getItem('authorized');
   }
 }
