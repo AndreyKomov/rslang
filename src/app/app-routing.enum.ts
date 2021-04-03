@@ -1,13 +1,12 @@
 export enum ParamKey {
-  main = '',
-  promo = 'promo',
+  promo = '',
   notFound = '**',
   team = 'team',
   games = 'games',
   audiocallPromo = 'audiocall',
-  audiocallGame = 'audiocallgame',
+  audiocallGame = 'audiocallgame'
 }
 
 export enum QueryParamKey {
-  redirectTo = '',
+  redirectTo = ''
 }

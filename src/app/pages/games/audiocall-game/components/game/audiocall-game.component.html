@@ -7,9 +7,15 @@
     <div
     class="words"
     *ngFor="let word of wordsArray"
+    (click) = "checkWord(word)"
     >
     {{word.wordTranslate}}
   </div>
+  </div>
+
+  <div class="additional-buttons">
+    <button mat-raised-button color="primary" class="help">Подсказка</button>
+    <button mat-raised-button color="primary" class="go-back-btn">Завершить</button>
   </div>
 
   <!-- <input class="in" [(ngModel)]="inValue" > -->

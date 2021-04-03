@@ -18,15 +18,16 @@ module.exports = {
         'plugin:prettier/recommended',
       ],
       rules: {
+        "import/prefer-default-export": "off",
         /**
          * ========================================================================
          * Modified Airbnb JS Style Guide rules extending eslint:recommended
          * ========================================================================
          */
         // require the use of === and !==
-        "prettier/prettier": ["error", {
+/*         "prettier/prettier": ["error", {
           "endOfLine":"auto"
-        }],
+        }], */
         eqeqeq: ['error', 'always', { null: 'ignore' }],
         // disallow else after a return in an if
         'no-else-return': ['error', { allowElseIf: false }],

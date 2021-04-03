@@ -1,0 +1,47 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  @include media-max-width {
+    font-size: 16px;
+    & .menu {
+      margin-top: 26px;
+    }
+  }
+
+  @include media-desktop {
+  }
+
+  @include media-tablet-landscape {
+  }
+
+  @include media-tablet-portrait {
+  }
+
+  @include media-mobile {
+  }
+
+  & .menu {
+    display: block;
+    letter-spacing: 0.5px;
+    &__list {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+    &__item {
+      text-transform: uppercase;
+      margin: 0 5%;
+    }
+    &__link {
+      color: $header-text-color;
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+
+  & .active {
+    font-weight: bold;
+  }
+}

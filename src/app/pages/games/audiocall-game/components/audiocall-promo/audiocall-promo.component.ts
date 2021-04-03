@@ -9,7 +9,12 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 export class AudiocallPromoComponent implements OnInit {
   startFromMenu = true;
 
+  inputValue = 0;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // @ts-ignore
+    window.qq = this.inputValue;
+  }
 }

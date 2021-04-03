@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-audiocall-game',
   templateUrl: './audiocall-game.component.html',
   styleUrls: ['./audiocall-game.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AudiocallGameComponent implements OnInit {
   // inValue = '';
@@ -45,7 +47,26 @@ export class AudiocallGameComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  difficulty = 0;
 
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((d) => {
+      console.log(d);
+      this.difficulty = d.difficult;
+
+      this.getWordsFromBE();
+    });
+  }
+
+  getWordsFromBE() {
+    // this method get words from beck-end
+    // to use this.difficulty
+    // .subscribe((data) => {})
+  }
+
+  checkWord(word) {
+    console.log(word);
+  }
 }

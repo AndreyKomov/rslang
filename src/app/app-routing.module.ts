@@ -1,18 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './shared/layout/main/main.component';
+import { PromoComponent } from './pages/promo/promo.component';
 import { ParamKey, QueryParamKey } from './app-routing.enum';
 
 const routes: Routes = [
-  { path: ParamKey.main, component: MainComponent, pathMatch: 'full' },
+  { path: ParamKey.promo, component: PromoComponent, pathMatch: 'full' },
+  { path: ParamKey.promo, component: PromoComponent },
   {
-    path: ParamKey.promo,
+    path: `${ParamKey.games}/${ParamKey.audiocallPromo}`,
     loadChildren: (): any =>
-      import('./pages/promo/promo.module').then((module) => module.PromoModule),
+      import('./pages/games/audiocall-game/audiocall.module').then(
+        (module) => module.AudiocallModule
+      ),
   },
   {
-    path: ParamKey.audiocallPromo,
-    loadChildren: () => import('./pages/games/audiocall-game/audiocall.module').then((module) => module.AudiocallModule),
+    path: ParamKey.games,
+    loadChildren: (): any =>
+      import('./pages/games/games.module').then((module) => module.GamesModule),
+  },
+  {
+    path: ParamKey.team,
+    loadChildren: (): any => import('./pages/team/team.module').then((module) => module.TeamModule),
   },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];

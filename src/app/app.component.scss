@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'mixins';
+
+.main {
+  @include media-max-width {
+    height: 60vh;
+  }
+  @include media-desktop {
+  }
+  @include media-tablet-landscape {
+  }
+  @include media-tablet-portrait {
+  }
+  @include media-mobile {
+  }
+
+  display: flex;
+  flex-flow: column;
+}
