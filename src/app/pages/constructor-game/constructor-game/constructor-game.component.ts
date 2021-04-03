@@ -6,12 +6,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./constructor-game.component.scss'],
 })
 export class ConstructorGameComponent implements OnInit {
+  translateWord = 'Машина';
   placeIndex = 0;
   word = 'car';
 
   letterArr: String[];
 
-  rightLettersArr: String[] = [];
+  rightLettersArr = [
+    {
+      letter: '',
+      isRight: false,
+    },
+    {
+      letter: '',
+      isRight: false,
+    },
+    {
+      letter: '',
+      isRight: false,
+    },
+  ];
 
   sliceWord(word: string): String[] {
     return word.split('');
@@ -27,11 +41,12 @@ export class ConstructorGameComponent implements OnInit {
   }
 
   checkLetter(letter: string, index: number, event: Event) {
-    console.log(letter);
     if (letter == this.word[this.placeIndex]) {
-      this.placeIndex++;
       this.letterArr.splice(index, 1);
-      this.rightLettersArr.push(letter);
+      this.rightLettersArr[this.placeIndex].letter = letter;
+      this.rightLettersArr[this.placeIndex].isRight = true;
+      console.log(this.rightLettersArr);
+      this.placeIndex++;
     } else {
       (<HTMLElement>event.target).classList.add('error');
       (<HTMLElement>event.target).classList.remove('ready-letter');

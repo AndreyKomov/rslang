@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .letter-box {
   width: 62px;
   height: 50px;
@@ -15,10 +19,6 @@
   text-align: center;
   transition: all 0.3s ease-out;
   outline: 0;
-
-  & span {
-    background-color: inherit;
-  }
 }
 
 .ready-letter {
@@ -49,4 +49,43 @@
 
 .error {
   background-color: #f44336;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 30px 32px 100px;
+}
+
+.wrapper-content {
+  padding: 28px 28px 24px;
+  text-align: center;
+  border: 1px solid #e6e9ee;
+
+  &__translate-word {
+    padding: 10px 46px 16px;
+    font-size: 26px;
+    line-height: 1.1;
+  }
+
+  &__text {
+    padding: 15px 16px;
+    color: #7e919f;
+    font-size: 12px;
+    line-height: 1.17;
+  }
+}
+
+.ready-letter-content {
+  height: 56px;
+  padding: 18px 11px 14px;
+}
+
+.right-letter-content {
+  height: 56px;
+  display: flex;
+  justify-content: center;
+}
+
+.currentBlock {
+  border: 2px solid rgba(37,130,231,.6);
 }
