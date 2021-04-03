@@ -43,10 +43,7 @@ export default class ServerTestingComponent implements OnInit {
     this.selectedFile = <File>event.target.files[0];
   }
 
-  ngOnInit() {
-    this.api.getWordById('5e9f5ee35eb9e72bc21af4a2').subscribe((data) => {
-      this.wordById = data.word;
-    });
+  ngOnInit(): void {
     this.api.getWordsByPageAndGroup(0, 0).subscribe((data) => {
       this.getWordsByPageAndGroup = JSON.stringify(data);
     });
@@ -55,7 +52,7 @@ export default class ServerTestingComponent implements OnInit {
     });
   }
 
-  createUser() {
+  createUser(): void {
     this.api
       .createUser('vitalik', 'vitg54uy@mail.ru', 'Vit1767812++', this.selectedFile)
       .subscribe((res) => {
@@ -63,7 +60,14 @@ export default class ServerTestingComponent implements OnInit {
       });
   }
 
-  updateUser() {
+  getWordById(): void {
+    this.api.getWordById('5e9f5ee35eb9e72bc21af4a2').subscribe((data) => {
+      console.log(data);
+      this.wordById = data.word;
+    });
+  }
+
+  updateUser(): void {
     this.api
       .updateUser(
         '60660e296b85e609a078ee2c',
@@ -78,14 +82,14 @@ export default class ServerTestingComponent implements OnInit {
       });
   }
 
-  signIn() {
+  signIn(): void {
     this.api.signIn('vit16784675@mail.ru', 'Vit1767812++').subscribe((res) => {
       localStorage.setItem('token', res.token);
       console.log('signIn: ', res);
     });
   }
 
-  createUserWord() {
+  createUserWord(): void {
     const optional = {
       optionalField: 'free',
       isDeleted: true,
@@ -104,14 +108,14 @@ export default class ServerTestingComponent implements OnInit {
       });
   }
 
-  getAllUsersWords() {
+  getAllUsersWords(): void {
     this.api.getAllUsersWords('60660e296b85e609a078ee2c', this.token).subscribe((res) => {
       this.getedAllUsersWords = JSON.stringify(res);
       console.log(res);
     });
   }
 
-  getUserWordById() {
+  getUserWordById(): void {
     this.api
       .getUserWordById('60660e296b85e609a078ee2c', '5e9f5ee35eb9e72bc21af4a0', this.token)
       .subscribe((res) => {
@@ -120,7 +124,7 @@ export default class ServerTestingComponent implements OnInit {
       });
   }
 
-  updateUserWord() {
+  updateUserWord(): void {
     const optional = {
       optionalField: 'close',
       isDeleted: true,
@@ -139,7 +143,7 @@ export default class ServerTestingComponent implements OnInit {
       });
   }
 
-  deleteUserWord() {
+  deleteUserWord(): void {
     this.api
       .deleteUserWord('60660e296b85e609a078ee2c', '5e9f5ee35eb9e72bc21af4a0', this.token)
       .subscribe((res) => {
@@ -148,7 +152,7 @@ export default class ServerTestingComponent implements OnInit {
       });
   }
 
-  setUserSettings() {
+  setUserSettings(): void {
     const optional = {
       optionalField: 'close',
       isDeleted: false,
@@ -161,14 +165,14 @@ export default class ServerTestingComponent implements OnInit {
       });
   }
 
-  getUserSettings() {
+  getUserSettings(): void {
     this.api.getUserSettings('60660e296b85e609a078ee2c', this.token).subscribe((res) => {
       this.getedUserSettings = JSON.stringify(res);
       console.log(res);
     });
   }
 
-  setUserStatistic() {
+  setUserStatistic(): void {
     const optional = {
       optionalField: 'close',
       isDeleted: false,
@@ -181,7 +185,7 @@ export default class ServerTestingComponent implements OnInit {
       });
   }
 
-  getUserStatistic() {
+  getUserStatistic(): void {
     const optional = {
       optionalField: 'close',
       isDeleted: false,
@@ -192,7 +196,7 @@ export default class ServerTestingComponent implements OnInit {
     });
   }
 
-  refreshTokenUser() {
+  refreshTokenUser(): void {
     this.api
       .refreshTokenUser(
         '60660e296b85e609a078ee2c',
