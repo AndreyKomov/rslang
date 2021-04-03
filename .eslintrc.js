@@ -16,6 +16,12 @@ module.exports = {
         'plugin:prettier/recommended',
       ],
       rules: {
+        'prettier/prettier': [
+          'error',
+          {
+            endOfLine: 'auto',
+          },
+        ],
         /**
          * ========================================================================
          * Modified Airbnb JS Style Guide rules extending eslint:recommended
