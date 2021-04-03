@@ -7,6 +7,23 @@ interface Optional {
   optionalField?: string | null;
   isDeleted?: boolean;
 }
+interface Word {
+  id?: string | null;
+  word?: string | null;
+  image?: string | null;
+  audio?: string | null;
+  audioMeaning?: string | null;
+  group?: number | null;
+  page?: number | null;
+  audioExample?: string | null;
+  textMeaning?: string | null;
+  textExample?: string | null;
+  transcription?: string | null;
+  wordTranslate?: string | null;
+  textMeaningTranslate?: string | null;
+  textExampleTranslate?: string | null;
+  wordsPerExampleSentence?: number | null;
+}
 
 @Component({
   template: '',
@@ -93,9 +110,9 @@ export default class WordsApiServiceComponent {
 
   constructor(private httpClient: HttpClient) {}
 
-  public getWordById(wordId: string | null): Observable<any> {
+  public getWordById(wordId: string | null): Observable<Word> {
     this.wordId = wordId;
-    return this.httpClient.get<any>(`${this.apiUrl}words/${this.wordId}`);
+    return this.httpClient.get<Word>(`${this.apiUrl}words/${this.wordId}`);
   }
 
   public getWordsByPageAndGroup(page: number | null, group: number | null): Observable<any> {
