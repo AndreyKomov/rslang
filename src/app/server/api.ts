@@ -7,10 +7,11 @@ interface Optional {
   optionalField?: string | null;
   isDeleted?: boolean;
 }
-@Injectable()
+
 @Component({
   template: '',
 })
+@Injectable()
 export default class WordsApiServiceComponent {
   private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
 
@@ -42,6 +43,54 @@ export default class WordsApiServiceComponent {
 
   avatar: File;
 
+  public static setUserId(id: string | null): void {
+    localStorage.setItem('userId', id);
+  }
+
+  public static getUserId(): void {
+    localStorage.getItem('userId');
+  }
+
+  public static setUserToken(token: string | null): void {
+    localStorage.setItem('token', token);
+  }
+
+  public static getUserToken(): void {
+    localStorage.getItem('token');
+  }
+
+  public static setUserRefreshToken(refreshToken: string | null): void {
+    localStorage.setItem('refreshToken', refreshToken);
+  }
+
+  public static getUserRefreshToken(): void {
+    localStorage.getItem('refreshToken');
+  }
+
+  public static setUserName(userName: string | null): void {
+    localStorage.setItem('userName', userName);
+  }
+
+  public static getUserName(): void {
+    localStorage.getItem('userName');
+  }
+
+  public static setUserEmail(userEmail: string | null): void {
+    localStorage.setItem('userEmail', userEmail);
+  }
+
+  public static getUserEmail(): void {
+    localStorage.getItem('userEmail');
+  }
+
+  public static setUserAuthorized(authorized: string | null): void {
+    localStorage.setItem('authorized', authorized);
+  }
+
+  public static getUserAuthorized(): void {
+    localStorage.getItem('authorized');
+  }
+
   constructor(private httpClient: HttpClient) {}
 
   public getWordById(wordId: string | null): Observable<any> {
@@ -59,7 +108,7 @@ export default class WordsApiServiceComponent {
     userName: string | null,
     email: string | null,
     password: string | null,
-    avatar: File,
+    avatar: File
   ): Observable<any> {
     this.userName = userName;
     this.email = email;
@@ -87,7 +136,7 @@ export default class WordsApiServiceComponent {
     userName: string | null,
     email: string | null,
     password: string | null,
-    avatar: File,
+    avatar: File
   ): Observable<any> {
     this.id = id;
     this.token = token;
@@ -122,7 +171,7 @@ export default class WordsApiServiceComponent {
     wordId: string | null,
     token: string | null,
     wordDifficulty: string | null,
-    optional: Optional | null,
+    optional: Optional | null
   ): Observable<any> {
     this.id = id;
     this.wordId = wordId;
@@ -152,7 +201,7 @@ export default class WordsApiServiceComponent {
   public getUserWordById(
     id: string | null,
     wordId: string | null,
-    token: string | null,
+    token: string | null
   ): Observable<any> {
     this.id = id;
     this.wordId = wordId;
@@ -170,7 +219,7 @@ export default class WordsApiServiceComponent {
     wordId: string | null,
     token: string | null,
     wordDifficulty: string | null,
-    optional: Optional | null,
+    optional: Optional | null
   ): Observable<any> {
     this.id = id;
     this.wordId = wordId;
@@ -189,7 +238,7 @@ export default class WordsApiServiceComponent {
   public deleteUserWord(
     id: string | null,
     wordId: string | null,
-    token: string | null,
+    token: string | null
   ): Observable<any> {
     this.id = id;
     this.wordId = wordId;
@@ -217,7 +266,7 @@ export default class WordsApiServiceComponent {
     id: string | null,
     token: string | null,
     wordsPerDay: number | null,
-    optional: Optional | null,
+    optional: Optional | null
   ): Observable<any> {
     this.id = id;
     this.token = token;
@@ -247,7 +296,7 @@ export default class WordsApiServiceComponent {
     id: string | null,
     token: string | null,
     learnedWords: number | null,
-    optional: Optional | null,
+    optional: Optional | null
   ): Observable<any> {
     this.id = id;
     this.token = token;
@@ -283,56 +332,5 @@ export default class WordsApiServiceComponent {
         Accept: 'application/json',
       },
     });
-  }
-
-  public setUserId(id: string | null): void {
-    this.id = id;
-    localStorage.setItem('userId', id);
-  }
-
-  public getUserId(): void {
-    localStorage.getItem('userId');
-  }
-
-  public setUserToken(token: string | null): void {
-    this.token = token;
-    localStorage.setItem('token', token);
-  }
-
-  public getUserToken(): void {
-    localStorage.getItem('token');
-  }
-
-  public setUserRefreshToken(refreshToken: string | null): void {
-    this.refreshToken = refreshToken;
-    localStorage.setItem('refreshToken', refreshToken);
-  }
-
-  public getUserRefreshToken(): void {
-    localStorage.getItem('refreshToken');
-  }
-
-  public setUserName(userName: string | null): void {
-    localStorage.setItem('userName', userName);
-  }
-
-  public getUserName(): void {
-    localStorage.getItem('userName');
-  }
-
-  public setUserEmail(userEmail: string | null): void {
-    localStorage.setItem('userEmail', userEmail);
-  }
-
-  public getUserEmail(): void {
-    localStorage.getItem('userEmail');
-  }
-
-  public setUserAuthorized(authorized: string | null): void {
-    localStorage.setItem('authorized', authorized);
-  }
-
-  public getUserAuthorized(): void {
-    localStorage.getItem('authorized');
   }
 }

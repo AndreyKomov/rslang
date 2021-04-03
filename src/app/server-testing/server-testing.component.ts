@@ -160,13 +160,12 @@ export default class ServerTestingComponent implements OnInit {
         console.log(res);
       });
   }
+
   getUserSettings() {
-    this.api
-      .getUserSettings('60660e296b85e609a078ee2c', this.token)
-      .subscribe((res) => {
-        this.getedUserSettings = JSON.stringify(res);
-        console.log(res);
-      });
+    this.api.getUserSettings('60660e296b85e609a078ee2c', this.token).subscribe((res) => {
+      this.getedUserSettings = JSON.stringify(res);
+      console.log(res);
+    });
   }
 
   setUserStatistic() {
@@ -181,22 +180,24 @@ export default class ServerTestingComponent implements OnInit {
         console.log(res);
       });
   }
+
   getUserStatistic() {
     const optional = {
       optionalField: 'close',
       isDeleted: false,
     };
-    this.api
-      .getUserStatistic('60660e296b85e609a078ee2c', this.token)
-      .subscribe((res) => {
-        this.getedUserStatistic = JSON.stringify(res);
-        console.log(res);
-      });
+    this.api.getUserStatistic('60660e296b85e609a078ee2c', this.token).subscribe((res) => {
+      this.getedUserStatistic = JSON.stringify(res);
+      console.log(res);
+    });
   }
 
   refreshTokenUser() {
     this.api
-      .refreshTokenUser('60660e296b85e609a078ee2c', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsInRva2VuSWQiOiJkZjA0NDc4Zi02Yjk3LTRkNTItYTNlYS0zYmFhZWZiMjJmYzMiLCJpYXQiOjE2MTc0MDY5MDgsImV4cCI6MTYxNzQyMzEwOH0.pRXSPDWeStGNAb5vAgFD0dUCFQ11OLVGs5QeGozfP-0')
+      .refreshTokenUser(
+        '60660e296b85e609a078ee2c',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsInRva2VuSWQiOiJkZjA0NDc4Zi02Yjk3LTRkNTItYTNlYS0zYmFhZWZiMjJmYzMiLCJpYXQiOjE2MTc0MDY5MDgsImV4cCI6MTYxNzQyMzEwOH0.pRXSPDWeStGNAb5vAgFD0dUCFQ11OLVGs5QeGozfP-0'
+      )
       .subscribe((res) => {
         this.refreshedTokenUser = JSON.stringify(res);
         console.log(res);
