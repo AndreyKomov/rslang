@@ -1,27 +1,28 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+import { HttpClientModule } from '@angular/common/http';
+
 import AppComponent from '@app/app.component';
-
-import AudioCallService from './pages/audio-call/audio-call.service';
-
-import MaterialModule from './pages/material/material.module';
-import AudioCallModule from './pages/audio-call/audio-call.module';
-import ElectronicTextbookModule from './pages/electronic-textbook/electronic-textbook.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import WordsApiService from './server/api';
+import RegistrationComponent from './pages/registration/registration/registration.component';
 import AppRoutingModule from './app-routing.module';
-import ElectronicTextbookService from './pages/electronic-textbook/electronic-textbook.service';
+import SharedModule from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RegistrationComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    AudioCallModule,
-    ElectronicTextbookModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
     AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [AudioCallService, ElectronicTextbookService],
+  providers: [WordsApiService],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}
