@@ -1,6 +1,6 @@
 <p>constructor-game works!</p>
 <div *ngFor="let letter of letterArr; let index = index">
-  <button class="letter-box ready-letter" (click)="checkLetter(letter, index)">
+  <button class="letter-box ready-letter" (click)="checkLetter(letter, index, $event)">
     <span>{{ letter }}</span>
   </button>
 </div>

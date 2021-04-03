@@ -26,15 +26,19 @@ export class ConstructorGameComponent implements OnInit {
     return this.randomiseLetters(letterArr);
   }
 
-  checkLetter(letter: string, index: number) {
+  checkLetter(letter: string, index: number, event: Event) {
     console.log(letter);
     if (letter == this.word[this.placeIndex]) {
       this.placeIndex++;
       this.letterArr.splice(index, 1);
       this.rightLettersArr.push(letter);
-      alert('Yes');
     } else {
-      alert('No');
+      (<HTMLElement>event.target).classList.add('error');
+      (<HTMLElement>event.target).classList.remove('ready-letter');
+      setTimeout(() => {
+        (<HTMLElement>event.target).classList.remove('error');
+        (<HTMLElement>event.target).classList.add('ready-letter');
+      }, 500);
     }
   }
 

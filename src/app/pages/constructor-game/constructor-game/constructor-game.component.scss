@@ -15,6 +15,10 @@
   text-align: center;
   transition: all 0.3s ease-out;
   outline: 0;
+
+  & span {
+    background-color: inherit;
+  }
 }
 
 .ready-letter {
@@ -41,4 +45,8 @@
   font-size: 20px;
   font-weight: 600;
   line-height: 47px;
+}
+
+.error {
+  background-color: #f44336;
 }
