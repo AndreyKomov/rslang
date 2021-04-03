@@ -78,13 +78,13 @@ export default class ServerTestingComponent implements OnInit {
         console.log(res);
       });
   }
-
+  
   signIn() {
     this.api.signIn('vit16784675@mail.ru', 'Vit1767812++').subscribe((res) => {
+      localStorage.setItem('token', res.token);
       console.log('signIn: ', res);
     });
   }
-
   createUserWord() {
     const optional = {
       optionalField: 'free',
