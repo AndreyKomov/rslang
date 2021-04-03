@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+import { Component, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'div[app-promo]',
@@ -6,10 +6,6 @@ import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from '@angula
   styleUrls: ['./promo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PromoComponent implements OnInit {
+export class PromoComponent {
   @HostBinding('class') class = 'promo';
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

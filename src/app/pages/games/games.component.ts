@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'section[app-games]',
@@ -6,10 +6,6 @@ import { Component, OnInit, HostBinding, ChangeDetectionStrategy } from '@angula
   styleUrls: ['./games.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GamesComponent implements OnInit {
+export class GamesComponent {
   @HostBinding('class') class = 'games';
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

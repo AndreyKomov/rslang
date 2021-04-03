@@ -3,3 +3,6 @@
 @import './scss/mixins.scss';
 @import './scss/common.scss';
 @import './scss/material.scss';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

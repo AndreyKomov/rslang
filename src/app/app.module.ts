@@ -11,6 +11,8 @@ import RegistrationComponent from './pages/registration/registration/registratio
 import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
 
+
+
 @NgModule({
   declarations: [AppComponent, RegistrationComponent],
   imports: [
