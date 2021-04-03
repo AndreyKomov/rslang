@@ -35,8 +35,7 @@ export default class ServerTestingComponent implements OnInit {
 
   selectedFile: File = null;
 
-  token: string | null =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjYwZTI5NmI4NWU2MDlhMDc4ZWUyYyIsImlhdCI6MTYxNzQwNzA0MiwiZXhwIjoxNjE3NDIxNDQyfQ.xHNbjrb5ZhAs4VYk8Y86InZQfqXSKjtKS-u6h-e3kSo';
+  token: string | null = localStorage.getItem('token');
 
   constructor(public api: WordApiServiceComponent) {}
 
@@ -78,13 +77,14 @@ export default class ServerTestingComponent implements OnInit {
         console.log(res);
       });
   }
-  
+
   signIn() {
     this.api.signIn('vit16784675@mail.ru', 'Vit1767812++').subscribe((res) => {
       localStorage.setItem('token', res.token);
       console.log('signIn: ', res);
     });
   }
+
   createUserWord() {
     const optional = {
       optionalField: 'free',

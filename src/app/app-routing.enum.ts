@@ -2,7 +2,7 @@ export enum ParamKey {
   promo = '',
   notFound = '**',
   team = 'team',
-  games = 'games',
+  games = 'games'
 }
 
 export enum QueryParamKey {
