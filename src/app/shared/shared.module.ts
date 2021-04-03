@@ -13,6 +13,7 @@ import { AuthButtonComponent } from './layout/auth-button/auth-button.component'
 import { FooterSliderComponent } from './layout/footer/footer-slider/footer-slider.component';
 import { FooterCredentialsComponent } from './layout/footer/footer-credentials/footer-credentials.component';
 import { PromoButtonComponent } from './layout/promo-button/promo-button.component';
+import HoverPersonInfoDirective from './directives/hover-person-info.directive';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { PromoButtonComponent } from './layout/promo-button/promo-button.compone
     FooterCredentialsComponent,
     PromoButtonComponent,
     PromoComponent,
+    HoverPersonInfoDirective,
   ],
   imports: [RouterModule, CommonModule, MaterialModule],
   exports: [
@@ -37,6 +39,8 @@ import { PromoButtonComponent } from './layout/promo-button/promo-button.compone
     FooterCredentialsComponent,
     PromoButtonComponent,
     PromoComponent,
+    HoverPersonInfoDirective,
+    MaterialModule,
   ],
   providers: [],
 })

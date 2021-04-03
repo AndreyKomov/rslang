@@ -164,6 +164,7 @@ module.exports = {
           },
         ],
         'no-console': 'error',
+        'import/prefer-default-export': 'off',
       },
     },
     {
