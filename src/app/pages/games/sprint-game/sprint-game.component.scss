@@ -63,4 +63,56 @@ h3 {
     background-size: cover;
     border: 1px solid #000;
     border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+}
+.closeButton{
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  z-index: 1;
+ 
+}
+.gradient-button-right {
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 20px 30px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, #9EEFE1 0%, #18b372 51%, #9EEFE1 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+    transition: .5s;
+  }
+  .gradient-button-wrong {
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 20px 30px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, #d81781 0%, #e61414 51%, #d81781 100%);
+    background-size: 100% auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+    transition: .5s;
+  }
+  .gradient-button-right:hover {
+    background-position: right center;
+  }
+  .gradient-button-wrong:hover {
+    background-position: right center;
+  }
+  .word-and-translation{
+      margin-top: 200px;
+      margin-bottom: 80px;
+      font-size: 25pt;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+  }
+.game-bar{
+display: block;
 }
