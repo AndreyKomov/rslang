@@ -46,4 +46,18 @@ h3 {
     background-image: linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url(https://sport-marafon.ru/upload/iblock/89e/1912-001.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-}    
+} 
+.game{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    padding: 20px 30px;
+    margin: auto;
+    font-size: 20px;
+    font-weight: 500;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 6px;
+}

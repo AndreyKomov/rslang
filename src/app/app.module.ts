@@ -12,7 +12,6 @@ import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
 
 
-
 @NgModule({
   declarations: [AppComponent, RegistrationComponent],
   imports: [
@@ -23,6 +22,8 @@ import SharedModule from './shared/shared.module';
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
+   
+ 
   ],
   providers: [WordsApiService],
   bootstrap: [AppComponent],

@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GamesComponent } from './games.component';
 import { GamesRoutingModule } from './games-routing.module';
-import { SprintGameComponent } from './sprint-game/sprint-game.component';
+
+
+import { SprintGameModule }   from './sprint-game/sprint-game.module';
 
 @NgModule({
-  declarations: [GamesComponent, SprintGameComponent],
-  imports: [CommonModule, GamesRoutingModule],
+  declarations: [GamesComponent],
+  imports: [CommonModule, GamesRoutingModule,SprintGameModule],
 })
 export class GamesModule {}
