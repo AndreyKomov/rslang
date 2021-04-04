@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import WordsApiServiceComponent from '../../../server/api';
 
@@ -8,21 +9,26 @@ import { IUserDataModel } from '../models/userDataModel';
   providedIn: 'root',
 })
 export default class RegistrationService {
-  constructor(private apiService: WordsApiServiceComponent) {}
+  constructor(private apiService: WordsApiServiceComponent, private router: Router) {}
 
   signIn(name: string, password: string, email: string, imgPath: File): void {
     this.apiService.createUser(name, email, password, imgPath);
+    this.apiService
+      .signIn(email, password)
+      .subscribe((data) => WordsApiServiceComponent.setUserToken(data.token));
+    this.router.navigate(['']);
   }
 
   logIn(password: string, email: string): void {
-    let userData: IUserDataModel;
-    this.apiService.signIn(email, password).subscribe((data) => (userData = data));
-    console.log(userData);
-    if (userData) {
-      WordsApiServiceComponent.setUserToken(userData.token);
-    } else {
-      console.log(userData.message);
-      alert('Неверные данные, повторите попытку');
-    }
+    this.apiService.signIn(email, password).subscribe(
+      (data: IUserDataModel) => {
+        alert();
+        WordsApiServiceComponent.setUserToken(data.token);
+        this.router.navigate(['team']);
+      },
+      (err) => {
+        alert('Неверные данные, повторите попытку');
+      }
+    );
   }
 }
