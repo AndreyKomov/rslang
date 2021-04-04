@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import RegistrationService from '@app/pages/registration/services/registration.service';
+import RegistrationService from '../services/registration.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IRegForm } from '../models/RegFormsModel';
-import { IFileModel } from '../models/FileModel';
 
 @Component({
   selector: 'app-registration',
@@ -15,9 +14,9 @@ export default class RegistrationComponent implements OnInit {
   isShow = false;
   registrationForm: IRegForm;
   imgURL: ArrayBuffer | string = '../../../../assets/img/no-avatar.png';
-  imagePath: string | any[];
+  imagePath: File;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private registrationService: RegistrationService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -39,9 +38,7 @@ export default class RegistrationComponent implements OnInit {
     });
   }
 
-  preview(files: IFileModel[]): void {
-    if (files.length === 0) return;
-
+  preview(files: File): void {
     const mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
       return;
@@ -83,19 +80,17 @@ export default class RegistrationComponent implements OnInit {
       return;
     }
 
-    if (this.isLoginTemplate) {
-      RegistrationService.signIn(
+    if (!this.isLoginTemplate) {
+      this.registrationService.signIn(
         this.registrationForm.value.name,
         this.registrationForm.value.password,
         this.registrationForm.value.email,
-        this.imgURL
+        this.imagePath
       );
     } else {
-      RegistrationService.logIn(
-        this.registrationForm.value.name,
+      this.registrationService.logIn(
         this.registrationForm.value.password,
-        this.registrationForm.value.email,
-        this.imgURL
+        this.registrationForm.value.email
       );
     }
   }
