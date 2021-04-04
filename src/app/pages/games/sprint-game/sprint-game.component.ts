@@ -16,6 +16,9 @@ round=0;
 wordsList:object|null;
 words:object|null;
 translations:object|null;
+index=0;
+wordsYouKnow=0;
+wordsYouDontKnow=0;
 
 constructor(public api: WordApiServiceComponent) {}
 ngOnInit(): void {
@@ -45,16 +48,32 @@ createTranscriptionArray =  (wordsList) => wordsList.map((item) => item.wordTran
 getWords(){
   this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
     this.wordsList = data;
-    console.log(this.wordsList);
-    this.wordsList=this.shuffle( this.wordsList);
     this.words=this.createWordsArray(this.wordsList);
     this.words=this.shuffle(this.words);
     this.translations=this.createTranscriptionArray(this.wordsList);
     this.translations=this.shuffle(this.translations);
-    console.log(this.words);
-    console.log(this.translations);
   });
+}
 
+checkWordTranslationMatch(checkPair){
+ const matchWordCheck= this.words[this.index];
+ const matchTranslationCheck=this.translations[this.index];
+ let result;
+ for (var prop in this.wordsList) {
+   if((this.wordsList[prop].word===matchWordCheck)&&(this.wordsList[prop].wordTranslate===matchTranslationCheck)){
+    result=true
+   }
+   else {result=false}
+ 
+}
+if(checkPair===result){
+  console.log('right');
+  this.wordsYouKnow=this.wordsYouKnow+1;
+}
+if(checkPair!==result){
+  this.wordsYouDontKnow=this.wordsYouDontKnow+1;
+  console.log('wrong')}
+this.index=this.index+1;
 }
 
 setLevelAndGroup() {
