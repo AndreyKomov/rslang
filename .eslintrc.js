@@ -5,12 +5,10 @@ module.exports = {
       files: ['*.ts'],
       parserOptions: {
         project: ['tsconfig.*?.json', 'e2e/tsconfig.json'],
+        tsconfigRootDir: __dirname,
         createDefaultProgram: true,
       },
-      plugins: [
-        "@typescript-eslint",
-        "@typescript-eslint/tslint"
-      ],
+      plugins: ['@typescript-eslint', '@typescript-eslint/tslint'],
       extends: [
         'plugin:@angular-eslint/recommended',
         'airbnb-typescript/base',
@@ -19,11 +17,18 @@ module.exports = {
       ],
       rules: {
         "import/prefer-default-export": "off",
+        'prettier/prettier': [
+          'error',
+          {
+            endOfLine: 'auto',
+          },
+        ],
         /**
          * ========================================================================
          * Modified Airbnb JS Style Guide rules extending eslint:recommended
          * ========================================================================
          */
+        'import/prefer-default-export': 'off',
         // require the use of === and !==
 /*         "prettier/prettier": ["error", {
           "endOfLine":"auto"
@@ -89,6 +94,11 @@ module.exports = {
          * ESLint Plugin TypeScript rules extending @typescript-eslint/recommended
          * ========================================================================
          */
+        '@typescript-eslint/lines-between-class-members': [
+          'error',
+          'always',
+          { exceptAfterSingleLine: true },
+        ],
         // disallow usage of the any type
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/prefer-regexp-exec': 'off',
@@ -121,7 +131,7 @@ module.exports = {
         ],
         '@typescript-eslint/interface-name-prefix': 'off',
 
-        //TODO: resolve later
+        //TODO: resolve later*
         '@typescript-eslint/no-unsafe-assignment': 'error',
         '@typescript-eslint/explicit-module-boundary-types': 'error',
         '@typescript-eslint/no-unsafe-return': 'error',
@@ -149,8 +159,16 @@ module.exports = {
         'object-curly-spacing': ['error', 'always'],
         '@typescript-eslint/brace-style': ['error', '1tbs', { allowSingleLine: true }],
         '@typescript-eslint/type-annotation-spacing': ['error', { before: false, after: true }],
-        '@typescript-eslint/space-before-function-paren': ['error', 'never'],
+        'space-before-function-paren': [
+          'error',
+          {
+            anonymous: 'never',
+            named: 'never',
+            asyncArrow: 'always',
+          },
+        ],
         'no-console': 'error',
+        'import/prefer-default-export': 'off',
       },
     },
     {
