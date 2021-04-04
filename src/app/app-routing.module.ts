@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: ParamKey.games,
     loadChildren: (): any =>
-      import('./pages/games/games.module').then((module) => module.GamesModule),
+      import('./pages/game-page/game-page.module').then((module) => module.GamePageModule),
   },
   {
     path: ParamKey.team,

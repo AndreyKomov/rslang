@@ -65,6 +65,7 @@ module.exports = {
             ignoreReadBeforeAssign: true,
           },
         ],
+        'import/prefer-default-export': 'off',
         // Prefer destructuring from arrays and objects
         'prefer-destructuring': [
           'error',
