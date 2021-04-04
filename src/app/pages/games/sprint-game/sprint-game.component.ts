@@ -10,5 +10,9 @@ import { Component } from '@angular/core';
 
 export class SprintGameComponent {
  message: string = "DataModule";
+display = false;
+update(){
+   this.display = !this.display;
+}
 
 }
