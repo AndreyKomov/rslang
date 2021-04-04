@@ -13,19 +13,30 @@ message: string = "DataModule";
 display = false;
 level=0;
 round=0;
-getWordsByPageAndGroup:object|null;
+wordsList:object|null;
 
 constructor(public api: WordApiServiceComponent) {}
 ngOnInit(): void {
-  this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
-    this.getWordsByPageAndGroup = data;
-    console.log(this.getWordsByPageAndGroup)
-  });
+  this.getWords()
  
 }
 
 update(){
    this.display = !this.display;
+}
+onLevelChange(level){
+this.level=  Number(level)-1;
+this.getWords()
+}
+onRoundChange(round){
+  this.round=  Number(round)-1;
+  this.getWords()
+  }
+getWords(){
+  this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
+    this.wordsList = data;
+    console.log(this.wordsList)
+  });
 }
 /* 
 getWords() {

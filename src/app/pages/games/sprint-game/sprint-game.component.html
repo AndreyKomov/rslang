@@ -27,19 +27,11 @@
 
     <div *ngIf="display" class="game">
 
-    <div class="closeButton">
-        <button  (click)="update()"
-            mat-raised-button="" color="primary" class="mat-focus-indicator auth-button__button mat-raised-button mat-button-base mat-primary" ng-reflect-color="primary">
-            <span class="mat-button-wrapper">
-                Закрыть</span>
-                <span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]">
-                </span>
-                <span class="mat-button-focus-overlay"></span> 
-        </button>
-    </div>
+    <button class="closeButton" (click)="update()">Закрыть</button>
+     
     <div class="level-and-round-choice">
         <label class="level__label">  Уровень  </label>
-        <select class="level__select">
+        <select class="level__select"   (change)="onLevelChange($event.target.value)">
             <option  value="1"> 1 </option>
             <option  value="2"> 2 </option>
             <option  value="3"> 3 </option>
@@ -47,8 +39,9 @@
             <option  value="5"> 5 </option>
             <option  value="6"> 6 </option>
         </select>
+   
         <label  class="round__label">Раунд</label>
-         <select class="round__select">
+         <select class="round__select" (change)="onRoundChange($event.target.value)">
              <option value="1"> 1 </option>
              <option  value="2"> 2 </option>
              <option  value="3"> 3 </option>

@@ -58,7 +58,7 @@ h3 {
     font-size: 20px;
     font-weight: 500;
     background:#87CEEB;
-    background-image: linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url(https://w-dog.ru/wallpapers/14/8/431875231827951.jpg);
+    background-image: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url(https://w-dog.ru/wallpapers/14/8/431875231827951.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     border: 1px solid #000;
@@ -66,11 +66,23 @@ h3 {
     font-family: 'Montserrat', sans-serif;
 }
 .closeButton{
-  position: absolute;
-  top: 70px;
-  right: 20px;
-  z-index: 1;
- 
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    z-index: 1;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 20px 30px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, #f0223d 0%, #e61414 51%, #f0223d 100%);
+    background-size: 100% auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+    transition: .5s;
+
 }
 .gradient-button-right {
     text-decoration: none;
