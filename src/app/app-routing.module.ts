@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
 import { PromoComponent } from './pages/promo/promo.component';
 import { ParamKey, QueryParamKey } from './app-routing.enum';
@@ -8,11 +9,12 @@ const routes: Routes = [
   { path: ParamKey.promo, component: PromoComponent },
   {
     path: ParamKey.games,
-    loadChildren: () => import('./pages/games/games.module').then((module) => module.GamesModule),
+    loadChildren: (): any =>
+      import('./pages/game-page/game-page.module').then((module) => module.GamePageModule),
   },
   {
     path: ParamKey.team,
-    loadChildren: () => import('./pages/team/team.module').then((module) => module.TeamModule),
+    loadChildren: (): any => import('./pages/team/team.module').then((module) => module.TeamModule),
   },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];
