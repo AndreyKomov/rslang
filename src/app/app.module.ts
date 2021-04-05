@@ -15,6 +15,7 @@ import SharedModule from './shared/shared.module';
   declarations: [AppComponent, RegistrationComponent],
   imports: [
     BrowserModule,
+    
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
