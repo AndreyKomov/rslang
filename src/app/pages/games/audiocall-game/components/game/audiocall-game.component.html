@@ -1,22 +1,24 @@
 <div class="audiocall-game">
-  <div class="speaker">
+  <div (click)="repeatSound()" class="speaker">
     <img src="./assets/img/speaker.png" alt="speaker">
   </div>
 
   <div class="words-list">
     <div
     class="words"
-    *ngFor="let word of wordsArray"
-    (click) = "checkWord(word)"
+    *ngFor="let wordItem of currentWords"
+    (click)="checkWord(wordItem)"
+    [ngClass]="{correct: correctStyle}"
     >
-    {{word.wordTranslate}}
+    {{wordItem.wordTranslate}}
   </div>
   </div>
 
   <div class="additional-buttons">
-    <button mat-raised-button color="primary" class="help">Подсказка</button>
-    <button mat-raised-button color="primary" class="go-back-btn">Завершить</button>
+    <button class="help">Подсказка</button>
+    <button routerLink="/games" class="go-back-btn">Завершить</button>
   </div>
 
-  <!-- <input class="in" [(ngModel)]="inValue" > -->
+  <button class="forward" [ngClass]="{active: active}"></button>
+
 </div>

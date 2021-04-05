@@ -1,8 +1,21 @@
+@import "variables";
+
 .container-audiocall-promo {
   position: relative;
   width: 500px;
   margin: 10px auto;
   text-align: center;
+  background-image: url(../../../../../../assets/img/promo-img.png);
+
+    h4,
+    .start-game {
+      color: $main-text-color;
+      background-color: $footer-slider-bg;
+      font-family: $font-main;
+      border-radius: 25px;
+      text-transform: uppercase;
+      font-size: 1.5rem;
+    }
 
     .game-description {
       position: relative;
@@ -10,27 +23,45 @@
       width: 500px;
       margin: 0 auto;
       text-align: center;
+      color: $main-text-color;
+      background-color: $footer-creds-bg;
+      font-family: $font-main;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 700;
     }
 
-    .game-types {
+    .audiocall-previous-settings {
       display: flex;
-      width: 690px;
-      margin: 50px auto;
-      justify-content: space-between;
-      text-align: center;
+      width: 225px;
+      flex-direction: column;
+      margin: 10px auto;
+      color: $main-text-color;
+      background-color: $footer-creds-bg;
+      font-family: $font-main;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
 
-        .studied-words,
-        .random-words {
-          width: 250px;
-          height: 190px;
-          border: solid 2px blueviolet;
-          border-radius: 5%;
-          background-color: skyblue;
+        .enter-group-and-pages {
+          display: flex;
+          margin: 10px;
+          justify-content: space-between;
         }
 
-        .start-game {
-          background-color: yellowgreen;
+        input,
+        label {
+          text-align: center;
         }
+
+        input {
+          width: 25px;
+        }
+    }
+
+    .start-game {
+      background-color: $footer-creds-bg;
+      box-shadow: 9px 9px 5px $footer-slider-bg;
     }
 }
 

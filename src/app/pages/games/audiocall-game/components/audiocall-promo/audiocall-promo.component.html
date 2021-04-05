@@ -4,7 +4,7 @@
     <div class="description-text">
       <p>В процессе игры необходимо угадать слово, произнесенное на английском языке.
         При выборе правилього/неправильного ответа звучит соответствующий сигнал.
-        В конце выходит статистика по количеству угаданных/неугаданных слов и аудио-дорожки всех слов,
+        В конце появится статистика по количеству угаданных/неугаданных слов и аудио-дорожки всех слов,
         участвовавших в игре.
       </p>
 
@@ -12,34 +12,31 @@
     </div>
   </div>
 
-  <div class="col-xs-12 col-sm-6" *ngIf="startFromMenu">
-    <div class="card">
-      <div class="card-header">
-        <h4>Настройки</h4>
-      </div>
-      <div class="card-body">
-        <ul class="list-unstyled pl-0">
-          <li class="birthday-item">
-            <div class="form-item">
-              <label class="form-item__label">Сложность</label>
-              <div class="form-item__control"><small><strong><span
-                      class="slider__value level">1</span><span>&nbsp;Уровень</span></strong></small></div>
-              <div class="slider">
-                <input
-                [(ngModel)] = "inputValue"
-                id="level" class="slider__input" type="range" value="0" min="0" max="5" />
-                <div class="slider__positive" style="width: 0%;"></div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
+  <div class="audiocall-previous-settings" *ngIf="startFromMenu">
+    <p>Выбор слов для игры</p>
+    <div class="enter-group-and-pages">
+      <label for="groop">Введите номер раздела (1 - 6)</label>
+      <input
+      [(ngModel)] = "groupValue"
+      id="group"
+      class="group-number"
+      >
     </div>
+
+  <div class="enter-group-and-pages">
+    <label for="page">Введите номер страницы (1 - 30)</label>
+    <input
+    [(ngModel)] = "pageValue"
+    id="page"
+    class="page-number"
+    >
   </div>
 
-  <a routerLink="audiocallgame" [queryParams]="{difficult: inputValue}" class="start-link">
+  </div>
+
+  <a routerLink="audiocallgame" [queryParams]="{group: groupValue, page: pageValue}" class="start-link">
     <button class="start-game">Начать</button>
   </a>
+
 
 </div>

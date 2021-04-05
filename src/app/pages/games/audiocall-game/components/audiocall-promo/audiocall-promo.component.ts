@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-audiocall-promo',
@@ -7,14 +8,22 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AudiocallPromoComponent implements OnInit {
-  startFromMenu = true;
+  startFromMenu;
 
-  inputValue = 0;
+  groupValue = 1;
+  pageValue = 1;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // @ts-ignore
-    window.qq = this.inputValue;
+    this.route.queryParams.subscribe((param) => {
+      this.startFromMenu = param.startFromMenu;
+      if (this.startFromMenu === "true") {
+        this.startFromMenu = true;
+      } else {
+        this.startFromMenu = false;
+      }
+    });
+    console.log(typeof this.startFromMenu);
   }
 }

@@ -1,72 +1,82 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import WordsApiServiceComponent from '@app/server/api';
+import { AudiocallService } from '../../audiocall.service';
 
 @Component({
   selector: 'app-audiocall-game',
   templateUrl: './audiocall-game.component.html',
   styleUrls: ['./audiocall-game.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AudiocallGameComponent implements OnInit {
-  // inValue = '';
-  wordsArray: any[] = [
-    {
-      id: 1,
-      word: 'string',
-      image: '',
-      audio: '',
-      wordTranslate: 'строка',
-    },
-    {
-      id: 2,
-      word: 'fish',
-      image: '',
-      audio: '',
-      wordTranslate: 'рыба',
-    },
-    {
-      id: 1,
-      word: 'sky',
-      image: '',
-      audio: '',
-      wordTranslate: 'небо',
-    },
-    {
-      id: 1,
-      word: 'spring',
-      image: '',
-      audio: '',
-      wordTranslate: 'весна',
-    },
-    {
-      id: 1,
-      word: 'flagman',
-      image: '',
-      audio: '',
-      wordTranslate: 'флагман',
-    },
-  ];
+  group: number;
+  page: number;
+  requestMediaUrl = 'https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/';
+  wordsFromApi: any[] = [];
+  currentWords: any[] = [];
+  wordsQuantityInRound = 5;
+  currentLastWordInRound = 0;
+  askedWordIndex = 0;
+  media = {};
+  wordSoundUrl = '';
+  askedWordSound = new Audio(`${this.requestMediaUrl}${this.wordSoundUrl}`);
+  // qq = new Audio('https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/files/02_0624.mp3');
+  correctStyle = false;
+  active = false;
 
-  difficulty = 0;
-
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private backEndService: WordsApiServiceComponent,
+    private gameService: AudiocallService
+  ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((d) => {
-      console.log(d);
-      this.difficulty = d.difficult;
-
+    this.route.queryParams.subscribe((param) => {
+      this.group = param.group;
+      this.page = param.page;
       this.getWordsFromBE();
     });
   }
 
   getWordsFromBE() {
-    // this method get words from beck-end
-    // to use this.difficulty
-    // .subscribe((data) => {})
+    this.backEndService.getWordsByPageAndGroup(this.page, this.group).subscribe((data) => {
+      this.wordsFromApi = data;
+      this.buildWordsArrayForGameRound();
+      this.getRandomWord(this.currentWords.length);
+    });
+  }
+
+  buildWordsArrayForGameRound() {
+    this.currentWords = this.wordsFromApi.slice(
+      this.currentLastWordInRound,
+      this.currentLastWordInRound + this.wordsQuantityInRound
+    );
+  }
+
+  getRandomWord(max) {
+    this.askedWordIndex = Math.floor(Math.random() * max);
+  }
+
+  getSound() {
+    const wordSoundUrl = this.currentWords[this.askedWordIndex].audio;
+    const askedWordSound = new Audio(`${this.requestMediaUrl}${wordSoundUrl}`);
+    return askedWordSound;
   }
 
   checkWord(word) {
-    console.log(word);
+    if (this.currentWords[this.askedWordIndex].id === word.id) {
+      this.gameService.playSound(this.gameService.correct);
+      this.correctStyle = true;
+      this.active = true;
+    } else {
+      this.gameService.playSound(this.gameService.error);
+    }
+  }
+
+  repeatSound() {
+    /*     const wordSoundUrl = this.currentWords[this.askedWordIndex].audio;
+      const askedWordSound = new Audio(`${this.requestMediaUrl}${wordSoundUrl}`);
+      askedWordSound.play(); */
+    this.getSound().play();
   }
 }

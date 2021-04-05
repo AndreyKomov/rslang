@@ -4,6 +4,7 @@
   position: relative;
   width: 320px;
   margin: 0 auto;
+  padding-top: 10px;
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
 
     .speaker {
@@ -33,7 +34,7 @@
         .words {
           position: relative;
           margin: 10px auto;
-          width: 100px;
+          width: 145px;
           height: 25px;
           text-align: center;
           border-radius: 19px;
@@ -51,6 +52,11 @@
           cursor: pointer;
           transform: scale(1.15);
         }
+
+        .correct {
+          background-color: greenyellow;
+        }
+
     }
 
     .additional-buttons {
@@ -81,5 +87,24 @@
           color: $footer-slider-bg;
           transform: scale(1.15);
         }
+    }
+
+    .forward {
+      display: none;
+      position: relative;
+      margin: 10px auto;
+      width: 80px;
+      height: 39px;
+      border-radius: 5px;
+      border: 2px double ;
+      background-image: url(../../../../../../assets/img/forward.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      transform: rotate(180deg);
+      outline: none;
+    }
+
+    .active {
+      display: block;
     }
 }
