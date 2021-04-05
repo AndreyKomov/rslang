@@ -28,7 +28,15 @@
     <div *ngIf="display" class="game">
 
     <button class="closeButton" (click)="update()">Закрыть</button>
-     
+    <div *ngIf="displayStatistics" class="game">
+ 
+       <div class="statistic">
+            Well done !!!<br>
+            You know {{wordsYouKnow}} words <br>
+            You made mistakes in {{wordsYouDontKnow}} words
+       </div>
+        
+     </div> 
     <div class="level-and-round-choice">
         <label class="level__label">  Уровень  </label>
         <select class="level__select"   (change)="onLevelChange($event.target.value)">
@@ -59,7 +67,7 @@
     <button class="gradient-button-right" (click)="checkWordTranslationMatch(true)">	&#9668; правильно</button>
     <button class="gradient-button-wrong" (click)="checkWordTranslationMatch(false)"> неправильно 	&#9658;</button>
     </div>
-
+ 
 
 <div>
 

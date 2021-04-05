@@ -11,6 +11,7 @@ import WordApiServiceComponent from '../../../server/api';
 export class SprintGameComponent implements OnInit {
 message: string = "DataModule";
 display = false;
+displayStatistics=false;
 level=0;
 round=0;
 wordsList:object|null;
@@ -29,6 +30,9 @@ update(){
    this.display = !this.display;
 }
 
+updateStatistics(){
+  this.displayStatistics = !this.displayStatistics;
+}
 shuffle (array)  {
   return array.sort(function() {
       return 0.5 - Math.random();
@@ -74,6 +78,10 @@ if(checkPair!==result){
   this.wordsYouDontKnow=this.wordsYouDontKnow+1;
   console.log('wrong')}
 this.index=this.index+1;
+if(this.index>19){
+  console.log('game over');
+  this.updateStatistics()
+}
 }
 
 setLevelAndGroup() {
