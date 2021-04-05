@@ -32,13 +32,19 @@
     <div *ngIf="displayStatistics" class="game">
  
        <div class="statistic">
-         <h2>Уровень пройден<br><br>
-             слова без ошибок: {{wordsYouKnow}} 
+         <h2>Уровень пройден</h2>
+         <br><br>
+          <h3>   слова без ошибок: {{wordsYouKnow}} 
                <div>{{rightWords}}</div> 
               <br><br>
             слова с ошибками : {{wordsYouDontKnow}}
             <div>{{wrongWords}}</div> 
-         </h2>  
+            <br>
+             <br>
+             <button class="gradient-button-right" (click)="getWords();update();updateStatistics()">
+                Начать игру заново
+             </button> 
+         </h3>  
        </div>
         
      </div> 

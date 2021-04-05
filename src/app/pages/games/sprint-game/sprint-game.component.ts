@@ -86,7 +86,8 @@ if(checkPair!==result){
 this.index=this.index+1;
 if(this.index>19){
   console.log('game over');
-  this.updateStatistics()
+  this.updateStatistics();
+  this.index=0;
 }
 }
 
