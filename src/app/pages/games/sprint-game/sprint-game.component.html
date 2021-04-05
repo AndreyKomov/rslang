@@ -4,8 +4,9 @@
 <div class="header-container"> <h1>СПРИНТ</h1>
 <br/>
 
-<button  (click)="update()"
- mat-raised-button="" color="primary" class="mat-focus-indicator auth-button__button mat-raised-button mat-button-base mat-primary" ng-reflect-color="primary"><span class="mat-button-wrapper">Начать</span><span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]"></span><span class="mat-button-focus-overlay"></span>
+<button  (click)="update()" 
+ mat-raised-button="" color="primary" class="mat-focus-indicator auth-button__button mat-raised-button mat-button-base mat-primary" ng-reflect-color="primary"><span class="mat-button-wrapper">
+ Начать</span><span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]"></span><span class="mat-button-focus-overlay"></span>
 </button>
 </div>
 
@@ -27,13 +28,17 @@
 
     <div *ngIf="display" class="game">
 
-    <button class="closeButton" (click)="update()">Закрыть</button>
+    <button class="closeButton" (click)="update()" >Закрыть</button>
     <div *ngIf="displayStatistics" class="game">
  
        <div class="statistic">
-            Well done !!!<br>
-            You know {{wordsYouKnow}} words <br>
-            You made mistakes in {{wordsYouDontKnow}} words
+         <h2>Уровень пройден<br><br>
+             слова без ошибок: {{wordsYouKnow}} 
+               <div>{{rightWords}}</div> 
+              <br><br>
+            слова с ошибками : {{wordsYouDontKnow}}
+            <div>{{wrongWords}}</div> 
+         </h2>  
        </div>
         
      </div> 
@@ -57,7 +62,20 @@
              <option  value="5"> 5 </option>
              <option  value="6"> 6 </option>
              <option  value="7"> 7 </option>
-        </select>
+             <option  value="8"> 8 </option>
+             <option  value="9"> 9 </option>
+             <option  value="10"> 10 </option>
+             <option  value="11"> 11 </option>
+             <option  value="12"> 12 </option>
+             <option  value="13"> 13 </option>
+             <option  value="14"> 14 </option>
+             <option  value="15"> 15 </option>
+             <option  value="16"> 16 </option>
+             <option  value="17"> 17 </option>
+             <option  value="18"> 18 </option>
+             <option  value="19"> 19 </option>
+             <option  value="20"> 20 </option>
+            </select>
      </div>
     <div class="word-and-translation">
         <span>{{this.words[index]}}</span>  -    <span>{{this.translations[index]}}</span>

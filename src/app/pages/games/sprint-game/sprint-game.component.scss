@@ -40,12 +40,15 @@ h3 {
     width: 100%;
     height: 100%;
     padding: 150px;
-    color: #fff;
+     font-size: 21px;
+    color: #3f51b5;
     text-align: center;
-    text-shadow: 3px 3px 2px #000;
-    background-image: linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url(https://sport-marafon.ru/upload/iblock/89e/1912-001.jpg);
+   // text-shadow: 2px 2px 2px #000;
+    background-image:url(https://image.freepik.com/free-vector/couple-practicing-trail-run-training_74855-5474.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    box-shadow: 1px 5px 14px rgb(0 0 0 / 10%);
+     line-height: 1.5;
 } 
 .game{
  position: fixed;
@@ -58,7 +61,7 @@ h3 {
     font-size: 20px;
     font-weight: 500;
     background:#87CEEB;
-    background-image: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url(https://w-dog.ru/wallpapers/14/8/431875231827951.jpg);
+    background-image: url(https://image.freepik.com/free-vector/couple-practicing-trail-run-training_74855-5474.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     border: 1px solid #000;
@@ -78,7 +81,7 @@ h3 {
     border-radius: 10px;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 2px;
-    background-image: linear-gradient(to right, #f0223d 0%, #e61414 51%, #f0223d 100%);
+    background-image: linear-gradient(to right, #da1a58  0%, #e61414 51%, #da1a58  100%);
     background-size: 100% auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
     transition: .5s;
@@ -93,7 +96,7 @@ h3 {
     border-radius: 10px;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 2px;
-    background-image: linear-gradient(to right, #9EEFE1 0%, #18b372 51%, #9EEFE1 100%);
+    background-image: linear-gradient(to right, #b29eef  0%, #18b372 51%, #b29eef  100%);
     background-size: 200% auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
     transition: .5s;

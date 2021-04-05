@@ -20,10 +20,13 @@ translations:object|null;
 index=0;
 wordsYouKnow=0;
 wordsYouDontKnow=0;
+rightWords=[]
+wrongWords=[]
+isCheckedWord:object|null;
 
 constructor(public api: WordApiServiceComponent) {}
 ngOnInit(): void {
-  this.getWords()
+  this.getWords();
 }
 
 update(){
@@ -71,12 +74,15 @@ checkWordTranslationMatch(checkPair){
  
 }
 if(checkPair===result){
-  console.log('right');
   this.wordsYouKnow=this.wordsYouKnow+1;
-}
+    console.log('right');
+  this.rightWords.push(this.words[this.index])
+ }
 if(checkPair!==result){
   this.wordsYouDontKnow=this.wordsYouDontKnow+1;
-  console.log('wrong')}
+  console.log('wrong');
+   this.wrongWords.push(this.words[this.index])
+  }
 this.index=this.index+1;
 if(this.index>19){
   console.log('game over');
