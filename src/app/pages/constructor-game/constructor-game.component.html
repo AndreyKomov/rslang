@@ -4,19 +4,31 @@
       {{ translateWord }}
     </div>
     <div class="wrapper-content__text">
-      <span>
-        Собери слово из букв
-      </span>
+      <span> Собери слово из букв </span>
     </div>
     <div class="right-letter-content">
-      <button [ngClass]="{'empty' : !letter.isRight, 'currentBlock' : placeIndex === index}" class="letter-box right-letter" *ngFor="let letter of rightLettersArr; let index = index">
+      <button
+        [ngClass]="{ empty: !letter.isRight, currentBlock: placeIndex === index }"
+        class="letter-box right-letter"
+        *ngFor="let letter of rightLettersArr; let index = index"
+      >
         {{ letter.letter }}
       </button>
     </div>
     <div class="ready-letter-content">
-      <button class="letter-box ready-letter" (click)="checkLetter(letter, index, $event)" *ngFor="let letter of letterArr; let index = index">
+      <button
+        class="letter-box ready-letter"
+        (click)="checkLetter(letter, index, $event)"
+        *ngFor="let letter of letterArr; let index = index"
+      >
         {{ letter }}
       </button>
     </div>
+
+    <span class="wrapper-content__enter">enter</span>
+
+    <button class="wrapper-content__dont-know-button" (click)="showAnswer()">
+      <span>не знаю :(</span>
+    </button>
   </div>
 </div>

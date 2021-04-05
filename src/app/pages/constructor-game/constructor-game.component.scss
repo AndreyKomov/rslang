@@ -73,6 +73,34 @@
     font-size: 12px;
     line-height: 1.17;
   }
+
+  &__dont-know-button {
+    color: #37383c;
+    background-color: #e5e9ec;
+    height: auto;
+    padding: 8px 28px;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: none;
+    box-shadow: none;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: all 0.3s ease-out;
+    outline: 0;
+    margin-top: 40px;
+
+    &:hover {
+      background-color: #dee3e6;
+    }
+  }
+
+  &__enter {
+    margin-right: 5px;
+    color: #7e919f;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.7;
+  }
 }
 
 .ready-letter-content {
@@ -87,5 +115,5 @@
 }
 
 .currentBlock {
-  border: 2px solid rgba(37,130,231,.6);
+  border: 2px solid rgba(37, 130, 231, 0.6);
 }
