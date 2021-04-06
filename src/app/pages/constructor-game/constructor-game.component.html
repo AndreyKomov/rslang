@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="word">
   <div class="wrapper-content">
     <div class="wrapper-content__translate-word">
       {{ translateWord }}
@@ -8,11 +8,11 @@
     </div>
     <div class="right-letter-content">
       <button
-        [ngClass]="{ empty: !letter.isRight, currentBlock: placeIndex === index }"
+        [ngClass]="{ empty: !letter, currentBlock: placeIndex === index }"
         class="letter-box right-letter"
         *ngFor="let letter of rightLettersArr; let index = index"
       >
-        {{ letter.letter }}
+        {{ letter }}
       </button>
     </div>
     <div class="ready-letter-content">
@@ -25,10 +25,27 @@
       </button>
     </div>
 
-    <span class="wrapper-content__enter">enter</span>
+    <div *ngIf="isEndRaund">
+      <img [src]="baseImgUrl" alt="img-association">
+      <div>{{ context }}</div>
+    </div>
 
-    <button class="wrapper-content__dont-know-button" (click)="showAnswer()">
-      <span>не знаю :(</span>
-    </button>
+    
+
+    <div *ngIf="!isEndRaund; else continueBtn">
+      <span class="wrapper-content__enter">enter</span>
+
+      <button class="wrapper-content__dont-know-button" (click)="showAnswer()">
+        <span>не знаю :(</span>
+      </button>
+    </div>
   </div>
 </div>
+
+<ng-template #continueBtn>
+    <span class="wrapper-content__enter">enter</span>
+
+    <button class="wrapper-content__continue-button" (click)="nextRaund()">
+      <span>Продолжить</span>
+    </button>
+</ng-template>

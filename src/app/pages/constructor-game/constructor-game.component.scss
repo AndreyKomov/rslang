@@ -94,6 +94,26 @@
     }
   }
 
+  &__continue-button {
+    color: #fff;
+    background-color: #2582e7;
+    height: auto;
+    padding: 8px 28px;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: none;
+    box-shadow: none;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: all 0.3s ease-out;
+    outline: 0;
+    margin-top: 40px;
+
+    &:hover {
+      background-color: #2582e2;
+    }
+  }
+
   &__enter {
     margin-right: 5px;
     color: #7e919f;
