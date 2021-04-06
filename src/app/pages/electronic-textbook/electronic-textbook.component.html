@@ -1,7 +1,26 @@
 <nav class="section-menu">
   <ul>
-    <li *ngFor="let category of categories; let i = index"
-      [attr.data-index]="i" (click)="onClickCategory(i)" >{{category}}</li>
+    <li *ngFor="let category of categories; let i = index" (click)="onClickCategory(i)">
+      <a [routerLink]="['./group', i, 'page', 0]" routerLinkActive="active">{{category}}</a>
+    </li>
   </ul>
+  <div>
+    <button mat-icon-button matTooltip="Настройки" (click)="onClickSettings()">
+      <mat-icon>tune</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Предыдущая страница" (click)="onClickPage('back')" [disabled]="!page">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <mat-form-field class="select">
+      <mat-label>Page</mat-label>
+      <select matNativeControl (change)="onChangePage($event)">
+        <option [value]="option" *ngFor="let option of pagesPagination" [selected]="page === option">{{option}}
+        </option>
+      </select>
+    </mat-form-field>
+    <button mat-icon-button matTooltip="Следующая страница" (click)="onClickPage('next')" [disabled]="page>29">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
 </nav>
 <router-outlet></router-outlet>

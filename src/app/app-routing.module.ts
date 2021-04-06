@@ -14,6 +14,13 @@ const routes: Routes = [
     path: ParamKey.team,
     loadChildren: () => import('./pages/team/team.module').then((module) => module.TeamModule),
   },
+  {
+    path: ParamKey.textbook,
+    loadChildren: () =>
+      import('./pages/electronic-textbook/electronic-textbook.module').then(
+        (module) => module.ElectronicTextbookModule
+      ),
+  },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];
 

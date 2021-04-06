@@ -1,0 +1,41 @@
+.card {
+  width: 320px;
+  /* height: 250px; */
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+
+  .mat-card-actions {
+    margin-bottom: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 0 auto;
+  /*   grid-template:
+      'word image image' auto
+      'word image image' auto
+      'examples examples examples' auto
+      / auto; */
+    &_word {
+      flex: 0 1 30%;
+    }
+    &_image {
+      flex: 0 1 65%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      img {
+        width: 180px;
+        height: 100px;
+        border-radius: 4px;
+      }
+    }
+    &_examples {
+      flex: 0 1 auto;
+    }
+  }
+}

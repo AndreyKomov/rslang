@@ -1,0 +1,31 @@
+<mat-card class="card">
+  <mat-card-actions>
+    <button mat-icon-button matTooltip="Прослушать слово" (click)="playAudio(word.audio)">
+      <mat-icon>volume_up</mat-icon>
+    </button>
+    <button *ngIf="cardInfo.isButtonAdd" mat-icon-button matTooltip="Добавить в сложные">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button *ngIf="cardInfo.isButtonDelete" mat-icon-button matTooltip="Удалить слово">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+  <mat-card-content>
+    <div class="card__content">
+      <div class="card__content_word">
+        <p>{{word.word | uppercase}}</p>
+        <p>{{word.transcription}}</p>
+        <p *ngIf="cardInfo.isWordTranslate">{{word.wordTranslate}}</p>
+      </div>
+      <div class="card__content_image">
+        <img src="{{urlImage + word.image}}" alt="word.word">
+      </div>
+      <div class="card__content_examples">
+        <p [innerHTML]="word.textExample"></p>
+        <p *ngIf="cardInfo.isTextExampleTranslate" [innerHTML]="word.textExampleTranslate"></p>
+        <p [innerHTML]="word.textMeaning"></p>
+        <p *ngIf="cardInfo.isTextExampleTranslate" [innerHTML]="word.textExampleTranslate"></p>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

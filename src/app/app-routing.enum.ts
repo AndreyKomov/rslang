@@ -2,9 +2,10 @@ export enum ParamKey {
   promo = '',
   notFound = '**',
   team = 'team',
-  games = 'games'
+  games = 'games',
+  textbook = 'textbook'
 }
 
 export enum QueryParamKey {
-  redirectTo = '',
+  redirectTo = ''
 }

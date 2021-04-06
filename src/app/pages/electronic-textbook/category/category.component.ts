@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import ElectronicTextbookService from '../electronic-textbook.service';
 
 @Component({
@@ -8,11 +8,11 @@ import ElectronicTextbookService from '../electronic-textbook.service';
   styleUrls: ['./category.component.scss'],
 })
 export default class CategoryComponent {
-  array: any;
-
-  constructor(private activateRoute: ActivatedRoute, private service: ElectronicTextbookService) {
-    const { id } = this.activateRoute.snapshot.params;
-    this.service.getWordDetalization(0, id).then((data) => (this.array = data));
-    console.log(id);
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private textbookService: ElectronicTextbookService
+  ) {
+    const { group }: Params = this.activateRoute.snapshot.params;
+    if (group) this.textbookService.groups = +group;
   }
 }

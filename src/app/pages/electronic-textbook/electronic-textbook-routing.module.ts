@@ -3,12 +3,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 import CategoryComponent from './category/category.component';
 import ElectronicTextbookComponent from './electronic-textbook.component';
+import { PageComponent } from './page/page.component';
 
 const routes: Routes = [
   {
-    path: 'textbook',
+    path: '',
     component: ElectronicTextbookComponent,
-    children: [{ path: 'group/:id', component: CategoryComponent }],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'group/0/page/0',
+      },
+      {
+        path: 'group/:group',
+        component: CategoryComponent,
+      },
+      { path: 'group/:group/page/:page', component: PageComponent },
+    ],
   },
 ];
 
