@@ -29,7 +29,7 @@
 
     <div *ngIf="display" class="game">
        
-    <button class="closeButton" (click)="getWords();update();pauseAudioTimer();isSoundOn=true" >Закрыть</button>
+    <button class="closeButton" (click)="getWords();update();pauseAudioTimer()" >Закрыть</button>
     <div *ngIf="displayStatistics" class="game">
  
        <div class="statistic">

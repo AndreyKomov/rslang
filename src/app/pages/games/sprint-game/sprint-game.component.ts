@@ -133,6 +133,7 @@ if(this.index>19){
   this.playAudioEndOfGame( )
   this.updateStatistics();
   this.index=0;
+  this.isSoundOn=false;
 }
 }
 
