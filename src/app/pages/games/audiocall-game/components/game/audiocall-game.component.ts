@@ -47,7 +47,7 @@ export class AudiocallGameComponent implements OnInit {
   }
 
   getWordsFromBE() {
-    this.backEndService.getWordsByPageAndGroup(this.page, this.group).subscribe((data) => {
+    this.backEndService.getWordsByPageAndGroup(this.page - 1, this.group - 1).subscribe((data) => {
       this.wordsFromApi = data;
       this.buildWordsArrayForGameRound();
       this.getRandomWord(this.currentWords.length);
@@ -102,8 +102,6 @@ export class AudiocallGameComponent implements OnInit {
   checkWordByKey(keyCode) {
     const keyCodeNumberType = +keyCode;
     if (typeof keyCodeNumberType === 'number' && keyCodeNumberType < 6) {
-      console.log(keyCodeNumberType);
-
       if (keyCodeNumberType === this.askedWordIndex + 1) {
         this.currentWords[this.askedWordIndex].correctStyle = true;
         this.gameService.playSound(this.gameService.correct);
@@ -141,7 +139,6 @@ export class AudiocallGameComponent implements OnInit {
     this.answer = '';
     this.buildWordsArrayForGameRound();
     this.getRandomWord(this.currentWords.length);
-    // console.log(this.currentLastWordInRound);
   }
 
   showAnswer() {
@@ -158,5 +155,12 @@ export class AudiocallGameComponent implements OnInit {
       'audiocall-errors',
       `${(this.gameService.numberOfErrors += this.numberOfErrors)}`
     );
+  }
+
+  playTrack(wordTrack) {
+    const soundIndexInMainArr = +wordTrack.target.id;
+    const wordSoundUrl = this.wordsFromApi[soundIndexInMainArr].audio;
+    const sound = new Audio(`${this.requestMediaUrl}${wordSoundUrl}`);
+    sound.play();
   }
 }

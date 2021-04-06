@@ -159,15 +159,14 @@
 
     .end-game {
       display: flex;
-      width: 250px;
-      height: 500px;
+      width: 285px;
       margin: 10px auto;
       flex-direction: column;
       box-shadow: 0 0 5px rgba(0,0,0,0.5);
       background: linear-gradient($main-bg-color, $footer-creds-bg);
 
-        img {
-          width: 195px;
+        .words-and-people {
+          width: 250px;
           height: auto;
           margin: 10px auto;
           border-radius: 10%;
@@ -216,6 +215,23 @@
           padding: 5px;
           border: 2px double ;
           background-color: cornsilk;
+        }
+
+        .word-track {
+          @extend %font-normal;
+          display: flex;
+          margin-bottom: 10px;
+          margin-left: 5px;
+          background: none;
+
+            .track-speaker {
+              width: 25px;
+            }
+
+            .track-speaker:hover {
+              cursor: pointer;
+              transform: scale(1.05);
+            }
         }
     }
   }

@@ -48,11 +48,27 @@
 <div class="end-game-wrapper">
   <div *ngIf="endGame" class="end-game">
     <h4>Слова закончились</h4>
-    <img src="../../../../../../assets/img/audiocall_results.jpg" alt="words-and-people">
+    <img src="../../../../../../assets/img/audiocall_results.jpg" alt="words-and-people" class="words-and-people">
     <div class="statistic">
       <p>Результаты</p>
       <p class="result-correct">Правильных ответов: {{numberOfCorrectAnswers}}</p>
       <p class="result-errors">Неправильных ответов: {{numberOfErrors}}</p>
+    </div>
+
+    <div
+      *ngFor="let track of wordsFromApi"
+      (click)="playTrack($event)"
+      class="word-track"
+      id="{{wordsFromApi.indexOf(track)}}"
+    >
+      <img
+        (click)="playTrack($event)"
+        src="../../../../../../assets/img/speaker.png"
+        alt="start-track-play"
+        class="track-speaker"
+        id="{{wordsFromApi.indexOf(track)}}"
+      >
+      {{track.word}} - {{track.wordTranslate}}
     </div>
     <a routerLink="/games" (click)="addStatistic()" class="back-to-game-menu">В игры</a>
   </div>
