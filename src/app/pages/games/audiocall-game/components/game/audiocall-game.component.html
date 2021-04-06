@@ -1,24 +1,61 @@
-<div class="audiocall-game">
-  <div (click)="repeatSound()" class="speaker">
-    <img src="./assets/img/speaker.png" alt="speaker">
-  </div>
+<div *ngIf="startGame" (keyup)="checkWordByKey($event)" class="wrapper">
+  <div class="game-content">
+    <div class="audiocall-game">
+      <div (click)="repeatSound()" class="speaker">
+        <img src="./assets/img/speaker.png" alt="speaker">
+      </div>
 
-  <div class="words-list">
-    <div
-    class="words"
-    *ngFor="let wordItem of currentWords"
-    (click)="checkWord(wordItem)"
-    [ngClass]="{correct: correctStyle}"
-    >
-    {{wordItem.wordTranslate}}
-  </div>
-  </div>
+      <div class="words-list">
+        <div
+          class="words"
+          *ngFor="let wordItem of currentWords"
+          (click)="checkWord(wordItem)"
+          [ngClass]="{correct: wordItem.correctStyle, errorStyle: wordItem.errorStyle}"
+        >
+        {{currentWords.indexOf(wordItem) + 1}}. {{wordItem.wordTranslate}}
+      </div>
+      </div>
 
-  <div class="additional-buttons">
-    <button class="help">Подсказка</button>
-    <button routerLink="/games" class="go-back-btn">Завершить</button>
-  </div>
+      <div class="additional-buttons">
+        <button (click)="showAnswer()" class="help">Подсказка</button>
+        <button
+          routerLink="/games"
+          (click)="addStatistic()"
+          class="go-back-btn"
+          >
+          Завершить
+        </button>
+      </div>
 
-  <button class="forward" [ngClass]="{active: active}"></button>
+      <div class="answer">{{answer}}</div>
+
+      <button
+      class="forward"
+      [ngClass]="{active: active}"
+      (click)="startNextRound()"
+      ></button>
+
+    </div>
+
+    <div *ngIf="correctAnswer" class="word-info">
+      <img src="{{wordImg}}" alt="wordImg">
+      <p>{{wordExample}}</p>
+    </div>
+  </div>
 
 </div>
+
+<div class="end-game-wrapper">
+  <div *ngIf="endGame" class="end-game">
+    <h4>Слова закончились</h4>
+    <img src="../../../../../../assets/img/audiocall_results.jpg" alt="words-and-people">
+    <div class="statistic">
+      <p>Результаты</p>
+      <p class="result-correct">Правильных ответов: {{numberOfCorrectAnswers}}</p>
+      <p class="result-errors">Неправильных ответов: {{numberOfErrors}}</p>
+    </div>
+    <a routerLink="/games" (click)="addStatistic()" class="back-to-game-menu">В игры</a>
+  </div>
+</div>
+
+

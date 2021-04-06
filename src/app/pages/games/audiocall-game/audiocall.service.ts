@@ -7,7 +7,8 @@ export class AudiocallService {
   failure = new Audio('../../../../assets/sounds/failure.mp3');
   correct = new Audio('../../../../assets/sounds/correct.mp3');
   success = new Audio('../../../../assets/sounds/success.mp3');
-  constructor() {}
+  numberOfCorrectAnswers = 0;
+  numberOfErrors = 0;
 
   playSound(sound) {
     sound.play();
