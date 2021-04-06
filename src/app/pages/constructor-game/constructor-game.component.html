@@ -1,3 +1,16 @@
+<div *ngIf="!isLevelChosen">
+  <select [(ngModel)]="selectedValue">
+    <option [ngValue]="0" disabled selected>Выбрать уровень сложности</option>
+    <option [ngValue]="0">0</option>
+    <option [ngValue]="1">1</option>
+    <option [ngValue]="2">2</option>
+    <option [ngValue]="3">3</option>
+    <option [ngValue]="4">4</option>
+    <option [ngValue]="5">5</option>
+  </select>
+  <button (click)="nextRaund()" class="choose-level">Выбрать</button>
+</div>
+
 <div class="wrapper" *ngIf="word">
   <div class="wrapper-content">
     <div class="wrapper-content__translate-word">
@@ -26,11 +39,9 @@
     </div>
 
     <div *ngIf="isEndRaund">
-      <img [src]="baseImgUrl" alt="img-association">
+      <img [src]="baseImgUrl" alt="img-association" />
       <div>{{ context }}</div>
     </div>
-
-    
 
     <div *ngIf="!isEndRaund; else continueBtn">
       <span class="wrapper-content__enter">enter</span>
@@ -43,9 +54,14 @@
 </div>
 
 <ng-template #continueBtn>
-    <span class="wrapper-content__enter">enter</span>
+  <span class="wrapper-content__enter">enter</span>
 
-    <button class="wrapper-content__continue-button" (click)="nextRaund()">
-      <span>Продолжить</span>
-    </button>
+  <button class="wrapper-content__continue-button" (click)="nextRaund()">
+    <span>Продолжить</span>
+  </button>
 </ng-template>
+
+<div *ngIf="showResult">
+  Правильных: {{ rightAnswers }}
+  Неправильных: {{ wrongAnswers }}
+</div>

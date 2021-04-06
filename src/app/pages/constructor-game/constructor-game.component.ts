@@ -7,6 +7,12 @@ import WordsApiServiceComponent from '@app/server/api';
   styleUrls: ['./constructor-game.component.scss'],
 })
 export class ConstructorGameComponent implements OnInit {
+  rightAnswers = 10;
+  wrongAnswers = 0;
+  showResult = false;
+  isLevelChosen = false;
+  page = 0;
+  selectedValue: number = 0;
   baseImgUrl = 'https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/';
   isEndRaund = false;
   context = '';
@@ -38,6 +44,11 @@ export class ConstructorGameComponent implements OnInit {
       if (this.placeIndex === this.word.length) {
         this.endRaund();
       }
+      if (this.raund > 10) {
+        this.word = '';
+        this.raund = 0;
+        this.showResult = true;
+      }
     } else {
       (<HTMLElement>event.target).classList.add('error');
       (<HTMLElement>event.target).classList.remove('ready-letter');
@@ -50,11 +61,11 @@ export class ConstructorGameComponent implements OnInit {
 
   constructor(private apiService: WordsApiServiceComponent) {}
 
-  ngOnInit(): void {
-    this.nextRaund();
-  }
+  ngOnInit(): void {}
 
   nextRaund(): void {
+    this.baseImgUrl = 'https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/';
+    this.isLevelChosen = true;
     this.isEndRaund = false;
     this.context = '';
     this.translateWord = '';
@@ -62,7 +73,7 @@ export class ConstructorGameComponent implements OnInit {
     this.word = '';
     this.letterArr = [];
     this.rightLettersArr = [];
-    this.apiService.getWordsByPageAndGroup(1, 1).subscribe(data => {
+    this.apiService.getWordsByPageAndGroup(this.page, this.selectedValue).subscribe(data => {
       this.word = data[this.raund].word;
       this.translateWord = data[this.raund].wordTranslate;
       this.context = data[this.raund].textExample;
@@ -85,6 +96,16 @@ export class ConstructorGameComponent implements OnInit {
     this.letterArr = [];
     
     this.endRaund();
+
+    if (this.raund > 10) {
+      this.word = '';
+      this.raund = 0;
+      this.showResult = true;
+    }
+
+    
+    this.rightAnswers--;
+    this.wrongAnswers++;
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -95,5 +116,11 @@ export class ConstructorGameComponent implements OnInit {
   endRaund() {
     this.raund++;
     this.isEndRaund = true;
+    if (this.page != 30) {
+      this.page++;
+    } else {
+      alert('Вы прошли все слова группы!');
+      location.reload();
+    }
   }
 }
