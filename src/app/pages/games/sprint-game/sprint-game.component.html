@@ -4,10 +4,13 @@
 <div class="header-container"> <h1>СПРИНТ</h1>
 <br/>
 
-<button  (click)="update();playAudioTimer()" 
- mat-raised-button="" color="primary" class="mat-focus-indicator auth-button__button mat-raised-button mat-button-base mat-primary" ng-reflect-color="primary"><span class="mat-button-wrapper">
- Начать
-</span><span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]"></span><span class="mat-button-focus-overlay"></span>
+<button  (click)="update();playAudioTimer();getWords()" 
+   mat-raised-button="" color="primary" class="mat-focus-indicator auth-button__button mat-raised-button mat-button-base mat-primary" 
+     ng-reflect-color="primary">
+     <span class="mat-button-wrapper">
+     Начать
+   </span><span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" 
+       ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]"></span><span class="mat-button-focus-overlay"></span>
 </button>
 </div>
 
@@ -23,29 +26,45 @@
         1. Используйте мышь, чтобы выбрать.
         <br/>
         2. Используйте клавиши влево и вправо.
-    
-      
+        
     </h3>
 
     <div *ngIf="display" class="game">
        
-    <button class="closeButton" (click)="getWords();update();pauseAudioTimer()" >Закрыть</button>
+    <button class="closeButton" (click)="update();pauseAudioTimer()" >Закрыть</button>
     <div *ngIf="displayStatistics" class="game">
  
        <div class="statistic">
          <h2>Уровень пройден</h2>
-         <br><br>
-          <h3>   слова без ошибок: {{wordsYouKnow}} 
-               <div>{{rightWords}}</div> 
-              <br><br>
-            слова с ошибками : {{wordsYouDontKnow}}
-            <div>{{wrongWords}}</div> 
-            <br>
-             <br>
-             <button class="gradient-button-right" (click)="getWords();update();updateStatistics();pauseAudioTimer();isSoundOn=true">
+        <div class="wordStatisticContainer">
+            <div >  
+                <h4>слова без ошибок: {{wordsYouKnowQuantity}}   <br>   </h4>
+            <div>
+                <ul>
+                    <li *ngFor="let item of rightWords" (click)="onSelectItem(item)" [class.active]="item == activeItem">{{ item }}</li>
+                  </ul>
+            </div>  
+
+              
+           </div>
+            
+            <div>
+                <h4>слова с ошибками : {{wordsYouDontKnowQuantity}}</h4>
+                <div>
+                    <ul>
+                        <li *ngFor="let item of wrongWords" (click)="onSelectItem(item)" [class.active]="item == activeItem">{{ item }}</li>
+                      </ul>
+                </div>  
+        
+            </div>
+        
+         
+             
+        </div>
+  <button class="gradient-button-right" (click)="updateStatistics();pauseAudioTimer();update()">
                 Начать игру заново
-             </button> 
-         </h3>  
+             </button>     
+         
        </div>
         
      </div> 
@@ -92,15 +111,23 @@
              <option  value="29"> 29 </option>
              <option  value="30"> 30 </option>
             </select>
-             <button (click)="pauseAudioTimer();pauseAudioWrongAnswer();isSoundOn=!isSoundOn;playAudioTimer()" 
+             <button (click)="
+             pauseAudioTimer();
+             pauseAudioWrongAnswer();
+             isSoundOn=!isSoundOn;
+             playAudioTimer()" 
                   type="button" class="gradient-button-sound">
               <img src="https://img2.freepng.ru/20180906/sac/kisspng-portable-network-graphics-computer-icons-scalable-svg-56515-sfon-5b9169a22017f5.8584771115362564181315.jpg"width="30" height="30" alt="OffSound">
             </button> 
 
      </div>
+  
     <div class="word-and-translation">
+     
         <span>{{this.words[index]}}</span>  -    <span>{{this.translations[index]}}</span>
+     
     </div>
+     
     <div class="game-bar">
         <div class="choose-word-translation"></div>
     <button class="gradient-button-right" (click)="checkWordTranslationMatch(true)">	&#9668; правильно</button>

@@ -134,6 +134,7 @@ h3 {
     background-position: right center;
   }
   .word-and-translation{
+    display: block;
       margin-top: 200px;
       margin-bottom: 80px;
       font-size: 25pt;
@@ -151,7 +152,33 @@ display: block;
     color: rgb(19, 18, 18);
 }
 .statistic{
-  margin-top:200px;
-  font-family: 'Montserrat', sans-serif;
-  letter-spacing: 2px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+    padding: 20px 30px;
+    margin: auto;
+    font-size: 20px;
+    font-weight: 500;
+    background:#87CEEB;
+    background-image: url(https://image.freepik.com/free-vector/couple-practicing-trail-run-training_74855-5474.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1px solid #000;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+
+}
+li {
+  cursor: pointer;
+}
+
+li.active {
+  color: green;
+}
+.wordStatisticContainer{
+  display: flex;
+  margin-left:20%;
+  padding-right: 20px;
 }

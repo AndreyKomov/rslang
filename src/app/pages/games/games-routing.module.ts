@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { GamesComponent } from './games.component';
-import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+
 const routes: Routes = [
   {
     path: '',
