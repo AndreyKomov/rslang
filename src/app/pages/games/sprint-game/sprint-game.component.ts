@@ -23,12 +23,56 @@ wordsYouDontKnow=0;
 rightWords=[]
 wrongWords=[]
 isCheckedWord:object|null;
+audioTimerSound=new Audio();
+AudioWrongAnswer=new Audio();
+AudioRightAnswer=new Audio();
+isSoundOn=true;
 
 constructor(public api: WordApiServiceComponent) {}
 ngOnInit(): void {
   this.getWords();
-}
+ }
 
+ playAudioTimer() { 
+   if(this.isSoundOn){
+    this.audioTimerSound.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_timer.mp3?raw=true`;
+    this.audioTimerSound.load();
+    this.audioTimerSound.play();
+   }
+
+} 
+
+pauseAudioTimer() { 
+  this.audioTimerSound.pause(); 
+} 
+playAudioWrongAnswer( ) { 
+  if(this.isSoundOn){
+    this.AudioWrongAnswer.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_error.mp3?raw=true`;
+    this.AudioWrongAnswer.load();
+    this.AudioWrongAnswer.play();
+   }
+} 
+pauseAudioWrongAnswer() { 
+ this.AudioWrongAnswer.pause(); 
+} 
+playAudioRightAnswer( ) { 
+  if(this.isSoundOn){
+    this.AudioRightAnswer.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_correct%20.mp3?raw=true`;
+    this.AudioRightAnswer.load();
+    this.AudioRightAnswer.play();
+   }
+} 
+pauseAudioRightAnswer() { 
+ this.AudioRightAnswer.pause(); 
+}
+playAudioEndOfGame( ) { 
+  if(this.isSoundOn){
+    let endOGameSound=new Audio();
+    endOGameSound.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_end_of_game.mp3?raw=true`;
+    endOGameSound.load();
+    endOGameSound.play();
+   }
+} 
 update(){
    this.display = !this.display;
 }
@@ -75,17 +119,18 @@ checkWordTranslationMatch(checkPair){
 }
 if(checkPair===result){
   this.wordsYouKnow=this.wordsYouKnow+1;
-    console.log('right');
+  if(this.isSoundOn){ this.playAudioRightAnswer()}  
   this.rightWords.push(this.words[this.index])
  }
 if(checkPair!==result){
   this.wordsYouDontKnow=this.wordsYouDontKnow+1;
-  console.log('wrong');
-   this.wrongWords.push(this.words[this.index])
+  if(this.isSoundOn){ this.playAudioWrongAnswer()}
+  this.wrongWords.push(this.words[this.index])
   }
 this.index=this.index+1;
 if(this.index>19){
-  console.log('game over');
+  this.pauseAudioTimer()
+  this.playAudioEndOfGame( )
   this.updateStatistics();
   this.index=0;
 }

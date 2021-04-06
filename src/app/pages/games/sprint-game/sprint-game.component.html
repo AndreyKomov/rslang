@@ -4,9 +4,10 @@
 <div class="header-container"> <h1>СПРИНТ</h1>
 <br/>
 
-<button  (click)="update()" 
+<button  (click)="update();playAudioTimer()" 
  mat-raised-button="" color="primary" class="mat-focus-indicator auth-button__button mat-raised-button mat-button-base mat-primary" ng-reflect-color="primary"><span class="mat-button-wrapper">
- Начать</span><span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]"></span><span class="mat-button-focus-overlay"></span>
+ Начать
+</span><span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]"></span><span class="mat-button-focus-overlay"></span>
 </button>
 </div>
 
@@ -27,8 +28,8 @@
     </h3>
 
     <div *ngIf="display" class="game">
-
-    <button class="closeButton" (click)="update()" >Закрыть</button>
+       
+    <button class="closeButton" (click)="getWords();update();pauseAudioTimer();isSoundOn=true" >Закрыть</button>
     <div *ngIf="displayStatistics" class="game">
  
        <div class="statistic">
@@ -41,7 +42,7 @@
             <div>{{wrongWords}}</div> 
             <br>
              <br>
-             <button class="gradient-button-right" (click)="getWords();update();updateStatistics()">
+             <button class="gradient-button-right" (click)="getWords();update();updateStatistics();pauseAudioTimer();isSoundOn=true">
                 Начать игру заново
              </button> 
          </h3>  
@@ -81,7 +82,21 @@
              <option  value="18"> 18 </option>
              <option  value="19"> 19 </option>
              <option  value="20"> 20 </option>
+              <option  value="21"> 21 </option>
+              <option  value="22"> 22 </option>
+             <option  value="23"> 23 </option>
+             <option  value="24"> 25 </option>
+             <option  value="26"> 26 </option>
+             <option  value="27"> 27 </option>
+             <option  value="28"> 28 </option>
+             <option  value="29"> 29 </option>
+             <option  value="30"> 30 </option>
             </select>
+             <button (click)="pauseAudioTimer();pauseAudioWrongAnswer();isSoundOn=!isSoundOn;playAudioTimer()" 
+                  type="button" class="gradient-button-sound">
+              <img src="https://img2.freepng.ru/20180906/sac/kisspng-portable-network-graphics-computer-icons-scalable-svg-56515-sfon-5b9169a22017f5.8584771115362564181315.jpg"width="30" height="30" alt="OffSound">
+            </button> 
+
      </div>
     <div class="word-and-translation">
         <span>{{this.words[index]}}</span>  -    <span>{{this.translations[index]}}</span>
@@ -104,5 +119,5 @@
  </div>
 
 <div>
-
+ 
 </div>
