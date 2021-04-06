@@ -1,0 +1,46 @@
+@use '../../../scss/variables.scss';
+
+.statistics {
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: variables.$font-main;
+    color: variables.$main-text-color;
+  }
+  &__games,
+  &__charts {
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  &__game {
+    margin-right: 50px;
+    margin-bottom: 50px;
+    padding: 10px;
+    border-radius: 2.5rem;
+    background-color: variables.$footer-creds-bg;
+  }
+  &__all,
+  &__percent {
+    margin-bottom: 50px;
+    padding: 10px;
+    border-radius: 2rem;
+    background-color: variables.$footer-creds-bg;
+  }
+  &__charts {
+    .chart-one,
+    .chart-two {
+      width: 250px;
+      height: 250px;
+      margin-right: 50px;
+      margin-bottom: 50px;
+      padding: 10px;
+      border-radius: 2rem;
+      background-color: variables.$footer-creds-bg;
+    }
+  }
+}
