@@ -31,14 +31,14 @@
 
     <div *ngIf="display" class="game">
        
-    <button class="closeButton" (click)="update();pauseAudioTimer()" > Закрыть окно</button>
+    <button class="closeButton" (click)="update();pauseAudioTimer();getWords()" > Закрыть окно</button>
     <div *ngIf="displayStatistics" class="game">
  
        <div class="statistic">
          <h2>Уровень пройден</h2>
         <div class="wordStatisticContainer">
             <div >  
-                <h4>слова без ошибок: {{wordsYouKnowQuantity}}   <br>   </h4>
+                <h4>правильно: {{wordsYouKnowQuantity}}   <br>   </h4>
             <div>
                 <ul>
                     <li *ngFor="let item of rightWords" (click)="onSelectItem(item)" [class.active]="item == activeItem">{{ item }}</li>
@@ -49,7 +49,7 @@
            </div>
             
             <div>
-                <h4>слова с ошибками : {{wordsYouDontKnowQuantity}}</h4>
+                <h4>ошибки : {{wordsYouDontKnowQuantity}}</h4>
                 <div>
                     <ul>
                         <li *ngFor="let item of wrongWords" (click)="onSelectItem(item)" [class.active]="item == activeItem">{{ item }}</li>
@@ -70,7 +70,7 @@
      </div> 
     <div class="level-and-round-choice">
         <label class="level__label">  Уровень  </label>
-        <select class="level__select"   (change)="onLevelChange($event.target.value);startTimer()">
+        <select class="level__select"   (change)="onLevelChange($event.target.value)">
             <option  value="1"> 1 </option>
             <option  value="2"> 2 </option>
             <option  value="3"> 3 </option>
@@ -80,7 +80,7 @@
         </select>
    
         <label  class="round__label">Раунд</label>
-         <select class="round__select" (change)="onRoundChange($event.target.value);startTimer()">
+         <select class="round__select" (change)="onRoundChange($event.target.value) ">
              <option value="1"> 1 </option>
              <option  value="2"> 2 </option>
              <option  value="3"> 3 </option>
