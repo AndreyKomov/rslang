@@ -1,17 +1,17 @@
-<div *ngIf="!isLevelChosen">
-  <select [(ngModel)]="selectedValue">
-    <option [ngValue]="0" disabled selected>Выбрать уровень сложности</option>
-    <option [ngValue]="0">0</option>
-    <option [ngValue]="1">1</option>
-    <option [ngValue]="2">2</option>
-    <option [ngValue]="3">3</option>
-    <option [ngValue]="4">4</option>
-    <option [ngValue]="5">5</option>
+<div *ngIf="!isLevelChosen" class="level-choose">
+  <select (change)="onChangeGroup($event.target.value)">
+    <option value="1" disabled selected>Выбрать уровень сложности</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
   </select>
-  <button (click)="nextRaund()" class="choose-level">Выбрать</button>
+  <button (click)="nextRaund()" class="level-choose__choose-level-btn">Выбрать</button>
 </div>
 
-<div class="wrapper" *ngIf="word">
+<div class="wrapper" *ngIf="word && !showResult">
   <div class="wrapper-content">
     <div class="wrapper-content__translate-word">
       {{ translateWord }}
@@ -61,7 +61,17 @@
   </button>
 </ng-template>
 
-<div *ngIf="showResult">
-  Правильных: {{ rightAnswers }}
-  Неправильных: {{ wrongAnswers }}
+<div *ngIf="showResult" class="show-result">
+  <div>
+    Правильных: {{ rightAnswers }}
+  </div>
+  <div>
+    Неправильных: {{ wrongAnswers }}
+  </div>
+  <button class="show-result__menu-btn" (click)="continueGame()">
+    Продолжить
+  </button>
+  <button class="show-result__menu-btn" (click)="reload()">
+    Изменить сложность
+  </button>
 </div>

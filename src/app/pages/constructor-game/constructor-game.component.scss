@@ -138,13 +138,34 @@
   border: 2px solid rgba(37, 130, 231, 0.6);
 }
 
-.choose-level {
-  margin-left: 5px;
-  background-color: #2582e7;
-  color: #fff;
-  border: none;
-  outline: 0;
-  border-radius: 5px;
-  width: 100px;
-  height: 25px;
+.show-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  &__menu-btn {
+    margin-top: 5px;
+    background-color: #2582e7;
+    color: #fff;
+    border: none;
+    outline: 0;
+    border-radius: 5px;
+    height: 25px;
+  }
+}
+
+.level-choose {
+  text-align: center;
+
+  &__choose-level-btn {
+    margin-left: 5px;
+    background-color: #2582e7;
+    color: #fff;
+    border: none;
+    outline: 0;
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;
+  }
 }

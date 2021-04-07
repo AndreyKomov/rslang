@@ -7,6 +7,7 @@ import WordsApiServiceComponent from '@app/server/api';
   styleUrls: ['./constructor-game.component.scss'],
 })
 export class ConstructorGameComponent implements OnInit {
+  isUserDoMistake = false;
   rightAnswers = 10;
   wrongAnswers = 0;
   showResult = false;
@@ -50,6 +51,7 @@ export class ConstructorGameComponent implements OnInit {
         this.showResult = true;
       }
     } else {
+      this.isUserDoMistake = true;
       (<HTMLElement>event.target).classList.add('error');
       (<HTMLElement>event.target).classList.remove('ready-letter');
       setTimeout(() => {
@@ -64,6 +66,7 @@ export class ConstructorGameComponent implements OnInit {
   ngOnInit(): void {}
 
   nextRaund(): void {
+    this.isUserDoMistake = false;
     this.baseImgUrl = 'https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/';
     this.isLevelChosen = true;
     this.isEndRaund = false;
@@ -82,7 +85,6 @@ export class ConstructorGameComponent implements OnInit {
         this.rightLettersArr.push('');
       }
       this.letterArr = this.getReadyForGameWord(this.word);
-      console.log(data);
     });
   }
 
@@ -94,6 +96,8 @@ export class ConstructorGameComponent implements OnInit {
     this.placeIndex = this.letterArr.length;
 
     this.letterArr = [];
+
+    this.isUserDoMistake = true;
     
     this.endRaund();
 
@@ -101,26 +105,49 @@ export class ConstructorGameComponent implements OnInit {
       this.word = '';
       this.raund = 0;
       this.showResult = true;
+      this.rightAnswers++;
+      this.wrongAnswers--;
     }
-
-    
-    this.rightAnswers--;
-    this.wrongAnswers++;
   }
 
   @HostListener('window:keydown', ['$event'])
   showAnswerKeydownHandler(event: KeyboardEvent): void {
-    event.code === 'Enter' && this.isEndRaund ? this.nextRaund() : this.showAnswer();
+    if (event.code === 'Enter' && this.isEndRaund) {
+      this.nextRaund();
+    } else if (event.code === 'Enter' && !this.isEndRaund && !this.showResult) {
+      this.showAnswer();
+    }
+     
   }
 
-  endRaund() {
+  endRaund(): void {
     this.raund++;
     this.isEndRaund = true;
+    if (this.isUserDoMistake) {
+      console.log(this.rightAnswers, this.wrongAnswers);
+      this.rightAnswers--;
+      this.wrongAnswers++;
+    }
     if (this.page != 30) {
       this.page++;
     } else {
       alert('Вы прошли все слова группы!');
       location.reload();
     }
+  }
+
+  continueGame(): void {
+    this.showResult = false;
+    this.rightAnswers = 10;
+    this.wrongAnswers = 0;
+    this.nextRaund();
+  }
+
+  reload(): void {
+    location.reload();
+  }
+
+  onChangeGroup(selected): void {
+    this.selectedValue = Number(selected) - 1;
   }
 }
