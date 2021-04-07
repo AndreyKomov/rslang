@@ -61,7 +61,7 @@
          
              
         </div>
-  <button class="gradient-button-right" (click)="updateStatistics();pauseAudioTimer();update(); ">
+  <button class="gradient-button-right" (click)="updateStatistics();pauseAudioTimer();update() ">
                 Начать игру заново
              </button>     
          
@@ -70,7 +70,7 @@
      </div> 
     <div class="level-and-round-choice">
         <label class="level__label">  Уровень  </label>
-        <select class="level__select"   (change)="onLevelChange($event.target.value)">
+        <select class="level__select"   (change)="onLevelChange($event.target.value);timeLeft=60">
             <option  value="1"> 1 </option>
             <option  value="2"> 2 </option>
             <option  value="3"> 3 </option>
@@ -80,7 +80,7 @@
         </select>
    
         <label  class="round__label">Раунд</label>
-         <select class="round__select" (change)="onRoundChange($event.target.value) ">
+         <select class="round__select" (change)="onRoundChange($event.target.value);timeLeft=60 ">
              <option value="1"> 1 </option>
              <option  value="2"> 2 </option>
              <option  value="3"> 3 </option>
@@ -128,8 +128,8 @@
      
     <div class="game-bar">
         <div class="choose-word-translation"></div>
-    <button class="gradient-button-right" (click)="checkWordTranslationMatch(true);stopTimer()">	&#9668; правильно</button>
-    <button class="gradient-button-wrong" (click)="checkWordTranslationMatch(false);stopTimer()"> неправильно 	&#9658;</button>
+    <button class="gradient-button-right" (click)="checkWordTranslationMatch(true);timeLeft=60">	&#9668; правильно</button>
+    <button class="gradient-button-wrong" (click)="checkWordTranslationMatch(false);timeLeft=60"> неправильно 	&#9658;</button>
     </div>
  
 

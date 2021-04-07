@@ -27,7 +27,7 @@ export class SprintGameComponent implements OnInit {
   AudioRightAnswer = new Audio();
   isSoundOn = true;
   hiddenScore = true;
-   timeLeft: number = 60;
+   timeLeft: number = 15;
    interval;
    subscribeTimer: any;
    
@@ -168,7 +168,7 @@ export class SprintGameComponent implements OnInit {
       this.playAudioEndOfGame();
       this.stopTimer()  
       this.updateStatistics();
-      this.index = 0;
+    this.index=0;
       this.isSoundOn = false;
   
 
@@ -190,20 +190,25 @@ export class SprintGameComponent implements OnInit {
 
 
 startTimer() {
+
     this.interval = setInterval(() => {
     if(this.timeLeft > 0) {
         this.timeLeft--;
         }
     else {
-      if (this.isSoundOn) {
-        this.playAudioWrongAnswer();
+         if (this.isSoundOn) {
+            this.playAudioWrongAnswer();
+          }
+          this.wrongWords.push(this.words[this.index]);
+          console.log(this.wrongWords)
+          console.log(this.index)
+          this.wordsYouDontKnowQuantity += 1;
+          this.index=this.index+1;
+          this.timeLeft = 15;
+          
+       
       }
-      this.wrongWords.push(this.words[this.index]);
-      this.wordsYouDontKnowQuantity += 1;
-      this.index=this.index+1;
-       this.timeLeft = 60;
-      }
-      
+ 
       this.cdr.markForCheck()
     },1000)
   }
