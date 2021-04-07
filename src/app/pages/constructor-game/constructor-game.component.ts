@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, Directive, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import WordsApiServiceComponent from '@app/server/api';
 
 @Component({
@@ -7,6 +7,8 @@ import WordsApiServiceComponent from '@app/server/api';
   styleUrls: ['./constructor-game.component.scss'],
 })
 export class ConstructorGameComponent implements OnInit {
+  isMistake = false;
+  @ViewChild('keysBlock') keysBlock;
   isUserDoMistake = false;
   rightAnswers = 10;
   wrongAnswers = 0;
@@ -63,7 +65,8 @@ export class ConstructorGameComponent implements OnInit {
 
   constructor(private apiService: WordsApiServiceComponent) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   nextRaund(): void {
     this.isUserDoMistake = false;
@@ -111,13 +114,36 @@ export class ConstructorGameComponent implements OnInit {
   }
 
   @HostListener('window:keydown', ['$event'])
-  showAnswerKeydownHandler(event: KeyboardEvent): void {
+  keysHandler(event): void {
     if (event.code === 'Enter' && this.isEndRaund) {
       this.nextRaund();
     } else if (event.code === 'Enter' && !this.isEndRaund && !this.showResult) {
       this.showAnswer();
     }
-     
+    if (event.key === this.word[this.placeIndex]) {
+      this.letterArr.splice(this.letterArr.indexOf(this.word[this.placeIndex]), 1);
+      this.rightLettersArr[this.placeIndex] = this.word[this.placeIndex];
+      this.placeIndex++;
+      if (this.placeIndex === this.word.length) {
+        this.endRaund();
+      }
+      if (this.raund > 10) {
+        this.word = '';
+        this.raund = 0;
+        this.showResult = true;
+      }
+    } 
+    else if (event.key !== this.word[this.placeIndex]) {
+      this.isUserDoMistake = true;
+      for (let i = 0; i < this.keysBlock.nativeElement.children.length; i++) {
+          this.isMistake = true;
+      setTimeout(() => {
+        this.isMistake = false;
+      }, 500);
+        }
+      
+      
+    }
   }
 
   endRaund(): void {

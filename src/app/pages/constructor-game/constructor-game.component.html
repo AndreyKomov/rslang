@@ -17,7 +17,7 @@
       {{ translateWord }}
     </div>
     <div class="wrapper-content__text">
-      <span> Собери слово из букв </span>
+      <span> Собери слово из букв(можете использовать клавиатуру, но только на АНГЛИЙСКОЙ РАСКЛАДКЕ!!!!!) </span>
     </div>
     <div class="right-letter-content">
       <button
@@ -28,11 +28,12 @@
         {{ letter }}
       </button>
     </div>
-    <div class="ready-letter-content">
+    <div class="ready-letter-content" #keysBlock>
       <button
         class="letter-box ready-letter"
         (click)="checkLetter(letter, index, $event)"
         *ngFor="let letter of letterArr; let index = index"
+        [ngClass]="{'error': isMistake}"
       >
         {{ letter }}
       </button>
