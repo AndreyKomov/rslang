@@ -38,9 +38,6 @@ export class AudiocallGameComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /*     setInterval(() => {
-      this.changeFullscreen = !this.changeFullscreen;
-    }, 2000); */
     this.route.queryParams.subscribe((param) => {
       this.group = param.group;
       this.page = param.page;
