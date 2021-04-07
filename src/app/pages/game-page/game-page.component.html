@@ -6,7 +6,7 @@
   <h4>Развлекайся и учись!</h4>
 
     <div class="game-page__content">
-        <a routerLink="/savannah" class="game-page__link">
+        <a routerLink="savanna" [queryParams]="{startFromMenu: true}" class="game-page__link">
           Саванна
           <img src="../../../assets/img/savannah-icon.png" alt="savannah">
         </a>
@@ -14,7 +14,7 @@
           Спринт
           <img src="../../../assets/img/sprint.png" alt="sprint">
         </a>
-        <a routerLink="audiocall" class="game-page__link">
+        <a routerLink="audiocall" [queryParams]="{startFromMenu: true}" class="game-page__link">
           Аудиоколл
           <img src="../../../assets/img/audiocall-icon.png" alt="audiocall">
         </a>
