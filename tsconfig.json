@@ -6,6 +6,7 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "esModuleInterop": true,
     "paths": {
       "@app/*": ["src/app/*"],
       "@common/*": ["src/app/common/*"],
