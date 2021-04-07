@@ -25,14 +25,8 @@ export class SprintGameComponent implements OnInit {
   audioTimerSound = new Audio();
   AudioWrongAnswer = new Audio();
   AudioRightAnswer = new Audio();
-  isSoundOn = false;
+  isSoundOn = true;
   hiddenScore = true;
-  checkRotationTimer='none';
-  degree:number|null;
-  seconds=60;
-  counter$: Observable<number>;
-   count = 60;
-
    timeLeft: number = 60;
    interval;
    subscribeTimer: any;
@@ -169,11 +163,14 @@ export class SprintGameComponent implements OnInit {
     }
     this.index += 1;
     if (this.index > 19) {
+      this.pauseTimer()
       this.pauseAudioTimer();
       this.playAudioEndOfGame();
+      this.stopTimer()  
       this.updateStatistics();
       this.index = 0;
       this.isSoundOn = false;
+  
 
     }
   }
@@ -192,29 +189,34 @@ export class SprintGameComponent implements OnInit {
   }
 
 
-/* timerMy(seconds){
-this.seconds =seconds || 60;
-this.degree = (360 *this.seconds/ 100) + 180;
-     if(this.seconds >=100 / 2){
-      this.checkRotationTimer='over_50'
-      }else{
-        this.checkRotationTimer=''
-    }  
- 
-} */
 startTimer() {
     this.interval = setInterval(() => {
-   //   this.timerMy(this.timeLeft)
     if(this.timeLeft > 0) {
         this.timeLeft--;
-      } else {
-        this.timeLeft = 60;
+        }
+    else {
+      if (this.isSoundOn) {
+        this.playAudioWrongAnswer();
       }
+      this.wrongWords.push(this.words[this.index]);
+      this.wordsYouDontKnowQuantity += 1;
+      this.index=this.index+1;
+       this.timeLeft = 60;
+      }
+      
       this.cdr.markForCheck()
     },1000)
   }
 
   pauseTimer() {
+    this.cdr.markForCheck()
     clearInterval(this.interval);
   }
+  
+  stopTimer() {
+    this.cdr.markForCheck();
+    this.timeLeft=0;
+
+  }
+
 }
