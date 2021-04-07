@@ -20,7 +20,7 @@ const routes: Routes = [
     path: ParamKey.team,
     loadChildren: (): any => import('./pages/team/team.module').then((module) => module.TeamModule),
   },
-  // { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
+  { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];
 
 @NgModule({
