@@ -25,9 +25,10 @@ export class SprintGameComponent implements OnInit {
   audioTimerSound = new Audio();
   AudioWrongAnswer = new Audio();
   AudioRightAnswer = new Audio();
+  endOGameSound = new Audio();
   isSoundOn = true;
   hiddenScore = true;
-   timeLeft: number = 15;
+   timeLeft: number = 60;
    interval;
    subscribeTimer: any;
    
@@ -77,16 +78,17 @@ export class SprintGameComponent implements OnInit {
 
   playAudioEndOfGame() {
     if (this.isSoundOn) {
-      const endOGameSound = new Audio();
-      endOGameSound.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_end_of_game.mp3?raw=true`;
-      endOGameSound.load();
-      endOGameSound.play();
+      this.endOGameSound.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_end_of_game.mp3?raw=true`;
+      this.endOGameSound.load();
+      this.endOGameSound.play();
     }
   }
-
+  pauseAudioEndOfGame() {
+    this.endOGameSound.pause();
+  }
   update() {
     this.display = !this.display;
-     
+
   }
 
   updateStatistics() {
@@ -204,7 +206,7 @@ startTimer() {
           console.log(this.index)
           this.wordsYouDontKnowQuantity += 1;
           this.index=this.index+1;
-          this.timeLeft = 15;
+          this.timeLeft = 60;
           
        
       }
@@ -223,5 +225,27 @@ startTimer() {
     this.timeLeft=0;
 
   }
+  quitGame(){
+    ;
+    this.pauseAudioWrongAnswer();
+    this.pauseAudioRightAnswer();
+    this.pauseAudioEndOfGame();
+    this.pauseTimer()
+    this.level = 0;
+    this.round = 0;
+    this.wordsList= null;
+    this.words= null;
+    this.translations= null;
+    this.index = 0;
+    this.wordsYouKnowQuantity = 0;
+    this.wordsYouDontKnowQuantity = 0;
+    this.rightWords = [];
+    this.wrongWords = [];
+    this.isCheckedWord= null;
+    this.isSoundOn = true;
+    this.hiddenScore = true;
+ 
+  
+     }
 
 }
