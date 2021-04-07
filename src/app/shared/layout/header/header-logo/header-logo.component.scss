@@ -2,6 +2,7 @@
 @import 'mixins';
 
 :host {
+  margin-right: auto;
   @include media-max-width {
     & .logo__link {
       width: 132px;

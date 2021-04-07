@@ -2,6 +2,7 @@
 @import 'mixins';
 
 :host {
+  margin-right: auto;
   @include media-max-width {
     font-size: 16px;
     & .menu {
@@ -19,6 +20,9 @@
   }
 
   @include media-mobile {
+    display: flex;
+    flex-direction: column;
+    background-color: green;
   }
 
   & .menu {
@@ -38,6 +42,11 @@
       &:hover {
         font-weight: bold;
       }
+    }
+    @include media-mobile {
+      display: flex;
+      flex-direction: column;
+      background-color: green;
     }
   }
 

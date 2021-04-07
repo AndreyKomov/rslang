@@ -41,8 +41,11 @@
       <img src="{{wordImg}}" alt="wordImg">
       <p>{{wordExample}}</p>
     </div>
-  </div>
+    <button (click)="changeFullscreenMode()" class="fullscreen-btn">
+      <img src="../../../../../../assets/img/audiocall-fullscreen.png" alt="fullscreen-mode">
+    </button>
 
+  </div>
 </div>
 
 <div class="end-game-wrapper">
@@ -73,5 +76,3 @@
     <a routerLink="/games" (click)="addStatistic()" class="back-to-game-menu">В игры</a>
   </div>
 </div>
-
-

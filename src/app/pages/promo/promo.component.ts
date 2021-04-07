@@ -8,8 +8,12 @@ import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from '@angula
 })
 export class PromoComponent implements OnInit {
   @HostBinding('class') class = 'promo';
-
+  decriptionCondition = true;
   constructor() {}
 
   ngOnInit(): void {}
+
+  showHiddenContent() {
+    this.decriptionCondition = !this.decriptionCondition;
+  }
 }

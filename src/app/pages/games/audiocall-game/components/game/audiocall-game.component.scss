@@ -1,4 +1,6 @@
 @import "variables";
+@import "mixins";
+
 %font-normal {
   color: $main-text-color;
   background-color: $footer-slider-bg;
@@ -7,10 +9,17 @@
   font-size: 1rem;
   text-align: center;
 }
+
+:host(.fullscreen) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 10000;
+}
+
 .wrapper {
-  // background-image: url('../../../../../../assets/img/sound.jpg');
-  // background-repeat: no-repeat;
-  // background-size: cover;
   background: linear-gradient(0.25turn, $footer-creds-bg, $main-bg-color, $footer-link-color);
 
   .audiocall-game {
@@ -49,7 +58,7 @@
             @extend %font-normal;
             position: relative;
             margin: 10px auto;
-            width: 145px;
+            width: 159px;
             height: 50px;
             border-radius: 19px;
             padding: 5px;
@@ -133,6 +142,7 @@
       width: 250px;
       height: 145px;
       margin: 10px auto;
+      margin-bottom: 0;
       border-radius: 25px;
       background: linear-gradient($main-bg-color, greenyellow);
       box-shadow: 2px 2px 5px $main-bg-color;
@@ -148,7 +158,25 @@
           @extend %font-normal;
           margin: 5px;
         }
+  }
 
+  .fullscreen-btn {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 5px;
+    outline: none;
+    background: none;
+    border: none;
+      img {
+        width: 49px;
+      };
+  }
+  .fullscreen-btn:hover {
+    cursor: pointer;
+    transform: scale(1.05);
   }
 }
 
@@ -235,4 +263,3 @@
         }
     }
   }
-

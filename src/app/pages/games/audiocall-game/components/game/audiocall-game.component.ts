@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import WordsApiServiceComponent from '@app/server/api';
 import { AudiocallService } from '../../audiocall.service';
@@ -9,6 +9,8 @@ import { AudiocallService } from '../../audiocall.service';
   styleUrls: ['./audiocall-game.component.scss'],
 })
 export class AudiocallGameComponent implements OnInit {
+  @HostBinding('class.fullscreen') changeFullscreen = false;
+
   group: number;
   page: number;
   requestMediaUrl = 'https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/';
@@ -36,6 +38,9 @@ export class AudiocallGameComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    /*     setInterval(() => {
+      this.changeFullscreen = !this.changeFullscreen;
+    }, 2000); */
     this.route.queryParams.subscribe((param) => {
       this.group = param.group;
       this.page = param.page;
@@ -46,7 +51,7 @@ export class AudiocallGameComponent implements OnInit {
     });
   }
 
-  getWordsFromBE() {
+  getWordsFromBE(): void {
     this.backEndService.getWordsByPageAndGroup(this.page - 1, this.group - 1).subscribe((data) => {
       this.wordsFromApi = data;
       this.buildWordsArrayForGameRound();
@@ -162,5 +167,9 @@ export class AudiocallGameComponent implements OnInit {
     const wordSoundUrl = this.wordsFromApi[soundIndexInMainArr].audio;
     const sound = new Audio(`${this.requestMediaUrl}${wordSoundUrl}`);
     sound.play();
+  }
+
+  changeFullscreenMode() {
+    this.changeFullscreen = !this.changeFullscreen;
   }
 }
