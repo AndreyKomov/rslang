@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import WordApiServiceComponent from '../../../server/api';
+import { Observable, timer } from 'rxjs';
+
 
 @Component({
   selector: 'app-sprint-game',
@@ -25,8 +27,20 @@ export class SprintGameComponent implements OnInit {
   AudioRightAnswer = new Audio();
   isSoundOn = false;
   hiddenScore = true;
+  checkRotationTimer='none';
+  degree:number|null;
+  seconds=60;
+  counter$: Observable<number>;
+   count = 60;
 
-  constructor(public api: WordApiServiceComponent) {}
+   timeLeft: number = 60;
+   interval;
+   subscribeTimer: any;
+   
+  constructor(public api: WordApiServiceComponent, private cdr:ChangeDetectorRef) {
+
+    }
+
   ngOnInit(): void {
     this.getWords();
   }
@@ -116,7 +130,6 @@ export class SprintGameComponent implements OnInit {
     this.wrongWords=[];
     this.wordsYouKnowQuantity = 0;
     this.wordsYouDontKnowQuantity = 0;
-    console.log(this.wordsList)
      this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
       this.wordsList = data;
       this.words = this.createWordsArray(this.wordsList);
@@ -176,5 +189,32 @@ export class SprintGameComponent implements OnInit {
 
   public onSelectItem(item: string): void {
     this.activeItem = item;
+  }
+
+
+/* timerMy(seconds){
+this.seconds =seconds || 60;
+this.degree = (360 *this.seconds/ 100) + 180;
+     if(this.seconds >=100 / 2){
+      this.checkRotationTimer='over_50'
+      }else{
+        this.checkRotationTimer=''
+    }  
+ 
+} */
+startTimer() {
+    this.interval = setInterval(() => {
+   //   this.timerMy(this.timeLeft)
+    if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 60;
+      }
+      this.cdr.markForCheck()
+    },1000)
+  }
+
+  pauseTimer() {
+    clearInterval(this.interval);
   }
 }

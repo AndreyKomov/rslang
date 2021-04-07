@@ -112,18 +112,28 @@
              <option  value="30"> 30 </option>
             </select>
              <button (click)="
-             pauseAudioTimer();
-             pauseAudioWrongAnswer();
-             isSoundOn=!isSoundOn;
-             playAudioTimer()" 
+                 pauseAudioTimer();
+                pauseAudioWrongAnswer();
+                isSoundOn=!isSoundOn;
+                    playAudioTimer()" 
                   type="button" class="gradient-button-sound">
               <img src="https://img2.freepng.ru/20180906/sac/kisspng-portable-network-graphics-computer-icons-scalable-svg-56515-sfon-5b9169a22017f5.8584771115362564181315.jpg"width="30" height="30" alt="OffSound">
             </button> 
+<!--             <div class="diagram timer " >
+                <div class="piece left " ></div>
+                <div class="piece right over_50" style.transform = rotate({{degree}}deg)></div>
+                <div class="text">
+                    <div>
+                        <b>{{timeLeft}}</b>
+                    </div>
+                </div>
+            </div> 
+    </div> -->
+     <button (click)='startTimer()'>Start Timer</button>
+     <button (click)='pauseTimer()'>Pause</button>
 
-     </div>
-  
     <div class="word-and-translation">
-     
+        <p>{{timeLeft}} Seconds Left....</p> 
         <span>{{this.words[index]}}</span>  -    <span>{{this.translations[index]}}</span>
      
     </div>
