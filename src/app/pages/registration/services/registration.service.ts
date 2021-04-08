@@ -11,24 +11,17 @@ import { IUserDataModel } from '../models/userDataModel';
 export default class RegistrationService {
   constructor(private apiService: WordsApiServiceComponent, private router: Router) {}
 
-  signIn(name: string, password: string, email: string, imgPath: File): void {
-    this.apiService.createUser(name, email, password, imgPath);
-    this.apiService
-      .signIn(email, password)
-      .subscribe((data) => WordsApiServiceComponent.setUserToken(data.token));
-    this.router.navigate(['']);
+  singUp(name: string, password: string, email: string, imgPath: File): void {
+    this.apiService.createUser(name, email, password, imgPath).subscribe((res) => res, null, () => {
+      this.logIn(password, email);
+      this.router.navigate(['']);
+    });
   }
 
   logIn(password: string, email: string): void {
-    this.apiService.signIn(email, password).subscribe(
-      (data: IUserDataModel) => {
-        alert();
-        WordsApiServiceComponent.setUserToken(data.token);
-        this.router.navigate(['team']);
-      },
-      (err) => {
-        alert('Неверные данные, повторите попытку');
-      }
-    );
+    this.apiService.signIn(email, password).subscribe((res) => {
+      localStorage.setItem('token', res.token);
+      this.router.navigate(['']);
+    });
   }
 }

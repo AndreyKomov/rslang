@@ -81,7 +81,7 @@ export default class RegistrationComponent implements OnInit {
     }
 
     if (!this.isLoginTemplate) {
-      this.registrationService.signIn(
+      this.registrationService.singUp(
         this.registrationForm.value.name,
         this.registrationForm.value.password,
         this.registrationForm.value.email,
