@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+import { Component, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'div[app-header-logo]',
@@ -6,10 +6,6 @@ import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from '@angula
   styleUrls: ['./header-logo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderLogoComponent implements OnInit {
+export class HeaderLogoComponent {
   @HostBinding('class') class = 'logo';
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

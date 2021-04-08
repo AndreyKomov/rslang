@@ -2,6 +2,7 @@
 @import 'mixins';
 
 :host {
+  margin-right: auto;
   @include media-max-width {
     font-size: 16px;
     & .menu {
@@ -19,6 +20,9 @@
   }
 
   @include media-mobile {
+    display: flex;
+    flex-direction: column;
+    background-color: green;
   }
 
   & .menu {
@@ -28,6 +32,11 @@
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
+      @include media-mobile {
+        display: flex;
+        flex-direction: column;
+        background-color: green;
+      }
     }
     &__item {
       text-transform: uppercase;

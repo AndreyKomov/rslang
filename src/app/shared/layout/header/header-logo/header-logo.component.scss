@@ -2,14 +2,15 @@
 @import 'mixins';
 
 :host {
+  margin-right: auto;
   @include media-max-width {
     & .logo__link {
       width: 132px;
       height: 74px;
     }
     & .logo__image {
-      width: 162px;
-      height: 74px;
+      width: 96px;
+      height: 80px;
     }
   }
   @include media-desktop {
