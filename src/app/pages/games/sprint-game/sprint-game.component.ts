@@ -1,6 +1,11 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import WordApiServiceComponent from '../../../server/api';
+import { HostListener } from '@angular/core';
 
+export enum KEY_CODE {
+  RIGHT_ARROW = 39,
+  LEFT_ARROW = 37
+}
 
 
 @Component({
@@ -8,6 +13,7 @@ import WordApiServiceComponent from '../../../server/api';
   templateUrl: './sprint-game.component.html',
   styleUrls: ['./sprint-game.component.scss'],
 })
+
 export class SprintGameComponent  {
   display = false;
   displayStatistics = false;
@@ -38,6 +44,17 @@ export class SprintGameComponent  {
   constructor(public api: WordApiServiceComponent, private cdr:ChangeDetectorRef) {
 
     }
+    @HostListener('window:keyup', ['$event'])
+    keyEvent(event: KeyboardEvent) {
+    
+      if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
+        this.checkWordTranslationMatch(false);this.timeLeft=60;this.delayedHide()
+      }
+  
+      if (event.keyCode === KEY_CODE.LEFT_ARROW) {
+          this.checkWordTranslationMatch(true);this.timeLeft=60;this.delayedHide()
+    }
+   }
 
   playAudioTimer() {
     if (this.isSoundOn) {
@@ -261,6 +278,5 @@ startTimer() {
         },1000)
      }
    }
-  
-  
+
 }
