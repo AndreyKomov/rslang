@@ -204,13 +204,10 @@ startTimer() {
             this.playAudioWrongAnswer();
           }
           this.wrongWords.push(this.words[this.index]);
-          console.log(this.wrongWords)
-          console.log(this.index)
           this.wordsYouDontKnowQuantity += 1;
           this.index=this.index+1;
           this.timeLeft = 60;
-      
-       
+          this.hiddenScoreClass='hidden'
       }
  
       this.cdr.markForCheck()
@@ -258,6 +255,7 @@ startTimer() {
     this.hiddenScoreClass='hiddenScore'
 
     setTimeout(() => {
+      this.cdr.markForCheck()
      this.hiddenScoreClass='hidden'
         },1000)
      }
