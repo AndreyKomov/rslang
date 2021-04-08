@@ -4,7 +4,7 @@
 <div class="header-container"> <h1>СПРИНТ</h1>
 <br/>
 
-<button  (click)="update();getWords();startTimer();playAudioTimer();hiddenScoreClass='hidden'" 
+<button  (click)="update();getWords();startTimer();playAudioTimer();hiddenScoreClass='hidden';timeLeft=60" 
    mat-raised-button="" color="primary" class="mat-focus-indicator auth-button__button mat-raised-button mat-button-base mat-primary" 
      ng-reflect-color="primary">
      <span class="mat-button-wrapper">
@@ -74,7 +74,7 @@
      </div> 
     <div class="level-and-round-choice">
         <label class="level__label">  Уровень  </label>
-        <select class="level__select"   (change)="onLevelChange($event.target.value);timeLeft=60">
+        <select class="level__select"   (change)="onLevelChange($event.target.value);timeLeft=60;index=0">
             <option  value="1"> 1 </option>
             <option  value="2"> 2 </option>
             <option  value="3"> 3 </option>
@@ -84,7 +84,7 @@
         </select>
    
         <label  class="round__label">Раунд</label>
-         <select class="round__select" (change)="onRoundChange($event.target.value);timeLeft=60 ">
+         <select class="round__select" (change)="onRoundChange($event.target.value);timeLeft=60;index=0">
              <option value="1"> 1 </option>
              <option  value="2"> 2 </option>
              <option  value="3"> 3 </option>
