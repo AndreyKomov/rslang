@@ -1,7 +1,32 @@
 @import 'variables';
 @import 'mixins';
+%font-github {
+  color: $main-text-color;
+  font-family: $font-main;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+}
 
-:host {
+.wrapper {
+  display: flex;
+  height: 100px;
+  background: linear-gradient($main-bg-color, $white-blue);
+
+    .dev-team {
+      @extend %font-github;
+      display: grid;
+      grid-template-columns: 159px 159px 159px;
+
+
+        img {
+          width: 25px;
+        }
+    }
+
+}
+
+/* :host {
   @include media-max-width {
     height: 20vh;
   }
@@ -13,4 +38,4 @@
   }
   @include media-mobile {
   }
-}
+} */

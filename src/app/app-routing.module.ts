@@ -7,6 +7,13 @@ const routes: Routes = [
   { path: ParamKey.promo, component: PromoComponent, pathMatch: 'full' },
   { path: ParamKey.promo, component: PromoComponent },
   {
+    path: `${ParamKey.games}/${ParamKey.audiocallPromo}`,
+    loadChildren: (): any =>
+      import('./pages/games/audiocall-game/audiocall.module').then(
+        (module) => module.AudiocallModule
+      ),
+  },
+  {
     path: `${ParamKey.games}/${ParamKey.savannaPromo}`,
     loadChildren: (): any =>
       import('./pages/games/savanna-game/savanna.module').then((module) => module.SavannaModule),

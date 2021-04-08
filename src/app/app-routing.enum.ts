@@ -3,7 +3,9 @@ export enum ParamKey {
   notFound = '**',
   team = 'team',
   games = 'games',
-  savannaPromo = 'savanna'
+  savannaPromo = 'savanna',
+  audiocallPromo = 'audiocall',
+  audiocallGame = 'audiocallgame'
 }
 
 export enum QueryParamKey {

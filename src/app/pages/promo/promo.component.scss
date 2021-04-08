@@ -2,6 +2,10 @@
 @import 'mixins';
 
 :host {
+  .promo__image {
+    width: 85%;
+  }
+
   @include media-max-width {
     padding: 0 5%;
     & .promo__intro {
@@ -19,8 +23,10 @@
           font-size: 18px;
         }
       }
-      & .promo__image {
-        width: 85%;
+
+
+      .promo-list {
+
       }
     }
   }

@@ -7,14 +7,14 @@
     "telegram":"https://t.me/cupora",
     "linkedIn":"https://www.linkedin.com/in/siarhei-baranenkau-898bab1b2/"
   },
-  {"name":"",
-    "position":"developer",
-    "photo":"../../../../assets/img/photo/Unknown-person.gif",
-    "description":"Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
-    "gitHub":"",
-    "telegram":"",
-    "linkedIn":""
-  },
+    {"name":"Комов Андрей",
+      "position":"team lead",
+      "photo":"../../../../assets/img/photo/komov.jpg",
+      "description":"Пинал всех и вся. Ооганизовал работу команды. Реализовал игру Аудиоколл. Занимался стиливым оформлением.",
+      "gitHub":"https://github.com/AndreyKomov/",
+      "telegram":"https://t.me/kavershteinman",
+      "linkedIn":"https://www.linkedin.com/in/andrey-komov-31162918b/"
+    },
     {"name":"Голденков Виталий",
       "position":"developer",
       "photo":"../../../../assets/img/photo/Vitali.jpg",
