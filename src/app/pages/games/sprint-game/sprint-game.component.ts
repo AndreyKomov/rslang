@@ -1,20 +1,17 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import WordApiServiceComponent from '../../../server/api';
-import { HostListener } from '@angular/core';
 
 export enum KEY_CODE {
   RIGHT_ARROW = 39,
-  LEFT_ARROW = 37
+  LEFT_ARROW = 37,
 }
-
 
 @Component({
   selector: 'app-sprint-game',
   templateUrl: './sprint-game.component.html',
   styleUrls: ['./sprint-game.component.scss'],
 })
-
-export class SprintGameComponent  {
+export class SprintGameComponent {
   display = false;
   displayStatistics = false;
   level = 0;
@@ -34,35 +31,37 @@ export class SprintGameComponent  {
   endOGameSound = new Audio();
   isSoundOn = true;
   hiddenScore = true;
-   timeLeft: number = 60;
-   interval;
-   subscribeTimer: any;
-   hiddenScoreBlock:boolean|null;
-   hiddenScoreClass:string|null;
-   riseScoreQuantity:boolean;
-   describeWordBlockTranslation:string|null;
-   describeWordBlockSound:string|null;
-   describeWordBlockImage:string|null;
-   describeWordBlockId:string|null;
-   describeWordBlockTranscription:string|null;
-   describeWordBlockTextExample:string|null;
-   chosenWordCardClass:string|null;
+  timeLeft = 60;
+  interval;
+  subscribeTimer: any;
+  hiddenScoreBlock: boolean | null;
+  hiddenScoreClass: string | null;
+  riseScoreQuantity: boolean;
+  describeWordBlockTranslation: string | null;
+  describeWordBlockSound: string | null;
+  describeWordBlockImage: string | null;
+  describeWordBlockId: string | null;
+  describeWordBlockTranscription: string | null;
+  describeWordBlockTextExample: string | null;
+  chosenWordCardClass: string | null;
+  closeWordCardButtonClass: string | null;
 
-   
-  constructor(public api: WordApiServiceComponent, private cdr:ChangeDetectorRef) {
+  constructor(public api: WordApiServiceComponent, private cdr: ChangeDetectorRef) {}
 
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
+      this.checkWordTranslationMatch(false);
+      this.timeLeft = 60;
+      this.delayedHide();
     }
-    @HostListener('window:keyup', ['$event'])
-    keyEvent(event: KeyboardEvent) {
-    
-      if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
-        this.checkWordTranslationMatch(false);this.timeLeft=60;this.delayedHide()
-      }
-  
-      if (event.keyCode === KEY_CODE.LEFT_ARROW) {
-          this.checkWordTranslationMatch(true);this.timeLeft=60;this.delayedHide()
+
+    if (event.keyCode === KEY_CODE.LEFT_ARROW) {
+      this.checkWordTranslationMatch(true);
+      this.timeLeft = 60;
+      this.delayedHide();
     }
-   }
+  }
 
   playAudioTimer() {
     if (this.isSoundOn) {
@@ -107,13 +106,15 @@ export class SprintGameComponent  {
       this.endOGameSound.play();
     }
   }
+
   pauseAudioEndOfGame() {
     this.endOGameSound.pause();
   }
+
   update() {
     this.display = !this.display;
-    if (this.isSoundOn){
-    this.playAudioTimer()
+    if (this.isSoundOn) {
+      this.playAudioTimer();
     }
   }
 
@@ -148,14 +149,14 @@ export class SprintGameComponent  {
   createTranscriptionArray = (wordsList) => wordsList.map((item) => item.wordTranslate);
 
   getWords() {
-    if (this.isSoundOn){
-      this.playAudioTimer()
-      }
-    this.rightWords=[];
-    this.wrongWords=[];
+    if (this.isSoundOn) {
+      this.playAudioTimer();
+    }
+    this.rightWords = [];
+    this.wrongWords = [];
     this.wordsYouKnowQuantity = 0;
     this.wordsYouDontKnowQuantity = 0;
-    this.wordsList=[];
+    this.wordsList = [];
     this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
       this.wordsList = data;
       this.words = this.createWordsArray(this.wordsList);
@@ -181,7 +182,7 @@ export class SprintGameComponent  {
     }
     if (checkPair === result) {
       this.wordsYouKnowQuantity += 1;
-      this.riseScoreQuantity=true;
+      this.riseScoreQuantity = true;
       if (this.isSoundOn) {
         this.playAudioRightAnswer();
       }
@@ -189,7 +190,7 @@ export class SprintGameComponent  {
     }
     if (checkPair !== result) {
       this.wordsYouDontKnowQuantity += 1;
-      this.riseScoreQuantity=false;
+      this.riseScoreQuantity = false;
       if (this.isSoundOn) {
         this.playAudioWrongAnswer();
       }
@@ -197,15 +198,14 @@ export class SprintGameComponent  {
     }
     this.index += 1;
     if (this.index > 19) {
-      this.pauseTimer()
+      this.pauseTimer();
       this.pauseAudioTimer();
       this.playAudioEndOfGame();
-      this.stopTimer()  
+      this.stopTimer();
       this.updateStatistics();
-    this.index=0;
+      this.index = 0;
       this.isSoundOn = false;
-  
-
+      this.closeWordCardButtonClass = 'hidden';
     }
   }
 
@@ -219,88 +219,85 @@ export class SprintGameComponent  {
   public activeItem: string;
 
   public onSelectItem(item: string): void {
-      this.activeItem = item;
+    this.activeItem = item;
   }
 
-
-startTimer() {
-
+  startTimer() {
     this.interval = setInterval(() => {
-    if(this.timeLeft > 0) {
+      if (this.timeLeft > 0) {
         this.timeLeft--;
+      } else {
+        if (this.isSoundOn) {
+          this.playAudioWrongAnswer();
         }
-    else {
-         if (this.isSoundOn) {
-            this.playAudioWrongAnswer();
-          }
-          this.wrongWords.push(this.words[this.index]);
-          this.wordsYouDontKnowQuantity += 1;
-          this.index=this.index+1;
-          this.timeLeft = 60;
-          this.hiddenScoreClass='hidden'
+        this.wrongWords.push(this.words[this.index]);
+        this.wordsYouDontKnowQuantity += 1;
+        this.index += 1;
+        this.timeLeft = 60;
+        this.hiddenScoreClass = 'hidden';
       }
- 
-      this.cdr.markForCheck()
-    },1000)
+
+      this.cdr.markForCheck();
+    }, 1000);
   }
 
   pauseTimer() {
-    this.cdr.markForCheck()
+    this.cdr.markForCheck();
     clearInterval(this.interval);
   }
-  
+
   stopTimer() {
     this.cdr.markForCheck();
-    this.timeLeft=0;
-
+    this.timeLeft = 0;
   }
-  quitGame(){
-    this.pauseTimer()
+
+  quitGame() {
+    this.pauseTimer();
     this.level = 0;
     this.round = 0;
-    this.wordsList= null;
-    this.words= null;
-    this.translations= null;
+    this.wordsList = null;
+    this.words = null;
+    this.translations = null;
     this.index = 0;
     this.wordsYouKnowQuantity = 0;
     this.wordsYouDontKnowQuantity = 0;
     this.rightWords = [];
     this.wrongWords = [];
-    this.isCheckedWord= null;
+    this.isCheckedWord = null;
     this.isSoundOn = true;
     this.hiddenScore = true;
-  
-     }
-     myFunction() {
-      var popup = document.getElementById("myPopup");
-      popup.classList.toggle("show");
   }
 
- delayedHide() {
-   if(this.riseScoreQuantity){
-    this.hiddenScoreClass='hiddenScore'
+  myFunction() {
+    const popup = document.getElementById('myPopup');
+    popup.classList.toggle('show');
+  }
 
-    setTimeout(() => {
-      this.cdr.markForCheck()
-     this.hiddenScoreClass='hidden'
-        },1000)
-     }
-   }
-   
- getSelectedWordCardId(){
-  this.chosenWordCardClass='chosenWordCard'
-   for (const prop in this.wordsList) {
-    if (this.wordsList[prop].word ===  this.activeItem ) {
-      this.describeWordBlockTranslation=this.wordsList[prop].wordTranslate;
-      this.describeWordBlockTranscription=this.wordsList[prop].transcription;
-      this.describeWordBlockTextExample=this.wordsList[prop].textExample;
+  delayedHide() {
+    if (this.riseScoreQuantity) {
+      this.hiddenScoreClass = 'hiddenScore';
+
+      setTimeout(() => {
+        this.cdr.markForCheck();
+        this.hiddenScoreClass = 'hidden';
+      }, 1000);
     }
-   
-  }  
-}
-ClosePopUpWindow(){
-  
-    this.chosenWordCardClass='hidden';
- 
-}
   }
+
+  getSelectedWordCardId() {
+    this.chosenWordCardClass = 'chosenWordCard';
+    this.closeWordCardButtonClass = 'closeWordCardButton';
+    for (const prop in this.wordsList) {
+      if (this.wordsList[prop].word === this.activeItem) {
+        this.describeWordBlockTranslation = this.wordsList[prop].wordTranslate;
+        this.describeWordBlockTranscription = this.wordsList[prop].transcription;
+        this.describeWordBlockTextExample = this.wordsList[prop].textExample;
+      }
+    }
+  }
+
+  ClosePopUpWindow() {
+    this.closeWordCardButtonClass = 'hidden';
+    this.chosenWordCardClass = 'hidden';
+  }
+}
