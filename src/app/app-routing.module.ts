@@ -14,6 +14,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: `${ParamKey.games}/${ParamKey.savannaPromo}`,
+    loadChildren: (): any =>
+      import('./pages/games/savanna-game/savanna.module').then((module) => module.SavannaModule),
+  },
+  {
     path: ParamKey.games,
     loadChildren: (): any =>
       import('./pages/game-page/game-page.module').then((module) => module.GamePageModule),

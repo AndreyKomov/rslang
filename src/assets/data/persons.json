@@ -15,12 +15,12 @@
       "telegram":"https://t.me/kavershteinman",
       "linkedIn":"https://www.linkedin.com/in/andrey-komov-31162918b/"
     },
-    {"name":"",
+    {"name":"Голденков Виталий",
       "position":"developer",
-      "photo":"../../../../assets/img/photo/Unknown-person.gif",
-      "description":"Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
-      "gitHub":"",
-      "telegram":"",
+      "photo":"../../../../assets/img/photo/Vitali.jpg",
+      "description":"Принял участие в работе с бэкэндом, созданию взаимодействия с сервером, реализовал методы загрузки и изменения аватаров пользователя. Разработал игру Саванна",
+      "gitHub":"https://github.com/GoldenkovVitali",
+      "telegram":"https://t.me/VitalikHV",
       "linkedIn":""
     },
     {"name":"",
