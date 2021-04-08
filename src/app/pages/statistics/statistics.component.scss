@@ -44,3 +44,55 @@
     }
   }
 }
+
+@media screen and (max-width: 1020px) {
+  .statistics {
+    &__games,
+    &__charts {
+      width: 800px;
+    }
+    &__game {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .statistics {
+    &__games,
+    &__charts {
+      max-width: 500px;
+    }
+    &__game {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .statistics {
+    &__wrapper {
+      font-size: small;
+    }
+    &__games,
+    &__charts {
+      max-width: 300px;
+    }
+    &__game {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    &__charts {
+      .chart-one,
+      .chart-two {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+    &__all,
+    &__percent {
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+  }
+}
