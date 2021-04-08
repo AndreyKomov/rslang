@@ -16,7 +16,7 @@
       }
 
       & .promo__text {
-        padding-left: 60px;
+        padding-left: 50px;
 
         @include media-tablet-landscape {
           padding-left: 5px;
@@ -33,7 +33,7 @@
           max-width: 200px;
         }
         & h1 {
-          font-size: 46px;
+          font-size: 39px;
 
           @include media-tablet-landscape {
             font-size: 19px;
@@ -129,5 +129,11 @@
 
  .component-list {
     list-style: disc;
+  }
+
+  .learn-language,
+  .dicription {
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
 }
