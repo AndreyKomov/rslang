@@ -20,6 +20,7 @@
 }
 
 .wrapper {
+  min-height: 100vh;
   background: linear-gradient(0.25turn, $footer-creds-bg, $main-bg-color, $footer-link-color);
 
   .audiocall-game {
