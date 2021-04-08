@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import WordApiServiceComponent from '../../../server/api';
-import { Observable, timer } from 'rxjs';
+
 
 
 @Component({
@@ -8,7 +8,7 @@ import { Observable, timer } from 'rxjs';
   templateUrl: './sprint-game.component.html',
   styleUrls: ['./sprint-game.component.scss'],
 })
-export class SprintGameComponent implements OnInit {
+export class SprintGameComponent  {
   display = false;
   displayStatistics = false;
   level = 0;
@@ -31,14 +31,13 @@ export class SprintGameComponent implements OnInit {
    timeLeft: number = 60;
    interval;
    subscribeTimer: any;
+   hiddenScoreBlock:boolean|null;
+   hiddenScoreClass:string|null;
+   riseScoreQuantity:boolean;
    
   constructor(public api: WordApiServiceComponent, private cdr:ChangeDetectorRef) {
 
     }
-
-  ngOnInit(): void {
-    this.getWords();
-  }
 
   playAudioTimer() {
     if (this.isSoundOn) {
@@ -126,7 +125,8 @@ export class SprintGameComponent implements OnInit {
     this.wrongWords=[];
     this.wordsYouKnowQuantity = 0;
     this.wordsYouDontKnowQuantity = 0;
-     this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
+    this.wordsList=[];
+    this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
       this.wordsList = data;
       this.words = this.createWordsArray(this.wordsList);
       this.words = this.shuffle(this.words);
@@ -151,6 +151,7 @@ export class SprintGameComponent implements OnInit {
     }
     if (checkPair === result) {
       this.wordsYouKnowQuantity += 1;
+      this.riseScoreQuantity=true;
       if (this.isSoundOn) {
         this.playAudioRightAnswer();
       }
@@ -158,6 +159,7 @@ export class SprintGameComponent implements OnInit {
     }
     if (checkPair !== result) {
       this.wordsYouDontKnowQuantity += 1;
+      this.riseScoreQuantity=false;
       if (this.isSoundOn) {
         this.playAudioWrongAnswer();
       }
@@ -207,7 +209,7 @@ startTimer() {
           this.wordsYouDontKnowQuantity += 1;
           this.index=this.index+1;
           this.timeLeft = 60;
-          
+      
        
       }
  
@@ -244,8 +246,22 @@ startTimer() {
     this.isCheckedWord= null;
     this.isSoundOn = true;
     this.hiddenScore = true;
- 
   
      }
+     myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+  }
 
+ delayedHide() {
+   if(this.riseScoreQuantity){
+    this.hiddenScoreClass='hiddenScore'
+
+    setTimeout(() => {
+     this.hiddenScoreClass='hidden'
+        },1000)
+     }
+   }
+  
+  
 }
