@@ -40,6 +40,14 @@ export class SprintGameComponent  {
    hiddenScoreBlock:boolean|null;
    hiddenScoreClass:string|null;
    riseScoreQuantity:boolean;
+   describeWordBlockTranslation:string|null;
+   describeWordBlockSound:string|null;
+   describeWordBlockImage:string|null;
+   describeWordBlockId:string|null;
+   describeWordBlockTranscription:string|null;
+   describeWordBlockTextExample:string|null;
+   chosenWordCardClass:string|null;
+
    
   constructor(public api: WordApiServiceComponent, private cdr:ChangeDetectorRef) {
 
@@ -211,7 +219,7 @@ export class SprintGameComponent  {
   public activeItem: string;
 
   public onSelectItem(item: string): void {
-    this.activeItem = item;
+      this.activeItem = item;
   }
 
 
@@ -278,5 +286,21 @@ startTimer() {
         },1000)
      }
    }
-
+   
+ getSelectedWordCardId(){
+  this.chosenWordCardClass='chosenWordCard'
+   for (const prop in this.wordsList) {
+    if (this.wordsList[prop].word ===  this.activeItem ) {
+      this.describeWordBlockTranslation=this.wordsList[prop].wordTranslate;
+      this.describeWordBlockTranscription=this.wordsList[prop].transcription;
+      this.describeWordBlockTextExample=this.wordsList[prop].textExample;
+    }
+   
+  }  
 }
+ClosePopUpWindow(){
+  
+    this.chosenWordCardClass='hidden';
+ 
+}
+  }

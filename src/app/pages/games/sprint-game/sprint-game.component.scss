@@ -236,3 +236,29 @@ li.active {
     -webkit-animation: pulsate 1.2s linear infinite;
    animation: pulsate 1.2s linear infinite;
  }
+ .chosenWordCard{
+   position: relative;
+    width: 80%;
+    max-width: 550px;
+    margin: 10px auto;
+    padding: 1em;
+    box-shadow:
+     0 1px 4px rgba(0, 0, 0, .3),
+     -23px 0 20px -23px rgba(0, 0, 0, .8),
+     23px 0 20px -23px rgba(0, 0, 0, .8),
+     0 0 40px rgba(0, 0, 0, .1) inset;
+ }
+ .closeWordCardButton{
+  text-decoration: none;
+  display: inline-block;
+  color: white;
+  padding: 0px 0px;
+  margin: 0px 0px;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 2px;
+  background-image: linear-gradient(to right, #d81781 0%, #e61414 51%, #d81781 100%);
+  background-size: 100% auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+  transition: .5s;
+ }
