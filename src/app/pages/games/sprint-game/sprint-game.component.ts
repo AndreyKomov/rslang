@@ -87,7 +87,9 @@ export class SprintGameComponent  {
   }
   update() {
     this.display = !this.display;
-
+    if (this.isSoundOn){
+    this.playAudioTimer()
+    }
   }
 
   updateStatistics() {
@@ -121,6 +123,9 @@ export class SprintGameComponent  {
   createTranscriptionArray = (wordsList) => wordsList.map((item) => item.wordTranslate);
 
   getWords() {
+    if (this.isSoundOn){
+      this.playAudioTimer()
+      }
     this.rightWords=[];
     this.wrongWords=[];
     this.wordsYouKnowQuantity = 0;
@@ -225,10 +230,6 @@ startTimer() {
 
   }
   quitGame(){
-    ;
-    this.pauseAudioWrongAnswer();
-    this.pauseAudioRightAnswer();
-    this.pauseAudioEndOfGame();
     this.pauseTimer()
     this.level = 0;
     this.round = 0;
