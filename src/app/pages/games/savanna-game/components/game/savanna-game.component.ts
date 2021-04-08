@@ -9,28 +9,6 @@ import { SavannaService } from '../../savanna.service';
   styleUrls: ['./savanna-game.component.scss'],
 })
 export class SavannaGameComponent implements OnInit {
-  @HostBinding('class.fullscreen') changeFullscreen = false;
-
-  @HostListener('document:keydown.1', ['$event'])
-  onKeydownHandler1(event: KeyboardEvent) {
-    this.checkAnswer(this.translations[0].wordTranslate);
-  }
-
-  @HostListener('document:keydown.2', ['$event'])
-  onKeydownHandler2(event: KeyboardEvent) {
-    this.checkAnswer(this.translations[1].wordTranslate);
-  }
-
-  @HostListener('document:keydown.3', ['$event'])
-  onKeydownHandler3(event: KeyboardEvent) {
-    this.checkAnswer(this.translations[2].wordTranslate);
-  }
-
-  @HostListener('document:keydown.4', ['$event'])
-  onKeydownHandler4(event: KeyboardEvent) {
-    this.checkAnswer(this.translations[3].wordTranslate);
-  }
-
   group: number;
   page: number;
 
@@ -62,7 +40,7 @@ export class SavannaGameComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private backEndService: WordsApiServiceComponent,
-    private gameService: SavannaService,
+    private gameService: SavannaService
   ) {}
 
   ngOnInit(): void {
@@ -74,9 +52,31 @@ export class SavannaGameComponent implements OnInit {
     });
   }
 
+  @HostBinding('class.fullscreen') changeFullscreen = false;
+
+  @HostListener('document:keydown.1', ['$event'])
+  onKeydownHandlerOne(): void {
+    this.checkAnswer(this.translations[0].wordTranslate);
+  }
+
+  @HostListener('document:keydown.2', ['$event'])
+  onKeydownHandlerTwo(): void {
+    this.checkAnswer(this.translations[1].wordTranslate);
+  }
+
+  @HostListener('document:keydown.3', ['$event'])
+  onKeydownHandlerThree(): void {
+    this.checkAnswer(this.translations[2].wordTranslate);
+  }
+
+  @HostListener('document:keydown.4', ['$event'])
+  onKeydownHandlerFour(): void {
+    this.checkAnswer(this.translations[3].wordTranslate);
+  }
+
   shuffleArr = (arr) => arr.sort(() => Math.random() - 0.5);
 
-  getWordsFromBE() {
+  getWordsFromBE(): void {
     this.backEndService.getWordsByPageAndGroup(this.page - 1, this.group - 1).subscribe((data) => {
       this.wordsFromApi = data;
       this.startGame();
@@ -84,13 +84,15 @@ export class SavannaGameComponent implements OnInit {
     });
   }
 
-  startGame() {
+  startGame(): void {
+    this.clearAllSetTimeouts();
     this.savannaFallingWord = `${this.wordsFromApi[this.savannaWordCounter].word}`;
     this.setRandomWords();
+    this.setClassToFallingWord();
     this.notCheckAnswer();
   }
 
-  checkAnswer(event) {
+  checkAnswer(event): void {
     event === `${this.wordsFromApi[this.savannaWordCounter].wordTranslate}`
       ? ((this.buttonClicked = true),
         (this.savannaRightAnswers += 1),
@@ -100,25 +102,28 @@ export class SavannaGameComponent implements OnInit {
         this.setItemToLocalStorage(),
         this.setClassToFallingWord(),
         this.savannaRightAnswers !== 20 ? this.startGame() : null)
-      : (this.heartsPlay.pop(), (this.savannaWrongAnswers += 1), this.setItemToLocalStorage());
+      : (this.heartsPlay.pop(),
+        (this.savannaWrongAnswers += 1),
+        this.setItemToLocalStorage(),
+        this.startGame());
     this.savannaWrongAnswers === 5 || this.savannaWordCounter === 20
       ? (this.router.navigateByUrl('/games/savanna/savannagame/savannaresults'),
         this.setItemToLocalStorage())
       : null;
   }
 
-  setItemToLocalStorage() {
+  setItemToLocalStorage(): void {
     localStorage.setItem('savannaRightAnswers', `${this.savannaRightAnswers}`);
     localStorage.setItem('savannaWrongAnswers', `${this.savannaWrongAnswers}`);
   }
 
-  setClassToFallingWord() {
+  setClassToFallingWord(): void {
     setTimeout(() => {
       this.className = 'savanna-animated';
     }, 150);
   }
 
-  setRandomWords() {
+  setRandomWords(): void {
     let translations = this.wordsFromApi
       .slice()
       .filter((word) => word.id !== this.wordsFromApi[this.savannaWordCounter].id);
@@ -128,7 +133,7 @@ export class SavannaGameComponent implements OnInit {
     this.translations = this.shuffleArr(translations);
   }
 
-  notCheckAnswer() {
+  notCheckAnswer(): void {
     setTimeout(() => {
       if (this.buttonClicked === false) {
         this.heartsPlay.pop();
@@ -138,13 +143,21 @@ export class SavannaGameComponent implements OnInit {
         this.setClassToFallingWord();
         this.startGame();
       }
-      // if (this.savannaWrongAnswers === 5) {
-      //   this.router.navigateByUrl('/games/savanna/savannagame/savannaresults');
-      // }
+      if (this.savannaWrongAnswers === 5) {
+        this.router.navigateByUrl('/games/savanna/savannagame/savannaresults');
+      }
     }, 8000);
+    this.buttonClicked = false;
   }
 
-  changeFullscreenMode() {
+  clearAllSetTimeouts(): void {
+    for (let i = setTimeout(() => {}, 0); i > 0; i -= 1) {
+      window.clearTimeout(i);
+      if (window.cancelAnimationFrame) window.cancelAnimationFrame(i);
+    }
+  }
+
+  changeFullscreenMode(): void {
     this.changeFullscreen = !this.changeFullscreen;
   }
 }

@@ -17,7 +17,7 @@ export class SavannaPromoComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
       this.startFromMenu = param.startFromMenu;
-      if (this.startFromMenu === "true") {
+      if (this.startFromMenu === 'true') {
         this.startFromMenu = true;
       } else {
         this.startFromMenu = false;
