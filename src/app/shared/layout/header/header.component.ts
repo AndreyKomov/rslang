@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openModal(value: string): void {
+  openModal(value): void {
     this.clickAutnBtnEvent.emit(value);
   }
 }

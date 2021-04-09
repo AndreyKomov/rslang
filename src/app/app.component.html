@@ -4,4 +4,4 @@
 </main>
 <footer app-footer></footer>
 
-<app-registration [isShow]="value"></app-registration>
+<app-registration [isShow]="value" (clickAutnBtnEvent)="openModal($event)"></app-registration>

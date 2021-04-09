@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import RegistrationService from '../services/registration.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IRegForm } from '../models/RegFormsModel';
@@ -10,6 +10,7 @@ import { IRegForm } from '../models/RegFormsModel';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class RegistrationComponent implements OnInit, OnChanges {
+  @Output() clickAutnBtnEvent = new EventEmitter<string>();
   @Input() isShow;
   modalName = 'Registration';
   isLoginTemplate = false;
@@ -28,8 +29,6 @@ export default class RegistrationComponent implements OnInit, OnChanges {
     if (data.previousValue !== undefined) {
       this.isShow = data.isShow.currentChanges;
     }
-    
-    console.log(data);
   }
 
   initForm(): void {
@@ -64,11 +63,12 @@ export default class RegistrationComponent implements OnInit, OnChanges {
 
   closeModal(): void {
     this.isShow = '';
-    console.log(this.isShow);
+    this.clickAutnBtnEvent.emit(this.isShow);
   }
 
   changeModal(): void {
     this.modalName = this.modalName === 'Registration' ? 'Login' : 'Registration';
+    this.modalName === 'Registration' ? this.registrationForm.controls['name'].enable() : this.registrationForm.controls['name'].disable();
     this.isLoginTemplate = !this.isLoginTemplate;
   }
 
