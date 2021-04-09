@@ -1,14 +1,24 @@
-<mat-card class="card">
+<mat-card class="card" *ngIf="!word.userWord || word.userWord && !word.userWord.optional.delete">
   <mat-card-actions>
-    <button mat-icon-button matTooltip="Прослушать слово" (click)="playAudio(word.audio)">
+    <div class="optional-word">
+      <div *ngIf="word.userWord && word.userWord.optional.repeat>=0" class="optional-word__repeat">
+        <mat-icon>repeat</mat-icon>
+         <span>{{word.userWord.optional.repeat}}</span>
+        </div>
+        <div class="optional-word__hard"><span>{{word.userWord && word.userWord.difficulty ? 'сложное' : ''}}</span></div>
+    </div>
+    <div>
+
+    <button mat-icon-button matTooltip="Прослушать слово" (click)="playAudio()" [disabled]="!textbookService.isPlay">
       <mat-icon>volume_up</mat-icon>
     </button>
-    <button *ngIf="cardInfo.isButtonAdd" mat-icon-button matTooltip="Добавить в сложные">
+    <button *ngIf="cardInfo.isButtonAdd" mat-icon-button matTooltip="Добавить в сложные" (click)="addWordHard()">
       <mat-icon>add</mat-icon>
     </button>
-    <button *ngIf="cardInfo.isButtonDelete" mat-icon-button matTooltip="Удалить слово">
+    <button *ngIf="cardInfo.isButtonDelete" mat-icon-button matTooltip="Удалить слово" (click)="addWordDeleted()">
       <mat-icon>delete</mat-icon>
     </button>
+  </div>
   </mat-card-actions>
   <mat-card-content>
     <div class="card__content">

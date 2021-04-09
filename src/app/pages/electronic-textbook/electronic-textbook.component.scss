@@ -1,21 +1,7 @@
-.section-menu {
+.header-textbook {
   position: sticky;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   z-index: 10;
   background-color: white;
-  ul {
-    display: flex;
-    list-style: none;
-    li {
-      margin: 0 10px;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-  .select {
-    width: 40px;
-  }
 }

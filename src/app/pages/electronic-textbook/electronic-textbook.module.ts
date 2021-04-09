@@ -9,7 +9,7 @@ import ElectronicTextbookRoutingModule from './electronic-textbook-routing.modul
 import { CardWordComponent } from './card-word/card-word.component';
 import { PageComponent } from './page/page.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
-
+import { PaginationComponent } from './pagination/pagination.component';
 @NgModule({
   declarations: [
     CategoryComponent,
@@ -17,6 +17,7 @@ import { SettingsDialogComponent } from './settings-dialog/settings-dialog.compo
     CardWordComponent,
     PageComponent,
     SettingsDialogComponent,
+    PaginationComponent,
   ],
   imports: [CommonModule, SharedModule, ElectronicTextbookRoutingModule],
 })

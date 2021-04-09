@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import WordsApiServiceComponent from '@app/server/api';
 import { LoadingService } from '@app/shared/services/loading.service';
+import { Subscription } from 'rxjs';
 import ElectronicTextbookService from '../electronic-textbook.service';
 import { IWord } from '../word';
 
@@ -10,34 +11,40 @@ import { IWord } from '../word';
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
 })
-export class PageComponent implements OnInit {
-  array: IWord;
+export class PageComponent implements AfterViewInit, OnDestroy {
+  array: IWord[];
+  backgroundColor: string;
+  subscription: Subscription;
   constructor(
     private activateRoute: ActivatedRoute,
     private api: WordsApiServiceComponent,
     private textbookService: ElectronicTextbookService,
-    public loadingService: LoadingService
-  ) {
-    /*    const { page, group }: Params = this.activateRoute.snapshot.params;
-    if (page) this.textbookService.pages = +page;
-    if (group) this.textbookService.groups = +group;
-    this.api
-      .getWordsByPageAndGroup(this.textbookService.pages, this.textbookService.groups)
-      .subscribe((data: IWord) => {
-        this.array = data;
-      }); */
-  }
+    public loadingService: LoadingService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.activateRoute.params.subscribe((routeParams) => {
       const { page, group } = routeParams;
       if (page) this.textbookService.pages = +page;
-      if (group) this.textbookService.groups = +group;
-      this.api
-        .getWordsByPageAndGroup(this.textbookService.pages, this.textbookService.groups)
-        .subscribe((data: IWord) => {
-          this.array = data;
+      if (group) {
+        this.textbookService.groups = +group;
+        this.backgroundColor = this.textbookService.getColor(+group);
+      }
+      this.textbookService
+        .getWordsPageAndGroup()
+        .toPromise()
+        .then(() => {
+          this.subscription = this.textbookService.getWords().subscribe((data) => {
+            this.array = data;
+          });
         });
+
+      this.cdr.detectChanges();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

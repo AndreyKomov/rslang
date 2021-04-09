@@ -13,6 +13,8 @@ export default class CategoryComponent {
     private textbookService: ElectronicTextbookService
   ) {
     const { group }: Params = this.activateRoute.snapshot.params;
-    if (group) this.textbookService.groups = +group;
+    if (group) {
+      this.textbookService.groups = +group;
+    }
   }
 }

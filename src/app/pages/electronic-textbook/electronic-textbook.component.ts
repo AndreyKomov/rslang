@@ -1,6 +1,14 @@
-import { AfterViewInit, Component } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import WordsApiServiceComponent from '@app/server/api';
+import { Subscription } from 'rxjs';
 import ElectronicTextbookService from './electronic-textbook.service';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { ICardInfo } from './word';
@@ -10,55 +18,51 @@ import { ICardInfo } from './word';
   templateUrl: './electronic-textbook.component.html',
   styleUrls: ['./electronic-textbook.component.scss'],
 })
-export default class ElectronicTextbookComponent implements AfterViewInit {
+export default class ElectronicTextbookComponent
+  implements AfterViewInit, OnDestroy, AfterViewChecked {
   categories = ['Easy', 'Medium', 'Normal', 'Hard', 'Hardest', 'Inferno'];
-  page: number;
-
+  page = 0;
+  group = 0;
   dialogData: ICardInfo;
-
-  pagesPagination = Array(30)
-    .fill(0)
-    .map((a, i) => {
-      return i + 1;
-    });
+  colorLink: string;
+  subscriptionTextbookService: Subscription;
 
   constructor(
     private router: Router,
     private textbookService: ElectronicTextbookService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cdr: ChangeDetectorRef,
+    private api: WordsApiServiceComponent
   ) {
-    this.textbookService.getCardInfo().subscribe((data) => {
+    this.subscriptionTextbookService = this.textbookService.getCardInfo().subscribe((data) => {
       this.dialogData = data;
     });
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.page = this.textbookService.pages;
-    }, 0);
+    this.group = this.textbookService.groups;
+    this.colorLink = this.textbookService.getColor(this.group);
+    this.cdr.detectChanges();
   }
 
-  onChangePage(event: Event): void {
-    this.page = +(event.target as HTMLSelectElement).value;
-    this.router.navigate(['textbook/group', this.textbookService.groups, 'page', this.page]);
+  ngAfterViewChecked(): void {
+    this.page = this.textbookService.pages;
+    this.cdr.detectChanges();
   }
 
-  /*   onClickCategory(id: number): void {} */
+  ngOnDestroy(): void {
+    this.subscriptionTextbookService.unsubscribe();
+  }
+
+  onClickCategory(id: number): void {
+    this.colorLink = this.textbookService.getColor(id);
+    this.group = id;
+    this.page = 0;
+  }
 
   onClickSettings(): void {
     this.dialog.open(SettingsDialogComponent, {
       data: this.dialogData,
     });
-  }
-
-  onClickPage(value: string): void {
-    this.page = value === 'back' ? this.textbookService.pages - 1 : this.textbookService.pages + 1;
-    this.textbookService.pages = this.page;
-    this.router.navigate([
-      'textbook/group',
-      this.textbookService.groups,
-      'page',
-      this.textbookService.pages,
-    ]);
   }
 }

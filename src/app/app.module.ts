@@ -10,7 +10,8 @@ import WordsApiService from './server/api';
 import RegistrationComponent from './pages/registration/registration/registration.component';
 import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
-import { LoadingInterceptor } from './shared/intercepter/loading.interceptor';
+import { LoadingInterceptor } from './shared/interceptor/loading.interceptor';
+import ElectronicTextbookService from './pages/electronic-textbook/electronic-textbook.service';
 
 @NgModule({
   declarations: [AppComponent, RegistrationComponent],
@@ -25,6 +26,7 @@ import { LoadingInterceptor } from './shared/intercepter/loading.interceptor';
   ],
   providers: [
     WordsApiService,
+    ElectronicTextbookService,
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

@@ -2,7 +2,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Component, Input } from '@angular/core';
 import { URL_FILES } from '@app/core/common/constants';
 import ElectronicTextbookService from '../electronic-textbook.service';
-import { ICardInfo } from '../word';
+import { ICardInfo, IWord } from '../word';
 
 @Component({
   selector: 'app-card-word',
@@ -17,18 +17,44 @@ import { ICardInfo } from '../word';
   ],
 })
 export class CardWordComponent {
-  @Input() word;
+  @Input() word: IWord;
 
   urlImage = URL_FILES;
   cardInfo: ICardInfo;
 
-  constructor(private textbookService: ElectronicTextbookService) {
+  constructor(public textbookService: ElectronicTextbookService) {
     this.textbookService.getCardInfo().subscribe((data) => {
       this.cardInfo = data;
     });
   }
 
-  playAudio(url: string): void {
+  playAudio(): void {
+    const url = [this.word.audio, this.word.audioExample, this.word.audioMeaning];
     this.textbookService.playAudio(url);
+  }
+
+  addWordHard(): void {
+    this.textbookService[this.word.userWord ? 'updateUserWord' : 'addUserWord'](
+      this.word.id,
+      'hard',
+      {
+        date: Date.now(),
+        repeat: 0,
+        delete: false,
+      }
+    );
+  }
+
+  addWordDeleted(): void {
+    const difficulty = this.word.userWord ? this.word.userWord.difficulty : 'easy';
+    this.textbookService[this.word.userWord ? 'updateUserWord' : 'addUserWord'](
+      this.word.id,
+      difficulty,
+      {
+        date: Date.now(),
+        repeat: 0,
+        delete: true,
+      }
+    );
   }
 }
