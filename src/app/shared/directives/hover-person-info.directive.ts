@@ -30,7 +30,7 @@ export default class HoverPersonInfoDirective implements AfterViewInit {
 
   @HostListener('mouseenter') onMouseLeave(): void {
     this.renderer2.setStyle(this.description, 'whiteSpace', 'normal');
-    this.renderer2.setStyle(this.description, 'height', `${this.heightBlockDescription}px`);
+    this.renderer2.setStyle(this.description, 'height', `${this.heightBlockDescription + 10}px`);
     this.isHover = true;
   }
 
@@ -49,7 +49,7 @@ export default class HoverPersonInfoDirective implements AfterViewInit {
     this.renderer2.setStyle(
       this.photo,
       'transform',
-      `translateX(${-event.movementX}px) translateY(${-event.movementY}px) scale(1.05)`,
+      `translateX(${-event.movementX}px) translateY(${-event.movementY}px) scale(1.05)`
     );
   }
 }

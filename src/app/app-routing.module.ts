@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: ParamKey.textbook,
-    loadChildren: () =>
+    loadChildren: (): any =>
       import('./pages/electronic-textbook/electronic-textbook.module').then(
         (module) => module.ElectronicTextbookModule
       ),
