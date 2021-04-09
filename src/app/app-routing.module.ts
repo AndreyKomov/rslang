@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PromoComponent } from './pages/promo/promo.component';
 import { ParamKey, QueryParamKey } from './app-routing.enum';
+import RegistrationComponent from './pages/registration/registration/registration.component';
 
 const routes: Routes = [
   { path: ParamKey.promo, component: PromoComponent, pathMatch: 'full' },
-  { path: ParamKey.promo, component: PromoComponent },
+  { path: ParamKey.promo, component: PromoComponent},
   {
     path: `${ParamKey.games}/${ParamKey.audiocallPromo}`,
     loadChildren: (): any =>

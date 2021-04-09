@@ -7,11 +7,9 @@ import AppComponent from '@app/app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import WordsApiService from './server/api';
-import RegistrationComponent from './pages/registration/registration/registration.component';
 import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
-
-import ServiceTestingComponent from './server-testing/server-testing.component';
+import RegistrationComponent from './pages/registration/registration/registration.component';
 
 @NgModule({
   declarations: [AppComponent, RegistrationComponent],

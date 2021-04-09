@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
 import RegistrationService from '../services/registration.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IRegForm } from '../models/RegFormsModel';
@@ -7,11 +7,12 @@ import { IRegForm } from '../models/RegFormsModel';
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export default class RegistrationComponent implements OnInit {
+export default class RegistrationComponent implements OnInit, OnChanges {
+  @Input() isShow;
   modalName = 'Registration';
   isLoginTemplate = false;
-  isShow = false;
   registrationForm: IRegForm;
   imgURL: ArrayBuffer | string = '../../../../assets/img/no-avatar.png';
   imagePath: File;
@@ -20,6 +21,15 @@ export default class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  ngOnChanges(changes): void {
+    let data = {...changes};
+    if (data.previousValue !== undefined) {
+      this.isShow = data.isShow.currentChanges;
+    }
+    
+    console.log(data);
   }
 
   initForm(): void {
@@ -52,12 +62,9 @@ export default class RegistrationComponent implements OnInit {
     };
   }
 
-  showReg(): void {
-    this.isShow = true;
-  }
-
   closeModal(): void {
-    this.isShow = false;
+    this.isShow = '';
+    console.log(this.isShow);
   }
 
   changeModal(): void {

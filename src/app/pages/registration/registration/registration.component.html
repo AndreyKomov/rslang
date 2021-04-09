@@ -1,8 +1,8 @@
-<ng-container *ngIf="!isShow">
+<ng-container *ngIf="isShow">
   <div class="overlay">
     <form class="modal-content" [formGroup]="registrationForm" (submit)="addUserData()">
       <h4>{{ modalName }}</h4>
-      <button (click)="closeModal()" class="modal-content__close"></button>
+      <button (click)="closeModal()" type="button" class="modal-content__close"></button>
       <div class="modal-content__alert" *ngIf="isControlInvalid('name') && !isLoginTemplate">
         Type a name(more than 8 and below than 30 charts)
       </div>
