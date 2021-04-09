@@ -13,7 +13,7 @@
   }
   @include media-desktop {
     height: 160px;
-    padding: 0 5%;
+    padding: 0 2px;
     & div {
       margin-top: 20px;
     }
@@ -29,5 +29,5 @@
   background: url('../../../../assets/img/header-bg.png') no-repeat;
   background-position: right;
   background-size: contain;
-  padding: 0 5%;
+  padding: 0 2px;
 }

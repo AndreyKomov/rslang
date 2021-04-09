@@ -1,4 +1,6 @@
 @use  '../../../scss/variables.scss';
+@import 'variables';
+@import 'mixins';
 $background_link: #55C1FF;
 $border_color: #5887FF;
 
@@ -12,6 +14,24 @@ $border_color: #5887FF;
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 1fr;
+
+    @include media-tablet-landscape {
+      display: flex;
+      width: auto;
+      flex-direction: column;
+    }
+
+    @include media-tablet-portrait {
+      display: flex;
+      width: auto;
+      flex-direction: column;
+    }
+
+    @include media-mobile {
+      width: auto;
+      display: flex;
+      flex-direction: column;
+    }
   }
   &__link {
     display: flex;
