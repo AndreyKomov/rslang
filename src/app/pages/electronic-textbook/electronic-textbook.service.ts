@@ -128,11 +128,11 @@ export default class ElectronicTextbookService {
   }
 
   getUserWords(): void {
-    this.api.getAllUsersWords(this.userData.userId, this.userData.token).pipe(
-      tap((data: IUserWord[]) => {
+    this.api
+      .getAllUsersWords(this.userData.userId, this.userData.token)
+      .subscribe((data: IUserWord[]) => {
         this.userWords = data;
-      })
-    );
+      });
   }
 
   addUserWord(wordId: string, wordDifficulty: string, optional: Optional): void {
