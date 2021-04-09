@@ -15,7 +15,8 @@ export class ConstructorGameComponent implements OnInit {
   showResult = false;
   isLevelChosen = false;
   page = 0;
-  selectedValue: number = 0;
+  selectedGroup: number = 0;
+  selectedPage: number = 0;
   baseImgUrl = 'https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/';
   isEndRaund = false;
   context = '';
@@ -79,7 +80,7 @@ export class ConstructorGameComponent implements OnInit {
     this.word = '';
     this.letterArr = [];
     this.rightLettersArr = [];
-    this.apiService.getWordsByPageAndGroup(this.page, this.selectedValue).subscribe(data => {
+    this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe(data => {
       this.word = data[this.raund].word;
       this.translateWord = data[this.raund].wordTranslate;
       this.context = data[this.raund].textExample;
@@ -174,6 +175,11 @@ export class ConstructorGameComponent implements OnInit {
   }
 
   onChangeGroup(selected): void {
-    this.selectedValue = Number(selected) - 1;
+    this.selectedGroup = Number(selected) - 1;
+  }
+
+  onChangePage(selected): void {
+    this.selectedPage = Number(selected);
+    this.page = this.selectedPage;
   }
 }
