@@ -199,7 +199,7 @@ export class SprintGameComponent {
     }
     this.index += 1;
     if (this.index > 19) {
-      this.delayedConfettiClass()
+      this.delayedConfettiClass();
       this.pauseTimer();
       this.pauseAudioTimer();
       this.playAudioEndOfGame();
@@ -285,18 +285,15 @@ export class SprintGameComponent {
       }, 1000);
     }
   }
-  delayedConfettiClass(){
-  
-    if ( this.wordsYouKnowQuantity >=10) {
-      this.confettiClass = 'confettiClass'
-         setTimeout(() => {
+
+  delayedConfettiClass() {
+    if (this.wordsYouKnowQuantity >= 10) {
+      this.confettiClass = 'confettiClass';
+      setTimeout(() => {
         this.cdr.markForCheck();
         this.confettiClass = '';
       }, 5000);
     }
-
-
-
   }
 
   getSelectedWordCardId() {
