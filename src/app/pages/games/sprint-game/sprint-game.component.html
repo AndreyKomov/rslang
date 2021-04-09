@@ -1,9 +1,18 @@
 
 <div class="container">
-    <div class="header-container">
+    <div class="{{classHeaderContainer}}">
          <h1>СПРИНТ</h1>
          <br/>
-        <button  (click)="update();getWords();startTimer();playAudioTimer();hiddenScoreClass='hidden';timeLeft=60" 
+         <button  (click)="update();
+            getWords();
+            startTimer();
+            playAudioTimer();
+            hiddenScoreClass='hidden';
+            timeLeft=60; 
+            ClosestartScreenClass();
+            startScreenClass='start-screen-no-backgroud';
+            CloseHeaderContainerClass()
+            " 
                 mat-raised-button="" 
                 color="primary" 
                 class="mat-focus-indicator auth-button__button mat-raised-button mat-button-base mat-primary" 
@@ -12,10 +21,11 @@
             Начать
                 </span><span matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" 
                     ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]"></span><span class="mat-button-focus-overlay"></span>
-        </button>
+         </button>
     </div>
-    <div class="start-screen ">
-        <h2>СПРИНТ</h2>
+    <div class="{{startScreenClass}}">
+     <div class="{{promoInfoClass}}">
+          <h2>СПРИНТ</h2>
         <br/>
         <h3 >
             Мини-игра «Спринт» - это тренировка для повторения заученных слов из вашего словаря.
@@ -25,14 +35,12 @@
             1. Используйте мышь, чтобы выбрать.
             <br/>
             2. Используйте клавиши влево и вправо.
-    
         </h3>
-
-        <div *ngIf="display" class="game">
-                <button class="closeButton" (click)="update();pauseAudioTimer();quitGame()" > 
-                    Закрыть окно
-                </button>
-                <div *ngIf="displayStatistics" class="game">
+    
+     </div> 
+    <div *ngIf="display" class="{{gameClass}}">
+           
+                <div *ngIf="displayStatistics" class="{{gameClass}}">
                     <div class="statistic">
                         <div class=" {{confettiClass}} ">
                             <div class="{{chosenWordCardClass}}">
@@ -42,7 +50,13 @@
                                 {{this.describeWordBlockTextExample}}
                             </div>
                             <div >
-                                <h2>Уровень пройден</h2>
+                                <h2>
+                                Уровень пройден 
+                                <button  class="gradient-button-sound" (click)=ChangeWindowSize()>
+                                     <img src="https://cdn2.iconfinder.com/data/icons/media-player-ui/512/Media-Icon-23-512.png"width="30" height="30" alt="fullScreenButton">
+                                </button>
+                                </h2>
+                                
                             </div> 
                             <div class="wordStatisticContainer">
                                 <div   id="wordsYouKnow">  
@@ -55,7 +69,7 @@
                                         </li>   
                                     </ul>
                                 </div>
-                            <div > 
+                                <div > 
                                     ошибки :
                                     <h4>{{wordsYouDontKnowQuantity}}</h4>
                                     <div>
@@ -65,23 +79,31 @@
                                                 {{ item }}
                                             </li>
                                         </ul>
-                                </div>  
+                                    </div>  
+                                 </div>
+                            </div>
                         </div>
-                        
+                        <button class="gradient-button-right" (click)="
+                             updateStatistics();
+                             update();
+                            isSoundOn=true;
+                            chosenWordCardClass = 'hidden';
+                            startScreenClass='start-screen';
+                            promoInfoClass='';
+                            ngOnInit();
+                             ">
+                            Начать игру заново
+                        </button>       
                     </div>
-                        
-                </div>
-                <button class="gradient-button-right" (click)="updateStatistics();update();
-                    isSoundOn=true;chosenWordCardClass = 'hidden' ">
-                    Начать игру заново
-                </button>     
-                
-            </div>
-                
-            </div> 
-            <div class="level-and-round-choice">
+                </div> 
+                <div class="{{levelAndRoundChoice}}">
+                   <div class="{{levelAndRoundChoice}}">
+                    <button class="closeButton" (click)="update();pauseAudioTimer();quitGame(); ngOnInit()" > 
+                        Закрыть окно
+                    </button>
+                   <div>  
                     <label class="level__label">  
-                            Уровень 
+                        Уровень 
                     </label>
                     <select class="level__select"   (change)="onLevelChange($event.target.value);timeLeft=60;index=0">
                         <option  value="1"> 1 </option>
@@ -92,7 +114,7 @@
                         <option  value="6"> 6 </option>
                     </select>
                     <label  class="round__label">
-                    Раунд
+                         Раунд
                     </label>
                     <select class="round__select" (change)="onRoundChange($event.target.value);timeLeft=60;index=0">
                         <option value="1"> 1 </option>
@@ -133,12 +155,14 @@
                         type="button" class="gradient-button-sound">
                         <img src="https://img2.freepng.ru/20180906/sac/kisspng-portable-network-graphics-computer-icons-scalable-svg-56515-sfon-5b9169a22017f5.8584771115362564181315.jpg"width="30" height="30" alt="OffSound">
                     </button> 
+                    <button  class="gradient-button-sound" (click)=ChangeWindowSize()>
+                     <img src="https://cdn2.iconfinder.com/data/icons/media-player-ui/512/Media-Icon-23-512.png"width="30" height="30" alt="fullScreenButton">
+                    </button>
                     <div class="word-and-translation">
                         <div>
                             <div class="{{hiddenScoreClass}}" id="blink7"  > + {{wordsYouKnowQuantity*10}}  </div> 
                             <div class="timer-css">{{timeLeft}}</div> 
                         </div>
-                    
                         <div>
                             <span>{{this.words[index]}}</span>   -   <span>{{this.translations[index]}}</span>
                         </div>
@@ -148,12 +172,8 @@
                         <button class="gradient-button-right" (click)="checkWordTranslationMatch(true);timeLeft=60;delayedHide()">	&#9668; правильно</button>
                         <button class="gradient-button-wrong" (click)="checkWordTranslationMatch(false);timeLeft=60;delayedHide()"> неправильно 	&#9658;</button>
                     </div>
-        
-
-            <div>
-
-
-        </div>
+                <div>
+            </div>
     </div>
   
 </div>

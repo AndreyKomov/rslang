@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener,OnInit } from '@angular/core';
 import WordApiServiceComponent from '../../../server/api';
 
 export enum KEY_CODE {
@@ -11,7 +11,7 @@ export enum KEY_CODE {
   templateUrl: './sprint-game.component.html',
   styleUrls: ['./sprint-game.component.scss'],
 })
-export class SprintGameComponent {
+export class SprintGameComponent implements OnInit {
   display = false;
   displayStatistics = false;
   level = 0;
@@ -46,9 +46,22 @@ export class SprintGameComponent {
   chosenWordCardClass: string | null;
   closeWordCardButtonClass: string | null;
   confettiClass: string | null;
+  promoInfoClass:string|null;
+  startScreenClass:string|null;
+  classHeaderContainer:string|null;
+  gameClass:string|null;
+  levelAndRoundChoice:string|null;
+  checkFullScreenSize:boolean|null;
 
   constructor(public api: WordApiServiceComponent, private cdr: ChangeDetectorRef) {}
-
+ 
+ ngOnInit() {
+   this.promoInfoClass='';
+   this.startScreenClass='start-screen';
+   this.classHeaderContainer='header-container';
+   this.gameClass='game';
+   this.levelAndRoundChoice=''
+ }
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
@@ -208,6 +221,9 @@ export class SprintGameComponent {
       this.index = 0;
       this.isSoundOn = false;
       this.closeWordCardButtonClass = 'hidden';
+      this.promoInfoClass= 'hidden';
+      this.gameClass='game-switched-off';
+      this.levelAndRoundChoice='hidden'
     }
   }
 
@@ -312,4 +328,20 @@ export class SprintGameComponent {
     this.closeWordCardButtonClass = 'hidden';
     this.chosenWordCardClass = 'hidden';
   }
+   ClosestartScreenClass() {
+    this.promoInfoClass= 'hidden';
+  }
+  CloseHeaderContainerClass(){
+    this.classHeaderContainer='hidden';
+  }
+ CloseLevelAndRoundChoice(){
+   this.levelAndRoundChoice='hidden'
+ }
+ ChangeWindowSize(){
+ this.checkFullScreenSize=!this.checkFullScreenSize;
+ if(this.checkFullScreenSize){
+   console.log(this.checkFullScreenSize)
+ }
+
+ }
 }
