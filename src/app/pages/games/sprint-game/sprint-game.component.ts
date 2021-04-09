@@ -45,6 +45,7 @@ export class SprintGameComponent {
   describeWordBlockTextExample: string | null;
   chosenWordCardClass: string | null;
   closeWordCardButtonClass: string | null;
+  confettiClass: string | null;
 
   constructor(public api: WordApiServiceComponent, private cdr: ChangeDetectorRef) {}
 
@@ -198,6 +199,7 @@ export class SprintGameComponent {
     }
     this.index += 1;
     if (this.index > 19) {
+      this.delayedConfettiClass()
       this.pauseTimer();
       this.pauseAudioTimer();
       this.playAudioEndOfGame();
@@ -282,6 +284,19 @@ export class SprintGameComponent {
         this.hiddenScoreClass = 'hidden';
       }, 1000);
     }
+  }
+  delayedConfettiClass(){
+  
+    if ( this.wordsYouKnowQuantity >=10) {
+      this.confettiClass = 'confettiClass'
+         setTimeout(() => {
+        this.cdr.markForCheck();
+        this.confettiClass = '';
+      }, 5000);
+    }
+
+
+
   }
 
   getSelectedWordCardId() {

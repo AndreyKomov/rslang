@@ -18,7 +18,7 @@
 <div class="start-screen ">
     <h2>СПРИНТ</h2>
     <br/>
-    <h3>
+    <h3 >
         Мини-игра «Спринт» - это тренировка для повторения заученных слов из вашего словаря.
         После запуска игры вы увидите слово и перевод. Вам нужно выбрать, правильно это или неправильно.
             <br/>
@@ -42,10 +42,10 @@
            {{describeWordBlockTranscription}}<br>
            {{this.describeWordBlockTextExample}}
          </div>
-          <div><h2>Уровень пройден</h2></div> 
+          <div class=" {{confettiClass}} "><h2>Уровень пройден</h2></div> 
            <div class="wordStatisticContainer">
          
-            <div id="wordsYouKnow">  
+            <div  class=" {{confettiClass}}" id="wordsYouKnow">  
              правильно:   <h4>{{wordsYouKnowQuantity}}</h4>  
        
                 <ul>
@@ -54,7 +54,7 @@
                 </ul>
             </div>
             
-            <div>
+            <div  class=" {{confettiClass}}"> 
                 ошибки : <h4>{{wordsYouDontKnowQuantity}}</h4>
                 <div>
                     <ul>
