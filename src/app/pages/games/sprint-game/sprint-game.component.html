@@ -34,37 +34,40 @@
                 </button>
                 <div *ngIf="displayStatistics" class="game">
                     <div class="statistic">
-                        <div class="{{chosenWordCardClass}}">
-                            {{describeWordBlockTranslation}} 
-                                <button class="{{closeWordCardButtonClass}}" (click)=ClosePopUpWindow()>x</button> <br>
-                            {{describeWordBlockTranscription}}<br>
-                            {{this.describeWordBlockTextExample}}
+                        <div class=" {{confettiClass}} ">
+                            <div class="{{chosenWordCardClass}}">
+                                {{describeWordBlockTranslation}} 
+                                    <button class="{{closeWordCardButtonClass}}" (click)=ClosePopUpWindow()>x</button> <br>
+                                {{describeWordBlockTranscription}}<br>
+                                {{this.describeWordBlockTextExample}}
+                            </div>
+                            <div >
+                                <h2>Уровень пройден</h2>
+                            </div> 
+                            <div class="wordStatisticContainer">
+                                <div   id="wordsYouKnow">  
+                                    правильно:  
+                                    <h4>{{wordsYouKnowQuantity}}</h4>  
+                                    <ul>
+                                        <li *ngFor="let item of rightWords" (click)="onSelectItem(item);getSelectedWordCardId()"
+                                            [class.active]="item == activeItem">  
+                                            {{ item }}
+                                        </li>   
+                                    </ul>
+                                </div>
+                            <div > 
+                                    ошибки :
+                                    <h4>{{wordsYouDontKnowQuantity}}</h4>
+                                    <div>
+                                        <ul>
+                                            <li *ngFor="let item of wrongWords" (click)="onSelectItem(item);getSelectedWordCardId()"
+                                                [class.active]="item == activeItem">
+                                                {{ item }}
+                                            </li>
+                                        </ul>
+                                </div>  
                         </div>
-                    <div class=" {{confettiClass}} ">
-                        <h2>Уровень пройден</h2>
-                    </div> 
-                    <div class="wordStatisticContainer">
-                    <div  class=" {{confettiClass}}" id="wordsYouKnow">  
-                        правильно:  
-                        <h4>{{wordsYouKnowQuantity}}</h4>  
-                        <ul>
-                            <li *ngFor="let item of rightWords" (click)="onSelectItem(item);getSelectedWordCardId()"
-                                [class.active]="item == activeItem">  
-                                {{ item }}
-                            </li>   
-                        </ul>
-                    </div>
-                    <div  class=" {{confettiClass}}"> 
-                        ошибки :
-                        <h4>{{wordsYouDontKnowQuantity}}</h4>
-                        <div>
-                            <ul>
-                                <li *ngFor="let item of wrongWords" (click)="onSelectItem(item);getSelectedWordCardId()"
-                                    [class.active]="item == activeItem">
-                                    {{ item }}
-                                </li>
-                            </ul>
-                        </div>  
+                        
                     </div>
                         
                 </div>
