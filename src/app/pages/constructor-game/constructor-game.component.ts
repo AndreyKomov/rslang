@@ -1,12 +1,13 @@
-import { Component, Directive, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, Directive, ElementRef, HostBinding, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import WordsApiServiceComponent from '@app/server/api';
 
 @Component({
   selector: 'app-constructor-game',
   templateUrl: './constructor-game.component.html',
-  styleUrls: ['./constructor-game.component.scss'],
+  styleUrls: ['./constructor-game.component.scss']
 })
 export class ConstructorGameComponent implements OnInit {
+  @HostBinding('class.fullscreen') changeFullscreen = false;
   isMistake = false;
   @ViewChild('keysBlock') keysBlock;
   isUserDoMistake = false;
@@ -182,5 +183,9 @@ export class ConstructorGameComponent implements OnInit {
   onChangePage(selected): void {
     this.selectedPage = Number(selected);
     this.page = this.selectedPage;
+  }
+
+  changeFullscreenMode(): void {
+    this.changeFullscreen = !this.changeFullscreen;
   }
 }

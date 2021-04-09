@@ -3,8 +3,6 @@
 
 .main {
   @include media-max-width {
-    height: 60vh;
-    overflow-y: auto;
   }
   @include media-desktop {
   }
