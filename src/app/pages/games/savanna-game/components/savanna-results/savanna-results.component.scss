@@ -2,10 +2,16 @@
 
 .savanna-body {
     width: 100vw;
-    height: 60vh;
+    height: 80vh;
     background-image: url('../../../../../../assets/img/bg-savanna1.jpg');
     background-size: cover;
     z-index: 2;
+    @media (max-width: 1280px) {
+      height: calc(100vh - 160px);
+    }
+    @media (max-width: 1025px) {
+      height: calc(100vh - 54px);
+    }
   }
 
 
@@ -48,6 +54,6 @@
 
 .savanna-results-errors {
     position: absolute;
-    top: 40%;
+    top: 42%;
     left: 45%;
 }

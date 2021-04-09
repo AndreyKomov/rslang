@@ -143,9 +143,9 @@ export class SavannaGameComponent implements OnInit {
         this.setClassToFallingWord();
         this.startGame();
       }
-      if (this.savannaWrongAnswers === 5) {
-        this.router.navigateByUrl('/games/savanna/savannagame/savannaresults');
-      }
+      // if (this.savannaWrongAnswers === 5) {
+      //   this.router.navigateByUrl('/games/savanna/savannagame/savannaresults');
+      // }
     }, 8000);
     this.buttonClicked = false;
   }
