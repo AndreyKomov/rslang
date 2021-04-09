@@ -83,12 +83,13 @@ export class ConstructorGameComponent implements OnInit {
     this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe(data => {
       this.word = data[this.raund].word;
       this.translateWord = data[this.raund].wordTranslate;
-      this.context = data[this.raund].textExample;
+      this.context = data[this.raund].word + ' ' + data[this.raund].transcription + ' - ' + data[this.raund].wordTranslate;
       this.baseImgUrl += data[this.raund].image;
       for (let i = 0; i < this.word.length; i++) {
         this.rightLettersArr.push('');
       }
       this.letterArr = this.getReadyForGameWord(this.word);
+      console.log(data);
     });
   }
 
