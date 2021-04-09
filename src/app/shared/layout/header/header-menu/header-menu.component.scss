@@ -22,28 +22,38 @@
   @include media-mobile {
     display: flex;
     flex-direction: column;
-    background-color: green;
   }
 
   & .menu {
     display: block;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.25px;
     &__list {
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
+      padding-left: 0;
+
       @include media-mobile {
         display: flex;
         flex-direction: column;
-        background-color: green;
       }
     }
     &__item {
       text-transform: uppercase;
-      margin: 0 5%;
+      margin: 0;
     }
     &__link {
+      display: block;
+      padding: 0 5px;
       color: $header-text-color;
+
+      @include media-tablet-landscape {
+        font-size: 14px;
+      }
+
+      @include media-tablet-portrait {
+        font-size: 14px;
+      }
       &:hover {
         font-weight: bold;
       }
@@ -52,5 +62,6 @@
 
   & .active {
     font-weight: bold;
+    text-decoration: underline;
   }
 }
