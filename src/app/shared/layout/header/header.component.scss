@@ -3,7 +3,6 @@
 
 :host {
   display: flex;
-  margin-right: auto;
   @include media-max-width {
     @include main-header-grid;
     height: 20vh;
@@ -13,7 +12,7 @@
   }
   @include media-desktop {
     height: 160px;
-    padding: 0 5%;
+    padding: 0 2px;
     & div {
       margin-top: 20px;
     }
@@ -29,5 +28,5 @@
   background: url('../../../../assets/img/header-bg.png') no-repeat;
   background-position: right;
   background-size: contain;
-  padding: 0 5%;
+  padding: 0 2px;
 }

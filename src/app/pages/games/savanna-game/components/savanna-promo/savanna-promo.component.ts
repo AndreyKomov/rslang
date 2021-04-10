@@ -2,14 +2,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-audiocall-promo',
-  templateUrl: './audiocall-promo.component.html',
-  styleUrls: ['./audiocall-promo.component.scss'],
+  selector: 'app-savanna-promo',
+  templateUrl: './savanna-promo.component.html',
+  styleUrls: ['./savanna-promo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AudiocallPromoComponent implements OnInit {
+export class SavannaPromoComponent implements OnInit {
   startFromMenu;
-
   groupValue = 1;
   pageValue = 1;
 

@@ -2,6 +2,6 @@
 <main class="main">
   <router-outlet></router-outlet>
 </main>
-<footer app-footer></footer>
+<footer app-footer *ngIf="footerVisibility"></footer>
 
-<app-registration [isShow]="value" (clickAutnBtnEvent)="openModal($event)"></app-registration>
+<app-registration [isShow]="showModal" (clickAutnBtnEvent)="openModal($event)"></app-registration>

@@ -3,8 +3,6 @@
 
 .main {
   @include media-max-width {
-    height: 60vh;
-    overflow-y: auto;
   }
   @include media-desktop {
   }
@@ -17,6 +15,7 @@
 
   display: flex;
   flex-flow: column;
+  flex-grow: 1;
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 5px;
