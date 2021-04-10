@@ -9,10 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import WordsApiService from './server/api';
 import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
-import RegistrationComponent from './pages/registration/registration/registration.component';
 
 @NgModule({
-  declarations: [AppComponent, RegistrationComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

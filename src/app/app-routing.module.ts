@@ -27,6 +27,13 @@ const routes: Routes = [
     path: ParamKey.team,
     loadChildren: (): any => import('./pages/team/team.module').then((module) => module.TeamModule),
   },
+  {
+    path: ParamKey.wordConstructor,
+    loadChildren: (): any =>
+      import('./pages/constructor-game/constructor-game.module').then(
+        (module) => module.ConstructorGameModule
+      ),
+  },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];
 
