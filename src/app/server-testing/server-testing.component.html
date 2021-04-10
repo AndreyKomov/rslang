@@ -1,55 +1,48 @@
 <div class="container">
-<h1>Welcome to testing</h1>
-<button type="button" (click)="getWordById()">wordById</button>
-{{wordById}}
-<h3>Words</h3>
-<h3>getUser</h3>
- {{getUser}}
-<h3>createUser</h3>
-<input
-    style="display: none"
-    #fileInput
-    type="file" (change)="onFileSelected($event)" >
-    <button type="button" (click)="fileInput.click()">Pick File</button>
-    <button type="button" (click)="createUser()">createUser</button>
-<h3>updateUser</h3>
-<input
-    style="display: none"
-    #fileInput
-    type="file" (change)="onFileSelected($event)" >
-    <button type="button" (click)="fileInput.click()">Pick File</button>
-    <button type="button" (click)="updateUser()">updateUser</button>
-<h3>signIn</h3>
-<button type="button" (click)="signIn()">signIn</button>
-<h3>createUserWord</h3>
-<button type="button" (click)="createUserWord()">createdUserWord</button>
- {{createdUserWord}}
- <h3>getAllUsersWords</h3>
- <button type="button" (click)="getAllUsersWords()">getAllUsersWords</button>
- {{getedAllUsersWords}}
- <h3>getUserWordById</h3>
- <button type="button" (click)="getUserWordById()">getUserWordById</button>
- {{getedUserWordById}}
- <h3>updateUserWord</h3>
- <button type="button" (click)="updateUserWord()">updateUserWord</button>
- {{updatedUserWord}}
- <h3>deleteUserWord</h3>
- <button type="button" (click)="deleteUserWord()">deleteUserWord</button>
- {{deletedUserWord}}
- <h3>setUserSettings</h3>
- <button type="button" (click)="setUserSettings()">setUserSettings</button>
- {{setedUserSettings}}
- <h3>getUserSettings</h3>
- <button type="button" (click)="getUserSettings()">getUserSettings</button>
- {{getedUserSettings}}
- <h3>setUserStatistic</h3>
- <button type="button" (click)="setUserStatistic()">setUserStatistic</button>
- {{setedUserStatistic}}
+  <h1>Welcome to testing</h1>
+  <button type="button" (click)="getWordById()">wordById</button>
+  {{ wordById }}
+  <h3>Words</h3>
+  <h3>getUser</h3>
+  {{ getUser }}
+  <h3>createUser</h3>
+  <input style="display: none" #fileInput type="file" (change)="onFileSelected($event)" />
+  <button type="button" (click)="fileInput.click()">Pick File</button>
+  <button type="button" (click)="createUser()">createUser</button>
+  <h3>updateUser</h3>
+  <input style="display: none" #fileInput type="file" (change)="onFileSelected($event)" />
+  <button type="button" (click)="fileInput.click()">Pick File</button>
+  <button type="button" (click)="updateUser()">updateUser</button>
+  <h3>signIn</h3>
+  <button type="button" (click)="signIn()">signIn</button>
+  <h3>createUserWord</h3>
+  <button type="button" (click)="createUserWord()">createdUserWord</button>
+  {{ createdUserWord }}
+  <h3>getAllUsersWords</h3>
+  <button type="button" (click)="getAllUsersWords()">getAllUsersWords</button>
+  {{ getedAllUsersWords }}
+  <h3>getUserWordById</h3>
+  <button type="button" (click)="getUserWordById()">getUserWordById</button>
+  {{ getedUserWordById }}
+  <h3>updateUserWord</h3>
+  <button type="button" (click)="updateUserWord()">updateUserWord</button>
+  {{ updatedUserWord }}
+  <h3>deleteUserWord</h3>
+  <button type="button" (click)="deleteUserWord()">deleteUserWord</button>
+  {{ deletedUserWord }}
+  <h3>setUserSettings</h3>
+  <button type="button" (click)="setUserSettings()">setUserSettings</button>
+  {{ setedUserSettings }}
+  <h3>getUserSettings</h3>
+  <button type="button" (click)="getUserSettings()">getUserSettings</button>
+  {{ getedUserSettings }}
+  <h3>setUserStatistic</h3>
+  <button type="button" (click)="setUserStatistic()">setUserStatistic</button>
+  {{ setedUserStatistic }}
   <h3>getUserStatistic</h3>
- <button type="button" (click)="getUserStatistic()">getUserStatistic</button>
- {{getedUserStatistic}}
- <h3>refreshTokenUser</h3>
- <button type="button" (click)="refreshTokenUser()">refreshTokenUser</button>
- {{refreshedTokenUser}}
+  <button type="button" (click)="getUserStatistic()">getUserStatistic</button>
+  {{ getedUserStatistic }}
+  <h3>refreshTokenUser</h3>
+  <button type="button" (click)="refreshTokenUser()">refreshTokenUser</button>
+  {{ refreshedTokenUser }}
 </div>
-
