@@ -19,7 +19,9 @@ export class RegistrationService {
             }
           )
         : imgPath[0];
-    this.apiService.createUser(name, email, password, newFile).subscribe((res: string) => res);
+    this.apiService.createUser(name, email, password, newFile).subscribe(() => {
+      this.logIn(password, email);
+    });
   }
 
   logIn(password: string, email: string): void {

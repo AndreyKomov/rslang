@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { RegistrationService } from '../services/registration.service';
@@ -18,6 +19,7 @@ import { IFileModel } from '../models/FileModel';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class RegistrationComponent implements OnInit {
+  @ViewChild('avatar') avatar;
   @Output() clickAutnBtnEvent = new EventEmitter<string>();
   @Input() isShow;
   modalName = 'Registration';
@@ -62,6 +64,7 @@ export default class RegistrationComponent implements OnInit {
     reader.readAsDataURL(files[0]);
     reader.onload = () => {
       this.imgURL = reader.result;
+      this.avatar.nativeElement.src = this.imgURL;
     };
   }
 

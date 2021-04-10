@@ -26,7 +26,13 @@
         id="password"
         maxlength="25"
       />
-      <img [src]="imgURL" alt="avatar" class="modal-content__avatar" *ngIf="!isLoginTemplate" />
+      <img
+        [src]="imgURL"
+        alt="avatar"
+        class="modal-content__avatar"
+        *ngIf="!isLoginTemplate"
+        #avatar
+      />
       <input
         #file
         type="file"
