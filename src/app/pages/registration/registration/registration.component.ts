@@ -24,7 +24,7 @@ export default class RegistrationComponent implements OnInit {
   isLoginTemplate = false;
   registrationForm: IRegForm;
   imgURL: ArrayBuffer | string = '../../../../assets/img/no-avatar.png';
-  imagePath: IFileModel;
+  imagePath: IFileModel[];
 
   constructor(private fb: FormBuilder, private registrationService: RegistrationService) {}
 
@@ -43,7 +43,10 @@ export default class RegistrationComponent implements OnInit {
           Validators.pattern(/^[A-Za-z].*$/),
         ],
       ],
-      email: ['', [Validators.required, Validators.email]],
+      email: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)],
+      ],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(25)]],
     });
   }
@@ -55,8 +58,7 @@ export default class RegistrationComponent implements OnInit {
     }
 
     const reader = new FileReader();
-    const file = files[0];
-    this.imagePath = file;
+    this.imagePath = files;
     reader.readAsDataURL(files[0]);
     reader.onload = () => {
       this.imgURL = reader.result;
