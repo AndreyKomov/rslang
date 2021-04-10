@@ -41,7 +41,7 @@
     <div *ngIf="display" class="{{gameClass}}">
            
                 <div *ngIf="displayStatistics" class="{{gameClass}}">
-                    <div class="statistic">
+                    <div class="{{statisticClass}}">
                         <div class=" {{confettiClass}} ">
                             <div class="{{chosenWordCardClass}}">
                                 {{describeWordBlockTranslation}} 
@@ -52,7 +52,7 @@
                             <div >
                                 <h2>
                                 Уровень пройден 
-                                <button  class="gradient-button-sound" (click)=ChangeWindowSize()>
+                                <button  class="gradient-button-sound" (click)=ChangeWindowSizeStatistic()>
                                      <img src="https://cdn2.iconfinder.com/data/icons/media-player-ui/512/Media-Icon-23-512.png"width="30" height="30" alt="fullScreenButton">
                                 </button>
                                 </h2>

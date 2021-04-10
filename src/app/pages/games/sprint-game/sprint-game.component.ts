@@ -52,6 +52,8 @@ export class SprintGameComponent implements OnInit {
   gameClass:string|null;
   levelAndRoundChoice:string|null;
   checkFullScreenSize:boolean|null;
+  checkFullScreenSizeStatistic:boolean|null;
+  statisticClass:string|null;
 
   constructor(public api: WordApiServiceComponent, private cdr: ChangeDetectorRef) {}
  
@@ -60,7 +62,8 @@ export class SprintGameComponent implements OnInit {
    this.startScreenClass='start-screen';
    this.classHeaderContainer='header-container';
    this.gameClass='game';
-   this.levelAndRoundChoice=''
+   this.levelAndRoundChoice='';
+   this.statisticClass='statistic';
  }
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -340,8 +343,15 @@ export class SprintGameComponent implements OnInit {
  ChangeWindowSize(){
  this.checkFullScreenSize=!this.checkFullScreenSize;
  if(this.checkFullScreenSize){
-   console.log(this.checkFullScreenSize)
+  this.gameClass='game-full-screen';
  }
-
+ else {  this.gameClass='game'}
  }
-}
+ ChangeWindowSizeStatistic(){
+  this.checkFullScreenSizeStatistic=!this.checkFullScreenSizeStatistic;
+  if(this.checkFullScreenSizeStatistic){
+    this.statisticClass='statistic-full-screen';
+   }
+   else {  this.statisticClass='statistic'}
+   }
+ }
