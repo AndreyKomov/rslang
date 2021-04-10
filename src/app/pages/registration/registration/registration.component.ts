@@ -1,34 +1,35 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import RegistrationService from '../services/registration.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import RegistrationService from '../services/registration.service';
 import { IRegForm } from '../models/RegFormsModel';
+import { IFileModel } from '../models/FileModel';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class RegistrationComponent implements OnInit, OnChanges {
+export default class RegistrationComponent implements OnInit {
   @Output() clickAutnBtnEvent = new EventEmitter<string>();
   @Input() isShow;
   modalName = 'Registration';
   isLoginTemplate = false;
   registrationForm: IRegForm;
   imgURL: ArrayBuffer | string = '../../../../assets/img/no-avatar.png';
-  imagePath: File;
+  imagePath: IFileModel;
 
   constructor(private fb: FormBuilder, private registrationService: RegistrationService) {}
 
   ngOnInit(): void {
     this.initForm();
-  }
-
-  ngOnChanges(changes): void {
-    let data = {...changes};
-    if (data.previousValue !== undefined) {
-      this.isShow = data.isShow.currentChanges;
-    }
   }
 
   initForm(): void {
@@ -47,14 +48,15 @@ export default class RegistrationComponent implements OnInit, OnChanges {
     });
   }
 
-  preview(files: File): void {
-    const mimeType = files[0].type;
+  preview(files: IFileModel[]): void {
+    const mimeType: string = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
       return;
     }
 
     const reader = new FileReader();
-    this.imagePath = files;
+    const file = files[0];
+    this.imagePath = file;
     reader.readAsDataURL(files[0]);
     reader.onload = () => {
       this.imgURL = reader.result;
@@ -68,8 +70,12 @@ export default class RegistrationComponent implements OnInit, OnChanges {
 
   changeModal(): void {
     this.modalName = this.modalName === 'Registration' ? 'Login' : 'Registration';
-    this.modalName === 'Registration' ? this.registrationForm.controls['name'].enable() : this.registrationForm.controls['name'].disable();
     this.isLoginTemplate = !this.isLoginTemplate;
+    if (this.isLoginTemplate) {
+      this.registrationForm.controls.name.disable();
+    } else {
+      this.registrationForm.controls.name.enable();
+    }
   }
 
   isControlInvalid(controlName: string): boolean {
