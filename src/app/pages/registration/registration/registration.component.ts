@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import RegistrationService from '../services/registration.service';
+import { RegistrationService } from '../services/registration.service';
 import { IRegForm } from '../models/RegFormsModel';
 import { IFileModel } from '../models/FileModel';
 

@@ -10,7 +10,6 @@ import WordsApiService from './server/api';
 import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
 import RegistrationComponent from './pages/registration/registration/registration.component';
-import RegistrationService from './pages/registration/services/registration.service';
 
 @NgModule({
   declarations: [AppComponent, RegistrationComponent],
@@ -23,7 +22,7 @@ import RegistrationService from './pages/registration/services/registration.serv
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [WordsApiService, RegistrationService],
+  providers: [WordsApiService],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}
