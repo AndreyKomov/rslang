@@ -3,7 +3,6 @@
 
 :host {
   display: flex;
-  margin-right: auto;
   @include media-max-width {
     @include main-header-grid;
     height: 20vh;
