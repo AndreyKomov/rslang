@@ -10,9 +10,10 @@ import WordsApiService from './server/api';
 import RegistrationComponent from './pages/registration/registration/registration.component';
 import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
+import { ConstructorGameComponent } from './pages/constructor-game/constructor-game.component';
 
 @NgModule({
-  declarations: [AppComponent, RegistrationComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

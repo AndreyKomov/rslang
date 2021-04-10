@@ -4,10 +4,11 @@ export enum ParamKey {
   textBook = 'textbook',
   team = 'team',
   games = 'games',
+  wordConstructor = 'words-puzzle',
   statistic = 'statistic',
   savannaPromo = 'savanna',
   audiocallPromo = 'audiocall',
-  audiocallGame = 'audiocallgame',
+  audiocallGame = 'audiocallgame'
 }
 
 export enum QueryParamKey {
