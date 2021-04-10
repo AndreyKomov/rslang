@@ -7,12 +7,32 @@ const routes: Routes = [
   { path: ParamKey.promo, component: PromoComponent, pathMatch: 'full' },
   { path: ParamKey.promo, component: PromoComponent },
   {
+    path: `${ParamKey.games}/${ParamKey.audiocallPromo}`,
+    loadChildren: (): any =>
+      import('./pages/games/audiocall-game/audiocall.module').then(
+        (module) => module.AudiocallModule
+      ),
+  },
+  {
+    path: `${ParamKey.games}/${ParamKey.savannaPromo}`,
+    loadChildren: (): any =>
+      import('./pages/games/savanna-game/savanna.module').then((module) => module.SavannaModule),
+  },
+  {
+    path: `${ParamKey.games}/${ParamKey.sprintGame}`,
+    loadChildren: (): any =>
+      import('./pages/games/sprint-game/sprint-game.module').then(
+        (module) => module.SprintGameModule
+      ),
+  },
+  {
     path: ParamKey.games,
-    loadChildren: () => import('./pages/games/games.module').then((module) => module.GamesModule),
+    loadChildren: (): any =>
+      import('./pages/game-page/game-page.module').then((module) => module.GamePageModule),
   },
   {
     path: ParamKey.team,
-    loadChildren: () => import('./pages/team/team.module').then((module) => module.TeamModule),
+    loadChildren: (): any => import('./pages/team/team.module').then((module) => module.TeamModule),
   },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];

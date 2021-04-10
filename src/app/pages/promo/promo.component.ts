@@ -8,4 +8,12 @@ import { Component, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 })
 export class PromoComponent {
   @HostBinding('class') class = 'promo';
+  decriptionCondition = true;
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  showHiddenContent() {
+    this.decriptionCondition = !this.decriptionCondition;
+  }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener,OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import WordApiServiceComponent from '../../../server/api';
 
 export enum KEY_CODE {
@@ -16,15 +16,15 @@ export class SprintGameComponent implements OnInit {
   displayStatistics = false;
   level = 0;
   round = 0;
-  wordsList: object | null;
-  words: object | null;
-  translations: object | null;
+  wordsList: any | null;
+  words: any | null;
+  translations: any | null;
   index = 0;
   wordsYouKnowQuantity = 0;
   wordsYouDontKnowQuantity = 0;
   rightWords = [];
   wrongWords = [];
-  isCheckedWord: object | null;
+  isCheckedWord: any | null;
   audioTimerSound = new Audio();
   AudioWrongAnswer = new Audio();
   AudioRightAnswer = new Audio();
@@ -46,25 +46,26 @@ export class SprintGameComponent implements OnInit {
   chosenWordCardClass: string | null;
   closeWordCardButtonClass: string | null;
   confettiClass: string | null;
-  promoInfoClass:string|null;
-  startScreenClass:string|null;
-  classHeaderContainer:string|null;
-  gameClass:string|null;
-  levelAndRoundChoice:string|null;
-  checkFullScreenSize:boolean|null;
-  checkFullScreenSizeStatistic:boolean|null;
-  statisticClass:string|null;
+  promoInfoClass: string | null;
+  startScreenClass: string | null;
+  classHeaderContainer: string | null;
+  gameClass: string | null;
+  levelAndRoundChoice: string | null;
+  checkFullScreenSize: boolean | null;
+  checkFullScreenSizeStatistic: boolean | null;
+  statisticClass: string | null;
 
   constructor(public api: WordApiServiceComponent, private cdr: ChangeDetectorRef) {}
- 
- ngOnInit() {
-   this.promoInfoClass='';
-   this.startScreenClass='start-screen';
-   this.classHeaderContainer='header-container';
-   this.gameClass='game';
-   this.levelAndRoundChoice='';
-   this.statisticClass='statistic';
- }
+
+  ngOnInit() {
+    this.promoInfoClass = '';
+    this.startScreenClass = 'start-screen';
+    this.classHeaderContainer = 'header-container';
+    this.gameClass = 'game';
+    this.levelAndRoundChoice = '';
+    this.statisticClass = 'statistic';
+  }
+
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
@@ -80,7 +81,7 @@ export class SprintGameComponent implements OnInit {
     }
   }
 
-  playAudioTimer() {
+  playAudioTimer(): void {
     if (this.isSoundOn) {
       this.audioTimerSound.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_timer.mp3?raw=true`;
       this.audioTimerSound.load();
@@ -224,9 +225,9 @@ export class SprintGameComponent implements OnInit {
       this.index = 0;
       this.isSoundOn = false;
       this.closeWordCardButtonClass = 'hidden';
-      this.promoInfoClass= 'hidden';
-      this.gameClass='game-switched-off';
-      this.levelAndRoundChoice='hidden'
+      this.promoInfoClass = 'hidden';
+      this.gameClass = 'game-switched-off';
+      this.levelAndRoundChoice = 'hidden';
     }
   }
 
@@ -331,27 +332,34 @@ export class SprintGameComponent implements OnInit {
     this.closeWordCardButtonClass = 'hidden';
     this.chosenWordCardClass = 'hidden';
   }
-   ClosestartScreenClass() {
-    this.promoInfoClass= 'hidden';
+
+  ClosestartScreenClass() {
+    this.promoInfoClass = 'hidden';
   }
-  CloseHeaderContainerClass(){
-    this.classHeaderContainer='hidden';
+
+  CloseHeaderContainerClass() {
+    this.classHeaderContainer = 'hidden';
   }
- CloseLevelAndRoundChoice(){
-   this.levelAndRoundChoice='hidden'
- }
- ChangeWindowSize(){
- this.checkFullScreenSize=!this.checkFullScreenSize;
- if(this.checkFullScreenSize){
-  this.gameClass='game-full-screen';
- }
- else {  this.gameClass='game'}
- }
- ChangeWindowSizeStatistic(){
-  this.checkFullScreenSizeStatistic=!this.checkFullScreenSizeStatistic;
-  if(this.checkFullScreenSizeStatistic){
-    this.statisticClass='statistic-full-screen';
-   }
-   else {  this.statisticClass='statistic'}
-   }
- }
+
+  CloseLevelAndRoundChoice() {
+    this.levelAndRoundChoice = 'hidden';
+  }
+
+  ChangeWindowSize() {
+    this.checkFullScreenSize = !this.checkFullScreenSize;
+    if (this.checkFullScreenSize) {
+      this.gameClass = 'game-full-screen';
+    } else {
+      this.gameClass = 'game';
+    }
+  }
+
+  ChangeWindowSizeStatistic() {
+    this.checkFullScreenSizeStatistic = !this.checkFullScreenSizeStatistic;
+    if (this.checkFullScreenSizeStatistic) {
+      this.statisticClass = 'statistic-full-screen';
+    } else {
+      this.statisticClass = 'statistic';
+    }
+  }
+}

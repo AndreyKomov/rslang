@@ -2,6 +2,7 @@
 @import 'mixins';
 
 :host {
+  display: flex;
   @include media-max-width {
     @include main-header-grid;
     height: 20vh;
@@ -10,9 +11,8 @@
     }
   }
   @include media-desktop {
-    @include main-template-grid;
     height: 160px;
-    padding: 0 5%;
+    padding: 0 2px;
     & div {
       margin-top: 20px;
     }
@@ -22,10 +22,11 @@
   @include media-tablet-portrait {
   }
   @include media-mobile {
+    display: flex;
+    flex-direction: column;
   }
-  display: grid;
   background: url('../../../../assets/img/header-bg.png') no-repeat;
   background-position: right;
   background-size: contain;
-  padding: 0 5%;
+  padding: 0 2px;
 }
