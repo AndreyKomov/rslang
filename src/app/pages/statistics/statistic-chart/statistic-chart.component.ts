@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
@@ -8,8 +8,11 @@ import { Color, Label } from 'ng2-charts';
   styleUrls: ['./statistic-chart.component.scss'],
 })
 export class StatisticChartComponent {
-  lineChartData: ChartDataSets[] = [{ data: [0], label: 'Изучено слов в день' }];
-  lineChartLabels: Label[] = ['День 1'];
+  @Input()
+  wordsToday: number;
+
+  lineChartData: ChartDataSets[];
+  lineChartLabels: Label[];
   lineChartOptions = {
     responsive: true,
   };
@@ -24,4 +27,9 @@ export class StatisticChartComponent {
   lineChartLegend = true;
   lineChartPlugins = [];
   lineChartType = 'line';
+
+  ngOnInit(): void {
+    this.lineChartData = [{ data: [this.wordsToday], label: 'Изучено слов в день' }];
+    this.lineChartLabels = ['День 1'];
+  }
 }
