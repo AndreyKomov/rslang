@@ -1,66 +1,74 @@
 [
-  {"name":"Бороненков Сергей",
-    "position":"developer",
-    "photo":"../../../../assets/img/photo/photo_2021-03-28_17-30-15.jpg",
-    "description":"Реализовал страницу нашей команды",
-    "gitHub":"https://github.com/cup0ra",
-    "telegram":"https://t.me/cupora",
-    "linkedIn":"https://www.linkedin.com/in/siarhei-baranenkau-898bab1b2/"
+  {
+    "name": "Бороненков Сергей",
+    "position": "developer",
+    "photo": "../../../../assets/img/photo/photo_2021-03-28_17-30-15.jpg",
+    "description": "Реализовал страницу нашей команды",
+    "gitHub": "https://github.com/cup0ra",
+    "telegram": "https://t.me/cupora",
+    "linkedIn": "https://www.linkedin.com/in/siarhei-baranenkau-898bab1b2/"
   },
-    {"name":"Комов Андрей",
-      "position":"team lead",
-      "photo":"../../../../assets/img/photo/komov.jpg",
-      "description":"Пинал всех и вся. Организовал работу команды. Реализовал игру Аудиоколл. Занимался стиливым оформлением.",
-      "gitHub":"https://github.com/AndreyKomov/",
-      "telegram":"https://t.me/kavershteinman",
-      "linkedIn":"https://www.linkedin.com/in/andrey-komov-31162918b/"
-    },
-    {"name":"Голденков Виталий",
-      "position":"developer",
-      "photo":"../../../../assets/img/photo/Vitali.jpg",
-      "description":"Принял участие в работе с бэкэндом, созданию взаимодействия с сервером, реализовал методы загрузки и изменения аватаров пользователя. Разработал игру Саванна",
-      "gitHub":"https://github.com/GoldenkovVitali",
-      "telegram":"https://t.me/VitalikHV",
-      "linkedIn":""
-    },
-    {"name":"",
-      "position":"developer",
-      "photo":"../../../../assets/img/photo/Unknown-person.gif",
-      "description":"Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
-      "gitHub":"",
-      "telegram":"",
-      "linkedIn":""
-    },
-    {"name":"",
-      "position":"developer",
-      "photo":"../../../../assets/img/photo/Unknown-person.gif",
-      "description":"Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
-      "gitHub":"",
-      "telegram":"",
-      "linkedIn":""
-    },
-    {"name":"",
-      "position":"developer",
-      "photo":"../../../../assets/img/photo/Unknown-person.gif",
-      "description":"Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
-      "gitHub":"",
-      "telegram":"",
-      "linkedIn":""
-    },
-    {"name":"",
-      "position":"developer",
-      "photo":"../../../../assets/img/photo/Unknown-person.gif",
-      "description":"Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
-      "gitHub":"",
-      "telegram":"",
-      "linkedIn":""
-    },
-    {"name":"",
-      "position":"developer",
-      "photo":"../../../../assets/img/photo/Unknown-person.gif",
-      "description":"Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
-      "gitHub":"",
-      "telegram":"",
-      "linkedIn":""
-    }
-  ]
+  {
+    "name": "Комов Андрей",
+    "position": "team lead",
+    "photo": "../../../../assets/img/photo/komov.jpg",
+    "description": "Пинал всех и вся. Организовал работу команды. Реализовал игру Аудиоколл. Занимался стиливым оформлением.",
+    "gitHub": "https://github.com/AndreyKomov/",
+    "telegram": "https://t.me/kavershteinman",
+    "linkedIn": "https://www.linkedin.com/in/andrey-komov-31162918b/"
+  },
+  {
+    "name": "Голденков Виталий",
+    "position": "developer",
+    "photo": "../../../../assets/img/photo/Vitali.jpg",
+    "description": "Принял участие в работе с бэкэндом, созданию взаимодействия с сервером, реализовал методы загрузки и изменения аватаров пользователя. Разработал игру Саванна",
+    "gitHub": "https://github.com/GoldenkovVitali",
+    "telegram": "https://t.me/VitalikHV",
+    "linkedIn": ""
+  },
+  {
+    "name": "Константин Кравцов",
+    "position": "developer",
+    "photo": "../../../../assets/img/photo/Kravtsov.png",
+    "description": "Сделал фронт-енд регистрации и игру конструктор слов",
+    "gitHub": "https://github.com/Yeeeeee1",
+    "telegram": "",
+    "linkedIn": ""
+  },
+  {
+    "name": "",
+    "position": "developer",
+    "photo": "../../../../assets/img/photo/Unknown-person.gif",
+    "description": "Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
+    "gitHub": "",
+    "telegram": "",
+    "linkedIn": ""
+  },
+  {
+    "name": "",
+    "position": "developer",
+    "photo": "../../../../assets/img/photo/Unknown-person.gif",
+    "description": "Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
+    "gitHub": "",
+    "telegram": "",
+    "linkedIn": ""
+  },
+  {
+    "name": "",
+    "position": "developer",
+    "photo": "../../../../assets/img/photo/Unknown-person.gif",
+    "description": "Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
+    "gitHub": "",
+    "telegram": "",
+    "linkedIn": ""
+  },
+  {
+    "name": "",
+    "position": "developer",
+    "photo": "../../../../assets/img/photo/Unknown-person.gif",
+    "description": "Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
+    "gitHub": "",
+    "telegram": "",
+    "linkedIn": ""
+  }
+]
