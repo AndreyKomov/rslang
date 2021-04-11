@@ -6,14 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import AppComponent from '@app/app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import WordsApiService from './server/api';
-import RegistrationComponent from './pages/registration/registration/registration.component';
+import WordsApiServiceComponent from './server/api';
 import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
-import { ConstructorGameComponent } from './pages/constructor-game/constructor-game.component';
+import RegistrationComponent from './pages/registration/registration/registration.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RegistrationComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -23,7 +22,7 @@ import { ConstructorGameComponent } from './pages/constructor-game/constructor-g
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [WordsApiService],
+  providers: [WordsApiServiceComponent],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}

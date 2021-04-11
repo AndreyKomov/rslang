@@ -1,10 +1,10 @@
-import { Component, Directive, ElementRef, HostBinding, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import WordsApiServiceComponent from '@app/server/api';
+import { Component, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
+import WordsApiServiceComponent from '../../server/api';
 
 @Component({
   selector: 'app-constructor-game',
   templateUrl: './constructor-game.component.html',
-  styleUrls: ['./constructor-game.component.scss']
+  styleUrls: ['./constructor-game.component.scss'],
 })
 export class ConstructorGameComponent implements OnInit {
   @HostBinding('class.fullscreen') changeFullscreen = false;
@@ -67,8 +67,7 @@ export class ConstructorGameComponent implements OnInit {
 
   constructor(private apiService: WordsApiServiceComponent) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   nextRaund(): void {
     this.isUserDoMistake = false;
@@ -81,10 +80,15 @@ export class ConstructorGameComponent implements OnInit {
     this.word = '';
     this.letterArr = [];
     this.rightLettersArr = [];
-    this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe(data => {
+    this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe((data) => {
       this.word = data[this.raund].word;
       this.translateWord = data[this.raund].wordTranslate;
-      this.context = data[this.raund].word + ' ' + data[this.raund].transcription + ' - ' + data[this.raund].wordTranslate;
+      this.context =
+        data[this.raund].word +
+        ' ' +
+        data[this.raund].transcription +
+        ' - ' +
+        data[this.raund].wordTranslate;
       this.baseImgUrl += data[this.raund].image;
       for (let i = 0; i < this.word.length; i++) {
         this.rightLettersArr.push('');
@@ -104,7 +108,7 @@ export class ConstructorGameComponent implements OnInit {
     this.letterArr = [];
 
     this.isUserDoMistake = true;
-    
+
     this.endRaund();
 
     if (this.raund > 10) {
@@ -135,17 +139,14 @@ export class ConstructorGameComponent implements OnInit {
         this.raund = 0;
         this.showResult = true;
       }
-    } 
-    else if (event.key !== this.word[this.placeIndex]) {
+    } else if (event.key !== this.word[this.placeIndex]) {
       this.isUserDoMistake = true;
       for (let i = 0; i < this.keysBlock.nativeElement.children.length; i++) {
-          this.isMistake = true;
-      setTimeout(() => {
-        this.isMistake = false;
-      }, 500);
-        }
-      
-      
+        this.isMistake = true;
+        setTimeout(() => {
+          this.isMistake = false;
+        }, 500);
+      }
     }
   }
 

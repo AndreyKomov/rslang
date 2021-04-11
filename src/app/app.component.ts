@@ -9,6 +9,12 @@ import { ParamKey } from './app-routing.enum';
 })
 export default class AppComponent {
   footerVisibility = true;
+  showModal = '';
+
+  openModal(value: string): void {
+    this.showModal = value;
+  }
+
   constructor(private router: Router) {
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationStart) {
