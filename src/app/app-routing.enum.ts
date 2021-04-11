@@ -4,13 +4,13 @@ export enum ParamKey {
   textBook = 'textbook',
   team = 'team',
   games = 'games',
-  textbook = 'textbook',
+  wordConstructor = 'words-puzzle',
   statistic = 'statistic',
   savannaPromo = 'savanna',
   audiocallPromo = 'audiocall',
-  audiocallGame = 'audiocallgame'
+  textbook = 'textbook'
 }
 
 export enum QueryParamKey {
-  redirectTo = '',
+  redirectTo = ''
 }

@@ -28,6 +28,13 @@ const routes: Routes = [
     loadChildren: (): any => import('./pages/team/team.module').then((module) => module.TeamModule),
   },
   {
+    path: ParamKey.wordConstructor,
+    loadChildren: (): any =>
+      import('./pages/constructor-game/constructor-game.module').then(
+        (module) => module.ConstructorGameModule
+      ),
+  },
+  {
     path: ParamKey.textbook,
     loadChildren: (): any =>
       import('./pages/electronic-textbook/electronic-textbook.module').then(

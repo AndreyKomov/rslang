@@ -1,21 +1,33 @@
 import { Injectable } from '@angular/core';
+import WordsApiServiceComponent from '@app/server/api';
 
-@Injectable({
-  providedIn: 'root',
-})
-export default class RegistrationService {
-  static signIn(
-    name: string,
-    password: string,
-    email: string,
-    imgPath: string | ArrayBuffer
-  ): void {
-    // eslint-disable-next-line no-console
-    console.log(name, password, email, imgPath);
+import { IFileModel } from '../models/FileModel';
+import { IUserDataModel } from '../models/userDataModel';
+
+@Injectable({ providedIn: 'root' })
+export class RegistrationService {
+  constructor(private apiService: WordsApiServiceComponent) {}
+
+  singUp(name: string, password: string, email: string, imgPath: IFileModel[]): void {
+    const newFile =
+      imgPath === undefined
+        ? new File(
+            ['../../../../assets/img/no-avatar.png'],
+            '../../../../assets/img/no-avatar.png',
+            {
+              type: 'image/jpg',
+            }
+          )
+        : imgPath[0];
+    this.apiService.createUser(name, email, password, newFile).subscribe(() => {
+      this.logIn(password, email);
+    });
   }
 
-  static logIn(name: string, password: string, email: string, imgPath: string | ArrayBuffer): void {
-    // eslint-disable-next-line no-console
-    console.log(name, password, email, imgPath);
+  logIn(password: string, email: string): void {
+    this.apiService.signIn(email, password).subscribe((res: IUserDataModel) => {
+      localStorage.setItem('token', res.token);
+      window.location.reload();
+    });
   }
 }
