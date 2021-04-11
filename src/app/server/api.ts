@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -25,11 +25,10 @@ interface Word {
   wordsPerExampleSentence?: number | null;
 }
 
-@Component({
-  template: '',
+@Injectable({
+  providedIn: 'root',
 })
-@Injectable()
-export default class WordsApiServiceComponent {
+export class WordsApiService {
   private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
 
   id: string | null;

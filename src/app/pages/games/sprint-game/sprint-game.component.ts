@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, OnDestroy } from '@angular/core';
-import WordApiServiceComponent from '../../../server/api';
+import { WordsApiService } from '../../../server/api';
 
 export enum KeyCode {
   rightArrow = 39,
@@ -33,7 +33,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   hiddenScore = true;
   timeLeft = 60;
   interval;
-  subscribeTimer: any|null;
+  subscribeTimer: any | null;
   hiddenScoreBlock: boolean | null;
   hiddenScoreClass: string | null;
   riseScoreQuantity: boolean;
@@ -54,14 +54,14 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   checkFullScreenSize: boolean | null;
   checkFullScreenSizeStatistic: boolean | null;
   statisticClass: string | null;
-  ArrayWordsYouKnowQuantity=[];
-  ArrayWordsYouDoNotKnowQuantity=[];
-  percentageKnownWords=[];
-  completeGameDate=[];
-  
+  ArrayWordsYouKnowQuantity = [];
+  ArrayWordsYouDoNotKnowQuantity = [];
+  percentageKnownWords = [];
+  completeGameDate = [];
+
   public activeItem: string;
 
-  constructor(public api: WordApiServiceComponent, private cdr: ChangeDetectorRef) {}
+  constructor(public api: WordsApiService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.promoInfoClass = '';
@@ -91,7 +91,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     }
   }
 
-  playAudioTimer(): void {
+  public playAudioTimer(): void {
     if (this.isSoundOn && this.display) {
       this.audioTimerSound.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_timer.mp3?raw=true`;
       this.audioTimerSound.load();
@@ -99,11 +99,11 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     }
   }
 
-  pauseAudioTimer(): void {
+  private pauseAudioTimer(): void {
     this.audioTimerSound.pause();
   }
 
-  playAudioWrongAnswer(): void {
+  private playAudioWrongAnswer(): void {
     if (this.isSoundOn && this.display) {
       this.AudioWrongAnswer.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_error.mp3?raw=true`;
       this.AudioWrongAnswer.load();
@@ -111,11 +111,11 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     }
   }
 
-  pauseAudioWrongAnswer(): void {
+  private pauseAudioWrongAnswer(): void {
     this.AudioWrongAnswer.pause();
   }
 
-  playAudioRightAnswer(): void {
+  private playAudioRightAnswer(): void {
     if (this.isSoundOn && this.display) {
       this.AudioRightAnswer.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_correct%20.mp3?raw=true`;
       this.AudioRightAnswer.load();
@@ -123,11 +123,11 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     }
   }
 
-  pauseAudioRightAnswer(): void {
+  private pauseAudioRightAnswer(): void {
     this.AudioRightAnswer.pause();
   }
 
-  playAudioEndOfGame(): void {
+  private playAudioEndOfGame(): void {
     if (this.isSoundOn) {
       this.endOGameSound.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_end_of_game.mp3?raw=true`;
       this.endOGameSound.load();
@@ -135,15 +135,15 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     }
   }
 
-  pauseAudioEndOfGame(): void {
+  private pauseAudioEndOfGame(): void {
     this.endOGameSound.pause();
   }
 
-  update(): void {
+  public  update(): void {
     this.display = !this.display;
   }
 
-  updateStatistics(): void {
+  private updateStatistics(): void {
     this.displayStatistics = !this.displayStatistics;
     this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
       this.wordsList = data;
@@ -154,22 +154,22 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     });
   }
 
-  shuffle(array): void {
+   shuffle(array): void {
     return array.sort(() => {
       return 0.5 - Math.random();
     });
   }
 
-  onLevelChange(levelChosen): void {
-    this.timeLeft=60;
-    this.index=0;
+  private onLevelChange(levelChosen): void {
+    this.timeLeft = 60;
+    this.index = 0;
     this.level = Number(levelChosen) - 1;
     this.getWords();
   }
 
-  onRoundChange(roundChosen): void {
-    this.timeLeft=60;
-    this.index=0;
+  private onRoundChange(roundChosen): void {
+    this.timeLeft = 60;
+    this.index = 0;
     this.round = Number(roundChosen) - 1;
     this.getWords();
   }
@@ -177,7 +177,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   createWordsArray = (wordsListChosen) => wordsListChosen.map((item) => item.word);
   createTranscriptionArray = (wordsListChosen) => wordsListChosen.map((item) => item.wordTranslate);
 
-  getWords(): void {
+  public getWords(): void {
     this.rightWords = [];
     this.wrongWords = [];
     this.wordsYouKnowQuantity = 0;
@@ -192,7 +192,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     });
   }
 
-  checkWordTranslationMatch(checkPair): void {
+  private checkWordTranslationMatch(checkPair): void {
     const matchWordCheck = this.words[this.index];
     const matchTranslationCheck = this.translations[this.index];
     let result;
@@ -238,11 +238,11 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.gameClass = 'game-switched-off';
       this.levelAndRoundChoice = 'hidden';
       this.setScoreAndDateToLocalStorage();
-      this.getScoreAndDateToLocalStorage()
+      this.getScoreAndDateToLocalStorage();
     }
   }
 
-  setLevelAndGroup(): void {
+  private setLevelAndGroup(): void {
     const level = this.level + 1;
     const round = this.round + 1;
     localStorage.setItem('level', level.toString());
@@ -253,10 +253,10 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.activeItem = item;
   }
 
-  startTimer(): void {
+  public startTimer(): void {
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
-        this.timeLeft--;
+        this.timeLeft -= 1;
       } else {
         if (this.isSoundOn) {
           this.playAudioWrongAnswer();
@@ -272,17 +272,17 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  pauseTimer(): void {
+  private pauseTimer(): void {
     this.cdr.markForCheck();
     clearInterval(this.interval);
   }
 
-  stopTimer(): void {
+  private stopTimer(): void {
     this.cdr.markForCheck();
     this.timeLeft = 0;
   }
 
-  quitGame(): void {
+  private quitGame(): void {
     this.pauseTimer();
     this.pauseAudioTimer();
     this.level = 0;
@@ -300,12 +300,12 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.hiddenScore = true;
   }
 
-  myFunction(): void {
+  private static myFunction(): void {
     const popup = document.getElementById('myPopup');
     popup.classList.toggle('show');
   }
 
-  delayedHide(): void {
+  private delayedHide(): void {
     if (this.riseScoreQuantity) {
       this.hiddenScoreClass = 'hiddenScore';
 
@@ -316,7 +316,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     }
   }
 
-  delayedConfettiClass(): void {
+  private delayedConfettiClass(): void {
     if (this.wordsYouKnowQuantity >= 10) {
       this.confettiClass = 'confettiClass';
       setTimeout(() => {
@@ -326,7 +326,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     }
   }
 
-  getSelectedWordCardId(): void {
+  private getSelectedWordCardId(): void {
     this.chosenWordCardClass = 'chosenWordCard';
     this.closeWordCardButtonClass = 'closeWordCardButton';
     for (const prop in this.wordsList) {
@@ -372,36 +372,34 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.statisticClass = 'statistic';
     }
   }
-  setScoreAndDateToLocalStorage():void{
-    let percent=this.wordsYouKnowQuantity/(this.wordsYouKnowQuantity+this.wordsYouDoNotKnowQuantity)*100;
-    const today=new Date();
+
+  setScoreAndDateToLocalStorage(): void {
+    const percent =
+      (this.wordsYouKnowQuantity / (this.wordsYouKnowQuantity + this.wordsYouDoNotKnowQuantity)) *
+      100;
+    const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = today.getFullYear();
-    const hour =today.getHours();
-    const minutes=today.getMinutes();
-    const sec=today.getSeconds();
+    const hour = today.getHours();
+    const minutes = today.getMinutes();
+    const sec = today.getSeconds();
     const todayString = `${yyyy}/${mm}/${dd} ${hour}: ${minutes}:${sec}`;
     this.ArrayWordsYouKnowQuantity.push(this.wordsYouKnowQuantity);
     this.ArrayWordsYouDoNotKnowQuantity.push(this.wordsYouDoNotKnowQuantity);
     this.percentageKnownWords.push(Math.round(percent));
-    this. completeGameDate.push(todayString);
+    this.completeGameDate.push(todayString);
 
-    localStorage.setItem ("sprint-correct", JSON.stringify(this.ArrayWordsYouKnowQuantity));
-    localStorage.setItem ("sprint-error", JSON.stringify(this. ArrayWordsYouDoNotKnowQuantity));
-    localStorage.setItem ("sprint-percent", JSON.stringify(this. percentageKnownWords));
-    localStorage.setItem ("sprint-date", JSON.stringify(this. completeGameDate));
-    
-  }
-  getScoreAndDateToLocalStorage():void{
-    JSON.parse (localStorage.getItem ("sprint-correct"));
-    JSON.parse (localStorage.getItem ("sprint-error"));
-    JSON.parse (localStorage.getItem ("sprint-percent"));
-    JSON.parse (localStorage.getItem ("sprint-date"));
- /*    console.log('right',JSON.parse (localStorage.getItem ("sprint-correct")));
-    console.log('wrong',JSON.parse (localStorage.getItem ("sprint-error")));
-    console.log('percent',JSON.parse (localStorage.getItem ("sprint-percent")));
-    console.log('sprint-date',JSON.parse (localStorage.getItem ("sprint-date"))); */
+    localStorage.setItem('sprint-correct', JSON.stringify(this.ArrayWordsYouKnowQuantity));
+    localStorage.setItem('sprint-error', JSON.stringify(this.ArrayWordsYouDoNotKnowQuantity));
+    localStorage.setItem('sprint-percent', JSON.stringify(this.percentageKnownWords));
+    localStorage.setItem('sprint-date', JSON.stringify(this.completeGameDate));
   }
 
+   getScoreAndDateToLocalStorage(): void {
+    JSON.parse(localStorage.getItem('sprint-correct'));
+    JSON.parse(localStorage.getItem('sprint-error'));
+    JSON.parse(localStorage.getItem('sprint-percent'));
+    JSON.parse(localStorage.getItem('sprint-date'));
+  }
 }

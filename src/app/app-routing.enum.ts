@@ -4,6 +4,7 @@ export enum ParamKey {
   textBook = 'textbook',
   team = 'team',
   games = 'games',
+  wordConstructor = 'words-puzzle',
   statistic = 'statistic',
   savannaPromo = 'savanna',
   audiocallPromo = 'audiocall',

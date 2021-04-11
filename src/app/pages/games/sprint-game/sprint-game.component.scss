@@ -289,3 +289,26 @@ li.active {
     text-shadow: 1px 1px white, -1px -1px #333;
       font-family: 'Montserrat', sans-serif;
  }
+ 
+@media (min-width: 760px)  {
+.closeButton{
+  margin: 75px 0px;
+}
+.timer{
+  margin:46px 20px;
+} 
+.show-words-and-translation{
+  margin:40px;
+}
+.game-bar{
+   margin:73px;
+}
+#blink7{
+  margin-top: 300px;
+  margin-left: 50%;
+}
+.wordStatisticContainer {
+    margin-left: 36%;
+ 
+}
+}

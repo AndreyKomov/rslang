@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  HostBinding,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'header[app-header]',
@@ -8,4 +15,14 @@ import { Component, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 })
 export class HeaderComponent {
   @HostBinding('class') class = 'header';
+
+  @Output() clickAutnBtnEvent = new EventEmitter<string>();
+
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  openModal(value): void {
+    this.clickAutnBtnEvent.emit(value);
+  }
 }
