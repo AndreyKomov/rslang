@@ -6,7 +6,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import AppComponent from '@app/app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
 
@@ -25,8 +24,8 @@ import RegistrationComponent from './pages/registration/registration/registratio
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
 
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}

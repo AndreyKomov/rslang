@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import WordsApiServiceComponent from '@app/server/api';
+import { WordsApiService } from '@app/server/api';
 import { AudiocallService } from '../../audiocall.service';
 
 @Component({
@@ -33,7 +33,7 @@ export class AudiocallGameComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private backEndService: WordsApiServiceComponent,
+    private backEndService: WordsApiService,
     private gameService: AudiocallService
   ) {}
 
