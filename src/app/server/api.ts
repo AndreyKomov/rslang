@@ -29,7 +29,7 @@ interface Word {
   template: '',
 })
 @Injectable()
-export default class WordsApiServiceComponent {
+export class WordsApiServiceComponent {
   private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
 
   id: string | null;

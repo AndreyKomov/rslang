@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import WordsApiServiceComponent from '@app/server/api';
+import { WordsApiServiceComponent } from '@app/server/api';
 import { SavannaService } from '../../savanna.service';
 
 @Component({

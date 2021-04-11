@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import WordsApiServiceComponent from '@app/server/api';
+import { WordsApiServiceComponent } from '@app/server/api';
 
 import { IFileModel } from '../models/FileModel';
 import { IUserDataModel } from '../models/userDataModel';

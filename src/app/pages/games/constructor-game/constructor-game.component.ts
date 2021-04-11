@@ -1,5 +1,5 @@
 import { Component, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
-import WordsApiServiceComponent from '../../server/api';
+import { WordsApiServiceComponent } from '@app/server/api';
 
 @Component({
   selector: 'app-constructor-game',
@@ -16,8 +16,8 @@ export class ConstructorGameComponent implements OnInit {
   showResult = false;
   isLevelChosen = false;
   page = 0;
-  selectedGroup: number = 0;
-  selectedPage: number = 0;
+  selectedGroup = 0;
+  selectedPage = 0;
   baseImgUrl = 'https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/';
   isEndRaund = false;
   context = '';
