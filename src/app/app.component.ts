@@ -16,9 +16,7 @@ export default class AppComponent {
           val.url.includes(ParamKey.audiocallPromo) ||
           val.url.includes(ParamKey.savannaPromo) ||
           val.url.includes(ParamKey.sprintGame) ||
-          val.url.includes('audiocall') ||
-          val.url.includes('audiocall') ||
-          val.url.includes('sprint')
+          val.url.includes('audiocall')
         ) {
           this.footerVisibility = false;
         } else {

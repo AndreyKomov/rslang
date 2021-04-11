@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import WordApiServiceComponent from '../../../server/api';
 
-export enum KEY_CODE {
-  RIGHT_ARROW = 39,
-  LEFT_ARROW = 37,
+export enum KeyCode {
+  rightArrow = 39,
+  leftArrow = 37,
 }
 
 @Component({
@@ -11,7 +11,7 @@ export enum KEY_CODE {
   templateUrl: './sprint-game.component.html',
   styleUrls: ['./sprint-game.component.scss'],
 })
-export class SprintGameComponent implements OnInit {
+export class SprintGameComponent implements OnInit, OnDestroy {
   display = false;
   displayStatistics = false;
   level = 0;
@@ -21,7 +21,7 @@ export class SprintGameComponent implements OnInit {
   translations: any | null;
   index = 0;
   wordsYouKnowQuantity = 0;
-  wordsYouDontKnowQuantity = 0;
+  wordsYouDoNotKnowQuantity = 0;
   rightWords = [];
   wrongWords = [];
   isCheckedWord: any | null;
@@ -33,7 +33,7 @@ export class SprintGameComponent implements OnInit {
   hiddenScore = true;
   timeLeft = 60;
   interval;
-  subscribeTimer: any;
+  subscribeTimer: any|null;
   hiddenScoreBlock: boolean | null;
   hiddenScoreClass: string | null;
   riseScoreQuantity: boolean;
@@ -54,10 +54,16 @@ export class SprintGameComponent implements OnInit {
   checkFullScreenSize: boolean | null;
   checkFullScreenSizeStatistic: boolean | null;
   statisticClass: string | null;
+  ArrayWordsYouKnowQuantity=[];
+  ArrayWordsYouDoNotKnowQuantity=[];
+  percentageKnownWords=[];
+  completeGameDate=[];
+  
+  public activeItem: string;
 
   constructor(public api: WordApiServiceComponent, private cdr: ChangeDetectorRef) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.promoInfoClass = '';
     this.startScreenClass = 'start-screen';
     this.classHeaderContainer = 'header-container';
@@ -66,15 +72,19 @@ export class SprintGameComponent implements OnInit {
     this.statisticClass = 'statistic';
   }
 
+  ngOnDestroy(): void {
+    this.quitGame();
+  }
+
   @HostListener('window:keyup', ['$event'])
-  keyEvent(event: KeyboardEvent) {
-    if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
+  keyEvent(event: KeyboardEvent): void {
+    if (event.keyCode === KeyCode.rightArrow) {
       this.checkWordTranslationMatch(false);
       this.timeLeft = 60;
       this.delayedHide();
     }
 
-    if (event.keyCode === KEY_CODE.LEFT_ARROW) {
+    if (event.keyCode === KeyCode.leftArrow) {
       this.checkWordTranslationMatch(true);
       this.timeLeft = 60;
       this.delayedHide();
@@ -82,42 +92,42 @@ export class SprintGameComponent implements OnInit {
   }
 
   playAudioTimer(): void {
-    if (this.isSoundOn) {
+    if (this.isSoundOn && this.display) {
       this.audioTimerSound.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_timer.mp3?raw=true`;
       this.audioTimerSound.load();
       this.audioTimerSound.play();
     }
   }
 
-  pauseAudioTimer() {
+  pauseAudioTimer(): void {
     this.audioTimerSound.pause();
   }
 
-  playAudioWrongAnswer() {
-    if (this.isSoundOn) {
+  playAudioWrongAnswer(): void {
+    if (this.isSoundOn && this.display) {
       this.AudioWrongAnswer.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_error.mp3?raw=true`;
       this.AudioWrongAnswer.load();
       this.AudioWrongAnswer.play();
     }
   }
 
-  pauseAudioWrongAnswer() {
+  pauseAudioWrongAnswer(): void {
     this.AudioWrongAnswer.pause();
   }
 
-  playAudioRightAnswer() {
-    if (this.isSoundOn) {
+  playAudioRightAnswer(): void {
+    if (this.isSoundOn && this.display) {
       this.AudioRightAnswer.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_correct%20.mp3?raw=true`;
       this.AudioRightAnswer.load();
       this.AudioRightAnswer.play();
     }
   }
 
-  pauseAudioRightAnswer() {
+  pauseAudioRightAnswer(): void {
     this.AudioRightAnswer.pause();
   }
 
-  playAudioEndOfGame() {
+  playAudioEndOfGame(): void {
     if (this.isSoundOn) {
       this.endOGameSound.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_end_of_game.mp3?raw=true`;
       this.endOGameSound.load();
@@ -125,18 +135,15 @@ export class SprintGameComponent implements OnInit {
     }
   }
 
-  pauseAudioEndOfGame() {
+  pauseAudioEndOfGame(): void {
     this.endOGameSound.pause();
   }
 
-  update() {
+  update(): void {
     this.display = !this.display;
-    if (this.isSoundOn) {
-      this.playAudioTimer();
-    }
   }
 
-  updateStatistics() {
+  updateStatistics(): void {
     this.displayStatistics = !this.displayStatistics;
     this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
       this.wordsList = data;
@@ -147,33 +154,34 @@ export class SprintGameComponent implements OnInit {
     });
   }
 
-  shuffle(array) {
+  shuffle(array): void {
     return array.sort(() => {
       return 0.5 - Math.random();
     });
   }
 
-  onLevelChange(level) {
-    this.level = Number(level) - 1;
+  onLevelChange(levelChosen): void {
+    this.timeLeft=60;
+    this.index=0;
+    this.level = Number(levelChosen) - 1;
     this.getWords();
   }
 
-  onRoundChange(round) {
-    this.round = Number(round) - 1;
+  onRoundChange(roundChosen): void {
+    this.timeLeft=60;
+    this.index=0;
+    this.round = Number(roundChosen) - 1;
     this.getWords();
   }
 
-  createWordsArray = (wordsList) => wordsList.map((item) => item.word);
-  createTranscriptionArray = (wordsList) => wordsList.map((item) => item.wordTranslate);
+  createWordsArray = (wordsListChosen) => wordsListChosen.map((item) => item.word);
+  createTranscriptionArray = (wordsListChosen) => wordsListChosen.map((item) => item.wordTranslate);
 
-  getWords() {
-    if (this.isSoundOn) {
-      this.playAudioTimer();
-    }
+  getWords(): void {
     this.rightWords = [];
     this.wrongWords = [];
     this.wordsYouKnowQuantity = 0;
-    this.wordsYouDontKnowQuantity = 0;
+    this.wordsYouDoNotKnowQuantity = 0;
     this.wordsList = [];
     this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
       this.wordsList = data;
@@ -184,7 +192,7 @@ export class SprintGameComponent implements OnInit {
     });
   }
 
-  checkWordTranslationMatch(checkPair) {
+  checkWordTranslationMatch(checkPair): void {
     const matchWordCheck = this.words[this.index];
     const matchTranslationCheck = this.translations[this.index];
     let result;
@@ -198,7 +206,7 @@ export class SprintGameComponent implements OnInit {
         result = false;
       }
     }
-    if (checkPair === result) {
+    if (checkPair === result && this.display) {
       this.wordsYouKnowQuantity += 1;
       this.riseScoreQuantity = true;
       if (this.isSoundOn) {
@@ -206,8 +214,8 @@ export class SprintGameComponent implements OnInit {
       }
       this.rightWords.push(this.words[this.index]);
     }
-    if (checkPair !== result) {
-      this.wordsYouDontKnowQuantity += 1;
+    if (checkPair !== result && this.display) {
+      this.wordsYouDoNotKnowQuantity += 1;
       this.riseScoreQuantity = false;
       if (this.isSoundOn) {
         this.playAudioWrongAnswer();
@@ -215,6 +223,7 @@ export class SprintGameComponent implements OnInit {
       this.wrongWords.push(this.words[this.index]);
     }
     this.index += 1;
+
     if (this.index > 19) {
       this.delayedConfettiClass();
       this.pauseTimer();
@@ -228,23 +237,23 @@ export class SprintGameComponent implements OnInit {
       this.promoInfoClass = 'hidden';
       this.gameClass = 'game-switched-off';
       this.levelAndRoundChoice = 'hidden';
+      this.setScoreAndDateToLocalStorage();
+      this.getScoreAndDateToLocalStorage()
     }
   }
 
-  setLevelAndGroup() {
+  setLevelAndGroup(): void {
     const level = this.level + 1;
     const round = this.round + 1;
     localStorage.setItem('level', level.toString());
     localStorage.setItem('round', round.toString());
   }
 
-  public activeItem: string;
-
   public onSelectItem(item: string): void {
     this.activeItem = item;
   }
 
-  startTimer() {
+  startTimer(): void {
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
@@ -253,7 +262,7 @@ export class SprintGameComponent implements OnInit {
           this.playAudioWrongAnswer();
         }
         this.wrongWords.push(this.words[this.index]);
-        this.wordsYouDontKnowQuantity += 1;
+        this.wordsYouDoNotKnowQuantity += 1;
         this.index += 1;
         this.timeLeft = 60;
         this.hiddenScoreClass = 'hidden';
@@ -263,18 +272,19 @@ export class SprintGameComponent implements OnInit {
     }, 1000);
   }
 
-  pauseTimer() {
+  pauseTimer(): void {
     this.cdr.markForCheck();
     clearInterval(this.interval);
   }
 
-  stopTimer() {
+  stopTimer(): void {
     this.cdr.markForCheck();
     this.timeLeft = 0;
   }
 
-  quitGame() {
+  quitGame(): void {
     this.pauseTimer();
+    this.pauseAudioTimer();
     this.level = 0;
     this.round = 0;
     this.wordsList = null;
@@ -282,7 +292,7 @@ export class SprintGameComponent implements OnInit {
     this.translations = null;
     this.index = 0;
     this.wordsYouKnowQuantity = 0;
-    this.wordsYouDontKnowQuantity = 0;
+    this.wordsYouDoNotKnowQuantity = 0;
     this.rightWords = [];
     this.wrongWords = [];
     this.isCheckedWord = null;
@@ -290,12 +300,12 @@ export class SprintGameComponent implements OnInit {
     this.hiddenScore = true;
   }
 
-  myFunction() {
+  myFunction(): void {
     const popup = document.getElementById('myPopup');
     popup.classList.toggle('show');
   }
 
-  delayedHide() {
+  delayedHide(): void {
     if (this.riseScoreQuantity) {
       this.hiddenScoreClass = 'hiddenScore';
 
@@ -306,7 +316,7 @@ export class SprintGameComponent implements OnInit {
     }
   }
 
-  delayedConfettiClass() {
+  delayedConfettiClass(): void {
     if (this.wordsYouKnowQuantity >= 10) {
       this.confettiClass = 'confettiClass';
       setTimeout(() => {
@@ -316,7 +326,7 @@ export class SprintGameComponent implements OnInit {
     }
   }
 
-  getSelectedWordCardId() {
+  getSelectedWordCardId(): void {
     this.chosenWordCardClass = 'chosenWordCard';
     this.closeWordCardButtonClass = 'closeWordCardButton';
     for (const prop in this.wordsList) {
@@ -328,24 +338,24 @@ export class SprintGameComponent implements OnInit {
     }
   }
 
-  ClosePopUpWindow() {
+  ClosePopUpWindow(): void {
     this.closeWordCardButtonClass = 'hidden';
     this.chosenWordCardClass = 'hidden';
   }
 
-  ClosestartScreenClass() {
+  CloseStartScreenClass(): void {
     this.promoInfoClass = 'hidden';
   }
 
-  CloseHeaderContainerClass() {
+  CloseHeaderContainerClass(): void {
     this.classHeaderContainer = 'hidden';
   }
 
-  CloseLevelAndRoundChoice() {
+  CloseLevelAndRoundChoice(): void {
     this.levelAndRoundChoice = 'hidden';
   }
 
-  ChangeWindowSize() {
+  ChangeWindowSize(): void {
     this.checkFullScreenSize = !this.checkFullScreenSize;
     if (this.checkFullScreenSize) {
       this.gameClass = 'game-full-screen';
@@ -354,7 +364,7 @@ export class SprintGameComponent implements OnInit {
     }
   }
 
-  ChangeWindowSizeStatistic() {
+  ChangeWindowSizeStatistic(): void {
     this.checkFullScreenSizeStatistic = !this.checkFullScreenSizeStatistic;
     if (this.checkFullScreenSizeStatistic) {
       this.statisticClass = 'statistic-full-screen';
@@ -362,4 +372,36 @@ export class SprintGameComponent implements OnInit {
       this.statisticClass = 'statistic';
     }
   }
+  setScoreAndDateToLocalStorage():void{
+    let percent=this.wordsYouKnowQuantity/(this.wordsYouKnowQuantity+this.wordsYouDoNotKnowQuantity)*100;
+    const today=new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = today.getFullYear();
+    const hour =today.getHours();
+    const minutes=today.getMinutes();
+    const sec=today.getSeconds();
+    const todayString = `${yyyy}/${mm}/${dd} ${hour}: ${minutes}:${sec}`;
+    this.ArrayWordsYouKnowQuantity.push(this.wordsYouKnowQuantity);
+    this.ArrayWordsYouDoNotKnowQuantity.push(this.wordsYouDoNotKnowQuantity);
+    this.percentageKnownWords.push(Math.round(percent));
+    this. completeGameDate.push(todayString);
+
+    localStorage.setItem ("sprint-correct", JSON.stringify(this.ArrayWordsYouKnowQuantity));
+    localStorage.setItem ("sprint-error", JSON.stringify(this. ArrayWordsYouDoNotKnowQuantity));
+    localStorage.setItem ("sprint-percent", JSON.stringify(this. percentageKnownWords));
+    localStorage.setItem ("sprint-date", JSON.stringify(this. completeGameDate));
+    
+  }
+  getScoreAndDateToLocalStorage():void{
+    JSON.parse (localStorage.getItem ("sprint-correct"));
+    JSON.parse (localStorage.getItem ("sprint-error"));
+    JSON.parse (localStorage.getItem ("sprint-percent"));
+    JSON.parse (localStorage.getItem ("sprint-date"));
+ /*    console.log('right',JSON.parse (localStorage.getItem ("sprint-correct")));
+    console.log('wrong',JSON.parse (localStorage.getItem ("sprint-error")));
+    console.log('percent',JSON.parse (localStorage.getItem ("sprint-percent")));
+    console.log('sprint-date',JSON.parse (localStorage.getItem ("sprint-date"))); */
+  }
+
 }

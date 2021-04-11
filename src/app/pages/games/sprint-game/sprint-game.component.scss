@@ -49,7 +49,7 @@ h3 {
   box-shadow: 1px 5px 14px rgb(0 0 0 / 10%);
   line-height: 1.5;
 } 
-.start-screen-no-backgroud{
+.start-screen-no-background{
   text-align: center;
   font-size: 21px;
    color: #3f51b5;
@@ -62,8 +62,6 @@ h3 {
   background-image: url(https://image.freepik.com/free-vector/couple-practicing-trail-run-training_74855-5474.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  border: 1px solid #000;
-  border-radius: 6px;
   font-family: 'Montserrat', sans-serif;
 }
 .game-switched-off{
@@ -86,9 +84,7 @@ h3 {
      background-image: url(https://image.freepik.com/free-vector/couple-practicing-trail-run-training_74855-5474.jpg);
      background-repeat: no-repeat;
      background-size: cover;
-     border: 1px solid #000;
-     border-radius: 6px;
-     font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
    }
 .closeButton{
   display: inline-block;
@@ -107,7 +103,7 @@ h3 {
     text-decoration: none;
     display: inline-block;
     color: white;
-    padding: 20px 0px;
+    padding: 20px 5px;
     margin-bottom:10px;
     border-radius: 10px;
     font-family: 'Montserrat', sans-serif;
@@ -134,7 +130,7 @@ h3 {
     text-decoration: none;
     display: inline-block;
     color: white;
-    padding: 20px 0px;
+    padding: 20px 5px;
     margin: 0px 10px;
     border-radius: 10px;
     font-family: 'Montserrat', sans-serif;
