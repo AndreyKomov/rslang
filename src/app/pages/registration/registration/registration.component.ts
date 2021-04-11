@@ -19,13 +19,13 @@ import { IFileModel } from '../models/FileModel';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class RegistrationComponent implements OnInit {
-  @ViewChild('avatar') avatar: HTMLImageElement;
+  @ViewChild('avatar') avatar;
   @Output() clickAutnBtnEvent = new EventEmitter<string>();
   @Input() isShow;
   modalName = 'Registration';
   isLoginTemplate = false;
   registrationForm: IRegForm;
-  imgURL = '../../../../assets/img/no-avatar.png';
+  imgURL: ArrayBuffer | string = '../../../../assets/img/no-avatar.png';
   imagePath: IFileModel[];
 
   constructor(private fb: FormBuilder, private registrationService: RegistrationService) {}
@@ -63,8 +63,8 @@ export default class RegistrationComponent implements OnInit {
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
     reader.onload = () => {
-      this.imgURL = reader.result as string;
-      this.avatar.src = this.imgURL;
+      this.imgURL = reader.result;
+      this.avatar.nativeElement.src = this.imgURL;
     };
   }
 
