@@ -27,6 +27,7 @@ export class RegistrationService {
   logIn(password: string, email: string): void {
     this.apiService.signIn(email, password).subscribe((res: IUserDataModel) => {
       localStorage.setItem('token', res.token);
+      localStorage.setItem('userId', res.userId);
       // window.location.reload();
     });
   }

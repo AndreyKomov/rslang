@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { WordsApiServiceComponent } from '@app/server/api';
+import { WordsApiService } from '@app/server/api';
 import { LoadingService } from '@app/shared/services/loading.service';
 import { Subscription } from 'rxjs';
 import { ElectronicTextbookService } from '../../electronic-textbook.service';
@@ -17,7 +17,7 @@ export class PageComponent implements AfterViewInit, OnDestroy {
   subscription: Subscription;
   constructor(
     private activateRoute: ActivatedRoute,
-    private api: WordsApiServiceComponent,
+    private api: WordsApiService,
     private textbookService: ElectronicTextbookService,
     public loadingService: LoadingService,
     private cdr: ChangeDetectorRef

@@ -7,10 +7,9 @@ export enum ParamKey {
   wordConstructor = 'words-puzzle',
   statistic = 'statistic',
   savannaPromo = 'savanna',
-  audiocallPromo = 'audiocall',
-  textbook = 'textbook',
+  audiocallPromo = 'audiocall'
 }
 
 export enum QueryParamKey {
-  redirectTo = '',
+  redirectTo = ''
 }

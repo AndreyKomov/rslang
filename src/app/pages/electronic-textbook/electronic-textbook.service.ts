@@ -1,6 +1,6 @@
 import { Injectable, Optional } from '@angular/core';
 import { URL_FILES } from '@app/core/common/constants';
-import { WordsApiServiceComponent } from '@app/server/api';
+import { WordsApiService } from '@app/server/api';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ICardInfo, IUserInfo, IUserWord, IWord } from './word';
@@ -29,7 +29,7 @@ export class ElectronicTextbookService {
 
   public cardInfo = this.cardInfoSource.asObservable();
 
-  constructor(private api: WordsApiServiceComponent) {
+  constructor(private api: WordsApiService) {
     this.userData = {
       token: localStorage.getItem('token'),
       userId: localStorage.getItem('userId'),

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { URL_FILES } from '@app/core/common/constants';
 import { ElectronicTextbookService } from '../../electronic-textbook.service';
 import { ICardInfo, IWord } from '../../word';
@@ -7,7 +7,6 @@ import { ICardInfo, IWord } from '../../word';
   selector: 'app-card-word',
   templateUrl: './card-word.component.html',
   styleUrls: ['./card-word.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardWordComponent {
   @Input() word: IWord;
