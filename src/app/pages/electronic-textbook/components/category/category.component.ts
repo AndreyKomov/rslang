@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import ElectronicTextbookService from '../electronic-textbook.service';
+import { ElectronicTextbookService } from '../../electronic-textbook.service';
 
 @Component({
   selector: 'app-category',

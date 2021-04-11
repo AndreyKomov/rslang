@@ -1,28 +1,14 @@
 <section class="header-textbook">
-<div class="section-menu">
-    <button mat-icon-button matTooltip="КАТЕГОРИЯ СЛОВ"
-     *ngFor="let category of categories; let i = index" (click)="onClickCategory(i)"
-     [routerLink]="['./group', i, 'page', 0]" routerLinkActive="active"
-     [style.color]='i === group ? colorLink : "black"'
-     >
-      <mat-icon>looks_{{i === 0 ? 'one' : i === 1 ? 'two' : i + 1}}</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="КОНСТРУКТОР" (click)="onClickSettings()">
-      <mat-icon>extension</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="СПРИНТ" (click)="onClickSettings()">
-      <mat-icon>directions_run</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="АУДИОВЫЗОВ" (click)="onClickSettings()">
-      <mat-icon>surround_sound</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="САВАННА" (click)="onClickSettings()">
-      <mat-icon>nature</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="Настройки" (click)="onClickSettings()">
+  <div class="section-menu">
+    <app-buttons-category [group]="group" [colorLink]="colorLink" (clickCategory)="onClickCategory($event)"></app-buttons-category>
+    <app-buttons-game></app-buttons-game>
+    <button mat-icon-button matTooltip="НАСТРОЙКИ" (click)="onClickSettings()">
       <mat-icon>tune</mat-icon>
     </button>
-</div>
+    <button mat-icon-button matTooltip="СЛОВАРЬ" (click)="onClickSettings()">
+      <mat-icon>menu_book</mat-icon>
+    </button>
+  </div>
   <div>
     <app-pagination [page]="page" [quantityPage]="30"></app-pagination>
   </div>

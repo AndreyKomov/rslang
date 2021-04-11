@@ -6,11 +6,9 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import WordsApiServiceComponent from '@app/server/api';
 import { Subscription } from 'rxjs';
-import ElectronicTextbookService from './electronic-textbook.service';
-import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
+import { ElectronicTextbookService } from './electronic-textbook.service';
+import { SettingsDialogComponent } from './components/settings-dialog/settings-dialog.component';
 import { ICardInfo } from './word';
 
 @Component({
@@ -20,7 +18,6 @@ import { ICardInfo } from './word';
 })
 export default class ElectronicTextbookComponent
   implements AfterViewInit, OnDestroy, AfterViewChecked {
-  categories = ['Easy', 'Medium', 'Normal', 'Hard', 'Hardest', 'Inferno'];
   page = 0;
   group = 0;
   dialogData: ICardInfo;
@@ -28,11 +25,9 @@ export default class ElectronicTextbookComponent
   subscriptionTextbookService: Subscription;
 
   constructor(
-    private router: Router,
     private textbookService: ElectronicTextbookService,
     public dialog: MatDialog,
-    private cdr: ChangeDetectorRef,
-    private api: WordsApiServiceComponent
+    private cdr: ChangeDetectorRef
   ) {
     this.subscriptionTextbookService = this.textbookService.getCardInfo().subscribe((data) => {
       this.dialogData = data;

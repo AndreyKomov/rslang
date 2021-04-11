@@ -1,12 +1,12 @@
 import { Injectable, Optional } from '@angular/core';
 import { URL_FILES } from '@app/core/common/constants';
-import WordsApiServiceComponent from '@app/server/api';
+import { WordsApiServiceComponent } from '@app/server/api';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ICardInfo, IUserInfo, IUserWord, IWord } from './word';
 
-@Injectable()
-export default class ElectronicTextbookService {
+@Injectable({ providedIn: 'root' })
+export class ElectronicTextbookService {
   private audioObj = new Audio();
   private group = 0;
   private page = 0;
@@ -17,39 +17,8 @@ export default class ElectronicTextbookService {
 
   isPlay = true;
   userData: IUserInfo;
-  categoryWords: IWord[];
-  userWords: IUserWord[] = [
-    {
-      id: '6070380bf44de700150e86f0',
-      difficulty: 'hard',
-      optional: { date: 1617967120405, repeat: 0, delete: false },
-      wordId: '5e9f5ee35eb9e72bc21af4a0',
-    },
-    {
-      id: '607038bdf44de700150e86f1',
-      difficulty: 'hard',
-      optional: { date: 1617967298971, repeat: 0, delete: false },
-      wordId: '5e9f5ee35eb9e72bc21af4a2',
-    },
-    {
-      id: '607038c0f44de700150e86f2',
-      difficulty: 'hard',
-      optional: { date: 1617967301770, repeat: 0, delete: false },
-      wordId: '5e9f5ee35eb9e72bc21af4a3',
-    },
-    {
-      id: '607038c3f44de700150e86f3',
-      difficulty: 'hard',
-      optional: { date: 1617967304258, repeat: 0, delete: false },
-      wordId: '5e9f5ee35eb9e72bc21af4a1',
-    },
-    {
-      id: '607038d8f44de700150e86f6',
-      difficulty: 'hard',
-      optional: { date: 1617967325819, repeat: 0, delete: false },
-      wordId: '5e9f5ee35eb9e72bc21af4a7',
-    },
-  ];
+  categoryWords: IWord[] = [];
+  userWords: IUserWord[] = [];
 
   private cardInfoSource = new BehaviorSubject<ICardInfo>({
     isTextExampleTranslate: true,
@@ -61,10 +30,11 @@ export default class ElectronicTextbookService {
   public cardInfo = this.cardInfoSource.asObservable();
 
   constructor(private api: WordsApiServiceComponent) {
-    this.api.signIn('cupora@tut.by', 'Cupora1985').subscribe((data: IUserInfo) => {
-      this.userData = data;
-      this.getUserWords();
-    });
+    this.userData = {
+      token: localStorage.getItem('token'),
+      userId: localStorage.getItem('userId'),
+    };
+    this.getUserWords();
   }
 
   get groups(): number {

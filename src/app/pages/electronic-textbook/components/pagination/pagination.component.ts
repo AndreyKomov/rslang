@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import ElectronicTextbookService from '../electronic-textbook.service';
+import { ElectronicTextbookService } from '../../electronic-textbook.service';
 
 @Component({
   selector: 'app-pagination',

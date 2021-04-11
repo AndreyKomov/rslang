@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import ElectronicTextbookService from '../electronic-textbook.service';
-import { ICardInfo } from '../word';
+import { ElectronicTextbookService } from '../../electronic-textbook.service';
+import { ICardInfo } from '../../word';
 
 @Component({
   selector: 'app-settings-dialog',

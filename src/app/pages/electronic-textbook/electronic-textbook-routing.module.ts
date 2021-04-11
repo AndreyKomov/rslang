@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import CategoryComponent from './category/category.component';
+import CategoryComponent from './components/category/category.component';
 import ElectronicTextbookComponent from './electronic-textbook.component';
-import { PageComponent } from './page/page.component';
+import { PageComponent } from './components/page/page.component';
 
 const routes: Routes = [
   {

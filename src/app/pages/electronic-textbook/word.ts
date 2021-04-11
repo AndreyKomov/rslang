@@ -38,9 +38,6 @@ export interface IOptional {
 }
 
 export interface IUserInfo {
-  message: string;
-  name: string;
-  refreshToken: string;
   token: string;
   userId: string;
 }

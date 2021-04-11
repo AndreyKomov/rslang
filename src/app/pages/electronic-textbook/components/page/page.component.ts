@@ -1,10 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import WordsApiServiceComponent from '@app/server/api';
+import { WordsApiServiceComponent } from '@app/server/api';
 import { LoadingService } from '@app/shared/services/loading.service';
 import { Subscription } from 'rxjs';
-import ElectronicTextbookService from '../electronic-textbook.service';
-import { IWord } from '../word';
+import { ElectronicTextbookService } from '../../electronic-textbook.service';
+import { IWord } from '../../word';
 
 @Component({
   selector: 'app-page',
