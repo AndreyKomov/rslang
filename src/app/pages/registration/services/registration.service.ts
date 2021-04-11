@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import WordsApiServiceComponent from '@app/server/api';
+import { WordsApiService } from '@app/server/api';
 
 import { IFileModel } from '../models/FileModel';
 import { IUserDataModel } from '../models/userDataModel';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
-  constructor(private apiService: WordsApiServiceComponent) {}
+  constructor(private apiService: WordsApiService) {}
 
   singUp(name: string, password: string, email: string, imgPath: IFileModel[]): void {
     const newFile =
@@ -27,7 +27,7 @@ export class RegistrationService {
   logIn(password: string, email: string): void {
     this.apiService.signIn(email, password).subscribe((res: IUserDataModel) => {
       localStorage.setItem('token', res.token);
-      window.location.reload();
+      // window.location.reload();
     });
   }
 }
