@@ -38,8 +38,6 @@ export class StatisticsComponent implements OnInit {
 
     this.percentRightAudiocall =
       (this.audiocallCorrect / (this.audiocallCorrect + this.audiocallErrors)) * 100;
-
-    Math.round(this.percentRightAudiocall);
   }
 
   getCurrentSavannahStatistic(): void {
@@ -56,7 +54,5 @@ export class StatisticsComponent implements OnInit {
 
     this.percentRightSavannah =
       (this.savannahCorrect / (this.savannahCorrect + this.savannahErrors)) * 100;
-
-    Math.ceil(this.percentRightSavannah);
   }
 }

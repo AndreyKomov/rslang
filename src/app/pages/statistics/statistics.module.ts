@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChartsModule } from 'ng2-charts';
 import StatisticsRoutingModule from './statistics-routing.module';
 import { StatisticsComponent } from './statistics.component';
+import { StatisticChartComponent } from './statistic-chart/statistic-chart.component';
 
 @NgModule({
-  imports: [CommonModule, StatisticsRoutingModule],
-  declarations: [StatisticsComponent],
+  imports: [CommonModule, StatisticsRoutingModule, ChartsModule],
+  declarations: [StatisticsComponent, StatisticChartComponent],
 })
 export class StatisticsModule {}
