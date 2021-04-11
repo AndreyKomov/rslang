@@ -1,7 +1,7 @@
-
-<header app-header></header>
+<header app-header (clickAutnBtnEvent)="openModal($event)"></header>
 <main class="main">
   <router-outlet></router-outlet>
 </main>
-<footer app-footer></footer>
+<footer app-footer *ngIf="footerVisibility"></footer>
 
+<app-registration [isShow]="showModal" (clickAutnBtnEvent)="openModal($event)"></app-registration>

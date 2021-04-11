@@ -32,6 +32,13 @@ const routes: Routes = [
     loadChildren: (): any =>
       import('./pages/statistics/statistics.module').then((module) => module.StatisticsModule),
   },
+  {
+    path: ParamKey.wordConstructor,
+    loadChildren: (): any =>
+      import('./pages/constructor-game/constructor-game.module').then(
+        (module) => module.ConstructorGameModule
+      ),
+  },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];
 

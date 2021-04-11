@@ -4,6 +4,7 @@ export enum ParamKey {
   textBook = 'textbook',
   team = 'team',
   games = 'games',
+  wordConstructor = 'words-puzzle',
   statistics = 'statistics',
   savannaPromo = 'savanna',
   audiocallPromo = 'audiocall',
@@ -11,5 +12,5 @@ export enum ParamKey {
 }
 
 export enum QueryParamKey {
-  redirectTo = '',
+  redirectTo = ''
 }
