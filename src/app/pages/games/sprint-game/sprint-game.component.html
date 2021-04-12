@@ -13,6 +13,7 @@
             startScreenClass='start-screen-no-background';
             CloseHeaderContainerClass();
              playAudioTimer()
+           
             " 
                 mat-raised-button="" 
                 color="primary" 
@@ -43,13 +44,13 @@
     
      </div> 
     <div *ngIf="display" class="{{gameClass}}">
-           
                 <div *ngIf="displayStatistics" class="{{gameClass}}">
-                    <div class="{{statisticClass}}">
+                    <div  id="page_background"class="{{statisticClass}}">
                         <div class=" {{confettiClass}} ">
                             <div class="{{chosenWordCardClass}}">
                                 {{describeWordBlockTranslation}} 
                                     <button class="{{closeWordCardButtonClass}}" (click)=ClosePopUpWindow()>x</button> <br>
+
                                 {{describeWordBlockTranscription}}<br>
                                 {{this.describeWordBlockTextExample}}
                             </div>
@@ -61,6 +62,11 @@
                                      width="30" height="30"
                                       alt="fullScreenButton">
                                 </button>
+                                <button class="gradient-button-background"  (click)= "BgImageChange()"  >
+                                    <img src="https://image.flaticon.com/icons/png/512/93/93638.png"
+                                    width="30" height="30"
+                                     alt="ImageButton">
+                                </button> <br>
                                 </h2>
                                 
                             </div> 
@@ -184,4 +190,4 @@
     </div>
   
 </div>
-
+<script id="myScript" src="https://api-maps.yandex.ru/2.1?apikey=3ce3be84-5f4d-4000-8c66-90be614290bf&load=package.full&lang=en-US"></script>

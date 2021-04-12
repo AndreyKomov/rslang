@@ -70,6 +70,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.gameClass = 'game';
     this.levelAndRoundChoice = '';
     this.statisticClass = 'statistic';
+    this.BgImageChange ()
   }
 
   ngOnDestroy(): void {
@@ -402,4 +403,37 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     JSON.parse(localStorage.getItem('sprint-percent'));
     JSON.parse(localStorage.getItem('sprint-date'));
   }
+  /*-------------change background block------------- */
+/*------------you can define by place or current weather,or both-----------*/
+BgImageChange () {
+
+    let UNSPLASH_KEY=`465dce04d3919029f66c7325f6799c6de4f10670641923838969e8fef84eb0a3`;
+    const url=` https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query=running&client_id=${UNSPLASH_KEY}`;
+    
+    (async () => {
+      const response = await fetch(url)
+      const data = await response.json();
+      console.log(data);
+      const img = new Image();
+      img.crossOrigin = "Anonymous";
+        
+      img.src = data.urls.regular;
+      console.log( img.src)
+      img.onload = function () {
+        draw(this);
+       
+      };
+        
+      })()
+  
+      function draw(img) {
+     
+        document.getElementById('page_background').style.backgroundImage = `url(${img.src})`;
+        
+      }
+
+
+}
+  /*---------------------------------------------------------------*/
+
 }
