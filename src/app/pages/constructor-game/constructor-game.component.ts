@@ -1,5 +1,5 @@
 import { Component, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
-import WordsApiServiceComponent from '../../server/api';
+import { WordsApiService } from '../../server/api';
 
 @Component({
   selector: 'app-constructor-game',
@@ -16,8 +16,8 @@ export class ConstructorGameComponent implements OnInit {
   showResult = false;
   isLevelChosen = false;
   page = 0;
-  selectedGroup: number = 0;
-  selectedPage: number = 0;
+  selectedGroup = 0;
+  selectedPage = 0;
   baseImgUrl = 'https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/';
   isEndRaund = false;
   context = '';
@@ -28,6 +28,8 @@ export class ConstructorGameComponent implements OnInit {
   letterArr: string[];
   rightLettersArr = [];
 
+  constructor(private apiService: WordsApiService) {}
+
   sliceWord(word: string): string[] {
     return word.split('');
   }
@@ -37,7 +39,7 @@ export class ConstructorGameComponent implements OnInit {
   }
 
   getReadyForGameWord(word: string): string[] {
-    let letterArr = this.sliceWord(word);
+    const letterArr = this.sliceWord(word);
     return this.randomiseLetters(letterArr);
   }
 
@@ -65,8 +67,6 @@ export class ConstructorGameComponent implements OnInit {
     }
   }
 
-  constructor(private apiService: WordsApiServiceComponent) {}
-
   ngOnInit(): void {}
 
   nextRaund(): void {
@@ -83,12 +83,9 @@ export class ConstructorGameComponent implements OnInit {
     this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe((data) => {
       this.word = data[this.raund].word;
       this.translateWord = data[this.raund].wordTranslate;
-      this.context =
-        data[this.raund].word +
-        ' ' +
-        data[this.raund].transcription +
-        ' - ' +
-        data[this.raund].wordTranslate;
+      this.context = `${data[this.raund].word} ${data[this.raund].transcription} - ${
+        data[this.raund].wordTranslate
+      }`;
       this.baseImgUrl += data[this.raund].image;
       for (let i = 0; i < this.word.length; i++) {
         this.rightLettersArr.push('');
