@@ -1,5 +1,5 @@
 import { Component, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
-import { WordsApiService } from '../../server/api';
+import { WordsApiService } from '../../../server/api';
 
 @Component({
   selector: 'app-constructor-game',
@@ -27,6 +27,7 @@ export class ConstructorGameComponent implements OnInit {
   raund = 0;
   letterArr: string[];
   rightLettersArr = [];
+  rightAnswersStreak = 0;
 
   constructor(private apiService: WordsApiService) {}
 
@@ -132,9 +133,19 @@ export class ConstructorGameComponent implements OnInit {
         this.endRaund();
       }
       if (this.raund > 10) {
+        if (this.rightAnswersStreak < this.rightAnswers) {
+          this.rightAnswers = this.rightAnswers;
+        }
         this.word = '';
         this.raund = 0;
         this.showResult = true;
+        this.apiService.setUserStatistic(
+          localStorage.getItem('id'),
+          localStorage.getItem('token'),
+          this.rightAnswers,
+          null
+        );
+        localStorage.setItem('wordConstructorRightStreak', JSON.stringify(this.rightAnswersStreak));
       }
     } else if (event.key !== this.word[this.placeIndex]) {
       this.isUserDoMistake = true;

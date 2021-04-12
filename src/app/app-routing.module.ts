@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: ParamKey.wordConstructor,
     loadChildren: (): any =>
-      import('./pages/constructor-game/constructor-game.module').then(
+      import('./pages/games/constructor-game/constructor-game.module').then(
         (module) => module.ConstructorGameModule
       ),
   },
