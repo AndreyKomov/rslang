@@ -15,6 +15,10 @@ export class StatisticsComponent implements OnInit {
   savannahErrors = 0;
   percentRightSavannah = 0;
 
+  sprintCorrect = 0;
+  sprintErrors = 0;
+  percentRightSprint = 0;
+
   allCorrectAnswers = 0;
   allErrors = 0;
   percentRightAll = 0;
@@ -22,6 +26,7 @@ export class StatisticsComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentAudiocallStatistic();
     this.getCurrentSavannahStatistic();
+    this.getCurrentSprintStatistic();
   }
 
   getCurrentAudiocallStatistic(): void {
@@ -54,5 +59,20 @@ export class StatisticsComponent implements OnInit {
 
     this.percentRightSavannah =
       (this.savannahCorrect / (this.savannahCorrect + this.savannahErrors)) * 100;
+  }
+
+  getCurrentSprintStatistic(): void {
+    const correctFromLocalSt = localStorage.getItem(`sprint-correct`);
+    const errorsFromLocalSt = localStorage.getItem(`sprint-error`);
+
+    this.sprintCorrect = +correctFromLocalSt;
+    this.sprintErrors = +errorsFromLocalSt;
+
+    this.allErrors += this.sprintErrors;
+    this.allCorrectAnswers += this.sprintCorrect;
+    this.percentRightAll =
+      (this.allCorrectAnswers / (this.allCorrectAnswers + this.allErrors)) * 100;
+
+    this.percentRightSprint = (this.sprintCorrect / (this.sprintCorrect + this.sprintErrors)) * 100;
   }
 }

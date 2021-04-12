@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
@@ -7,7 +7,7 @@ import { Color, Label } from 'ng2-charts';
   templateUrl: './statistic-chart.component.html',
   styleUrls: ['./statistic-chart.component.scss'],
 })
-export class StatisticChartComponent {
+export class StatisticChartComponent implements OnInit {
   @Input()
   wordsToday: number;
 
