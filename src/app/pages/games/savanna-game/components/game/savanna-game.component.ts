@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WordsApiServiceComponent } from '@app/server/api';
+import { WordsApiService } from '@app/server/api';
 import { SavannaService } from '../../savanna.service';
 
 @Component({
@@ -39,7 +39,7 @@ export class SavannaGameComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private backEndService: WordsApiServiceComponent,
+    private backEndService: WordsApiService,
     private gameService: SavannaService
   ) {}
 

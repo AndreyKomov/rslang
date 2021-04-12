@@ -20,7 +20,7 @@
         Type a password(more than 8 and below than 25 charts)
       </div>
       <input
-        type="text"
+        type="password"
         placeholder="Enter Password"
         formControlName="password"
         id="password"
@@ -53,7 +53,7 @@
       >
         <p>
           Already have an account?
-          <button (click)="changeModal()">Sign in</button>.
+          <button (click)="changeModal()">Login</button>.
         </p>
       </div>
     </form>
@@ -64,7 +64,7 @@
   <div class="modal-content__container modal-content__signin">
     <p>
       Have not an account?
-      <button (click)="changeModal()">Sign up</button>.
+      <button (click)="changeModal()">Register</button>.
     </p>
   </div>
 </ng-template>

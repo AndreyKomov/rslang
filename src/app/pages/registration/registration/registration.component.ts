@@ -28,7 +28,14 @@ export default class RegistrationComponent implements OnInit {
   imgURL: ArrayBuffer | string = '../../../../assets/img/no-avatar.png';
   imagePath: IFileModel[];
 
-  constructor(private fb: FormBuilder, private registrationService: RegistrationService) {}
+  constructor(private fb: FormBuilder, private registrationService: RegistrationService) {
+    this.registrationService.clickLogin.subscribe((data) => (this.isShow = data));
+    this.registrationService.clickRegister.subscribe((data) => {
+      this.isLoginTemplate = data;
+      this.registrationForm.controls.name.disable();
+      // this.changeModal();
+    });
+  }
 
   ngOnInit(): void {
     this.initForm();

@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import AppComponent from '@app/app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WordsApiServiceComponent } from './server/api';
 import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
 import RegistrationComponent from './pages/registration/registration/registration.component';
@@ -22,7 +21,6 @@ import RegistrationComponent from './pages/registration/registration/registratio
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [WordsApiServiceComponent],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}

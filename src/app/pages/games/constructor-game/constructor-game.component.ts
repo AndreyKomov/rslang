@@ -1,5 +1,5 @@
 import { Component, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
-import { WordsApiServiceComponent } from '@app/server/api';
+import { WordsApiService } from '@app/server/api';
 
 @Component({
   selector: 'app-constructor-game',
@@ -65,7 +65,7 @@ export class ConstructorGameComponent implements OnInit {
     }
   }
 
-  constructor(private apiService: WordsApiServiceComponent) {}
+  constructor(private apiService: WordsApiService) {}
 
   ngOnInit(): void {}
 

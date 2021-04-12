@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
-import { WordsApiServiceComponent } from '@app/server/api';
+import { EventEmitter, Injectable } from '@angular/core';
+import { WordsApiService } from '@app/server/api';
 
 import { IFileModel } from '../models/FileModel';
 import { IUserDataModel } from '../models/userDataModel';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
-  constructor(private apiService: WordsApiServiceComponent) {}
+  clickLogin: EventEmitter<boolean> = new EventEmitter();
+  clickRegister: EventEmitter<boolean> = new EventEmitter();
+
+  constructor(private apiService: WordsApiService) {}
 
   singUp(name: string, password: string, email: string, imgPath: IFileModel[]): void {
     const newFile =
@@ -20,14 +23,14 @@ export class RegistrationService {
           )
         : imgPath[0];
     this.apiService.createUser(name, email, password, newFile).subscribe(() => {
-      this.logIn(password, email);
+      this.clickRegister.emit(true);
     });
   }
 
   logIn(password: string, email: string): void {
     this.apiService.signIn(email, password).subscribe((res: IUserDataModel) => {
-      localStorage.setItem('token', res.token);
-      window.location.reload();
+      localStorage.setItem('userId', res.userId);
+      this.clickLogin.emit(false);
     });
   }
 }
