@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  HostBinding,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, HostBinding, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'header[app-header]',

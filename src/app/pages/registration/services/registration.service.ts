@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { WordsApiService } from '@app/server/api';
 
 import { IFileModel } from '../models/FileModel';
-import { IUserDataModel } from '../models/userDataModel';
+import { IUserDataModel } from '../models/UserDataModel';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
