@@ -11,7 +11,7 @@ export class ConstructorGameComponent implements OnInit {
   isMistake = false;
   @ViewChild('keysBlock') keysBlock;
   isUserDoMistake = false;
-  rightAnswers = 10;
+  rightAnswers = 0;
   wrongAnswers = 0;
   showResult = false;
   isLevelChosen = false;
@@ -133,19 +133,9 @@ export class ConstructorGameComponent implements OnInit {
         this.endRaund();
       }
       if (this.raund > 10) {
-        if (this.rightAnswersStreak < this.rightAnswers) {
-          this.rightAnswers = this.rightAnswers;
-        }
         this.word = '';
         this.raund = 0;
         this.showResult = true;
-        this.apiService.setUserStatistic(
-          localStorage.getItem('id'),
-          localStorage.getItem('token'),
-          this.rightAnswers,
-          null
-        );
-        localStorage.setItem('wordConstructorRightStreak', JSON.stringify(this.rightAnswersStreak));
       }
     } else if (event.key !== this.word[this.placeIndex]) {
       this.isUserDoMistake = true;
@@ -161,9 +151,13 @@ export class ConstructorGameComponent implements OnInit {
   endRaund(): void {
     this.raund++;
     this.isEndRaund = true;
+    if (this.rightAnswersStreak < this.rightAnswers) {
+      this.rightAnswersStreak = this.rightAnswers;
+    }
+    localStorage.setItem('wordConstructorRightAnswers', JSON.stringify(this.rightAnswers));
+    localStorage.setItem('wordConstructorRightStreak', JSON.stringify(this.rightAnswersStreak));
     if (this.isUserDoMistake) {
       console.log(this.rightAnswers, this.wrongAnswers);
-      this.rightAnswers--;
       this.wrongAnswers++;
     }
     if (this.page != 30) {
@@ -176,7 +170,7 @@ export class ConstructorGameComponent implements OnInit {
 
   continueGame(): void {
     this.showResult = false;
-    this.rightAnswers = 10;
+    this.rightAnswers = 0;
     this.wrongAnswers = 0;
     this.nextRaund();
   }
