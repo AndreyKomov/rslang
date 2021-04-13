@@ -78,6 +78,10 @@ export class ElectronicTextbookService {
     return this.words;
   }
 
+  getUserWordsArray(): any {
+    return this.userWords;
+  }
+
   getWordsPageAndGroup(): void {
     this.api.getWordsByPageAndGroup(this.page, this.group).subscribe((data: IWord[]) => {
       const array = data.map((word) => {
