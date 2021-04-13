@@ -155,6 +155,7 @@ export class ConstructorGameComponent implements OnInit {
       this.rightAnswersStreak = this.rightAnswers;
     }
     localStorage.setItem('wordConstructorRightAnswers', JSON.stringify(this.rightAnswers));
+    localStorage.setItem('wordConstructorWrongAnswers', JSON.stringify(this.wrongAnswers));
     localStorage.setItem('wordConstructorRightStreak', JSON.stringify(this.rightAnswersStreak));
     if (this.isUserDoMistake) {
       console.log(this.rightAnswers, this.wrongAnswers);
