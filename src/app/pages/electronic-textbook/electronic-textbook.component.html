@@ -1,12 +1,19 @@
 <section class="header-textbook">
   <div class="section-menu">
-    <app-buttons-category [group]="group" [colorLink]="colorLink" (clickCategory)="onClickCategory($event)"></app-buttons-category>
+    <app-buttons-dictionary *ngIf="isDictionary"></app-buttons-dictionary>
+    <app-buttons-category
+    *ngIf="!isDictionary"
+    [group]="group"
+    [colorLink]="colorLink"
+    (clickCategory)="onClickCategory($event)"></app-buttons-category>
     <app-buttons-game></app-buttons-game>
     <button mat-icon-button matTooltip="НАСТРОЙКИ" (click)="onClickSettings()">
       <mat-icon>tune</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="СЛОВАРЬ" >
-      <mat-icon>menu_book</mat-icon>
+    <button mat-icon-button matTooltip="{{!isDictionary ? 'СЛОВАРЬ' : 'УЧЕБНИК'}}"
+     (click)="isDictionary=!isDictionary"
+     [routerLink]="!isDictionary ? ['./dictionary', 'studied'] : ['./group/0/page/0']">
+      <mat-icon>{{!isDictionary ? 'menu_book' : 'book'}}</mat-icon>
     </button>
   </div>
   <div>

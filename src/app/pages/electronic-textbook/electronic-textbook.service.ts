@@ -1,7 +1,7 @@
 import { Injectable, Optional } from '@angular/core';
 import { URL_FILES } from '@app/core/common/constants';
 import { WordsApiService } from '@app/server/api';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, Subscription } from 'rxjs';
 import { ICardInfo, IUserInfo, IUserWord, IWord } from './word';
 
 @Injectable({ providedIn: 'root' })
@@ -11,8 +11,10 @@ export class ElectronicTextbookService {
   private page = 0;
   private colors = ['#a29bfe', '#f53b57', '#fd79a8', '#55efc4', '#ffeaa7', '#b2bec3'];
   private wordsSource = new BehaviorSubject<IWord[]>([]);
-
   public words = this.wordsSource.asObservable();
+
+  private wordsDictionarySource = new BehaviorSubject<IWord[]>([]);
+  public wordsDictionary = this.wordsSource.asObservable();
 
   isPlay = true;
   userData: IUserInfo;
@@ -76,6 +78,17 @@ export class ElectronicTextbookService {
 
   getWords(): Observable<IWord[]> {
     return this.words;
+  }
+
+  getUserWordsArray(): void {
+    forkJoin(this.userWords.map((word) => this.api.getWordById(word.wordId))).subscribe((data) => {
+      const wordsDictionary: any = this.userWords.map((word, index) => {
+        console.log(data[index], word);
+        return { ...data[index], userWord: word };
+      });
+
+      this.wordsDictionarySource.next(wordsDictionary);
+    });
   }
 
   getWordsPageAndGroup(): void {
