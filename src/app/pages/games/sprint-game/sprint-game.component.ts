@@ -70,7 +70,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.gameClass = 'game';
     this.levelAndRoundChoice = '';
     this.statisticClass = 'statistic';
-    this.BgImageChange();
+    this.BgImageChange(false);
   }
 
   ngOnDestroy(): void {
@@ -228,7 +228,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.wrongWords.push(this.words[this.index]);
     }
     this.index += 1;
-
+    this.playAudioTimer()
     if (this.index > 19) {
       this.delayedConfettiClass();
       this.pauseTimer();
@@ -244,6 +244,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.levelAndRoundChoice = 'hidden';
       this.setScoreAndDateToLocalStorage();
       this.getScoreAndDateToLocalStorage();
+      this.pauseAudioTimer()
     }
   }
 
@@ -408,7 +409,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     JSON.parse(localStorage.getItem('sprint-date'));
   }
 
-  public BgImageChange() {
+  public BgImageChange(value) {
     let backgroundTheme;
     if (this.activeItem) {
       backgroundTheme = this.activeItem;
@@ -426,14 +427,21 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       img.crossOrigin = 'Anonymous';
 
       img.src = data.urls.regular;
-      img.onload = function () {
-        draw(this);
+   
+     img.onload = function () {
+        if(this){
+          localStorage.setItem('img-url', JSON.stringify( img.src));
+        }
       };
     })();
-    function draw(img) {
-      document.getElementById('page_background').style.backgroundImage = `url(${img.src})`;
+   
+    let urlImage=JSON.parse(localStorage.getItem('img-url'));
+    if(value){
+      document.getElementById('page_background').style.backgroundImage = `url(${urlImage})`;
       document.getElementById('page_background').style.backgroundRepeat = `no-repeat`;
-      document.getElementById('page_background').style.backgroundSize = `cover`;
+      document.getElementById('page_background').style.backgroundSize = `cover`; 
     }
+    
   }
+
 }
