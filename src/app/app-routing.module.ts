@@ -41,6 +41,13 @@ const routes: Routes = [
         (module) => module.ConstructorGameModule
       ),
   },
+  {
+    path: ParamKey.textBook,
+    loadChildren: (): any =>
+      import('./pages/electronic-textbook/electronic-textbook.module').then(
+        (module) => module.ElectronicTextbookModule
+      ),
+  },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];
 

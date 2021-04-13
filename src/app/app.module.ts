@@ -1,13 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import AppComponent from '@app/app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import AppRoutingModule from './app-routing.module';
 import SharedModule from './shared/shared.module';
+
+import { LoadingInterceptor } from './shared/interceptor/loading.interceptor';
+
 import RegistrationComponent from './pages/registration/registration/registration.component';
 
 @NgModule({
@@ -21,6 +24,8 @@ import RegistrationComponent from './pages/registration/registration/registratio
     AppRoutingModule,
     HttpClientModule,
   ],
+
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export default class AppModule {}
