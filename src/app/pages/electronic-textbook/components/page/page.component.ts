@@ -31,14 +31,10 @@ export class PageComponent implements AfterViewInit, OnDestroy {
         this.textbookService.groups = +group;
         this.backgroundColor = this.textbookService.getColor(+group);
       }
-      this.textbookService
-        .getWordsPageAndGroup()
-        .toPromise()
-        .then(() => {
-          this.subscription = this.textbookService.getWords().subscribe((data) => {
-            this.array = data;
-          });
-        });
+      this.textbookService.getWordsPageAndGroup();
+      this.subscription = this.textbookService.getWords().subscribe((data) => {
+        this.array = data;
+      });
 
       this.cdr.detectChanges();
     });

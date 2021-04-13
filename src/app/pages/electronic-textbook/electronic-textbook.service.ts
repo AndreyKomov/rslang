@@ -2,7 +2,6 @@ import { Injectable, Optional } from '@angular/core';
 import { URL_FILES } from '@app/core/common/constants';
 import { WordsApiService } from '@app/server/api';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { ICardInfo, IUserInfo, IUserWord, IWord } from './word';
 
 @Injectable({ providedIn: 'root' })
@@ -29,13 +28,7 @@ export class ElectronicTextbookService {
 
   public cardInfo = this.cardInfoSource.asObservable();
 
-  constructor(private api: WordsApiService) {
-    this.userData = {
-      token: localStorage.getItem('token'),
-      userId: localStorage.getItem('userId'),
-    };
-    this.getUserWords();
-  }
+  constructor(private api: WordsApiService) {}
 
   get groups(): number {
     return this.group;
@@ -85,21 +78,36 @@ export class ElectronicTextbookService {
     return this.words;
   }
 
-  getWordsPageAndGroup(): Observable<IWord[]> {
-    return this.api.getWordsByPageAndGroup(this.page, this.group).pipe(
-      tap((data: IWord[]) => {
-        const array = data.map((word) => {
-          const findWord = this.userWords.find((userWord) => userWord.wordId === word.id);
-          return findWord ? { ...word, userWord: findWord } : word;
-        });
-        this.wordsSource.next(array);
-      })
-    );
+  getWordsPageAndGroup(): void {
+    this.api.getWordsByPageAndGroup(this.page, this.group).subscribe((data: IWord[]) => {
+      const array = data.map((word) => {
+        const findWord = this.userWords.find((userWord) => userWord.wordId === word.id);
+        return findWord ? { ...word, userWord: findWord } : word;
+      });
+      this.wordsSource.next(array);
+    });
   }
 
-  getUserWords(): void {
+  getUserWords(userId: string, token: string): void {
+    this.userData = { userId, token };
     this.api
       .getAllUsersWords(this.userData.userId, this.userData.token)
+      .subscribe((data: IUserWord[]) => {
+        this.userWords = data;
+      });
+  }
+
+  getUserSettings(): void {
+    this.api
+      .getUserSettings(this.userData.userId, this.userData.token)
+      .subscribe((data: IUserWord[]) => {
+        this.userWords = data;
+      });
+  }
+
+  setUserSettings(option: Optional): void {
+    this.api
+      .setUserSettings(this.userData.userId, this.userData.token, 4, option)
       .subscribe((data: IUserWord[]) => {
         this.userWords = data;
       });

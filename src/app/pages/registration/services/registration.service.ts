@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ElectronicTextbookService } from '@app/pages/electronic-textbook/electronic-textbook.service';
 import { WordsApiService } from '@app/server/api';
 
 import { IFileModel } from '../models/FileModel';
@@ -6,7 +7,10 @@ import { IUserDataModel } from '../models/userDataModel';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
-  constructor(private apiService: WordsApiService) {}
+  constructor(
+    private apiService: WordsApiService,
+    private textbookService: ElectronicTextbookService
+  ) {}
 
   singUp(name: string, password: string, email: string, imgPath: IFileModel[]): void {
     const newFile =
@@ -28,7 +32,7 @@ export class RegistrationService {
     this.apiService.signIn(email, password).subscribe((res: IUserDataModel) => {
       localStorage.setItem('token', res.token);
       localStorage.setItem('userId', res.userId);
-      // window.location.reload();
+      this.textbookService.getUserWords(res.userId, res.token);
     });
   }
 }

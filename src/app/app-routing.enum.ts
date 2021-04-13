@@ -7,7 +7,8 @@ export enum ParamKey {
   wordConstructor = 'words-puzzle',
   statistic = 'statistic',
   savannaPromo = 'savanna',
-  audiocallPromo = 'audiocall'
+  audiocallPromo = 'audiocall',
+  audiocallGame = 'audiocallgame'
 }
 
 export enum QueryParamKey {
