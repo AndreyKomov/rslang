@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostBinding, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { WordsApiService } from '../../../server/api';
 
 @Component({
@@ -68,7 +68,17 @@ export class ConstructorGameComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (
+      !localStorage.getItem('wordConstructorRightAnswers') &&
+      !localStorage.getItem('wordConstructorWrongAnswers') &&
+      !localStorage.getItem('wordConstructorRightStreak')
+    ) {
+      localStorage.setItem('wordConstructorRightAnswers', '0');
+      localStorage.setItem('wordConstructorWrongAnswers', '0');
+      localStorage.setItem('wordConstructorRightStreak', '0');
+    }
+  }
 
   nextRaund(): void {
     this.isUserDoMistake = false;
@@ -113,8 +123,6 @@ export class ConstructorGameComponent implements OnInit {
       this.word = '';
       this.raund = 0;
       this.showResult = true;
-      this.rightAnswers++;
-      this.wrongAnswers--;
     }
   }
 
@@ -151,15 +159,24 @@ export class ConstructorGameComponent implements OnInit {
   endRaund(): void {
     this.raund++;
     this.isEndRaund = true;
-    if (this.rightAnswersStreak < this.rightAnswers) {
-      this.rightAnswersStreak = this.rightAnswers;
-    }
-    localStorage.setItem('wordConstructorRightAnswers', JSON.stringify(this.rightAnswers));
-    localStorage.setItem('wordConstructorWrongAnswers', JSON.stringify(this.wrongAnswers));
-    localStorage.setItem('wordConstructorRightStreak', JSON.stringify(this.rightAnswersStreak));
+
     if (this.isUserDoMistake) {
       console.log(this.rightAnswers, this.wrongAnswers);
+      localStorage.setItem(
+        'wordConstructorWrongAnswers',
+        JSON.stringify(Number(localStorage.getItem('wordConstructorWrongAnswers')) + 1)
+      );
       this.wrongAnswers++;
+    } else {
+      this.rightAnswers++;
+      this.rightAnswersStreak = this.rightAnswers;
+      if (Number(localStorage.getItem('wordConstructorRightStreak')) < this.rightAnswersStreak) {
+        localStorage.setItem('wordConstructorRightStreak', JSON.stringify(this.rightAnswersStreak));
+      }
+      localStorage.setItem(
+        'wordConstructorRightAnswers',
+        JSON.stringify(Number(localStorage.getItem('wordConstructorRightAnswers')) + 1)
+      );
     }
     if (this.page != 30) {
       this.page++;
