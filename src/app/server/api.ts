@@ -29,7 +29,7 @@ interface Word {
   providedIn: 'root',
 })
 export class WordsApiService {
-  private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
+  private apiUrl = 'https://quiet-fortress-68618.herokuapp.com/';
 
   id: string | null;
 

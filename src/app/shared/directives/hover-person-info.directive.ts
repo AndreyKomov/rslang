@@ -49,7 +49,7 @@ export default class HoverPersonInfoDirective implements AfterViewInit {
     this.renderer2.setStyle(
       this.photo,
       'transform',
-      `translateX(${-event.movementX}px) translateY(${-event.movementY}px) scale(1.05)`,
+      `translateX(${-event.movementX}px) translateY(${-event.movementY}px) scale(1.05)`
     );
   }
 }

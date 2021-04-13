@@ -7,7 +7,7 @@ import { SavannaRoutingModule } from './savanna-routing.module';
 import { SavannaResultsComponent } from './components/savanna-results/savanna-results.component';
 
 @NgModule({
-  declarations: [SavannaPromoComponent, SavannaGameComponent, SavannaResultsComponent ],
+  declarations: [SavannaPromoComponent, SavannaGameComponent, SavannaResultsComponent],
   imports: [CommonModule, SavannaRoutingModule, FormsModule],
 })
 export class SavannaModule {}

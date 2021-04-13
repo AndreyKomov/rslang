@@ -6,7 +6,7 @@ import { Component, OnInit, ChangeDetectionStrategy, HostBinding, EventEmitter, 
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @HostBinding('class') class = 'header';
 
   @Output() clickAutnBtnEvent = new EventEmitter<string>();

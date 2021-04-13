@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'div[app-auth-button]',
@@ -6,10 +6,6 @@ import { Component, OnInit, HostBinding, ChangeDetectionStrategy } from '@angula
   styleUrls: ['./auth-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthButtonComponent implements OnInit {
+export class AuthButtonComponent {
   @HostBinding('class') class = 'auth-button';
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

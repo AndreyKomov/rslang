@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'span[app-footer-credentials]',
@@ -6,10 +6,6 @@ import { Component, OnInit, HostBinding, ChangeDetectionStrategy } from '@angula
   styleUrls: ['./footer-credentials.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FooterCredentialsComponent implements OnInit {
+export class FooterCredentialsComponent {
   @HostBinding('class') class = 'dev-team__credentials';
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }
