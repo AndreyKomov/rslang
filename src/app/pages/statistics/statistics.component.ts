@@ -19,6 +19,11 @@ export class StatisticsComponent implements OnInit {
   sprintErrors = 0;
   percentRightSprint = 0;
 
+  constructorCorrect = 0;
+  constructorErrors = 0;
+  constructorRightStreak = 0;
+  percentRightConstructor = 0;
+
   allCorrectAnswers = 0;
   allErrors = 0;
   percentRightAll = 0;
@@ -27,6 +32,7 @@ export class StatisticsComponent implements OnInit {
     this.getCurrentAudiocallStatistic();
     this.getCurrentSavannahStatistic();
     this.getCurrentSprintStatistic();
+    this.getCurrentConstructorStatistic();
   }
 
   getCurrentAudiocallStatistic(): void {
@@ -74,5 +80,22 @@ export class StatisticsComponent implements OnInit {
       (this.allCorrectAnswers / (this.allCorrectAnswers + this.allErrors)) * 100;
 
     this.percentRightSprint = (this.sprintCorrect / (this.sprintCorrect + this.sprintErrors)) * 100;
+  }
+
+  getCurrentConstructorStatistic(): void {
+    const correctFromLocalSt = localStorage.getItem(`wordConstructorRightAnswers`);
+    const errorsFromLocalSt = localStorage.getItem(`wordConstructorWrongAnswers`);
+    this.constructorRightStreak = +localStorage.getItem(`wordConstructorRightStreak`);
+
+    this.constructorCorrect = +correctFromLocalSt;
+    this.constructorErrors = +errorsFromLocalSt;
+
+    this.allErrors += this.constructorErrors;
+    this.allCorrectAnswers += this.constructorCorrect;
+    this.percentRightAll =
+      (this.allCorrectAnswers / (this.allCorrectAnswers + this.allErrors)) * 100;
+
+    this.percentRightConstructor =
+      (this.constructorCorrect / (this.constructorCorrect + this.constructorErrors)) * 100;
   }
 }
