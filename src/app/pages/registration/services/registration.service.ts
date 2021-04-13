@@ -23,12 +23,14 @@ export class RegistrationService {
           )
         : imgPath[0];
     this.apiService.createUser(name, email, password, newFile).subscribe(() => {
+      alert('Успешная регистрация, войдите');
       this.clickRegister.emit(true);
     });
   }
 
   logIn(password: string, email: string): void {
     this.apiService.signIn(email, password).subscribe((res: IUserDataModel) => {
+      alert('Успешный вход');
       localStorage.setItem('userId', res.userId);
       this.clickLogin.emit(false);
     });

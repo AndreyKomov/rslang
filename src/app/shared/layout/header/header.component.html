@@ -1,3 +1,4 @@
 <div app-header-logo></div>
 <div app-header-menu></div>
-<div app-auth-button (click)="openModal('open')"></div>
+<div app-auth-button (click)="openModal(true)" *ngIf="!token && !id; else block"></div>
+<ng-template #block></ng-template>

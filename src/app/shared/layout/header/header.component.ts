@@ -1,4 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, HostBinding, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  HostBinding,
+  EventEmitter,
+  Output,
+} from '@angular/core';
+import { WordsApiService } from '@app/server/api';
 
 @Component({
   selector: 'header[app-header]',
@@ -8,14 +16,19 @@ import { Component, OnInit, ChangeDetectionStrategy, HostBinding, EventEmitter, 
 })
 export class HeaderComponent implements OnInit {
   @HostBinding('class') class = 'header';
+  token: string | null = localStorage.getItem('token');
+  id: string | null = localStorage.getItem('userId');
+  user = this.wordsApiService.getUser(this.id, this.token).subscribe((res) => {
+    console.log(res);
+  });
 
-  @Output() clickAutnBtnEvent = new EventEmitter<string>();
+  @Output() clickAutnBtnEvent = new EventEmitter<boolean>();
 
-  constructor() {}
+  constructor(public wordsApiService: WordsApiService) {}
 
   ngOnInit(): void {}
 
-  openModal(value): void {
+  openModal(value: boolean): void {
     this.clickAutnBtnEvent.emit(value);
   }
 }

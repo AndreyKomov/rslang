@@ -29,7 +29,7 @@ interface Word {
   providedIn: 'root',
 })
 export class WordsApiService {
-  private apiUrl = 'https://powerful-river-87536.herokuapp.com/';
+  private apiUrl = 'https://quiet-fortress-68618.herokuapp.com/';
 
   id: string | null;
 
@@ -71,8 +71,8 @@ export class WordsApiService {
     localStorage.setItem('token', token);
   }
 
-  public static getUserToken(): void {
-    localStorage.getItem('token');
+  public getUserToken(): string {
+    return localStorage.getItem('token');
   }
 
   public static setUserRefreshToken(refreshToken: string | null): void {

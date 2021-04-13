@@ -20,7 +20,7 @@ import { IFileModel } from '../models/FileModel';
 })
 export default class RegistrationComponent implements OnInit {
   @ViewChild('avatar') avatar;
-  @Output() clickAutnBtnEvent = new EventEmitter<string>();
+  @Output() clickAutnBtnEvent = new EventEmitter<boolean>();
   @Input() isShow;
   modalName = 'Registration';
   isLoginTemplate = false;
@@ -31,9 +31,14 @@ export default class RegistrationComponent implements OnInit {
   constructor(private fb: FormBuilder, private registrationService: RegistrationService) {
     this.registrationService.clickLogin.subscribe((data) => (this.isShow = data));
     this.registrationService.clickRegister.subscribe((data) => {
+      this.modalName = this.modalName === 'Registration' ? 'Login' : 'Registration';
       this.isLoginTemplate = data;
-      this.registrationForm.controls.name.disable();
-      // this.changeModal();
+      console.log(this.isLoginTemplate);
+      if (this.isLoginTemplate) {
+        this.registrationForm.controls.name.disable();
+      } else {
+        this.registrationForm.controls.name.enable();
+      }
     });
   }
 
@@ -76,13 +81,14 @@ export default class RegistrationComponent implements OnInit {
   }
 
   closeModal(): void {
-    this.isShow = '';
+    this.isShow = false;
     this.clickAutnBtnEvent.emit(this.isShow);
   }
 
   changeModal(): void {
     this.modalName = this.modalName === 'Registration' ? 'Login' : 'Registration';
     this.isLoginTemplate = !this.isLoginTemplate;
+    console.log(this.isLoginTemplate);
     if (this.isLoginTemplate) {
       this.registrationForm.controls.name.disable();
     } else {
