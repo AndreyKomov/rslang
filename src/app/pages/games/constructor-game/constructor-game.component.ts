@@ -11,7 +11,7 @@ export class ConstructorGameComponent implements OnInit {
   isMistake = false;
   @ViewChild('keysBlock') keysBlock;
   isUserDoMistake = false;
-  rightAnswers = 10;
+  rightAnswers = 0;
   wrongAnswers = 0;
   showResult = false;
   isLevelChosen = false;
@@ -27,6 +27,9 @@ export class ConstructorGameComponent implements OnInit {
   raund = 0;
   letterArr: string[];
   rightLettersArr = [];
+  rightAnswersStreak = 0;
+
+  constructor(private apiService: WordsApiService) {}
 
   sliceWord(word: string): string[] {
     return word.split('');
@@ -37,7 +40,7 @@ export class ConstructorGameComponent implements OnInit {
   }
 
   getReadyForGameWord(word: string): string[] {
-    let letterArr = this.sliceWord(word);
+    const letterArr = this.sliceWord(word);
     return this.randomiseLetters(letterArr);
   }
 
@@ -65,9 +68,17 @@ export class ConstructorGameComponent implements OnInit {
     }
   }
 
-  constructor(private apiService: WordsApiService) {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (
+      !localStorage.getItem('wordConstructorRightAnswers') &&
+      !localStorage.getItem('wordConstructorWrongAnswers') &&
+      !localStorage.getItem('wordConstructorRightStreak')
+    ) {
+      localStorage.setItem('wordConstructorRightAnswers', '0');
+      localStorage.setItem('wordConstructorWrongAnswers', '0');
+      localStorage.setItem('wordConstructorRightStreak', '0');
+    }
+  }
 
   nextRaund(): void {
     this.isUserDoMistake = false;
@@ -83,12 +94,9 @@ export class ConstructorGameComponent implements OnInit {
     this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe((data) => {
       this.word = data[this.raund].word;
       this.translateWord = data[this.raund].wordTranslate;
-      this.context =
-        data[this.raund].word +
-        ' ' +
-        data[this.raund].transcription +
-        ' - ' +
-        data[this.raund].wordTranslate;
+      this.context = `${data[this.raund].word} ${data[this.raund].transcription} - ${
+        data[this.raund].wordTranslate
+      }`;
       this.baseImgUrl += data[this.raund].image;
       for (let i = 0; i < this.word.length; i++) {
         this.rightLettersArr.push('');
@@ -115,8 +123,6 @@ export class ConstructorGameComponent implements OnInit {
       this.word = '';
       this.raund = 0;
       this.showResult = true;
-      this.rightAnswers++;
-      this.wrongAnswers--;
     }
   }
 
@@ -153,10 +159,24 @@ export class ConstructorGameComponent implements OnInit {
   endRaund(): void {
     this.raund++;
     this.isEndRaund = true;
+
     if (this.isUserDoMistake) {
       console.log(this.rightAnswers, this.wrongAnswers);
-      this.rightAnswers--;
+      localStorage.setItem(
+        'wordConstructorWrongAnswers',
+        JSON.stringify(Number(localStorage.getItem('wordConstructorWrongAnswers')) + 1)
+      );
       this.wrongAnswers++;
+    } else {
+      this.rightAnswers++;
+      this.rightAnswersStreak = this.rightAnswers;
+      if (Number(localStorage.getItem('wordConstructorRightStreak')) < this.rightAnswersStreak) {
+        localStorage.setItem('wordConstructorRightStreak', JSON.stringify(this.rightAnswersStreak));
+      }
+      localStorage.setItem(
+        'wordConstructorRightAnswers',
+        JSON.stringify(Number(localStorage.getItem('wordConstructorRightAnswers')) + 1)
+      );
     }
     if (this.page != 30) {
       this.page++;
@@ -168,7 +188,7 @@ export class ConstructorGameComponent implements OnInit {
 
   continueGame(): void {
     this.showResult = false;
-    this.rightAnswers = 10;
+    this.rightAnswers = 0;
     this.wrongAnswers = 0;
     this.nextRaund();
   }

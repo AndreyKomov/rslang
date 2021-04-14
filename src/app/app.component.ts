@@ -10,6 +10,11 @@ import { ParamKey } from './app-routing.enum';
 export default class AppComponent {
   footerVisibility = true;
   showModal = false;
+  isAuthenticated = false;
+
+  auth(value): void {
+    this.isAuthenticated = value;
+  }
 
   openModal(value: boolean): void {
     this.showModal = value;
@@ -21,7 +26,7 @@ export default class AppComponent {
         if (
           val.url.includes(ParamKey.audiocallPromo) ||
           val.url.includes(ParamKey.savannaPromo) ||
-          val.url.includes('audiocall') ||
+          val.url.includes(ParamKey.sprintGame) ||
           val.url.includes('audiocall')
         ) {
           this.footerVisibility = false;

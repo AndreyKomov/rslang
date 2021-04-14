@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+import { Component, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 import { ParamKey } from '@app/app-routing.enum';
 import { MainNav } from './header-menu.enum';
 
@@ -8,7 +8,7 @@ import { MainNav } from './header-menu.enum';
   styleUrls: ['./header-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderMenuComponent implements OnInit {
+export class HeaderMenuComponent {
   @HostBinding('class') class = 'menu';
 
   navMenu: Array<Array<string>>;
@@ -19,6 +19,4 @@ export class HeaderMenuComponent implements OnInit {
     this.navMenu = Object.entries(MainNav);
     this.menuRoutes = ParamKey;
   }
-
-  ngOnInit(): void {}
 }

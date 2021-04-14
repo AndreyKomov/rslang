@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'div[app-footer-slider]',
@@ -6,10 +6,6 @@ import { Component, OnInit, HostBinding, ChangeDetectionStrategy } from '@angula
   styleUrls: ['./footer-slider.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FooterSliderComponent implements OnInit {
+export class FooterSliderComponent {
   @HostBinding('class') class = 'dev-team__slider';
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

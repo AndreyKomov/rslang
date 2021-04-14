@@ -5,19 +5,23 @@ import {
   HostBinding,
   EventEmitter,
   Output,
+  OnChanges,
+  Input,
 } from '@angular/core';
+import { getMatInputUnsupportedTypeError } from '@angular/material/input';
 import { WordsApiService } from '@app/server/api';
 
 @Component({
   selector: 'header[app-header]',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnChanges {
+  @Input() isAuthenticated;
   @HostBinding('class') class = 'header';
-  token: string | null = localStorage.getItem('token');
-  id: string | null = localStorage.getItem('userId');
+  token: string | null;
+  id: string | null;
   userName = '';
   userImg;
 
@@ -26,6 +30,12 @@ export class HeaderComponent implements OnInit {
   constructor(public wordsApiService: WordsApiService) {}
 
   ngOnInit(): void {
+    this.getUser();
+  }
+
+  getUser(): void {
+    this.id = localStorage.getItem('token');
+    this.token = localStorage.getItem('userId');
     if (this.token && this.id) {
       this.wordsApiService.getUser(this.id, this.token).subscribe((res) => {
         console.log(res);
@@ -33,6 +43,13 @@ export class HeaderComponent implements OnInit {
         this.userImg = res.avatar;
       });
     }
+  }
+
+  ngOnChanges(changes): void {
+    if (changes.isAuthenticated.currentValue) {
+      this.getUser();
+    }
+    console.log(changes);
   }
 
   openModal(value: boolean): void {
