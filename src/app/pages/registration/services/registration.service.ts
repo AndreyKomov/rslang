@@ -32,6 +32,7 @@ export class RegistrationService {
     this.apiService.signIn(email, password).subscribe((res: IUserDataModel) => {
       alert('Успешный вход');
       localStorage.setItem('userId', res.userId);
+      localStorage.setItem('token', res.token);
       this.clickLogin.emit(false);
     });
   }

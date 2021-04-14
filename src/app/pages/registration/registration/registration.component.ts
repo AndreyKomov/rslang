@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   ViewChild,
@@ -16,7 +17,7 @@ import { IFileModel } from '../models/FileModel';
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class RegistrationComponent implements OnInit {
   @ViewChild('avatar') avatar;
@@ -31,14 +32,7 @@ export default class RegistrationComponent implements OnInit {
   constructor(private fb: FormBuilder, private registrationService: RegistrationService) {
     this.registrationService.clickLogin.subscribe((data) => (this.isShow = data));
     this.registrationService.clickRegister.subscribe((data) => {
-      this.modalName = this.modalName === 'Registration' ? 'Login' : 'Registration';
-      this.isLoginTemplate = data;
-      console.log(this.isLoginTemplate);
-      if (this.isLoginTemplate) {
-        this.registrationForm.controls.name.disable();
-      } else {
-        this.registrationForm.controls.name.enable();
-      }
+      this.changeModal();
     });
   }
 
