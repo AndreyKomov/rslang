@@ -33,14 +33,12 @@ export class StatisticsComponent implements OnInit {
     this.getCurrentSavannahStatistic();
     this.getCurrentSprintStatistic();
     this.getCurrentConstructorStatistic();
+    this.percentRightAll = Math.round(this.percentRightAll);
   }
 
   getCurrentAudiocallStatistic(): void {
-    const correctFromLocalSt = localStorage.getItem(`audiocall-correct`);
-    const errorsFromLocalSt = localStorage.getItem(`audiocall-errors`);
-
-    this.audiocallCorrect = +correctFromLocalSt;
-    this.audiocallErrors = +errorsFromLocalSt;
+    this.audiocallCorrect = +localStorage.getItem(`audiocall-correct`);
+    this.audiocallErrors = +localStorage.getItem(`audiocall-errors`);
 
     this.allErrors += this.audiocallErrors;
     this.allCorrectAnswers += this.audiocallCorrect;
@@ -49,14 +47,12 @@ export class StatisticsComponent implements OnInit {
 
     this.percentRightAudiocall =
       (this.audiocallCorrect / (this.audiocallCorrect + this.audiocallErrors)) * 100;
+    this.percentRightAudiocall = Math.round(this.percentRightAudiocall);
   }
 
   getCurrentSavannahStatistic(): void {
-    const correctFromLocalSt = localStorage.getItem(`savannaRightAnswers`);
-    const errorsFromLocalSt = localStorage.getItem(`savannaWrongAnswers`);
-
-    this.savannahCorrect = +correctFromLocalSt;
-    this.savannahErrors = +errorsFromLocalSt;
+    this.savannahCorrect = +localStorage.getItem(`savannaRightAnswers`);
+    this.savannahErrors = +localStorage.getItem(`savannaWrongAnswers`);
 
     this.allErrors += this.savannahErrors;
     this.allCorrectAnswers += this.savannahCorrect;
@@ -65,14 +61,12 @@ export class StatisticsComponent implements OnInit {
 
     this.percentRightSavannah =
       (this.savannahCorrect / (this.savannahCorrect + this.savannahErrors)) * 100;
+    this.percentRightSavannah = Math.round(this.percentRightSavannah);
   }
 
   getCurrentSprintStatistic(): void {
-    const correctFromLocalSt = localStorage.getItem(`sprint-correct`);
-    const errorsFromLocalSt = localStorage.getItem(`sprint-error`);
-
-    this.sprintCorrect = +correctFromLocalSt;
-    this.sprintErrors = +errorsFromLocalSt;
+    this.sprintCorrect = +localStorage.getItem(`sprint-correct`);
+    this.sprintErrors = +localStorage.getItem(`sprint-error`);
 
     this.allErrors += this.sprintErrors;
     this.allCorrectAnswers += this.sprintCorrect;
@@ -80,15 +74,13 @@ export class StatisticsComponent implements OnInit {
       (this.allCorrectAnswers / (this.allCorrectAnswers + this.allErrors)) * 100;
 
     this.percentRightSprint = (this.sprintCorrect / (this.sprintCorrect + this.sprintErrors)) * 100;
+    this.percentRightSprint = Math.round(this.percentRightSprint);
   }
 
   getCurrentConstructorStatistic(): void {
-    const correctFromLocalSt = localStorage.getItem(`wordConstructorRightAnswers`);
-    const errorsFromLocalSt = localStorage.getItem(`wordConstructorWrongAnswers`);
     this.constructorRightStreak = +localStorage.getItem(`wordConstructorRightStreak`);
-
-    this.constructorCorrect = +correctFromLocalSt;
-    this.constructorErrors = +errorsFromLocalSt;
+    this.constructorCorrect = +localStorage.getItem(`wordConstructorRightAnswers`);
+    this.constructorErrors = +localStorage.getItem(`wordConstructorWrongAnswers`);
 
     this.allErrors += this.constructorErrors;
     this.allCorrectAnswers += this.constructorCorrect;
@@ -97,5 +89,6 @@ export class StatisticsComponent implements OnInit {
 
     this.percentRightConstructor =
       (this.constructorCorrect / (this.constructorCorrect + this.constructorErrors)) * 100;
+    this.percentRightConstructor = Math.round(this.percentRightConstructor);
   }
 }
