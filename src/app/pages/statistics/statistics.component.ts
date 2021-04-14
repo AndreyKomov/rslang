@@ -65,9 +65,11 @@ export class StatisticsComponent implements OnInit {
   }
 
   getCurrentSprintStatistic(): void {
-    this.sprintCorrect = +localStorage.getItem(`sprint-correct`);
-    this.sprintErrors = +localStorage.getItem(`sprint-error`);
+    const rightSprtint = localStorage.getItem(`sprint-correct`);
+    const wrongSprint = localStorage.getItem(`sprint-error`);
 
+    this.sprintCorrect = JSON.parse(rightSprtint)[0];
+    this.sprintErrors = JSON.parse(wrongSprint)[0];
     this.allErrors += this.sprintErrors;
     this.allCorrectAnswers += this.sprintCorrect;
     this.percentRightAll =
