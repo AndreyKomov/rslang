@@ -4,9 +4,14 @@
 <button mat-icon-button matTooltip="СПРИНТ">
   <mat-icon>directions_run</mat-icon>
 </button>
+<a routerLink="/games/audiocall/audiocallgame" [queryParams]="{group: groupValue, page: pageValue}">
 <button mat-icon-button matTooltip="АУДИОВЫЗОВ">
-  <mat-icon>surround_sound</mat-icon>
+    <mat-icon>surround_sound</mat-icon>
 </button>
-<button mat-icon-button matTooltip="САВАННА">
-  <mat-icon>nature</mat-icon>
-</button>
+</a>
+<a routerLink="/games/savanna/savannagame" [queryParams]="{group: groupValue, page: pageValue}">
+  <button mat-icon-button matTooltip="САВАННА">
+    <mat-icon>nature</mat-icon>
+  </button>
+</a>
+

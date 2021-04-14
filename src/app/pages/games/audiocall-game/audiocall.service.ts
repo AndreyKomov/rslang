@@ -9,8 +9,20 @@ export class AudiocallService {
   success = new Audio('../../../../assets/sounds/success.mp3');
   numberOfCorrectAnswers = 0;
   numberOfErrors = 0;
+  strikeSerie = 0;
 
   playSound(sound) {
     sound.play();
+  }
+
+  updateStrikeSerie(answer: boolean) {
+    if (answer) {
+      this.strikeSerie += 1;
+      if (+localStorage.getItem('audiocall-strike') < this.strikeSerie) {
+        localStorage.setItem('audiocall-strike', `${this.strikeSerie}`);
+      }
+    } else {
+      this.strikeSerie = 0;
+    }
   }
 }

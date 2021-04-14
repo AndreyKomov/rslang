@@ -96,6 +96,7 @@ export class SavannaGameComponent implements OnInit {
     event === `${this.wordsFromApi[this.savannaWordCounter].wordTranslate}`
       ? ((this.buttonClicked = true),
         (this.savannaRightAnswers += 1),
+        (this.gameService.updateStrikeSerie(true)),
         (this.savannaWordCounter += 1),
         (this.diamonWidth += 1),
         (this.className = ''),
@@ -104,6 +105,7 @@ export class SavannaGameComponent implements OnInit {
         this.savannaRightAnswers !== 20 ? this.startGame() : null)
       : (this.heartsPlay.pop(),
         (this.savannaWrongAnswers += 1),
+        (this.gameService.updateStrikeSerie(false)),
         this.setItemToLocalStorage(),
         this.startGame());
     this.savannaWrongAnswers === 5 || this.savannaWordCounter === 20
