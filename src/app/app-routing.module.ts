@@ -19,6 +19,13 @@ const routes: Routes = [
       import('./pages/games/savanna-game/savanna.module').then((module) => module.SavannaModule),
   },
   {
+    path: `${ParamKey.games}/${ParamKey.sprintGame}`,
+    loadChildren: (): any =>
+      import('./pages/games/sprint-game/sprint-game.module').then(
+        (module) => module.SprintGameModule
+      ),
+  },
+  {
     path: ParamKey.games,
     loadChildren: (): any =>
       import('./pages/game-page/game-page.module').then((module) => module.GamePageModule),
@@ -37,6 +44,13 @@ const routes: Routes = [
     loadChildren: (): any =>
       import('./pages/constructor-game/constructor-game.module').then(
         (module) => module.ConstructorGameModule
+      ),
+  },
+  {
+    path: ParamKey.textBook,
+    loadChildren: (): any =>
+      import('./pages/electronic-textbook/electronic-textbook.module').then(
+        (module) => module.ElectronicTextbookModule
       ),
   },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },

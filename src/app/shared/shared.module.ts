@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { PromoComponent } from '@app/pages/promo/promo.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import MaterialModule from './component/material/material.module';
 
 import { HeaderComponent } from './layout/header/header.component';
@@ -14,6 +15,7 @@ import { FooterSliderComponent } from './layout/footer/footer-slider/footer-slid
 import { FooterCredentialsComponent } from './layout/footer/footer-credentials/footer-credentials.component';
 import { PromoButtonComponent } from './layout/promo-button/promo-button.component';
 import HoverPersonInfoDirective from './directives/hover-person-info.directive';
+import { SpinnerComponent } from './component/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +29,12 @@ import HoverPersonInfoDirective from './directives/hover-person-info.directive';
     PromoButtonComponent,
     PromoComponent,
     HoverPersonInfoDirective,
+    SpinnerComponent,
   ],
   imports: [RouterModule, CommonModule, MaterialModule],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     HeaderComponent,
     HeaderMenuComponent,
     HeaderLogoComponent,
@@ -41,6 +46,7 @@ import HoverPersonInfoDirective from './directives/hover-person-info.directive';
     PromoComponent,
     HoverPersonInfoDirective,
     MaterialModule,
+    SpinnerComponent,
   ],
   providers: [],
 })

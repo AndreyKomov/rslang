@@ -9,8 +9,9 @@ export enum ParamKey {
   savannaPromo = 'savanna',
   audiocallPromo = 'audiocall',
   audiocallGame = 'audiocallgame',
+  sprintGame = 'sprint'
 }
 
 export enum QueryParamKey {
-  redirectTo = ''
+  redirectTo = '',
 }
