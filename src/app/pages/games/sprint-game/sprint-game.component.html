@@ -55,6 +55,7 @@
                                 {{this.describeWordBlockTextExample}}
                             </div>
                             <div >
+                               
                                 <h2>
                                 Уровень пройден 
                                 <button  class="gradient-button-sound" (click)=ChangeWindowSizeStatistic()>
@@ -66,7 +67,12 @@
                                     <img src="https://image.flaticon.com/icons/png/512/93/93638.png"
                                     width="30" height="30"
                                      alt="ImageButton">
-                                </button> <br>
+                                </button> 
+                                <button class="gradient-button-statistics">
+                                    <img src="https://img2.freepng.ru/20180420/xqe/kisspng-chart-computer-icons-statistics-report-elevator-repair-5ad986adef4327.78399718152420522998.jpg"
+                                    width="30" height="30"
+                                     alt="StatisticButton">
+                             </button> <br>
                                 </h2>
                                 
                             </div> 
@@ -105,7 +111,9 @@
                             ngOnInit();
                              ">
                             Начать игру заново
-                        </button>       
+                        </button>   
+                       
+
                     </div>
                 </div> 
                 <div class="{{levelAndRoundChoice}}">
@@ -174,7 +182,7 @@
                             <div class="{{hiddenScoreClass}}" id="blink7"  > + {{wordsYouKnowQuantity*10}}  </div> 
                             <div class="timer-css">{{timeLeft}}</div> 
                         </div>
-                        <div class="show-words-and-translation">
+                        <div *ngIf="this.words" class="show-words-and-translation">
                             <span>{{this.words[index]}}</span>   -   <span>{{this.translations[index]}}</span>
                         </div>
                     </div>

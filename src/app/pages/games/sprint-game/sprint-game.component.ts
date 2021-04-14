@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { WordsApiService } from '../../../server/api';
+import { AudioSprintService } from './sprint-game.service';
+
 
 export enum KeyCode {
   rightArrow = 39,
@@ -19,15 +21,12 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   wordsList: any | null;
   words: any | null;
   translations: any | null;
-  index = 0;
+  index : number| null;
   wordsYouKnowQuantity = 0;
   wordsYouDoNotKnowQuantity = 0;
   rightWords = [];
   wrongWords = [];
   isCheckedWord: any | null;
-  audioTimerSound = new Audio();
-  AudioWrongAnswer = new Audio();
-  AudioRightAnswer = new Audio();
   endOGameSound = new Audio();
   isSoundOn = true;
   hiddenScore = true;
@@ -61,7 +60,11 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
   public activeItem: string;
 
-  constructor(public api: WordsApiService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    public api: WordsApiService, 
+    private cdr: ChangeDetectorRef,
+    public audioService:AudioSprintService
+    ) {}
 
   ngOnInit(): void {
     this.promoInfoClass = '';
@@ -94,39 +97,33 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
   public playAudioTimer(): void {
     if (this.isSoundOn && this.display) {
-      this.audioTimerSound.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_timer.mp3?raw=true`;
-      this.audioTimerSound.load();
-      this.audioTimerSound.play();
+    this.audioService.playSoundTimer()
     }
   }
 
   public pauseAudioTimer(): void {
-    this.audioTimerSound.pause();
+    this.audioService.stopSoundTimer()
   }
 
   public playAudioWrongAnswer(): void {
     if (this.isSoundOn && this.display) {
-      this.AudioWrongAnswer.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_error.mp3?raw=true`;
-      this.AudioWrongAnswer.load();
-      this.AudioWrongAnswer.play();
-    }
+     this.audioService.playSoundError()
+      }
   }
 
   public pauseAudioWrongAnswer(): void {
-    this.AudioWrongAnswer.pause();
+    this.audioService.stopSoundError()
   }
 
   public playAudioRightAnswer(): void {
     if (this.isSoundOn && this.display) {
-      this.AudioRightAnswer.src = `https://github.com/Yuliya-soul/Sounds/blob/master/assets/audio/audio_correct%20.mp3?raw=true`;
-      this.AudioRightAnswer.load();
-      this.AudioRightAnswer.play();
+      this.audioService.playSoundAudioRightAnswer()
     }
   }
 
   pauseAudioRightAnswer(): void {
-    this.AudioRightAnswer.pause();
-  }
+    this.audioService. stopSoundAudioRightAnswer() 
+  }  
 
   public playAudioEndOfGame(): void {
     if (this.isSoundOn) {
@@ -181,6 +178,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   public getWords() {
     this.rightWords = [];
     this.wrongWords = [];
+    this.index = 0;
     this.wordsYouKnowQuantity = 0;
     this.wordsYouDoNotKnowQuantity = 0;
     this.wordsList = [];
