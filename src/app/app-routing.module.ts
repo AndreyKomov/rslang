@@ -35,6 +35,11 @@ const routes: Routes = [
     loadChildren: (): any => import('./pages/team/team.module').then((module) => module.TeamModule),
   },
   {
+    path: ParamKey.statistics,
+    loadChildren: (): any =>
+      import('./pages/statistics/statistics.module').then((module) => module.StatisticsModule),
+  },
+  {
     path: ParamKey.wordConstructor,
     loadChildren: (): any =>
       import('./pages/constructor-game/constructor-game.module').then(
