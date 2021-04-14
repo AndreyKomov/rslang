@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PromoComponent } from './pages/promo/promo.component';
 import { ParamKey, QueryParamKey } from './app-routing.enum';
+import { ConstructorGameModule } from './pages/games/constructor-game/constructor-game.module';
 
 const routes: Routes = [
   { path: ParamKey.promo, component: PromoComponent, pathMatch: 'full' },
@@ -35,9 +36,14 @@ const routes: Routes = [
     loadChildren: (): any => import('./pages/team/team.module').then((module) => module.TeamModule),
   },
   {
-    path: ParamKey.wordConstructor,
+    path: ParamKey.statistics,
     loadChildren: (): any =>
-      import('./pages/constructor-game/constructor-game.module').then(
+      import('./pages/statistics/statistics.module').then((module) => module.StatisticsModule),
+  },
+  {
+    path: ParamKey.wordConstructor,
+    loadChildren: async (): Promise<ConstructorGameModule> =>
+      import('./pages/games/constructor-game/constructor-game.module').then(
         (module) => module.ConstructorGameModule
       ),
   },

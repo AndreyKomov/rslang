@@ -1,5 +1,5 @@
-import { Component, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
-import { WordsApiService } from '../../server/api';
+import { Component, HostBinding, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { WordsApiService } from '../../../server/api';
 
 @Component({
   selector: 'app-constructor-game',
@@ -11,7 +11,7 @@ export class ConstructorGameComponent implements OnInit {
   isMistake = false;
   @ViewChild('keysBlock') keysBlock;
   isUserDoMistake = false;
-  rightAnswers = 10;
+  rightAnswers = 0;
   wrongAnswers = 0;
   showResult = false;
   isLevelChosen = false;
@@ -27,6 +27,7 @@ export class ConstructorGameComponent implements OnInit {
   raund = 0;
   letterArr: string[];
   rightLettersArr = [];
+  rightAnswersStreak = 0;
 
   constructor(private apiService: WordsApiService) {}
 
@@ -67,7 +68,17 @@ export class ConstructorGameComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (
+      !localStorage.getItem('wordConstructorRightAnswers') &&
+      !localStorage.getItem('wordConstructorWrongAnswers') &&
+      !localStorage.getItem('wordConstructorRightStreak')
+    ) {
+      localStorage.setItem('wordConstructorRightAnswers', '0');
+      localStorage.setItem('wordConstructorWrongAnswers', '0');
+      localStorage.setItem('wordConstructorRightStreak', '0');
+    }
+  }
 
   nextRaund(): void {
     this.isUserDoMistake = false;
@@ -112,8 +123,6 @@ export class ConstructorGameComponent implements OnInit {
       this.word = '';
       this.raund = 0;
       this.showResult = true;
-      this.rightAnswers++;
-      this.wrongAnswers--;
     }
   }
 
@@ -150,10 +159,24 @@ export class ConstructorGameComponent implements OnInit {
   endRaund(): void {
     this.raund++;
     this.isEndRaund = true;
+
     if (this.isUserDoMistake) {
       console.log(this.rightAnswers, this.wrongAnswers);
-      this.rightAnswers--;
+      localStorage.setItem(
+        'wordConstructorWrongAnswers',
+        JSON.stringify(Number(localStorage.getItem('wordConstructorWrongAnswers')) + 1)
+      );
       this.wrongAnswers++;
+    } else {
+      this.rightAnswers++;
+      this.rightAnswersStreak = this.rightAnswers;
+      if (Number(localStorage.getItem('wordConstructorRightStreak')) < this.rightAnswersStreak) {
+        localStorage.setItem('wordConstructorRightStreak', JSON.stringify(this.rightAnswersStreak));
+      }
+      localStorage.setItem(
+        'wordConstructorRightAnswers',
+        JSON.stringify(Number(localStorage.getItem('wordConstructorRightAnswers')) + 1)
+      );
     }
     if (this.page != 30) {
       this.page++;
@@ -165,7 +188,7 @@ export class ConstructorGameComponent implements OnInit {
 
   continueGame(): void {
     this.showResult = false;
-    this.rightAnswers = 10;
+    this.rightAnswers = 0;
     this.wrongAnswers = 0;
     this.nextRaund();
   }
