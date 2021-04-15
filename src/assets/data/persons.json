@@ -8,6 +8,7 @@
     "telegram": "https://t.me/cupora",
     "linkedIn": "https://www.linkedin.com/in/siarhei-baranenkau-898bab1b2/"
   },
+<<<<<<< HEAD
   {
     "name": "Комов Андрей",
     "position": "team lead",
@@ -72,3 +73,62 @@
     "linkedIn": ""
   }
 ]
+=======
+    {"name":"Комов Андрей",
+      "position":"team lead",
+      "photo":"../../../../assets/img/photo/komov.jpg",
+      "description":"Пинал всех и вся. Организовал работу команды. Реализовал игру Аудиоколл. Занимался стиливым оформлением.",
+      "gitHub":"https://github.com/AndreyKomov/",
+      "telegram":"https://t.me/kavershteinman",
+      "linkedIn":"https://www.linkedin.com/in/andrey-komov-31162918b/"
+    },
+    {"name":"Голденков Виталий",
+      "position":"developer",
+      "photo":"../../../../assets/img/photo/Vitali.jpg",
+      "description":"Принял участие в работе с бэкэндом, созданию взаимодействия с сервером, реализовал методы загрузки и изменения аватаров пользователя. Разработал игру Саванна",
+      "gitHub":"https://github.com/GoldenkovVitali",
+      "telegram":"https://t.me/VitalikHV",
+      "linkedIn":""
+    },
+    {"name":"Симончик Юлия",
+      "position":"developer",
+      "photo":"../../../../assets/img/photo/Yuliya.jpg",
+      "description":"Приняла участие в работе с бэкэндом, создании взаимодействия с сервером.Разработала игру Спринт ",
+      "gitHub":"https://github.com/Yuliya-soul",
+      "telegram":"",
+      "linkedIn":""
+    },
+    {"name":"",
+      "position":"developer",
+      "photo":"../../../../assets/img/photo/Unknown-person.gif",
+      "description":"Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
+      "gitHub":"",
+      "telegram":"",
+      "linkedIn":""
+    },
+    {"name":"Титова Мария",
+      "position":"developer",
+      "photo":"../../../../assets/img/photo/maria.jpg",
+      "description":"Реализовала страницу статистики",
+      "gitHub":"https://github.com/riatitova",
+      "telegram":"https://t.me/riatitova",
+      "linkedIn":"https://www.linkedin.com/in/riatitova/"
+    },
+    {"name":"",
+      "position":"developer",
+      "photo":"../../../../assets/img/photo/Unknown-person.gif",
+      "description":"Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
+      "gitHub":"",
+      "telegram":"",
+      "linkedIn":""
+    },
+    {"name":"",
+      "position":"developer",
+      "photo":"../../../../assets/img/photo/Unknown-person.gif",
+      "description":"Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.Sample text. Click to select the text box. Click again or double click to start editing the text.",
+      "gitHub":"",
+      "telegram":"",
+      "linkedIn":""
+    }
+  ]
+>>>>>>> 0023e9f4d3e7d5af038a7c2c362595d91c6d72f1

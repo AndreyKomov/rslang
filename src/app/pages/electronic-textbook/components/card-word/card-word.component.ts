@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { URL_FILES } from '@app/core/common/constants';
 import { ElectronicTextbookService } from '../../electronic-textbook.service';
 import { ICardInfo, IWord } from '../../word';
@@ -8,16 +8,24 @@ import { ICardInfo, IWord } from '../../word';
   templateUrl: './card-word.component.html',
   styleUrls: ['./card-word.component.scss'],
 })
-export class CardWordComponent {
+export class CardWordComponent implements AfterViewInit {
   @Input() word: IWord;
+  @Input() isDictionary: boolean;
+  urlImage: string;
 
-  urlImage = URL_FILES;
   cardInfo: ICardInfo;
 
   constructor(public textbookService: ElectronicTextbookService) {
     this.textbookService.getCardInfo().subscribe((data) => {
       this.cardInfo = data;
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.urlImage =
+      this.word.image.slice(0, 5) === 'files'
+        ? URL_FILES + this.word.image
+        : `data:image/jpg;base64,${this.word.image}`;
   }
 
   playAudio(): void {
