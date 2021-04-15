@@ -45,6 +45,7 @@ export class SavannaGameComponent implements OnInit {
 
   ngOnInit(): void {
     this.setItemToLocalStorage();
+    debugger
     this.route.queryParams.subscribe((param) => {
       this.group = param.group;
       this.page = param.page;
@@ -77,11 +78,13 @@ export class SavannaGameComponent implements OnInit {
   shuffleArr = (arr) => arr.sort(() => Math.random() - 0.5);
 
   getWordsFromBE(): void {
-    this.backEndService.getWordsByPageAndGroup(this.page - 1, this.group - 1).subscribe((data) => {
-      this.wordsFromApi = data;
-      this.startGame();
-      this.setClassToFallingWord();
-    });
+    this.backEndService
+      .getWordsByPageAndGroup(+this.page, +this.group)
+      .subscribe((data) => {
+        this.wordsFromApi = data;
+        this.startGame();
+        this.setClassToFallingWord();
+      });
   }
 
   startGame(): void {
@@ -96,7 +99,7 @@ export class SavannaGameComponent implements OnInit {
     event === `${this.wordsFromApi[this.savannaWordCounter].wordTranslate}`
       ? ((this.buttonClicked = true),
         (this.savannaRightAnswers += 1),
-        (this.gameService.updateStrikeSerie(true)),
+        this.gameService.updateStrikeSerie(true),
         (this.savannaWordCounter += 1),
         (this.diamonWidth += 1),
         (this.className = ''),
@@ -105,7 +108,7 @@ export class SavannaGameComponent implements OnInit {
         this.savannaRightAnswers !== 20 ? this.startGame() : null)
       : (this.heartsPlay.pop(),
         (this.savannaWrongAnswers += 1),
-        (this.gameService.updateStrikeSerie(false)),
+        this.gameService.updateStrikeSerie(false),
         this.setItemToLocalStorage(),
         this.startGame());
     this.savannaWrongAnswers === 5 || this.savannaWordCounter === 20

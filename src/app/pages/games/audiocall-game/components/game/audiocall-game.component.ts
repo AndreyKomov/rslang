@@ -49,15 +49,7 @@ export class AudiocallGameComponent implements OnInit {
   }
 
   getWordsFromBE(): void {
-    if (+this.page === 0) {
-      this.page = 1;
-    }
-    if (+this.group === 0) {
-      this.group = 1;
-    }
-    console.log(this.group, this.page);
-    
-    this.backEndService.getWordsByPageAndGroup(this.page - 1, this.group - 1).subscribe((data) => {
+    this.backEndService.getWordsByPageAndGroup(+this.page, +this.group).subscribe((data) => {
       this.wordsFromApi = data;
       this.buildWordsArrayForGameRound();
       this.getRandomWord(this.currentWords.length);

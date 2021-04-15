@@ -13,7 +13,7 @@
   <div class="audiocall-previous-settings" *ngIf="startFromMenu">
     <p>Выбор слов для игры</p>
     <div class="enter-group-and-pages">
-      <label for="groop">Введите уровень сложности: (1 - 6)</label>
+      <label for="groop">Введите уровень сложности: (0 - 5)</label>
       <input
       [(ngModel)] = "groupValue"
       id="group"
@@ -22,7 +22,7 @@
     </div>
 
   <div class="enter-group-and-pages">
-    <label for="page">Введите номер страницы (1 - 30)</label>
+    <label for="page">Введите номер страницы (0 - 29)</label>
     <input
     [(ngModel)] = "pageValue"
     id="page"

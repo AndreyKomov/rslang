@@ -1,9 +1,15 @@
-<button mat-icon-button matTooltip="КОНСТРУКТОР">
-  <mat-icon>extension</mat-icon>
-</button>
-<button mat-icon-button matTooltip="СПРИНТ">
-  <mat-icon>directions_run</mat-icon>
-</button>
+<a routerLink="/words-puzzle" [queryParams]="{selectedGroup: groupValue, selectedPage: pageValue}">
+  <button mat-icon-button matTooltip="КОНСТРУКТОР">
+    <mat-icon>extension</mat-icon>
+  </button>
+</a>
+
+<a routerLink="/games/sprint" [queryParams]="{level: groupValue, round: pageValue}">
+  <button mat-icon-button matTooltip="СПРИНТ">
+    <mat-icon>directions_run</mat-icon>
+  </button>
+</a>
+
 <a routerLink="/games/audiocall/audiocallgame" [queryParams]="{group: groupValue, page: pageValue}">
 <button mat-icon-button matTooltip="АУДИОВЫЗОВ">
     <mat-icon>surround_sound</mat-icon>
@@ -14,4 +20,6 @@
     <mat-icon>nature</mat-icon>
   </button>
 </a>
+
+<!--   -->
 

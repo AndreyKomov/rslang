@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ElectronicTextbookService } from '../../electronic-textbook.service';
 
 @Component({
@@ -6,11 +6,14 @@ import { ElectronicTextbookService } from '../../electronic-textbook.service';
   templateUrl: './buttons-game.component.html',
   styleUrls: ['./buttons-game.component.scss'],
 })
-export class ButtonsGameComponent implements OnInit {
-  groupValue = this.textBookService.groups;
-  pageValue = this.textBookService.pages;
-
+export class ButtonsGameComponent {
   constructor(private textBookService: ElectronicTextbookService) {}
 
-  ngOnInit(): void {}
+  get groupValue(): number {
+    return this.textBookService.groups;
+  }
+
+  get pageValue(): number {
+    return this.textBookService.pages;
+  }
 }
