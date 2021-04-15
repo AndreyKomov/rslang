@@ -250,7 +250,6 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.statisticClassTable = 'hidden';
     }
   }
-
   public setLevelAndGroup() {
     const level = this.level + 1;
     const round = this.round + 1;
