@@ -12,6 +12,8 @@ import { SettingsDialogComponent } from './components/settings-dialog/settings-d
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ButtonsGameComponent } from './components/buttons-game/buttons-game.component';
 import { ButtonsCategoryComponent } from './components/buttons-category/buttons-category.component';
+import { ButtonsDictionaryComponent } from './components/buttons-dictionary/buttons-dictionary.component';
+import { DictionaryComponent } from './components/dictionary/dictionary.component';
 @NgModule({
   declarations: [
     CategoryComponent,
@@ -22,6 +24,8 @@ import { ButtonsCategoryComponent } from './components/buttons-category/buttons-
     PaginationComponent,
     ButtonsGameComponent,
     ButtonsCategoryComponent,
+    ButtonsDictionaryComponent,
+    DictionaryComponent,
   ],
   imports: [CommonModule, SharedModule, ElectronicTextbookRoutingModule],
 })
