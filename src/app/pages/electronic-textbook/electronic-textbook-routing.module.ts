@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import CategoryComponent from './components/category/category.component';
 import ElectronicTextbookComponent from './electronic-textbook.component';
 import { PageComponent } from './components/page/page.component';
+import { DictionaryComponent } from './components/dictionary/dictionary.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
         component: CategoryComponent,
       },
       { path: 'group/:group/page/:page', component: PageComponent },
+      {
+        path: 'dictionary/:group',
+        component: DictionaryComponent,
+      },
     ],
   },
 ];
