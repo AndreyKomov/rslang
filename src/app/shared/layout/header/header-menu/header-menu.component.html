@@ -10,5 +10,15 @@
         {{ item[1] }}
       </a>
     </li>
+    <li class="menu__item" *ngIf="canActive">
+      <a
+        routerLink="statistics"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="menu__link"
+      >
+        Статистика
+      </a>
+    </li>
   </ul>
 </nav>

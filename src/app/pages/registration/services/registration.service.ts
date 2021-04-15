@@ -7,7 +7,6 @@ import { IUserDataModel } from '../models/UserDataModel';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
-  @Output() isAuthenticated = new EventEmitter<boolean>();
   clickLogin: EventEmitter<boolean> = new EventEmitter();
   clickRegister: EventEmitter<boolean> = new EventEmitter();
 
@@ -19,15 +18,10 @@ export class RegistrationService {
   singUp(name: string, password: string, email: string, imgPath: IFileModel[]): void {
     const newFile =
       imgPath === undefined
-        ? new File(
-            ['../../../../assets/img/no-avatar.png'],
-            '../../../../assets/img/no-avatar.png',
-            {
-              type: 'image/jpg',
-            }
-          )
+        ? new File([''], '', {
+            type: 'image/jpg',
+          })
         : imgPath[0];
-    console.log(newFile);
     this.apiService.createUser(name, email, password, newFile).subscribe(() => {
       alert('Успешная регистрация, войдите');
       this.clickRegister.emit(true);
@@ -40,7 +34,6 @@ export class RegistrationService {
       localStorage.setItem('userId', res.userId);
       localStorage.setItem('token', res.token);
       this.clickLogin.emit(false);
-      this.isAuthenticated.emit(true);
       this.textbookService.getUserWords(res.userId, res.token);
     });
   }

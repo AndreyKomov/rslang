@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -17,11 +18,12 @@ import { IFileModel } from '../models/FileModel';
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class RegistrationComponent implements OnInit {
   @ViewChild('avatar') avatar;
   @Output() clickAutnBtnEvent = new EventEmitter<boolean>();
+  @Output() clickLoginEvent = new EventEmitter<boolean>();
   @Input() isShow;
   modalName = 'Registration';
   isLoginTemplate = false;
@@ -29,9 +31,18 @@ export default class RegistrationComponent implements OnInit {
   imgURL: ArrayBuffer | string = '../../../../assets/img/no-avatar.png';
   imagePath: IFileModel[];
 
-  constructor(private fb: FormBuilder, private registrationService: RegistrationService) {
-    this.registrationService.clickLogin.subscribe((data) => (this.isShow = data));
+  constructor(
+    private fb: FormBuilder,
+    private registrationService: RegistrationService,
+    private ref: ChangeDetectorRef
+  ) {
+    this.registrationService.clickLogin.subscribe((data) => {
+      this.ref.markForCheck();
+      this.clickLoginEvent.emit(true);
+      this.isShow = data;
+    });
     this.registrationService.clickRegister.subscribe((data) => {
+      this.ref.markForCheck();
       this.changeModal();
     });
   }
@@ -77,12 +88,12 @@ export default class RegistrationComponent implements OnInit {
   closeModal(): void {
     this.isShow = false;
     this.clickAutnBtnEvent.emit(this.isShow);
+    this.ref.markForCheck();
   }
 
   changeModal(): void {
     this.modalName = this.modalName === 'Registration' ? 'Login' : 'Registration';
     this.isLoginTemplate = !this.isLoginTemplate;
-    console.log(this.isLoginTemplate);
     if (this.isLoginTemplate) {
       this.registrationForm.controls.name.disable();
     } else {

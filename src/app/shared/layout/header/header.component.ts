@@ -8,7 +8,6 @@ import {
   OnChanges,
   Input,
 } from '@angular/core';
-import { getMatInputUnsupportedTypeError } from '@angular/material/input';
 import { WordsApiService } from '@app/server/api';
 
 @Component({
@@ -26,6 +25,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   userImg;
 
   @Output() clickAutnBtnEvent = new EventEmitter<boolean>();
+  @Output() isLogin = new EventEmitter<boolean>();
 
   constructor(public wordsApiService: WordsApiService) {}
 
@@ -34,22 +34,25 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   getUser(): void {
-    this.id = localStorage.getItem('token');
-    this.token = localStorage.getItem('userId');
+    this.token = localStorage.getItem('token');
+    this.id = localStorage.getItem('userId');
     if (this.token && this.id) {
       this.wordsApiService.getUser(this.id, this.token).subscribe((res) => {
-        console.log(res);
+        this.isLogin.emit(true);
         this.userName = res.name;
-        this.userImg = res.avatar;
+        if (res.avatar === '') {
+          this.userImg = '../../../../assets/img/no-avatar.png';
+        } else {
+          this.userImg = res.avatar;
+        }
       });
     }
   }
 
   ngOnChanges(changes): void {
-    if (changes.isAuthenticated.currentValue) {
+    if (this.isAuthenticated) {
       this.getUser();
     }
-    console.log(changes);
   }
 
   openModal(value: boolean): void {
