@@ -3,5 +3,5 @@ export enum MainNav {
   textBook = 'Учебник',
   games = 'Игры',
   team = 'О Команде',
-  statistic = 'Статистика',
+  statistics = 'Статистика',
 }
