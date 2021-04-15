@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, HostListener, OnInit, OnDestroy } from '@
 import { WordsApiService } from '../../../server/api';
 import { AudioSprintService } from './sprint-game.service';
 
-
 export enum KeyCode {
   rightArrow = 39,
   leftArrow = 37,
@@ -21,7 +20,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   wordsList: any | null;
   words: any | null;
   translations: any | null;
-  index : number| null;
+  index: number | null;
   wordsYouKnowQuantity = 0;
   wordsYouDoNotKnowQuantity = 0;
   rightWords = [];
@@ -57,14 +56,18 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   ArrayWordsYouDoNotKnowQuantity = [];
   percentageKnownWords = [];
   completeGameDate = [];
-
+  openedStatisticsWindow: boolean | null;
+  statisticClassTable = 'hidden';
+  statisticInfoForTable = [];
+  statisticsColor: string | null;
+  colorCounter = 0;
   public activeItem: string;
 
   constructor(
-    public api: WordsApiService, 
+    public api: WordsApiService,
     private cdr: ChangeDetectorRef,
-    public audioService:AudioSprintService
-    ) {}
+    public audioService: AudioSprintService
+  ) {}
 
   ngOnInit(): void {
     this.promoInfoClass = '';
@@ -97,33 +100,33 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
   public playAudioTimer(): void {
     if (this.isSoundOn && this.display) {
-    this.audioService.playSoundTimer()
+      this.audioService.playSoundTimer();
     }
   }
 
   public pauseAudioTimer(): void {
-    this.audioService.stopSoundTimer()
+    this.audioService.stopSoundTimer();
   }
 
   public playAudioWrongAnswer(): void {
     if (this.isSoundOn && this.display) {
-     this.audioService.playSoundError()
-      }
+      this.audioService.playSoundError();
+    }
   }
 
   public pauseAudioWrongAnswer(): void {
-    this.audioService.stopSoundError()
+    this.audioService.stopSoundError();
   }
 
   public playAudioRightAnswer(): void {
     if (this.isSoundOn && this.display) {
-      this.audioService.playSoundAudioRightAnswer()
+      this.audioService.playSoundAudioRightAnswer();
     }
   }
 
   pauseAudioRightAnswer(): void {
-    this.audioService. stopSoundAudioRightAnswer() 
-  }  
+    this.audioService.stopSoundAudioRightAnswer();
+  }
 
   public playAudioEndOfGame(): void {
     if (this.isSoundOn) {
@@ -226,8 +229,9 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.wrongWords.push(this.words[this.index]);
     }
     this.index += 1;
-    this.playAudioTimer()
+    this.playAudioTimer();
     if (this.index > 19) {
+      this.colorCounter += 1;
       this.delayedConfettiClass();
       this.pauseTimer();
       this.pauseAudioTimer();
@@ -242,7 +246,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.levelAndRoundChoice = 'hidden';
       this.setScoreAndDateToLocalStorage();
       this.getScoreAndDateToLocalStorage();
-      this.pauseAudioTimer()
+      this.pauseAudioTimer();
+      this.statisticClassTable = 'hidden';
     }
   }
 
@@ -347,6 +352,15 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.chosenWordCardClass = 'hidden';
   }
 
+  public ChangeStatisticsWindow(): void {
+    this.openedStatisticsWindow = !this.openedStatisticsWindow;
+    if (this.openedStatisticsWindow) {
+      this.statisticClassTable = 'day-table-statistics';
+    } else {
+      this.statisticClassTable = 'hidden';
+    }
+  }
+
   public CloseStartScreenClass(): void {
     this.promoInfoClass = 'hidden';
   }
@@ -383,21 +397,23 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       100;
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
     const yyyy = today.getFullYear();
     const hour = today.getHours();
     const minutes = today.getMinutes();
     const sec = today.getSeconds();
-    const todayString = `${yyyy}/${mm}/${dd} ${hour}: ${minutes}:${sec}`;
+    const todayString = `${yyyy}/${mm}/${dd}   ${hour}:${minutes}:${sec}`;
     this.ArrayWordsYouKnowQuantity.push(this.wordsYouKnowQuantity);
     this.ArrayWordsYouDoNotKnowQuantity.push(this.wordsYouDoNotKnowQuantity);
-    this.percentageKnownWords.push(Math.round(percent));
+    this.percentageKnownWords.push(Math.ceil(percent));
     this.completeGameDate.push(todayString);
-
+    const dataString = `${todayString}   ${percent}  %`;
+    this.statisticInfoForTable.push(dataString);
     localStorage.setItem('sprint-correct', JSON.stringify(this.ArrayWordsYouKnowQuantity));
     localStorage.setItem('sprint-error', JSON.stringify(this.ArrayWordsYouDoNotKnowQuantity));
     localStorage.setItem('sprint-percent', JSON.stringify(this.percentageKnownWords));
     localStorage.setItem('sprint-date', JSON.stringify(this.completeGameDate));
+    localStorage.setItem('sprint-statistic-for-table', JSON.stringify(this.statisticInfoForTable));
   }
 
   public getScoreAndDateToLocalStorage(): void {
@@ -405,6 +421,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     JSON.parse(localStorage.getItem('sprint-error'));
     JSON.parse(localStorage.getItem('sprint-percent'));
     JSON.parse(localStorage.getItem('sprint-date'));
+    JSON.parse(localStorage.getItem('sprint-statistic-for-table'));
+    console.log(this.statisticInfoForTable);
   }
 
   public BgImageChange(value) {
@@ -425,21 +443,31 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       img.crossOrigin = 'Anonymous';
 
       img.src = data.urls.regular;
-   
-     img.onload = function () {
-        if(this){
-          localStorage.setItem('img-url', JSON.stringify( img.src));
+
+      img.onload = function () {
+        if (this) {
+          localStorage.setItem('img-url', JSON.stringify(img.src));
         }
       };
     })();
-   
-    let urlImage=JSON.parse(localStorage.getItem('img-url'));
-    if(value){
+
+    const urlImage = JSON.parse(localStorage.getItem('img-url'));
+    if (value) {
       document.getElementById('page_background').style.backgroundImage = `url(${urlImage})`;
       document.getElementById('page_background').style.backgroundRepeat = `no-repeat`;
-      document.getElementById('page_background').style.backgroundSize = `cover`; 
+      document.getElementById('page_background').style.backgroundSize = `cover`;
     }
-    
   }
 
+  getColor(i) {
+    let red = 0;
+    let green = Math.floor(255 - 42.5 * i);
+    let blue = Math.floor(255 - 42.5 * i);
+    if (green < 0) {
+      red = 0;
+      green = 0;
+      blue = 0;
+    }
+    return `rgb(${red},  ${green},${blue} )`;
+  }
 }

@@ -303,6 +303,20 @@ li.active {
   box-shadow: 0 0 20px rgba(0, 0, 0, .1);
   transition: .5s;
  }
+ .day-table-statistics{
+ text-decoration: none;
+  display: inline-block;
+  position:absolute;
+  padding: 0px 0px;
+  margin: 0px 0px;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 2px;
+  background-size: 100% auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+  transition: .5s;
+  background-color:white;
+ }
  .confettiClass{
   background-image: url(https://i.gifer.com/origin/1a/1af8d3b487b77085d5288814f151e1de.gif);
  }
