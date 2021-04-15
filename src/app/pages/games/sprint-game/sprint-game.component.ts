@@ -4,7 +4,7 @@ import { AudioSprintService } from './sprint-game.service';
 
 export enum KeyCode {
   rightArrow = 39,
-  leftArrow = 37,
+  leftArrow = 37
 }
 
 @Component({
@@ -250,6 +250,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.statisticClassTable = 'hidden';
     }
   }
+
   public setLevelAndGroup() {
     const level = this.level + 1;
     const round = this.round + 1;
@@ -443,7 +444,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
       img.src = data.urls.regular;
 
-      img.onload = function () {
+      img.onload = function() {
         if (this) {
           localStorage.setItem('img-url', JSON.stringify(img.src));
         }

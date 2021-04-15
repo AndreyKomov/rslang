@@ -49,7 +49,7 @@ export class AudiocallGameComponent implements OnInit {
   }
 
   getWordsFromBE(): void {
-    this.backEndService.getWordsByPageAndGroup(this.page - 1, this.group - 1).subscribe((data) => {
+    this.backEndService.getWordsByPageAndGroup(+this.page, +this.group).subscribe((data) => {
       this.wordsFromApi = data;
       this.buildWordsArrayForGameRound();
       this.getRandomWord(this.currentWords.length);
@@ -94,10 +94,12 @@ export class AudiocallGameComponent implements OnInit {
       `;
       this.correctAnswer = true;
       this.numberOfCorrectAnswers += 1;
+      this.gameService.updateStrikeSerie(true);
     } else {
       this.gameService.playSound(this.gameService.error);
       word.errorStyle = true;
       this.numberOfErrors += 1;
+      this.gameService.updateStrikeSerie(false);
     }
   }
 
