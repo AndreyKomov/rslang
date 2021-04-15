@@ -1,6 +1,6 @@
 <section class="wrapper-dictionary" >
   <div class="container-words" *ngIf="loadingService.isLoading$ | async; else elseBlock">
-    <app-card-word *ngFor="let item of wordsDictionary" [word]='item'></app-card-word>
+    <app-card-word [isDictionary]="isDictionary" *ngFor="let item of array" [word]='item'></app-card-word>
   </div>
   <ng-template #elseBlock><app-spinner></app-spinner></ng-template>
 </section>

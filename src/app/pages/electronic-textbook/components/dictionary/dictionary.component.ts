@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingService } from '@app/shared/services/loading.service';
+
 import { ElectronicTextbookService } from '../../electronic-textbook.service';
 import { IWord } from '../../word';
 
@@ -9,8 +10,10 @@ import { IWord } from '../../word';
   templateUrl: './dictionary.component.html',
   styleUrls: ['./dictionary.component.scss'],
 })
-export class DictionaryComponent implements OnInit {
+export class DictionaryComponent {
+  array: IWord[];
   wordsDictionary: IWord[];
+  isDictionary = true;
   constructor(
     private activateRoute: ActivatedRoute,
     private textbookService: ElectronicTextbookService,
@@ -18,25 +21,21 @@ export class DictionaryComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {
     this.textbookService.getUserWordsArray();
-    this.textbookService.wordsDictionary.subscribe((data) => {
-      this.wordsDictionary = data;
-      console.log(data);
-    });
-  }
-
-  ngOnInit(): void {
     this.activateRoute.params.subscribe((routeParams) => {
       const { group } = routeParams;
-      console.log(group);
-      console.log(this.wordsDictionary);
+      this.textbookService.wordsDictionary.subscribe((data) => {
+        this.wordsDictionary = data;
 
-      /*  if (group === 'difficult') {
-        this.wordsDictionary = this.wordsDictionary.filter(
-          (word) => word.userWord.difficulty === 'hard'
-        );
-      } else if (group === 'deleted') {
-        this.wordsDictionary = this.wordsDictionary.filter((word) => word.userWord.optional.delete);
-      } */
+        if (group === 'difficult') {
+          this.array = this.wordsDictionary.filter(
+            (word) => word.userWord.difficulty === 'hard' && !word.userWord.optional.delete
+          );
+        } else if (group === 'deleted') {
+          this.array = this.wordsDictionary.filter((word) => word.userWord.optional.delete);
+        } else {
+          this.array = this.wordsDictionary;
+        }
+      });
     });
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable, Optional } from '@angular/core';
 import { URL_FILES } from '@app/core/common/constants';
 import { WordsApiService } from '@app/server/api';
-import { BehaviorSubject, forkJoin, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { ICardInfo, IUserInfo, IUserWord, IWord } from './word';
 
 @Injectable({ providedIn: 'root' })
@@ -14,9 +14,10 @@ export class ElectronicTextbookService {
   public words = this.wordsSource.asObservable();
 
   private wordsDictionarySource = new BehaviorSubject<IWord[]>([]);
-  public wordsDictionary = this.wordsSource.asObservable();
+  public wordsDictionary = this.wordsDictionarySource.asObservable();
 
   isPlay = true;
+  isDictionary = false;
   userData: IUserInfo;
   categoryWords: IWord[] = [];
   userWords: IUserWord[] = [];
@@ -57,18 +58,22 @@ export class ElectronicTextbookService {
   playAudio(url: string[]): void {
     this.isPlay = false;
     let song = 0;
+    const newUrl = `${url[song].slice(0, 5) === 'files' ? URL_FILES : `data:audio/mpeg;base64,`}`;
     this.audioObj.addEventListener('ended', () => {
       song += 1;
       song = song < url.length ? song : 0;
+
       if (song !== 0) {
-        this.audioObj.src = `${URL_FILES + url[song]}`;
+        console.log(url[song].slice(0, 5));
+
+        this.audioObj.src = `${newUrl}${url[song]}`;
         this.audioObj.load();
         this.audioObj.play();
       } else {
         this.isPlay = true;
       }
     });
-    this.audioObj.src = `${URL_FILES + url[song]}`;
+    this.audioObj.src = `${newUrl + url[song]}`;
     this.audioObj.play();
   }
 
@@ -83,12 +88,17 @@ export class ElectronicTextbookService {
   getUserWordsArray(): void {
     forkJoin(this.userWords.map((word) => this.api.getWordById(word.wordId))).subscribe((data) => {
       const wordsDictionary: any = this.userWords.map((word, index) => {
-        console.log(data[index], word);
-        return { ...data[index], userWord: word };
+        return {
+          ...data[index],
+          userWord: word,
+        };
       });
-
-      this.wordsDictionarySource.next(wordsDictionary);
+      this.updateWordsArray(wordsDictionary);
     });
+  }
+
+  updateWordsArray(array: IWord[]): void {
+    this.wordsDictionarySource.next(array);
   }
 
   getWordsPageAndGroup(): void {
