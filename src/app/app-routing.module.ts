@@ -55,6 +55,7 @@ const routes: Routes = [
       import('./pages/electronic-textbook/electronic-textbook.module').then(
         (module) => module.ElectronicTextbookModule
       ),
+    canActivate: [AuthGuard],
   },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];

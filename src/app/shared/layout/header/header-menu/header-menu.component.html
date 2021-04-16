@@ -12,6 +12,16 @@
     </li>
     <li class="menu__item" *ngIf="canActive">
       <a
+        routerLink="textbook"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="menu__link"
+      >
+        Учебник
+      </a>
+    </li>
+    <li class="menu__item" *ngIf="canActive">
+      <a
         routerLink="statistics"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
