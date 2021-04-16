@@ -194,7 +194,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
   createWordsArray = (wordsListChosen) => wordsListChosen.map((item) => item.word);
   createTranscriptionArray = (wordsListChosen) => wordsListChosen.map((item) => item.wordTranslate);
-  public getRandomInt(max) {
+  getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
 
