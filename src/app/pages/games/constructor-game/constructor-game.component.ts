@@ -1,4 +1,6 @@
 import { Component, HostBinding, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ElectronicTextbookService } from '@app/pages/electronic-textbook/electronic-textbook.service';
 import { WordsApiService } from '../../../server/api';
 
 @Component({
@@ -29,7 +31,11 @@ export class ConstructorGameComponent implements OnInit {
   rightLettersArr = [];
   rightAnswersStreak = 0;
 
-  constructor(private apiService: WordsApiService) {}
+  constructor(
+    private apiService: WordsApiService,
+    private etextBookService: ElectronicTextbookService,
+    private route: ActivatedRoute
+  ) {}
 
   sliceWord(word: string): string[] {
     return word.split('');
@@ -69,6 +75,13 @@ export class ConstructorGameComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((param) => {
+      if (param.selectedPage !== undefined && param.selectedGroup !== undefined) {
+        this.raund = param.selectedGroup;
+        this.page = param.selectedPage;
+        this.nextRaund();
+      }
+    });
     if (
       !localStorage.getItem('wordConstructorRightAnswers') &&
       !localStorage.getItem('wordConstructorWrongAnswers') &&
