@@ -64,7 +64,6 @@ export class ElectronicTextbookService {
       song = song < url.length ? song : 0;
 
       if (song !== 0) {
-        console.log(url[song].slice(0, 5));
 
         this.audioObj.src = `${newUrl}${url[song]}`;
         this.audioObj.load();
