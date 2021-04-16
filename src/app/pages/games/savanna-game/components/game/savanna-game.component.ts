@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, HostListener } from '@angular/core';
+import { Component, OnInit, HostBinding, HostListener, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WordsApiService } from '@app/server/api';
 import { SavannaService } from '../../savanna.service';
@@ -8,7 +8,7 @@ import { SavannaService } from '../../savanna.service';
   templateUrl: './savanna-game.component.html',
   styleUrls: ['./savanna-game.component.scss'],
 })
-export class SavannaGameComponent implements OnInit {
+export class SavannaGameComponent implements OnInit, OnDestroy {
   group: number;
   page: number;
 
@@ -45,12 +45,15 @@ export class SavannaGameComponent implements OnInit {
 
   ngOnInit(): void {
     this.setItemToLocalStorage();
-    debugger
     this.route.queryParams.subscribe((param) => {
       this.group = param.group;
       this.page = param.page;
       this.getWordsFromBE();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.clearAllSetTimeouts();
   }
 
   @HostBinding('class.fullscreen') changeFullscreen = false;
