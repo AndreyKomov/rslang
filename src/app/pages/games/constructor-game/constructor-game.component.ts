@@ -80,7 +80,7 @@ export class ConstructorGameComponent implements OnInit {
       if (param.selectedPage !== undefined && param.selectedGroup !== undefined) {
         this.raund = param.selectedGroup;
         this.page = param.selectedPage;
-        this.nextRaund();
+        this.getData();
       }
     });
     if (
@@ -92,12 +92,12 @@ export class ConstructorGameComponent implements OnInit {
       localStorage.setItem('wordConstructorWrongAnswers', '0');
       localStorage.setItem('wordConstructorRightStreak', '0');
     }
-    this.getData();
   }
 
   getData(): void {
     this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe((data) => {
       this.wordsArr = data;
+      this.nextRaund();
     });
   }
 
@@ -106,10 +106,7 @@ export class ConstructorGameComponent implements OnInit {
     this.baseImgUrl = 'https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/';
     this.isLevelChosen = true;
     this.isEndRaund = false;
-    this.context = '';
-    this.translateWord = '';
     this.placeIndex = 0;
-    this.word = '';
     this.letterArr = [];
     this.rightLettersArr = [];
 
