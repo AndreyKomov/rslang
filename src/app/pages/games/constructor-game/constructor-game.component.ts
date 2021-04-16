@@ -30,6 +30,7 @@ export class ConstructorGameComponent implements OnInit {
   letterArr: string[];
   rightLettersArr = [];
   rightAnswersStreak = 0;
+  wordsArr = [];
 
   constructor(
     private apiService: WordsApiService,
@@ -91,6 +92,13 @@ export class ConstructorGameComponent implements OnInit {
       localStorage.setItem('wordConstructorWrongAnswers', '0');
       localStorage.setItem('wordConstructorRightStreak', '0');
     }
+    this.getData();
+  }
+
+  getData(): void {
+    this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe((data) => {
+      this.wordsArr = data;
+    });
   }
 
   nextRaund(): void {
@@ -104,18 +112,17 @@ export class ConstructorGameComponent implements OnInit {
     this.word = '';
     this.letterArr = [];
     this.rightLettersArr = [];
-    this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe((data) => {
-      this.word = data[this.raund].word;
-      this.translateWord = data[this.raund].wordTranslate;
-      this.context = `${data[this.raund].word} ${data[this.raund].transcription} - ${
-        data[this.raund].wordTranslate
-      }`;
-      this.baseImgUrl += data[this.raund].image;
-      for (let i = 0; i < this.word.length; i++) {
-        this.rightLettersArr.push('');
-      }
-      this.letterArr = this.getReadyForGameWord(this.word);
-    });
+
+    this.word = this.wordsArr[this.raund].word;
+    this.translateWord = this.wordsArr[this.raund].wordTranslate;
+    this.context = `${this.wordsArr[this.raund].word} ${
+      this.wordsArr[this.raund].transcription
+    } - ${this.wordsArr[this.raund].wordTranslate}`;
+    this.baseImgUrl += this.wordsArr[this.raund].image;
+    for (let i = 0; i < this.word.length; i++) {
+      this.rightLettersArr.push('');
+    }
+    this.letterArr = this.getReadyForGameWord(this.word);
   }
 
   showAnswer(): void {
