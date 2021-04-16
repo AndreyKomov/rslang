@@ -130,6 +130,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     }
   }
 
+
   public pauseAudioWrongAnswer(): void {
     this.audioService.stopSoundError();
   }
