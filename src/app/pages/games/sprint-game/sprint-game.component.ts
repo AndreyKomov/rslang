@@ -421,17 +421,16 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     JSON.parse(localStorage.getItem('sprint-percent'));
     JSON.parse(localStorage.getItem('sprint-date'));
     JSON.parse(localStorage.getItem('sprint-statistic-for-table'));
-    console.log(this.statisticInfoForTable);
   }
 
   public BgImageChange(value) {
     let backgroundTheme;
-    if (this.activeItem) {
+     if (this.activeItem) {
       backgroundTheme = this.activeItem;
+     
     } else {
       backgroundTheme = 'sprint';
     }
-
     const UNSPLASH_KEY = `465dce04d3919029f66c7325f6799c6de4f10670641923838969e8fef84eb0a3`;
     const url = ` https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query=${backgroundTheme}&client_id=${UNSPLASH_KEY}`;
 
@@ -444,18 +443,14 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       img.src = data.urls.regular;
 
       img.onload = function () {
-        if (this) {
-          localStorage.setItem('img-url', JSON.stringify(img.src));
+        if((this)&&(value)) {
+         document.getElementById('page_background').style.backgroundImage = `url(${img.src})`;
+         document.getElementById('page_background').style.backgroundRepeat = `no-repeat`;
+         document.getElementById('page_background').style.backgroundSize = `cover`;
         }
       };
     })();
 
-    const urlImage = JSON.parse(localStorage.getItem('img-url'));
-    if (value) {
-      document.getElementById('page_background').style.backgroundImage = `url(${urlImage})`;
-      document.getElementById('page_background').style.backgroundRepeat = `no-repeat`;
-      document.getElementById('page_background').style.backgroundSize = `cover`;
-    }
   }
 
   getColor(i) {
