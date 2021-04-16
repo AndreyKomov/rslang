@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { WordsApiService } from '../../../server/api';
 import { AudioSprintService } from './sprint-game.service';
 
@@ -64,12 +65,18 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   public activeItem: string;
 
   constructor(
+    public route:ActivatedRoute,
     public api: WordsApiService,
     private cdr: ChangeDetectorRef,
     public audioService: AudioSprintService
   ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((param) => {
+    console.log(param.group);
+    console.log (param.page);
+     
+    });
     this.promoInfoClass = '';
     this.startScreenClass = 'start-screen';
     this.classHeaderContainer = 'header-container';
