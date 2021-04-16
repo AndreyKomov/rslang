@@ -1,5 +1,7 @@
-import { Component, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
-import { WordsApiService } from '@app/server/api';
+import { Component, HostBinding, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ElectronicTextbookService } from '@app/pages/electronic-textbook/electronic-textbook.service';
+import { WordsApiService } from '../../../server/api';
 
 @Component({
   selector: 'app-constructor-game',
@@ -28,8 +30,13 @@ export class ConstructorGameComponent implements OnInit {
   letterArr: string[];
   rightLettersArr = [];
   rightAnswersStreak = 0;
+  wordsArr = [];
 
-  constructor(private apiService: WordsApiService) {}
+  constructor(
+    private apiService: WordsApiService,
+    private etextBookService: ElectronicTextbookService,
+    private route: ActivatedRoute
+  ) {}
 
   sliceWord(word: string): string[] {
     return word.split('');
@@ -69,6 +76,13 @@ export class ConstructorGameComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((param) => {
+      if (param.selectedPage !== undefined && param.selectedGroup !== undefined) {
+        this.raund = param.selectedGroup;
+        this.page = param.selectedPage;
+        this.getData();
+      }
+    });
     if (
       !localStorage.getItem('wordConstructorRightAnswers') &&
       !localStorage.getItem('wordConstructorWrongAnswers') &&
@@ -80,29 +94,32 @@ export class ConstructorGameComponent implements OnInit {
     }
   }
 
+  getData(): void {
+    this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe((data) => {
+      this.wordsArr = data;
+      this.nextRaund();
+    });
+  }
+
   nextRaund(): void {
     this.isUserDoMistake = false;
     this.baseImgUrl = 'https://raw.githubusercontent.com/GoldenkovVitali/rslang-data/master/';
     this.isLevelChosen = true;
     this.isEndRaund = false;
-    this.context = '';
-    this.translateWord = '';
     this.placeIndex = 0;
-    this.word = '';
     this.letterArr = [];
     this.rightLettersArr = [];
-    this.apiService.getWordsByPageAndGroup(this.page, this.selectedGroup).subscribe((data) => {
-      this.word = data[this.raund].word;
-      this.translateWord = data[this.raund].wordTranslate;
-      this.context = `${data[this.raund].word} ${data[this.raund].transcription} - ${
-        data[this.raund].wordTranslate
-      }`;
-      this.baseImgUrl += data[this.raund].image;
-      for (let i = 0; i < this.word.length; i++) {
-        this.rightLettersArr.push('');
-      }
-      this.letterArr = this.getReadyForGameWord(this.word);
-    });
+
+    this.word = this.wordsArr[this.raund].word;
+    this.translateWord = this.wordsArr[this.raund].wordTranslate;
+    this.context = `${this.wordsArr[this.raund].word} ${
+      this.wordsArr[this.raund].transcription
+    } - ${this.wordsArr[this.raund].wordTranslate}`;
+    this.baseImgUrl += this.wordsArr[this.raund].image;
+    for (let i = 0; i < this.word.length; i++) {
+      this.rightLettersArr.push('');
+    }
+    this.letterArr = this.getReadyForGameWord(this.word);
   }
 
   showAnswer(): void {

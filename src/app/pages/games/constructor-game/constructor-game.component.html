@@ -1,5 +1,5 @@
 <button (click)="changeFullscreenMode()" class="fullscreen-btn">
-  <img src="../../../../../../assets/img/audiocall-fullscreen.png" alt="fullscreen-mode">
+  <img src="../../../../../../assets/img/audiocall-fullscreen.png" alt="fullscreen-mode" />
 </button>
 
 <div *ngIf="!isLevelChosen" class="level-choose">
@@ -45,7 +45,7 @@
     <option value="29">29</option>
     <option value="30">30</option>
   </select>
-  <button (click)="nextRaund()" class="level-choose__choose-level-btn">Выбрать</button>
+  <button (click)="getData()" class="level-choose__choose-level-btn">Выбрать</button>
 </div>
 
 <div class="wrapper" *ngIf="word && !showResult">
@@ -54,7 +54,9 @@
       {{ translateWord }}
     </div>
     <div class="wrapper-content__text">
-      <span> Собери слово из букв(можете использовать клавиатуру, но только на АНГЛИЙСКОЙ РАСКЛАДКЕ!!!!!) </span>
+      <span>
+        Собери слово из букв(можете использовать клавиатуру, но только на АНГЛИЙСКОЙ РАСКЛАДКЕ!!!!!)
+      </span>
     </div>
     <div class="right-letter-content">
       <button
@@ -70,7 +72,7 @@
         class="letter-box ready-letter"
         (click)="checkLetter(letter, index, $event)"
         *ngFor="let letter of letterArr; let index = index"
-        [ngClass]="{'error': isMistake}"
+        [ngClass]="{ error: isMistake }"
       >
         {{ letter }}
       </button>
@@ -100,16 +102,8 @@
 </ng-template>
 
 <div *ngIf="showResult" class="show-result">
-  <div>
-    Правильных: {{ rightAnswers }}
-  </div>
-  <div>
-    Неправильных: {{ wrongAnswers }}
-  </div>
-  <button class="show-result__menu-btn" (click)="continueGame()">
-    Продолжить
-  </button>
-  <button class="show-result__menu-btn" (click)="reload()">
-    Изменить сложность
-  </button>
+  <div>Правильных: {{ rightAnswers }}</div>
+  <div>Неправильных: {{ wrongAnswers }}</div>
+  <button class="show-result__menu-btn" (click)="continueGame()">Продолжить</button>
+  <button class="show-result__menu-btn" (click)="reload()">Изменить сложность</button>
 </div>

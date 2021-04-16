@@ -422,7 +422,6 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     JSON.parse(localStorage.getItem('sprint-percent'));
     JSON.parse(localStorage.getItem('sprint-date'));
     JSON.parse(localStorage.getItem('sprint-statistic-for-table'));
-    console.log(this.statisticInfoForTable);
   }
 
   public BgImageChange(value) {
