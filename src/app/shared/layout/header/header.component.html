@@ -1,3 +1,9 @@
 <div app-header-logo></div>
-<div app-header-menu></div>
-<div app-auth-button (click)="openModal('open')"></div>
+<div app-header-menu [isAuthenticated]="isAuthenticated"></div>
+<div app-auth-button (click)="openModal(true)" *ngIf="!token && !id; else block"></div>
+<ng-template #block>
+  <div class="auth-user">
+    <p>{{ userName }}</p>
+    <img [src]="userImg" alt="avatar" />
+  </div>
+</ng-template>

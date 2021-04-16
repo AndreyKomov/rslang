@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   ViewChild,
@@ -19,16 +21,31 @@ import { IFileModel } from '../models/FileModel';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class RegistrationComponent implements OnInit {
-  @ViewChild('avatar') avatar: HTMLImageElement;
-  @Output() clickAutnBtnEvent = new EventEmitter<string>();
+  @ViewChild('avatar') avatar;
+  @Output() clickAutnBtnEvent = new EventEmitter<boolean>();
+  @Output() clickLoginEvent = new EventEmitter<boolean>();
   @Input() isShow;
   modalName = 'Registration';
   isLoginTemplate = false;
   registrationForm: IRegForm;
-  imgURL = '../../../../assets/img/no-avatar.png';
+  imgURL: ArrayBuffer | string = '../../../../assets/img/no-avatar.png';
   imagePath: IFileModel[];
 
-  constructor(private fb: FormBuilder, private registrationService: RegistrationService) {}
+  constructor(
+    private fb: FormBuilder,
+    private registrationService: RegistrationService,
+    private ref: ChangeDetectorRef
+  ) {
+    this.registrationService.clickLogin.subscribe((data) => {
+      this.ref.markForCheck();
+      this.clickLoginEvent.emit(true);
+      this.isShow = data;
+    });
+    this.registrationService.clickRegister.subscribe((data) => {
+      this.ref.markForCheck();
+      this.changeModal();
+    });
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -63,14 +80,15 @@ export default class RegistrationComponent implements OnInit {
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
     reader.onload = () => {
-      this.imgURL = reader.result as string;
-      this.avatar.src = this.imgURL;
+      this.imgURL = reader.result;
+      this.avatar.nativeElement.src = this.imgURL;
     };
   }
 
   closeModal(): void {
-    this.isShow = '';
+    this.isShow = false;
     this.clickAutnBtnEvent.emit(this.isShow);
+    this.ref.markForCheck();
   }
 
   changeModal(): void {

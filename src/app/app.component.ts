@@ -9,9 +9,14 @@ import { ParamKey } from './app-routing.enum';
 })
 export default class AppComponent {
   footerVisibility = true;
-  showModal = '';
+  showModal = false;
+  isAuthenticated = false;
 
-  openModal(value: string): void {
+  auth(value): void {
+    this.isAuthenticated = value;
+  }
+
+  openModal(value: boolean): void {
     this.showModal = value;
   }
 

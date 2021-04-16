@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PromoComponent } from './pages/promo/promo.component';
 import { ParamKey, QueryParamKey } from './app-routing.enum';
 import { ConstructorGameModule } from './pages/games/constructor-game/constructor-game.module';
+import { AuthGuard } from './shared/layout/header/guard/auth.guard';
 
 const routes: Routes = [
   { path: ParamKey.promo, component: PromoComponent, pathMatch: 'full' },
@@ -39,6 +40,7 @@ const routes: Routes = [
     path: ParamKey.statistics,
     loadChildren: (): any =>
       import('./pages/statistics/statistics.module').then((module) => module.StatisticsModule),
+    canActivate: [AuthGuard],
   },
   {
     path: ParamKey.wordConstructor,
@@ -53,6 +55,7 @@ const routes: Routes = [
       import('./pages/electronic-textbook/electronic-textbook.module').then(
         (module) => module.ElectronicTextbookModule
       ),
+    canActivate: [AuthGuard],
   },
   { path: ParamKey.notFound, redirectTo: QueryParamKey.redirectTo },
 ];
