@@ -20,6 +20,7 @@ export default class ElectronicTextbookComponent
   implements AfterViewInit, OnDestroy, AfterViewChecked {
   page = 0;
   group = 0;
+  isDictionary = false;
   dialogData: ICardInfo;
   colorLink: string;
   subscriptionTextbookService: Subscription;

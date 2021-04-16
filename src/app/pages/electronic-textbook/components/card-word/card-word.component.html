@@ -1,22 +1,25 @@
-<mat-card class="card" *ngIf="!word.userWord || word.userWord && !word.userWord.optional.delete">
+<mat-card class="card" >
   <mat-card-actions>
     <div class="optional-word">
       <div *ngIf="word.userWord && word.userWord.optional.repeat>=0" class="optional-word__repeat">
         <mat-icon>repeat</mat-icon>
          <span>{{word.userWord.optional.repeat}}</span>
         </div>
-        <div class="optional-word__hard"><span>{{word.userWord && word.userWord.difficulty ? 'сложное' : ''}}</span></div>
+        <div class="optional-word__hard"><span>{{word.userWord && word.userWord.difficulty === 'hard' ? 'сложное' : ''}}</span></div>
     </div>
     <div>
 
     <button mat-icon-button matTooltip="Прослушать слово" (click)="playAudio()" [disabled]="!textbookService.isPlay">
       <mat-icon>volume_up</mat-icon>
     </button>
-    <button *ngIf="cardInfo.isButtonAdd" mat-icon-button matTooltip="Добавить в сложные" (click)="addWordHard()">
+    <button *ngIf="cardInfo.isButtonAdd && !isDictionary" mat-icon-button matTooltip="Добавить в сложные" (click)="addWordHard()">
       <mat-icon>add</mat-icon>
     </button>
-    <button *ngIf="cardInfo.isButtonDelete" mat-icon-button matTooltip="Удалить слово" (click)="addWordDeleted()">
+    <button *ngIf="cardInfo.isButtonDelete && !isDictionary" mat-icon-button matTooltip="Удалить слово" (click)="addWordDeleted()">
       <mat-icon>delete</mat-icon>
+    </button>
+    <button *ngIf="cardInfo.isButtonDelete && isDictionary" mat-icon-button matTooltip="Вернуть слово" (click)="addWordDeleted()">
+      <mat-icon>reply</mat-icon>
     </button>
   </div>
   </mat-card-actions>
@@ -28,7 +31,8 @@
         <p *ngIf="cardInfo.isWordTranslate">{{word.wordTranslate}}</p>
       </div>
       <div class="card__content_image">
-        <img src="{{urlImage + word.image}}" alt="word.word">
+        <img src="{{urlImage}}" alt="word.word">
+       <ng-template></ng-template>
       </div>
       <div class="card__content_examples">
         <p [innerHTML]="word.textExample"></p>

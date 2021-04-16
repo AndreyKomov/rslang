@@ -5,7 +5,7 @@ import { AudioSprintService } from './sprint-game.service';
 
 export enum KeyCode {
   rightArrow = 39,
-  leftArrow = 37,
+  leftArrow = 37
 }
 
 @Component({
@@ -16,8 +16,8 @@ export enum KeyCode {
 export class SprintGameComponent implements OnInit, OnDestroy {
   display = false;
   displayStatistics = false;
-  level = 0;
-  round = 0;
+  level:number| null;
+  round:number| null;
   wordsList: any | null;
   words: any | null;
   translations: any | null;
@@ -73,10 +73,16 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
-    console.log(param.group);
-    console.log (param.page);
-     
-    });
+    this.level=param.level;
+    this.round=param.round;
+    if(this.level==undefined){
+      this.level=0;
+    }
+    if(this.round==undefined){
+      this.round=0;
+    }
+  });
+ 
     this.promoInfoClass = '';
     this.startScreenClass = 'start-screen';
     this.classHeaderContainer = 'header-container';
@@ -257,6 +263,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.statisticClassTable = 'hidden';
     }
   }
+
   public setLevelAndGroup() {
     const level = this.level + 1;
     const round = this.round + 1;
