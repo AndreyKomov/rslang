@@ -62,6 +62,9 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   statisticInfoForTable = [];
   statisticsColor: string | null;
   colorCounter = 0;
+  strikeCounter=0;
+  StrikeArray=[];
+  StrikeArrayToSave=[];
   public activeItem: string;
 
   constructor(
@@ -228,6 +231,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     if (checkPair === result && this.display) {
       this.wordsYouKnowQuantity += 1;
       this.riseScoreQuantity = true;
+      this.strikeCounter=this.strikeCounter+1
       if (this.isSoundOn) {
         this.playAudioRightAnswer();
       }
@@ -236,6 +240,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     if (checkPair !== result && this.display) {
       this.wordsYouDoNotKnowQuantity += 1;
       this.riseScoreQuantity = false;
+      this.StrikeArray.push(this.strikeCounter);
+      this.strikeCounter=0;
       if (this.isSoundOn) {
         this.playAudioWrongAnswer();
       }
@@ -244,7 +250,12 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.index += 1;
     this.playAudioTimer();
     if (this.index > 19) {
+      let maximum= this.getMaxOfArray(this.StrikeArray)
+      this.StrikeArrayToSave.push(maximum);
+      localStorage.setItem('sprint-strike', JSON.stringify(this.StrikeArrayToSave));
       this.colorCounter += 1;
+      this.strikeCounter=0;
+      this.StrikeArray=[];
       this.delayedConfettiClass();
       this.pauseTimer();
       this.pauseAudioTimer();
@@ -285,6 +296,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
         }
         this.wrongWords.push(this.words[this.index]);
         this.wordsYouDoNotKnowQuantity += 1;
+        this.StrikeArray.push(this.strikeCounter);
+        this.strikeCounter=0;
         this.index += 1;
         this.timeLeft = 60;
         this.hiddenScoreClass = 'hidden';
@@ -477,5 +490,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       blue = 0;
     }
     return `rgb(${red},  ${green},${blue} )`;
+  }
+  getMaxOfArray(numArray) {
+    return Math.max.apply(null, numArray);
   }
 }
