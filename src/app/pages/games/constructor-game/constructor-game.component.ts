@@ -102,7 +102,6 @@ export class ConstructorGameComponent implements OnInit {
         this.rightLettersArr.push('');
       }
       this.letterArr = this.getReadyForGameWord(this.word);
-      console.log(data);
     });
   }
 
@@ -161,7 +160,6 @@ export class ConstructorGameComponent implements OnInit {
     this.isEndRaund = true;
 
     if (this.isUserDoMistake) {
-      console.log(this.rightAnswers, this.wrongAnswers);
       localStorage.setItem(
         'wordConstructorWrongAnswers',
         JSON.stringify(Number(localStorage.getItem('wordConstructorWrongAnswers')) + 1)
