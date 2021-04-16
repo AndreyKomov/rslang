@@ -5,7 +5,7 @@ import { AudioSprintService } from './sprint-game.service';
 
 export enum KeyCode {
   rightArrow = 39,
-  leftArrow = 37
+  leftArrow = 37,
 }
 
 @Component({
@@ -16,8 +16,8 @@ export enum KeyCode {
 export class SprintGameComponent implements OnInit, OnDestroy {
   display = false;
   displayStatistics = false;
-  level:number| null;
-  round:number| null;
+  level: number | null;
+  round: number | null;
   wordsList: any | null;
   words: any | null;
   translations: any | null;
@@ -62,13 +62,13 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   statisticInfoForTable = [];
   statisticsColor: string | null;
   colorCounter = 0;
-  strikeCounter=0;
-  StrikeArray=[];
-  StrikeArrayToSave=[];
+  strikeCounter = 0;
+  StrikeArray = [];
+  StrikeArrayToSave = [];
   public activeItem: string;
 
   constructor(
-    public route:ActivatedRoute,
+    public route: ActivatedRoute,
     public api: WordsApiService,
     private cdr: ChangeDetectorRef,
     public audioService: AudioSprintService
@@ -76,16 +76,16 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
-    this.level=param.level;
-    this.round=param.round;
-    if(this.level==undefined){
-      this.level=0;
-    }
-    if(this.round==undefined){
-      this.round=0;
-    }
-  });
- 
+      this.level = param.level;
+      this.round = param.round;
+      if (this.level === undefined) {
+        this.level = 0;
+      }
+      if (this.round === undefined) {
+        this.round = 0;
+      }
+    });
+
     this.promoInfoClass = '';
     this.startScreenClass = 'start-screen';
     this.classHeaderContainer = 'header-container';
@@ -193,9 +193,10 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
   createWordsArray = (wordsListChosen) => wordsListChosen.map((item) => item.word);
   createTranscriptionArray = (wordsListChosen) => wordsListChosen.map((item) => item.wordTranslate);
-  getRandomInt(max) {
+  public getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
+
   public getWords() {
     this.rightWords = [];
     this.wrongWords = [];
@@ -204,15 +205,15 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.wordsYouDoNotKnowQuantity = 0;
     this.wordsList = [];
     this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
-      let numberSplice=this.getRandomInt(5);
+      const numberSplice = this.getRandomInt(5);
       this.shuffle(data);
       this.wordsList = data;
       this.words = this.createWordsArray(this.wordsList);
       this.translations = this.createTranscriptionArray(this.wordsList);
-      let halfOfWordsArray=this.shuffle(this.words.splice(numberSplice));
-      this.words=this.words.concat(halfOfWordsArray);
-      let halfOfTranslationsArray=this.shuffle(this.translations.splice(numberSplice));
-      this.translations=this.translations.concat(halfOfTranslationsArray);
+      const halfOfWordsArray = this.shuffle(this.words.splice(numberSplice));
+      this.words = this.words.concat(halfOfWordsArray);
+      const halfOfTranslationsArray = this.shuffle(this.translations.splice(numberSplice));
+      this.translations = this.translations.concat(halfOfTranslationsArray);
     });
   }
 
@@ -237,7 +238,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     if (checkPair === result && this.display) {
       this.wordsYouKnowQuantity += 1;
       this.riseScoreQuantity = true;
-      this.strikeCounter=this.strikeCounter+1
+      this.strikeCounter += 1;
       if (this.isSoundOn) {
         this.playAudioRightAnswer();
       }
@@ -247,7 +248,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.wordsYouDoNotKnowQuantity += 1;
       this.riseScoreQuantity = false;
       this.StrikeArray.push(this.strikeCounter);
-      this.strikeCounter=0;
+      this.strikeCounter = 0;
       if (this.isSoundOn) {
         this.playAudioWrongAnswer();
       }
@@ -256,12 +257,12 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.index += 1;
     this.playAudioTimer();
     if (this.index > 19) {
-      let maximum= this.getMaxOfArray(this.StrikeArray)
+      const maximum = this.getMaxOfArray(this.StrikeArray);
       this.StrikeArrayToSave.push(maximum);
       localStorage.setItem('sprint-strike', JSON.stringify(this.StrikeArrayToSave));
       this.colorCounter += 1;
-      this.strikeCounter=0;
-      this.StrikeArray=[];
+      this.strikeCounter = 0;
+      this.StrikeArray = [];
       this.delayedConfettiClass();
       this.pauseTimer();
       this.pauseAudioTimer();
@@ -303,7 +304,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
         this.wrongWords.push(this.words[this.index]);
         this.wordsYouDoNotKnowQuantity += 1;
         this.StrikeArray.push(this.strikeCounter);
-        this.strikeCounter=0;
+        this.strikeCounter = 0;
         this.index += 1;
         this.timeLeft = 60;
         this.hiddenScoreClass = 'hidden';
@@ -458,9 +459,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
   public BgImageChange(value) {
     let backgroundTheme;
-     if (this.activeItem) {
+    if (this.activeItem) {
       backgroundTheme = this.activeItem;
-     
     } else {
       backgroundTheme = 'sprint';
     }
@@ -475,15 +475,14 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
       img.src = data.urls.regular;
 
-      img.onload = function () {
-        if((this)&&(value)) {
-         document.getElementById('page_background').style.backgroundImage = `url(${img.src})`;
-         document.getElementById('page_background').style.backgroundRepeat = `no-repeat`;
-         document.getElementById('page_background').style.backgroundSize = `cover`;
+      img.onload = () => {
+        if (this && value) {
+          document.getElementById('page_background').style.backgroundImage = `url(${img.src})`;
+          document.getElementById('page_background').style.backgroundRepeat = `no-repeat`;
+          document.getElementById('page_background').style.backgroundSize = `cover`;
         }
       };
     })();
-
   }
 
   getColor(i) {
@@ -497,6 +496,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     }
     return `rgb(${red},  ${green},${blue} )`;
   }
+
   getMaxOfArray(numArray) {
     return Math.max.apply(null, numArray);
   }
