@@ -193,7 +193,9 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
   createWordsArray = (wordsListChosen) => wordsListChosen.map((item) => item.word);
   createTranscriptionArray = (wordsListChosen) => wordsListChosen.map((item) => item.wordTranslate);
-
+  getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
   public getWords() {
     this.rightWords = [];
     this.wrongWords = [];
@@ -202,11 +204,15 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.wordsYouDoNotKnowQuantity = 0;
     this.wordsList = [];
     this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
+      let numberSplice=this.getRandomInt(5);
+      this.shuffle(data);
       this.wordsList = data;
       this.words = this.createWordsArray(this.wordsList);
-      this.words = this.shuffle(this.words);
       this.translations = this.createTranscriptionArray(this.wordsList);
-      this.translations = this.shuffle(this.translations);
+      let halfOfWordsArray=this.shuffle(this.words.splice(numberSplice));
+      this.words=this.words.concat(halfOfWordsArray);
+      let halfOfTranslationsArray=this.shuffle(this.translations.splice(numberSplice));
+      this.translations=this.translations.concat(halfOfTranslationsArray);
     });
   }
 
