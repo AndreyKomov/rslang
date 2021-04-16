@@ -9,7 +9,7 @@ export enum ParamKey {
   savannaPromo = 'savanna',
   audiocallPromo = 'audiocall',
   audiocallGame = 'audiocallgame',
-  sprintGame = 'sprint'
+  sprintGame = 'sprint',
 }
 
 export enum QueryParamKey {

@@ -71,8 +71,8 @@ export class WordsApiService {
     localStorage.setItem('token', token);
   }
 
-  public static getUserToken(): void {
-    localStorage.getItem('token');
+  public getUserToken(): string {
+    return localStorage.getItem('token');
   }
 
   public static setUserRefreshToken(refreshToken: string | null): void {
