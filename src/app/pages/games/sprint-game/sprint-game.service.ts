@@ -17,7 +17,6 @@ export class AudioSprintService {
   playSoundTimer() {
     this.audioTimerSound.play();
   }
-
   stopSoundTimer() {
     this.audioTimerSound.pause();
   }
