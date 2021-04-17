@@ -33,6 +33,15 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.getUser();
   }
 
+  logOut(): void {
+    this.wordsApiService.deleteUser(this.id, this.token);
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    this.token = null;
+    this.id = null;
+    this.isLogin.emit(false);
+  }
+
   getUser(): void {
     this.token = localStorage.getItem('token');
     this.id = localStorage.getItem('userId');
