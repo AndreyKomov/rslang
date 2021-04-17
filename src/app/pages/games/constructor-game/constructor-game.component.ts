@@ -127,7 +127,7 @@ export class ConstructorGameComponent implements OnInit {
       this.rightLettersArr[i] = this.word[i];
     }
 
-    this.placeIndex = this.letterArr.length;
+    this.placeIndex = -1;
 
     this.letterArr = [];
 
