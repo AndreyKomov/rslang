@@ -20,7 +20,7 @@ import { IFileModel } from '../models/FileModel';
   styleUrls: ['./registration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class RegistrationComponent implements OnInit {
+export default class RegistrationComponent implements OnInit, OnChanges {
   @ViewChild('avatar') avatar;
   @Output() clickAutnBtnEvent = new EventEmitter<boolean>();
   @Output() clickLoginEvent = new EventEmitter<boolean>();
@@ -39,6 +39,7 @@ export default class RegistrationComponent implements OnInit {
     this.registrationService.clickLogin.subscribe((data) => {
       this.ref.markForCheck();
       this.clickLoginEvent.emit(true);
+      this.clickAutnBtnEvent.emit(data);
       this.isShow = data;
     });
     this.registrationService.clickRegister.subscribe((data) => {
@@ -49,6 +50,10 @@ export default class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  ngOnChanges(changes): void {
+    this.isShow = changes.isShow.currentValue;
   }
 
   initForm(): void {
