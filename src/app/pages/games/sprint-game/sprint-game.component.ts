@@ -66,6 +66,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   StrikeArray = [];
   StrikeArrayToSave = [];
   chosenWordCardSound: string | null;
+  localSourceImage: string | null;
+
   public activeItem: string;
 
   constructor(
@@ -198,7 +200,6 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     return Math.floor(Math.random() * max);
   }
 
-  
   public getWords() {
     this.rightWords = [];
     this.wrongWords = [];
@@ -381,6 +382,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
         this.describeWordBlockTranscription = this.wordsList[prop].transcription;
         this.describeWordBlockTextExample = this.wordsList[prop].textExample;
         this.chosenWordCardSound = this.wordsList[prop].audio;
+        this.localSourceImage = this.wordsList[prop].image;
       }
     }
   }
@@ -472,22 +474,31 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     const UNSPLASH_KEY = `465dce04d3919029f66c7325f6799c6de4f10670641923838969e8fef84eb0a3`;
     const url = ` https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query=${backgroundTheme}&client_id=${UNSPLASH_KEY}`;
 
-    (async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      const img = new Image();
-      img.crossOrigin = 'Anonymous';
-
-      img.src = data.urls.regular;
-
-      img.onload = () => {
-        if (this && value) {
-          document.getElementById('page_background').style.backgroundImage = `url(${img.src})`;
-          document.getElementById('page_background').style.backgroundRepeat = `no-repeat`;
-          document.getElementById('page_background').style.backgroundSize = `cover`;
+    if (value) {
+      (async () => {
+        let img;
+        const response = await fetch(url);
+        const data = await response.json();
+        if (response.status === 200) {
+          img = new Image();
+          img.crossOrigin = 'Anonymous';
+          img.src = data.urls.regular;
+        } else if (backgroundTheme === 'sprint') {
+          img = new Image();
+          img.src = `https://raw.githubusercontent.com/Yuliya-soul/Sounds/master/files/sprint.jpg`;
+        } else {
+          img = new Image();
+          img.src = `https://raw.githubusercontent.com/Yuliya-soul/Sounds/master/${this.localSourceImage}`;
         }
-      };
-    })();
+        img.onload = () => {
+          if (this && value) {
+            document.getElementById('page_background').style.backgroundImage = `url(${img.src})`;
+            document.getElementById('page_background').style.backgroundRepeat = `no-repeat`;
+            document.getElementById('page_background').style.backgroundSize = `cover`;
+          }
+        };
+      })();
+    }
   }
 
   getColor(i) {
