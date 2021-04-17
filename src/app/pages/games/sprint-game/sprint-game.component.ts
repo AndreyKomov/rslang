@@ -198,7 +198,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     return Math.floor(Math.random() * max);
   }
 
-    public getWords() {
+  
+  public getWords() {
     this.rightWords = [];
     this.wrongWords = [];
     this.index = 0;
