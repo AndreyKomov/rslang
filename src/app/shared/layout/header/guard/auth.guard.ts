@@ -8,8 +8,7 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> | boolean {
     if (localStorage.getItem('userId') && localStorage.getItem('token')) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 }

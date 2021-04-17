@@ -65,7 +65,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   strikeCounter = 0;
   StrikeArray = [];
   StrikeArrayToSave = [];
-  chosenWordCardSound:string|null;
+  chosenWordCardSound: string | null;
   public activeItem: string;
 
   constructor(
@@ -130,7 +130,6 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       this.audioService.playSoundError();
     }
   }
-
 
   public pauseAudioWrongAnswer(): void {
     this.audioService.stopSoundError();
@@ -199,7 +198,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     return Math.floor(Math.random() * max);
   }
 
-  public getWords() {
+    public getWords() {
     this.rightWords = [];
     this.wrongWords = [];
     this.index = 0;
@@ -207,7 +206,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.wordsYouDoNotKnowQuantity = 0;
     this.wordsList = [];
     this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
-      const numberSplice = this.getRandomInt(5);
+      const numberSplice = this.getRandomInt(10);
       this.shuffle(data);
       this.wordsList = data;
       this.words = this.createWordsArray(this.wordsList);
@@ -262,7 +261,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       const maximum = this.getMaxOfArray(this.StrikeArray);
       this.StrikeArrayToSave.push(maximum);
       JSON.parse(localStorage.getItem('sprint-strike'));
-      let strikeToSave= this.getMaxOfArray(this.StrikeArrayToSave)
+      const strikeToSave = this.getMaxOfArray(this.StrikeArrayToSave);
       localStorage.setItem('sprint-strike', JSON.stringify(strikeToSave));
       this.colorCounter += 1;
       this.strikeCounter = 0;
@@ -380,8 +379,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
         this.describeWordBlockTranslation = this.wordsList[prop].wordTranslate;
         this.describeWordBlockTranscription = this.wordsList[prop].transcription;
         this.describeWordBlockTextExample = this.wordsList[prop].textExample;
-        this.chosenWordCardSound=this.wordsList[prop].audio;
-
+        this.chosenWordCardSound = this.wordsList[prop].audio;
       }
     }
   }
@@ -506,9 +504,12 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   getMaxOfArray(numArray) {
     return Math.max.apply(null, numArray);
   }
-  PlayWordAudio(){
-    const soundLink= this.chosenWordCardSound;
-    const   sound = new Audio(`https://github.com/Yuliya-soul/Sounds/blob/master/${soundLink}?raw=true`);
-  sound.play()
+
+  PlayWordAudio() {
+    const soundLink = this.chosenWordCardSound;
+    const sound = new Audio(
+      `https://github.com/Yuliya-soul/Sounds/blob/master/${soundLink}?raw=true`
+    );
+    sound.play();
   }
 }
