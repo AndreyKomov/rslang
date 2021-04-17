@@ -124,6 +124,18 @@ h3 {
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
     transition: .5s;
   } 
+  .audio-button-class{
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    width: 40px; 
+    height: 40px;
+    margin-left: 20px;
+    border-radius: 10%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+    transition: .5s;
+  }
+
   .gradient-button-background{
     text-decoration: none;
     display: inline-block;
@@ -161,6 +173,7 @@ h3 {
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
     transition: .5s;
   }
+
   .gradient-button-right:hover {
     background-position: right center;
   }
@@ -324,7 +337,21 @@ li.active {
     text-shadow: 1px 1px white, -1px -1px #333;
       font-family: 'Montserrat', sans-serif;
  }
- 
+ .start-button{
+
+text-decoration: none;
+display: inline-block;
+color: white;
+padding: 10px 5px;
+margin: 0px 10px;
+border-radius: 10px;
+font-family: 'Montserrat', sans-serif;
+letter-spacing: 2px;
+background-image: linear-gradient(to right, #9fa5cc 0%, #3f51b5 51%, #9fa5cc 100%);
+background-size: 100% auto;
+box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+transition: .5s;
+ }
 @media (min-width: 760px)  {
 .closeButton{
   margin: 75px 0px;
