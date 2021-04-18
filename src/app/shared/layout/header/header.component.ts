@@ -8,6 +8,7 @@ import {
   OnChanges,
   Input,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { WordsApiService } from '@app/server/api';
 
 @Component({
@@ -28,7 +29,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   @Output() clickAutnBtnEvent = new EventEmitter<boolean>();
   @Output() isLogin = new EventEmitter<boolean>();
 
-  constructor(public wordsApiService: WordsApiService) {}
+  constructor(public wordsApiService: WordsApiService, private route: Router) {}
 
   ngOnInit(): void {
     this.getUser();
@@ -41,6 +42,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.token = null;
     this.id = null;
     this.isLogin.emit(false);
+    this.route.navigate([``]);
   }
 
   getUser(): void {

@@ -1,5 +1,4 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { ElectronicTextbookService } from '@app/pages/electronic-textbook/electronic-textbook.service';
 import { WordsApiService } from '@app/server/api';
 
@@ -13,8 +12,7 @@ export class RegistrationService {
 
   constructor(
     private apiService: WordsApiService,
-    private textbookService: ElectronicTextbookService,
-    private route: Router
+    private textbookService: ElectronicTextbookService
   ) {}
 
   singUp(name: string, password: string, email: string, imgPath: IFileModel[]): void {
@@ -38,7 +36,6 @@ export class RegistrationService {
       localStorage.setItem('refreshToken', res.refreshToken);
       this.clickLogin.emit(false);
       this.textbookService.getUserWords(res.userId, res.token);
-      this.route.navigate([``]);
     });
   }
 }
