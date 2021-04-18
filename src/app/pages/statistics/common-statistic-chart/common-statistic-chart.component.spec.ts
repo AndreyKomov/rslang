@@ -8,9 +8,8 @@ describe('CommonStatisticChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommonStatisticChartComponent ]
-    })
-    .compileComponents();
+      declarations: [CommonStatisticChartComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

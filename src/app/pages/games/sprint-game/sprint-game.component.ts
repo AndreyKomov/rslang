@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { WordsApiService } from '../../../server/api';
 import { AudioSprintService } from './sprint-game.service';
 
 export enum KeyCode {
   rightArrow = 39,
-  leftArrow = 37
+  leftArrow = 37,
 }
 
 @Component({
@@ -15,8 +16,8 @@ export enum KeyCode {
 export class SprintGameComponent implements OnInit, OnDestroy {
   display = false;
   displayStatistics = false;
-  level = 0;
-  round = 0;
+  level: number | null;
+  round: number | null;
   wordsList: any | null;
   words: any | null;
   translations: any | null;
@@ -61,15 +62,33 @@ export class SprintGameComponent implements OnInit, OnDestroy {
   statisticInfoForTable = [];
   statisticsColor: string | null;
   colorCounter = 0;
+  strikeCounter = 0;
+  StrikeArray = [];
+  StrikeArrayToSave = [];
+  chosenWordCardSound: string | null;
+  localSourceImage: string | null;
+
   public activeItem: string;
 
   constructor(
+    public route: ActivatedRoute,
     public api: WordsApiService,
     private cdr: ChangeDetectorRef,
     public audioService: AudioSprintService
   ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((param) => {
+      this.level = param.level;
+      this.round = param.round;
+      if (this.level === undefined) {
+        this.level = 0;
+      }
+      if (this.round === undefined) {
+        this.round = 0;
+      }
+    });
+
     this.promoInfoClass = '';
     this.startScreenClass = 'start-screen';
     this.classHeaderContainer = 'header-container';
@@ -177,6 +196,9 @@ export class SprintGameComponent implements OnInit, OnDestroy {
 
   createWordsArray = (wordsListChosen) => wordsListChosen.map((item) => item.word);
   createTranscriptionArray = (wordsListChosen) => wordsListChosen.map((item) => item.wordTranslate);
+  getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 
   public getWords() {
     this.rightWords = [];
@@ -186,11 +208,15 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.wordsYouDoNotKnowQuantity = 0;
     this.wordsList = [];
     this.api.getWordsByPageAndGroup(this.round, this.level).subscribe((data) => {
+      const numberSplice = this.getRandomInt(10);
+      this.shuffle(data);
       this.wordsList = data;
       this.words = this.createWordsArray(this.wordsList);
-      this.words = this.shuffle(this.words);
       this.translations = this.createTranscriptionArray(this.wordsList);
-      this.translations = this.shuffle(this.translations);
+      const halfOfWordsArray = this.shuffle(this.words.splice(numberSplice));
+      this.words = this.words.concat(halfOfWordsArray);
+      const halfOfTranslationsArray = this.shuffle(this.translations.splice(numberSplice));
+      this.translations = this.translations.concat(halfOfTranslationsArray);
     });
   }
 
@@ -215,6 +241,7 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     if (checkPair === result && this.display) {
       this.wordsYouKnowQuantity += 1;
       this.riseScoreQuantity = true;
+      this.strikeCounter += 1;
       if (this.isSoundOn) {
         this.playAudioRightAnswer();
       }
@@ -223,6 +250,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     if (checkPair !== result && this.display) {
       this.wordsYouDoNotKnowQuantity += 1;
       this.riseScoreQuantity = false;
+      this.StrikeArray.push(this.strikeCounter);
+      this.strikeCounter = 0;
       if (this.isSoundOn) {
         this.playAudioWrongAnswer();
       }
@@ -231,7 +260,14 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     this.index += 1;
     this.playAudioTimer();
     if (this.index > 19) {
+      const maximum = this.getMaxOfArray(this.StrikeArray);
+      this.StrikeArrayToSave.push(maximum);
+      JSON.parse(localStorage.getItem('sprint-strike'));
+      const strikeToSave = this.getMaxOfArray(this.StrikeArrayToSave);
+      localStorage.setItem('sprint-strike', JSON.stringify(strikeToSave));
       this.colorCounter += 1;
+      this.strikeCounter = 0;
+      this.StrikeArray = [];
       this.delayedConfettiClass();
       this.pauseTimer();
       this.pauseAudioTimer();
@@ -272,6 +308,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
         }
         this.wrongWords.push(this.words[this.index]);
         this.wordsYouDoNotKnowQuantity += 1;
+        this.StrikeArray.push(this.strikeCounter);
+        this.strikeCounter = 0;
         this.index += 1;
         this.timeLeft = 60;
         this.hiddenScoreClass = 'hidden';
@@ -343,6 +381,8 @@ export class SprintGameComponent implements OnInit, OnDestroy {
         this.describeWordBlockTranslation = this.wordsList[prop].wordTranslate;
         this.describeWordBlockTranscription = this.wordsList[prop].transcription;
         this.describeWordBlockTextExample = this.wordsList[prop].textExample;
+        this.chosenWordCardSound = this.wordsList[prop].audio;
+        this.localSourceImage = this.wordsList[prop].image;
       }
     }
   }
@@ -431,30 +471,33 @@ export class SprintGameComponent implements OnInit, OnDestroy {
     } else {
       backgroundTheme = 'sprint';
     }
-
     const UNSPLASH_KEY = `465dce04d3919029f66c7325f6799c6de4f10670641923838969e8fef84eb0a3`;
     const url = ` https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query=${backgroundTheme}&client_id=${UNSPLASH_KEY}`;
 
-    (async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      const img = new Image();
-      img.crossOrigin = 'Anonymous';
-
-      img.src = data.urls.regular;
-
-      img.onload = function() {
-        if (this) {
-          localStorage.setItem('img-url', JSON.stringify(img.src));
-        }
-      };
-    })();
-
-    const urlImage = JSON.parse(localStorage.getItem('img-url'));
     if (value) {
-      document.getElementById('page_background').style.backgroundImage = `url(${urlImage})`;
-      document.getElementById('page_background').style.backgroundRepeat = `no-repeat`;
-      document.getElementById('page_background').style.backgroundSize = `cover`;
+      (async () => {
+        let img;
+        const response = await fetch(url);
+        const data = await response.json();
+        if (response.status === 200) {
+          img = new Image();
+          img.crossOrigin = 'Anonymous';
+          img.src = data.urls.regular;
+        } else if (backgroundTheme === 'sprint') {
+          img = new Image();
+          img.src = `https://raw.githubusercontent.com/Yuliya-soul/Sounds/master/files/sprint.jpg`;
+        } else {
+          img = new Image();
+          img.src = `https://raw.githubusercontent.com/Yuliya-soul/Sounds/master/${this.localSourceImage}`;
+        }
+        img.onload = () => {
+          if (this && value) {
+            document.getElementById('page_background').style.backgroundImage = `url(${img.src})`;
+            document.getElementById('page_background').style.backgroundRepeat = `no-repeat`;
+            document.getElementById('page_background').style.backgroundSize = `cover`;
+          }
+        };
+      })();
     }
   }
 
@@ -468,5 +511,17 @@ export class SprintGameComponent implements OnInit, OnDestroy {
       blue = 0;
     }
     return `rgb(${red},  ${green},${blue} )`;
+  }
+
+  getMaxOfArray(numArray) {
+    return Math.max.apply(null, numArray);
+  }
+
+  PlayWordAudio() {
+    const soundLink = this.chosenWordCardSound;
+    const sound = new Audio(
+      `https://github.com/Yuliya-soul/Sounds/blob/master/${soundLink}?raw=true`
+    );
+    sound.play();
   }
 }

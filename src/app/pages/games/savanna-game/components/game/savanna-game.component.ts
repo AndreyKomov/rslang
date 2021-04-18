@@ -81,13 +81,11 @@ export class SavannaGameComponent implements OnInit, OnDestroy {
   shuffleArr = (arr) => arr.sort(() => Math.random() - 0.5);
 
   getWordsFromBE(): void {
-    this.backEndService
-      .getWordsByPageAndGroup(+this.page, +this.group)
-      .subscribe((data) => {
-        this.wordsFromApi = data;
-        this.startGame();
-        this.setClassToFallingWord();
-      });
+    this.backEndService.getWordsByPageAndGroup(+this.page, +this.group).subscribe((data) => {
+      this.wordsFromApi = data;
+      this.startGame();
+      this.setClassToFallingWord();
+    });
   }
 
   startGame(): void {

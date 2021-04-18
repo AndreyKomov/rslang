@@ -8,9 +8,8 @@ describe('ButtonsDictionaryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ButtonsDictionaryComponent ]
-    })
-    .compileComponents();
+      declarations: [ButtonsDictionaryComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

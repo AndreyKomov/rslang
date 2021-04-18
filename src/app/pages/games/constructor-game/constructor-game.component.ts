@@ -78,7 +78,7 @@ export class ConstructorGameComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
       if (param.selectedPage !== undefined && param.selectedGroup !== undefined) {
-        this.raund = param.selectedGroup;
+        this.selectedGroup = param.selectedGroup;
         this.page = param.selectedPage;
         this.getData();
       }
@@ -127,7 +127,7 @@ export class ConstructorGameComponent implements OnInit {
       this.rightLettersArr[i] = this.word[i];
     }
 
-    this.placeIndex = this.letterArr.length;
+    this.placeIndex = -1;
 
     this.letterArr = [];
 

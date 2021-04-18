@@ -36,8 +36,6 @@ export class HeaderMenuComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes): void {
     this.isAuthenticated = changes.isAuthenticated.currentValue;
-    if (this.isAuthenticated) {
-      this.canActive = this.authGuard.canActivate(null, null);
-    }
+    this.canActive = this.authGuard.canActivate(null, null);
   }
 }
