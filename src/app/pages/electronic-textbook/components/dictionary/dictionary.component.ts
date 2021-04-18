@@ -17,7 +17,7 @@ export class DictionaryComponent implements OnDestroy, AfterViewInit {
   page: number;
   wordsDictionary = new BehaviorSubject<IWord[]>([]);
   isDictionary: boolean;
-  isLouder = true;
+  isLouder = false;
   subscription: Subscription;
   subscriptionRoute: Subscription;
   constructor(
@@ -27,10 +27,10 @@ export class DictionaryComponent implements OnDestroy, AfterViewInit {
     private cdr: ChangeDetectorRef
   ) {
     this.textbookService.dictionary = true;
-    this.textbookService.setDictionarySection = 'studied';
     this.isDictionary = this.textbookService.dictionary;
     this.textbookService.isUserWords.subscribe((value) => {
       if (value) {
+        this.isLouder = !!(!this.textbookService.userWords.length && value);
         this.textbookService.getUserWordsArray();
       }
     });
@@ -38,7 +38,7 @@ export class DictionaryComponent implements OnDestroy, AfterViewInit {
       this.wordsDictionary.next(data);
       this.array = this.filterArrayWords().slice(this.page * 20, (this.page + 1) * 20);
       if (data.length) {
-        this.isLouder = false;
+        this.isLouder = true;
       }
     });
   }
@@ -46,6 +46,7 @@ export class DictionaryComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.subscriptionRoute = this.activateRoute.params.subscribe((routeParams) => {
       const { group, page } = routeParams;
+      this.textbookService.setDictionarySection = group;
       this.path = group;
       this.page = +page;
       this.array = this.filterArrayWords().slice(this.page * 20, (this.page + 1) * 20);

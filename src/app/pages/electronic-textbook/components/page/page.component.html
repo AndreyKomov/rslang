@@ -1,5 +1,5 @@
 <section class="wrapper-page" [style.background-color]='backgroundColor' >
-  <div class="container-words" *ngIf="isLoad && loadingService.isLoading$ | async; else elseBlock">
+  <div class="container-words" *ngIf="isArray && loadingService.isLoading$ | async; else elseBlock">
     <ng-container *ngIf="array.length; else notWord" >
    <app-card-word [isDictionary]="isDictionary" *ngFor="let item of array" [word]='item'></app-card-word>
   </ng-container>

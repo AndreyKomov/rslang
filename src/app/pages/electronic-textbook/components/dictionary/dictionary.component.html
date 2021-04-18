@@ -1,5 +1,5 @@
 <section class="wrapper-dictionary" >
-  <div class="container-words" *ngIf="!isLouder && (loadingService.isLoading$ | async); else elseBlock">
+  <div class="container-words" *ngIf="isLouder; else elseBlock">
     <ng-container *ngIf="array.length; else notWord" >
       <app-card-word [isDictionary]="isDictionary" *ngFor="let item of array" [word]='item'></app-card-word>
      </ng-container>
