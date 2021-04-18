@@ -228,6 +228,7 @@ export class ElectronicTextbookService {
     config.verticalPosition = this.verticalPosition;
     config.horizontalPosition = this.horizontalPosition;
     config.duration = this.autoHide;
+    config.panelClass = ['snackbar'];
     this.snackBar.open(message, undefined, config);
   }
 }
