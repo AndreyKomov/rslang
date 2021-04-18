@@ -15,14 +15,21 @@ export class PageComponent implements AfterViewInit, OnDestroy {
   backgroundColor: string;
   subscription: Subscription;
   isDictionary: boolean;
+  isLoad: boolean;
   constructor(
     private activateRoute: ActivatedRoute,
-    private textbookService: ElectronicTextbookService,
+    public textbookService: ElectronicTextbookService,
     public loadingService: LoadingService,
     private cdr: ChangeDetectorRef
   ) {
     this.textbookService.dictionary = false;
     this.textbookService.setPagination = 30;
+    this.textbookService.isUserWords.subscribe((value) => {
+      this.isLoad = value;
+      if (value) {
+        this.textbookService.getWordsPageAndGroup();
+      }
+    });
     this.subscription = this.textbookService.getWords().subscribe((data) => {
       this.array = data.filter(
         (word) => !word.userWord || (word.userWord && !word.userWord.optional.delete)
@@ -41,7 +48,7 @@ export class PageComponent implements AfterViewInit, OnDestroy {
         this.textbookService.groups = +group;
         this.backgroundColor = this.textbookService.getColor(+group);
       }
-      this.textbookService.getWordsPageAndGroup();
+      if (this.isLoad) this.textbookService.getWordsPageAndGroup();
       this.cdr.detectChanges();
     });
   }

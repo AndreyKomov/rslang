@@ -11,8 +11,10 @@ export class LoadingInterceptor implements HttpInterceptor {
   constructor(private loadingService: LoadingService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.totalRequest += this.totalRequest;
-    this.loadingService.setLoading(false);
+    if (request.method === 'GET') {
+      this.totalRequest += this.totalRequest;
+      this.loadingService.setLoading(false);
+    }
     return next.handle(request).pipe(
       finalize((): void => {
         this.totalRequest -= this.totalRequest;

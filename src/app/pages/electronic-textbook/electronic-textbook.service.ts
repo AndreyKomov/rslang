@@ -12,7 +12,6 @@ import { ICardInfo, IOptional, IUserInfo, IUserWord, IWord } from './word';
 
 @Injectable({ providedIn: 'root' })
 export class ElectronicTextbookService {
-  private audioObj = new Audio();
   private group = 0;
   private page = 0;
   private isDictionary = false;
@@ -31,6 +30,7 @@ export class ElectronicTextbookService {
   public wordsDictionary = this.wordsDictionarySource.asObservable();
 
   isPlay = true;
+  isUserWords = new BehaviorSubject<boolean>(false);
   userData: IUserInfo;
   categoryWords: IWord[] = [];
   userWords: IUserWord[] = [];
@@ -93,23 +93,24 @@ export class ElectronicTextbookService {
   }
 
   playAudio(url: string[]): void {
+    const audioObj = new Audio();
     this.isPlay = false;
     let song = 0;
     const newUrl = `${url[song].slice(0, 5) === 'files' ? URL_FILES : `data:audio/mpeg;base64,`}`;
-    this.audioObj.addEventListener('ended', () => {
+    audioObj.addEventListener('ended', () => {
       song += 1;
       song = song < url.length ? song : 0;
 
       if (song !== 0) {
-        this.audioObj.src = `${newUrl}${url[song]}`;
-        this.audioObj.load();
-        this.audioObj.play();
+        audioObj.src = `${newUrl}${url[song]}`;
+        audioObj.load();
+        audioObj.play();
       } else {
         this.isPlay = true;
       }
     });
-    this.audioObj.src = `${newUrl + url[song]}`;
-    this.audioObj.play();
+    audioObj.src = `${newUrl + url[song]}`;
+    audioObj.play();
   }
 
   getColor(index: number): string {
@@ -152,6 +153,7 @@ export class ElectronicTextbookService {
       .getAllUsersWords(this.userData.userId, this.userData.token)
       .subscribe((data: IUserWord[]) => {
         this.userWords = data;
+        this.isUserWords.next(true);
       });
   }
 

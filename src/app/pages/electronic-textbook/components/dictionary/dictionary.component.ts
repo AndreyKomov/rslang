@@ -29,7 +29,11 @@ export class DictionaryComponent implements OnDestroy, AfterViewInit {
     this.textbookService.dictionary = true;
     this.textbookService.setDictionarySection = 'studied';
     this.isDictionary = this.textbookService.dictionary;
-    this.textbookService.getUserWordsArray();
+    this.textbookService.isUserWords.subscribe((value) => {
+      if (value) {
+        this.textbookService.getUserWordsArray();
+      }
+    });
     this.subscription = this.textbookService.getWords().subscribe((data) => {
       this.wordsDictionary.next(data);
       this.array = this.filterArrayWords().slice(this.page * 20, (this.page + 1) * 20);
