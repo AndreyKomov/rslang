@@ -39,9 +39,10 @@ export class CardWordComponent implements AfterViewInit {
       'hard',
       {
         date: Date.now(),
-        repeat: 0,
+        repeat: this.word.userWord ? this.word.userWord.optional.repeat : 0,
         delete: false,
-      }
+      },
+      'Слово добавлено в сложные'
     );
   }
 
@@ -52,9 +53,31 @@ export class CardWordComponent implements AfterViewInit {
       difficulty,
       {
         date: Date.now(),
-        repeat: 0,
+        repeat: this.word.userWord ? this.word.userWord.optional.repeat : 0,
         delete: true,
-      }
+      },
+      'Слово добавлено в удаленные'
+    );
+  }
+
+  removeFromDeleted(): void {
+    this.textbookService.updateUserWord(
+      this.word.id,
+      this.word.userWord.difficulty,
+      {
+        ...this.word.userWord.optional,
+        delete: false,
+      },
+      'Слово удаленно из удаленных'
+    );
+  }
+
+  removeFromHard(): void {
+    this.textbookService.updateUserWord(
+      this.word.id,
+      'easy',
+      this.word.userWord.optional,
+      'Слово удаленно из сложных'
     );
   }
 }

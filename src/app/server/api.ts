@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 interface Optional {
+  date: number;
+  repeat: number;
+  delete: boolean;
   optionalField?: string | null;
   isDeleted?: boolean;
 }

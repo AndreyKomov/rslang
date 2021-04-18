@@ -20,9 +20,11 @@ export default class ElectronicTextbookComponent
   implements AfterViewInit, OnDestroy, AfterViewChecked {
   page = 0;
   group = 0;
-  isDictionary = false;
+  isDictionary: boolean;
   dialogData: ICardInfo;
   colorLink: string;
+  quantityPagesArray: number[] = [];
+  quantityPages = 0;
   subscriptionTextbookService: Subscription;
 
   constructor(
@@ -30,6 +32,10 @@ export default class ElectronicTextbookComponent
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef
   ) {
+    this.textbookService.getUserWords(
+      localStorage.getItem('userId'),
+      localStorage.getItem('token')
+    );
     this.subscriptionTextbookService = this.textbookService.getCardInfo().subscribe((data) => {
       this.dialogData = data;
     });
@@ -42,7 +48,17 @@ export default class ElectronicTextbookComponent
   }
 
   ngAfterViewChecked(): void {
+    this.isDictionary = this.textbookService.dictionary;
     this.page = this.textbookService.pages;
+    this.group = this.textbookService.groups;
+    if (this.quantityPages !== this.textbookService.pagination) {
+      this.quantityPagesArray = Array(this.textbookService.pagination)
+        .fill(0)
+        .map((a, i) => {
+          return i;
+        });
+      this.quantityPages = this.textbookService.pagination;
+    }
     this.cdr.detectChanges();
   }
 
@@ -60,5 +76,11 @@ export default class ElectronicTextbookComponent
     this.dialog.open(SettingsDialogComponent, {
       data: this.dialogData,
     });
+  }
+
+  onClickDictionary(): void {
+    this.textbookService.dictionary = !this.isDictionary;
+    this.page = 0;
+    this.textbookService.pages = 0;
   }
 }

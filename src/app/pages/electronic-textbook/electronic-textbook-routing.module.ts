@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       { path: 'group/:group/page/:page', component: PageComponent },
       {
-        path: 'dictionary/:group',
+        path: 'dictionary/:group/page/:page',
         component: DictionaryComponent,
       },
     ],

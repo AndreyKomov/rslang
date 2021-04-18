@@ -16,4 +16,8 @@ export class ButtonsGameComponent {
   get pageValue(): number {
     return this.textBookService.pages;
   }
+
+  onClick(): void {
+    this.textBookService.addWordsToLearned();
+  }
 }
