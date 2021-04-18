@@ -33,6 +33,7 @@ export class RegistrationService {
       alert('Успешный вход');
       localStorage.setItem('userId', res.userId);
       localStorage.setItem('token', res.token);
+      localStorage.setItem('refreshToken', res.refreshToken);
       this.clickLogin.emit(false);
       this.textbookService.getUserWords(res.userId, res.token);
     });
