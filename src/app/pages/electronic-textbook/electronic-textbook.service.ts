@@ -220,7 +220,6 @@ export class ElectronicTextbookService {
           this.userWords.push(word);
         }
       });
-      console.log(this.userWords);
     });
   }
 
