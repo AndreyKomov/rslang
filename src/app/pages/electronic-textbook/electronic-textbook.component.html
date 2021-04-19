@@ -1,6 +1,6 @@
 <section class="header-textbook">
   <div class="section-menu">
-    <app-buttons-dictionary *ngIf="isDictionary"></app-buttons-dictionary>
+    <app-buttons-dictionary [page]="page" *ngIf="isDictionary"></app-buttons-dictionary>
     <app-buttons-category
     *ngIf="!isDictionary"
     [group]="group"
@@ -12,12 +12,15 @@
     </button>
     <button mat-icon-button matTooltip="{{!isDictionary ? 'СЛОВАРЬ' : 'УЧЕБНИК'}}"
      (click)="isDictionary=!isDictionary"
-     [routerLink]="!isDictionary ? ['./dictionary', 'studied'] : ['./group/0/page/0']">
+     [routerLink]="!isDictionary ? ['./dictionary', 'studied', 'page', 0] : ['./group', group, 'page', 0]">
       <mat-icon>{{!isDictionary ? 'menu_book' : 'book'}}</mat-icon>
     </button>
   </div>
   <div>
-    <app-pagination [page]="page" [quantityPage]="30"></app-pagination>
+    <app-pagination
+    [isDictionary]='isDictionary'
+    [page]="page"
+    [quantityPages]="quantityPagesArray"></app-pagination>
   </div>
 </section>
 <router-outlet></router-outlet>

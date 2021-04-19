@@ -35,6 +35,8 @@ export interface IOptional {
   date: number;
   repeat: number;
   delete: boolean;
+  optionalField?: string | null;
+  isDeleted?: boolean;
 }
 
 export interface IUserInfo {

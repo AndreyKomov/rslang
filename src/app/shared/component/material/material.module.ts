@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const materialModules = [
   MatButtonModule,
@@ -20,6 +21,7 @@ const materialModules = [
   MatProgressSpinnerModule,
   MatDialogModule,
   MatSlideToggleModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

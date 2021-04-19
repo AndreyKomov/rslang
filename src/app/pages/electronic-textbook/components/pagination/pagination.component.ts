@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElectronicTextbookService } from '../../electronic-textbook.service';
 
@@ -8,35 +8,31 @@ import { ElectronicTextbookService } from '../../electronic-textbook.service';
   styleUrls: ['./pagination.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent {
   @Input() page: number;
-  @Input() quantityPage: number;
+  @Input() quantityPages: number[];
+  @Input() isDictionary: boolean;
 
   pagesPagination: number[];
 
   constructor(private router: Router, private textbookService: ElectronicTextbookService) {}
 
-  ngOnInit(): void {
-    this.pagesPagination = Array(this.quantityPage)
-      .fill(0)
-      .map((a, i) => {
-        return i;
-      });
-  }
-
   onChangePage(event: Event): void {
     this.page = +(event.target as HTMLSelectElement).value;
-    this.router.navigate(['textbook/group', this.textbookService.groups, 'page', this.page]);
+    this.textbookService.pages = this.page;
+    this.goToRouter();
   }
 
   onClickPage(value: string): void {
     this.page = value === 'back' ? this.textbookService.pages - 1 : this.textbookService.pages + 1;
     this.textbookService.pages = this.page;
-    this.router.navigate([
-      'textbook/group',
-      this.textbookService.groups,
-      'page',
-      this.textbookService.pages,
-    ]);
+    this.goToRouter();
+  }
+
+  goToRouter(): void {
+    const path = this.isDictionary
+      ? ['textbook/dictionary', this.textbookService.getDictionarySection, 'page', this.page]
+      : ['textbook/group', this.textbookService.groups, 'page', this.page];
+    this.router.navigate(path);
   }
 }
