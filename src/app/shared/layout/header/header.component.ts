@@ -8,6 +8,7 @@ import {
   OnChanges,
   Input,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { WordsApiService } from '@app/server/api';
 
 @Component({
@@ -21,13 +22,14 @@ export class HeaderComponent implements OnInit, OnChanges {
   @HostBinding('class') class = 'header';
   token: string | null;
   id: string | null;
+  refreshToken: string | null;
   userName = '';
   userImg;
 
   @Output() clickAutnBtnEvent = new EventEmitter<boolean>();
   @Output() isLogin = new EventEmitter<boolean>();
 
-  constructor(public wordsApiService: WordsApiService) {}
+  constructor(public wordsApiService: WordsApiService, private route: Router) {}
 
   ngOnInit(): void {
     this.getUser();
@@ -40,21 +42,33 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.token = null;
     this.id = null;
     this.isLogin.emit(false);
+    this.route.navigate([``]);
   }
 
   getUser(): void {
     this.token = localStorage.getItem('token');
     this.id = localStorage.getItem('userId');
+    this.refreshToken = localStorage.getItem('refreshToken');
+
     if (this.token && this.id) {
-      this.wordsApiService.getUser(this.id, this.token).subscribe((res) => {
-        this.isLogin.emit(true);
-        this.userName = res.name;
-        if (res.avatar === '') {
-          this.userImg = '../../../../assets/img/no-avatar.png';
-        } else {
-          this.userImg = res.avatar;
+      this.wordsApiService.getUser(this.id, this.token).subscribe(
+        (res) => {
+          this.isLogin.emit(true);
+          this.userName = res.name;
+          if (res.avatar === '') {
+            this.userImg = '../../../../assets/img/no-avatar.png';
+          } else {
+            this.userImg = res.avatar;
+          }
+        },
+        (err: Error) => {
+          this.wordsApiService.refreshTokenUser(this.id, this.refreshToken).subscribe((res) => {
+            localStorage.setItem('token', this.token);
+            localStorage.setItem('refreshToken', this.refreshToken);
+            this.getUser();
+          });
         }
-      });
+      );
     }
   }
 
